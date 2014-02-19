@@ -346,7 +346,7 @@ task :start => :environment do
     pid = spawn('open /Applications/Postgres93.app')
     Process.detach(pid)
   end
-  exec 'RAILS_ENV=development foreman start -f ./Procfile.development | grep -v phantomjs'
+  exec 'RAILS_ENV=development foreman start -f ./Procfile.development'
 end
 DEVELOPMENT
 
