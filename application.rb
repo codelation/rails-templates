@@ -1277,8 +1277,6 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 - [WebMock](https://github.com/bblimke/webmock)
 README
 
-
-
 # =================================================================
 # Create root route
 # =================================================================
@@ -1292,11 +1290,29 @@ route 'root to: "static_pages#home"'
 run "bundle install"
 
 # =================================================================
+# Install Devise 
+# =================================================================
+
+if install_devise
+  run "rails generate devise:install"
+  run "rails generate devise User"
+  run "rails generate cancan:ability"
+end
+
+# =================================================================
+# Install Blogelator 
+# =================================================================
+
+if install_blogelator
+  run "rails generate blogelator:install"
+end
+
+# =================================================================
 # Create the Database
 # =================================================================
 
-create_database = ask("Do you want to create the database? [yes]")
-unless create_database.downcase.include?("n")
+create_database = ask("Do you want to create the database? [yes]").downcase.include?("n")
+if create_database
   rake "db:create"
 end
 
