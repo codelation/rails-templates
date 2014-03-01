@@ -1,6 +1,6 @@
 # Rails Templates
 
-A collection (or maybe just one) of Rails application templates.
+A collection of Rails application templates. (or maybe just one)
 
 ## Application.rb
 
