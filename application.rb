@@ -11,6 +11,12 @@ install_devise = ask("Do you want to add authentication? [no]").downcase.start_w
 install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?("y")
 
 # =================================================================
+# Ask what domain the site will be hosted on
+# =================================================================
+
+domain_name = ask("What is the host name used in the production environment?")
+
+# =================================================================
 # Files
 # =================================================================
 
@@ -1111,16 +1117,9 @@ NORMALIZECSS
 # .env
 # -----------------------------------------
 
-domain_name = ask("What is the host name used in the production environment?")
 file ".env", <<-ENV
 HOSTNAME=localhost:3000
-
 SECRET_TOKEN=#{SecureRandom.hex(64)}
-
-SMTP_ADDRESS=smtp.mandrillapp.com
-SMTP_PORT=587
-SMTP_USER_NAME=username
-SMTP_PASSWORD=password
 ENV
 
 # -----------------------------------------
@@ -1350,3 +1349,24 @@ end
 git :init
 git add: "."
 git commit: "-a -m 'Initial commit'"
+
+# =================================================================
+# Heroku Instructions
+# =================================================================
+
+puts ""
+puts "# ================================================================= #"
+puts "#                      Heroku Configuration                         #"
+puts "# ================================================================= #"
+puts ""
+puts "Set up the following environment variables:"
+puts ""
+puts "heroku config:set HOSTNAME=#{domain_name}"
+puts "heroku config:set SECRET_TOKEN=Use `rake secret` to generate"
+puts "heroku config:set SMTP_ADDRESS=smtp.mandrillapp.com"
+puts "heroku config:set SMTP_PORT=587"
+puts "heroku config:set SMTP_USER_NAME=username"
+puts "heroku config:set SMTP_PASSWORD=password"
+puts ""
+
+def run_bundle; end
