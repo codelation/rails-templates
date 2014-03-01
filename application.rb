@@ -1,8 +1,14 @@
 # =================================================================
-# Configuration
+# Ask if Devise and CanCan should be installed
 # =================================================================
 
-domain_name = ask("What is the host name used in the production environment?")
+install_devise = ask("Do you want to add authentication? [no]").downcase.start_with?("y")
+
+# =================================================================
+# Ask if Blogelator should be installed
+# =================================================================
+
+install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?("y")
 
 # =================================================================
 # Files
@@ -13,67 +19,368 @@ domain_name = ask("What is the host name used in the production environment?")
 # -----------------------------------------
 
 run "rm app/assets/javascripts/application.js"
+file "app/assets/javascripts/application/.keep", ""
 file "app/assets/javascripts/application.js", <<-APPLICATIONJS
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+// require handlebars
+// require ember
+// require ember-data
+//= require_tree ./application
 APPLICATIONJS
 
 # -----------------------------------------
-# app/assets/javascripts/application.css
+# app/assets/stylesheets/_variables.scss
 # -----------------------------------------
 
-run "rm app/assets/stylesheets/application.css"
-file "app/assets/stylesheets/application.css", <<-APPLICATIONCSS
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_tree ./#{@app_name.underscore}
- *= require_self
- */
-APPLICATIONCSS
+file "app/assets/stylesheets/_variables.scss", <<-VARIABLESSCSS
+@import "bourbon";
+
+// Typography
+$sans-serif: $helvetica;
+$serif: $georgia;
+
+$base-font-family: $sans-serif;
+$header-font-family: $base-font-family;
+
+// Sizes
+$base-font-size: 1em;
+$base-line-height: $base-font-size * 1.5;
+$base-border-radius: em(3);
+
+// Body Color
+$base-body-color: #fff;
+
+// Font Colors
+$base-font-color: #3e3e3e;
+$base-accent-color: #df0061;
+
+// Text Link Colors
+$base-link-color: $base-accent-color;
+$hover-link-color: darken($base-accent-color, 8%);
+
+// Border color
+$base-border-color: #ddd;
+
+// Flash Colors
+$error-color: #fbe3e4;
+$notice-color: #fff6bf;
+$success-color: #e6efc2;
+VARIABLESSCSS
 
 # -----------------------------------------
-# app/assets/stylesheets/{app_name}/layout/application.scss
+# app/assets/stylesheets/application/static_pages/home.scss
 # -----------------------------------------
 
-file "app/assets/stylesheets/#{@app_name.underscore}/layout/application.scss", <<-APPLICATIONLAYOUTSCSS
-html, body {
-  margin: 0;
-  padding: 0;
-}
-APPLICATIONLAYOUTSCSS
+file "app/assets/stylesheets/application/static_pages/home.scss", <<-HOMESCSS
+// Styles specific to StaticPagesController#home
 
-# -----------------------------------------
-# app/assets/stylesheets/{app_name}/static_pages/home.scss
-# -----------------------------------------
+@import "bourbon";
+@import "variables";
 
-file "app/assets/stylesheets/#{@app_name.underscore}/static_pages/home.scss", <<-HOMESCSS
-.static-pages.home {
+body.static-pages.home {
   h1 {
     text-align: center;
   }
 }
 HOMESCSS
+
+# -----------------------------------------
+# app/assets/stylesheets/application/static_pages.scss
+# -----------------------------------------
+
+file "app/assets/stylesheets/application/static_pages.scss", <<-STATICPAGESSCSS
+// Styles shared by all StaticPagesController actions
+
+@import "bourbon";
+@import "variables";
+
+body.static-pages {
+  
+}
+STATICPAGESSCSS
+
+# -----------------------------------------
+# app/assets/stylesheets/shared/typography/body.scss
+# -----------------------------------------
+
+file "app/assets/stylesheets/shared/typography/body.scss", <<-BODYSCSS
+@import "bourbon";
+@import "variables";
+
+p {
+  margin: 0 0 ($base-line-height * .5);
+}
+
+a {
+  color: $base-link-color;
+  @include transition(color 0.1s linear);
+
+  &:hover {
+    color: $hover-link-color;
+  }
+
+  &:active, &:focus {
+    color: $hover-link-color;
+    outline: none;
+  }
+}
+
+hr {
+  border-bottom: 1px solid $base-border-color;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: $base-line-height 0;
+}
+
+img {
+  margin: 0;
+  max-width: 100%;
+}
+
+abbr, acronym {
+  border-bottom: 1px dotted $base-border-color;
+  cursor: help;
+}
+
+address {
+  display: block;
+  margin: 0 0 ($base-line-height / 2);
+}
+
+hgroup {
+  margin-bottom: $base-line-height / 2;
+}
+
+del {
+  color: lighten($base-font-color, 15);
+}
+
+pre {
+  font-family: "Menlo", "Monaco", monospace;
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  background-color: darken($base-body-color, 3%);
+  border: 1px solid $base-border-color;
+  border-radius: $base-border-radius;
+  font-family: "Menlo", "Monaco", monospace;
+  font-size: 0.95em;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 0 4px;
+}
+
+blockquote {
+  border-left: 2px solid $base-border-color;
+  color: lighten($base-font-color, 15);
+  margin: $base-line-height 0;
+  padding-left: $base-line-height / 2;
+}
+
+cite {
+  color: lighten($base-font-color, 25);
+  font-style: italic;
+
+  &:before {
+    content: '\\2014 \\00A0';
+  }
+}
+BODYSCSS
+
+# -----------------------------------------
+# app/assets/stylesheets/shared/typography/forms.scss
+# -----------------------------------------
+
+file "app/assets/stylesheets/shared/typography/forms.scss", <<-FORMSSCSS
+@import "bourbon";
+@import "variables";
+
+$form-border-color: $base-border-color;
+$form-border-color-hover: darken($base-border-color, 10);
+$form-border-color-focus: $base-accent-color;
+$form-border-radius: $base-border-radius;
+$form-box-shadow: inset 0 1px 3px hsla(0, 0%, 0%, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), 0.7);
+$form-font-size: $base-font-size;
+$form-font-family: $base-font-family;
+
+fieldset {
+  background: lighten($base-border-color, 10);
+  border: 1px solid $base-border-color;
+  margin: 0 0 ($base-line-height / 2) 0;
+  padding: $base-line-height;
+}
+
+input,
+label,
+select {
+  display: block;
+  font-family: $form-font-family;
+  font-size: $form-font-size;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: $base-line-height / 4;
+
+  &.required:after {
+    content: "*";
+  }
+
+  abbr {
+    display: none;
+  }
+}
+
+textarea,
+\#{$all-text-inputs} {
+  @include box-sizing(border-box);
+  @include transition(border-color);
+  background-color: white;
+  border-radius: $form-border-radius;
+  border: 1px solid $form-border-color;
+  box-shadow: $form-box-shadow;
+  font-family: $form-font-family;
+  font-size: $form-font-size;
+  margin-bottom: $base-line-height / 2;
+  padding: ($base-line-height / 3) ($base-line-height / 3);
+  resize: vertical;
+  width: 100%;
+
+  &:hover {
+    border-color: $form-border-color-hover;
+  }
+
+  &:focus {
+    border-color: $form-border-color-focus;
+    box-shadow: $form-box-shadow-focus;
+    outline: none;
+  }
+}
+
+input[type="search"] {
+  @include appearance(none);
+}
+
+input[type="checkbox"], input[type="radio"] {
+  display: inline;
+  margin-right: $base-line-height / 4;
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+select {
+  width: auto;
+  margin-bottom: $base-line-height;
+}
+
+button,
+input[type="submit"] {
+  @include appearance(none);
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+FORMSSCSS
+
+# -----------------------------------------
+# app/assets/stylesheets/shared/typography/headings.scss
+# -----------------------------------------
+
+file "app/assets/stylesheets/shared/typography/headings.scss", <<-HEADINGSSCSS
+@import "bourbon";
+@import "variables";
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font-family;
+  line-height: 1.25em;
+  margin: 0 0 0.5em;
+  text-rendering: optimizeLegibility; // Fix the character spacing for headings
+}
+
+h1 {
+  font-size: $base-font-size * 2.25; // 16 * 2.25 = 36px
+  margin-bottom: 1em;
+}
+
+h2 {
+  font-size: $base-font-size * 2; // 16 * 2 = 32px
+  margin-bottom: 0.7em;
+}
+
+h3 {
+  font-size: $base-font-size * 1.75; // 16 * 1.75 = 28px
+  margin-bottom: 0.5em;
+}
+
+h4 {
+  font-size: $base-font-size * 1.5; // 16 * 1.5 = 24px
+  margin-bottom: 0.25em;
+}
+
+h5 {
+  font-size: $base-font-size * 1.25; // 16 * 1.25 = 20px
+  margin-bottom: 0.25em;
+}
+
+h6 {
+  font-size: $base-font-size;
+  margin-bottom: 0.25em;
+}
+HEADINGSSCSS
+
+# -----------------------------------------
+# app/assets/stylesheets/shared/typography/lists.scss
+# -----------------------------------------
+
+file "app/assets/stylesheets/shared/typography/lists.scss", <<-LISTSSCSS
+@import "bourbon";
+@import "variables";
+
+body.blogelator {
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    margin-bottom: $base-line-height / 2;
+    padding-left: $base-line-height;
+  }
+
+  dl {
+    line-height: $base-line-height;
+    margin-bottom: $base-line-height / 2;
+
+    dt {
+      font-weight: bold;
+      margin-top: $base-line-height / 2;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+}
+LISTSSCSS
+
+# -----------------------------------------
+# app/assets/stylesheets/application.css.scss
+# -----------------------------------------
+
+run "rm app/assets/stylesheets/application.css"
+file "app/assets/stylesheets/application.css.scss", <<-APPLICATIONCSS
+/*
+ *= require normalize
+ *= require_tree ./shared
+ *= require_tree ./application
+ *= require_self
+ */
+APPLICATIONCSS
 
 # -----------------------------------------
 # app/controllers/static_pages_controller.rb
@@ -238,8 +545,8 @@ file "config/environments/production.rb", <<-PRODUCTION
   # config.action_mailer.raise_delivery_errors = false
   
   # Use SMTP for sending email in production
-  config.action_mailer.default_url_options = { :host => #{ENV["HOSTNAME"]} }
-  config.action_mailer.asset_host = "http://#{ENV["HOSTNAME"]}"
+  config.action_mailer.default_url_options = { :host => ENV["HOSTNAME"] }
+  config.action_mailer.asset_host = "http://\#{ENV["HOSTNAME"]}"
   config.action_mailer.delivery_method = :smtp
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -351,9 +658,440 @@ end
 DEVELOPMENT
 
 # -----------------------------------------
+# vendor/assets/stylesheets/normalize.css
+# -----------------------------------------
+
+file "vendor/assets/stylesheets/normalize.css", <<-NORMALIZECSS
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined in IE 8/9.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9.
+ * Hide the `template` element in IE, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+  background: transparent;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8+, and Opera
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+  border: 0; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+NORMALIZECSS
+
+# -----------------------------------------
 # .env
 # -----------------------------------------
 
+domain_name = ask("What is the host name used in the production environment?")
 file ".env", <<-ENV
 HOSTNAME=#{domain_name}
 
@@ -415,9 +1153,9 @@ source "http://rubygems.org"
 ruby "2.0.0"
 gem "rails", "4.0.3"
 
-gem "awesome_print"
-gem "bourbon"
-gem "coffee-rails"
+gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\", github: \"codelation/blogelator\"" : ""}
+gem "bourbon"#{install_devise ? "\ngem \"cancan\"" : ""}
+gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
 gem "ember-source"
 gem "jquery-rails"
@@ -507,9 +1245,9 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 
 ### Production/Development/Test
 
-- [Awesome Print](https://github.com/michaeldv/awesome_print)
-- [Bourbon](http://bourbon.io)
-- [Coffee-Rails](https://github.com/rails/coffee-rails)
+- [Awesome Print](https://github.com/michaeldv/awesome_print)#{install_blogelator ? "\n- [Blogelator](https://github.com/codelation/blogelator)" : ""}
+- [Bourbon](http://bourbon.io)#{install_devise ? "\n- [CanCan](https://github.com/ryanb/cancan)" : ""}
+- [Coffee-Rails](https://github.com/rails/coffee-rails)#{install_devise ? "\n- [Devise](https://github.com/plataformatec/devise)" : ""}
 - [ember-rails](https://github.com/emberjs/ember-rails)
 - [jquery-rails](https://github.com/rails/jquery-rails)
 - [New Relic Ruby Agent](https://github.com/newrelic/rpm)
@@ -539,6 +1277,8 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 - [WebMock](https://github.com/bblimke/webmock)
 README
 
+
+
 # =================================================================
 # Create root route
 # =================================================================
@@ -546,13 +1286,13 @@ README
 route 'root to: "static_pages#home"'
 
 # =================================================================
-# Install gems 
+# Install Gems 
 # =================================================================
 
 run "bundle install"
 
 # =================================================================
-# Create the database
+# Create the Database
 # =================================================================
 
 create_database = ask("Do you want to create the database? [yes]")
@@ -561,7 +1301,7 @@ unless create_database.downcase.include?("n")
 end
 
 # =================================================================
-# Initialize git
+# Initialize Git
 # =================================================================
 
 git :init
