@@ -1093,7 +1093,7 @@ NORMALIZECSS
 
 domain_name = ask("What is the host name used in the production environment?")
 file ".env", <<-ENV
-HOSTNAME=#{domain_name}
+HOSTNAME=localhost:3000
 
 SMTP_ADDRESS=smtp.mandrillapp.com
 SMTP_PORT=587
@@ -1311,9 +1311,14 @@ end
 # Create the Database
 # =================================================================
 
-create_database = ask("Do you want to create the database? [yes]").downcase.include?("n")
+create_database = !ask("Do you want to create the database? [yes]").downcase.start_with?("n")
 if create_database
   rake "db:create"
+  
+  migrate_database = !ask("Do you want to run the database migrations? [yes]").downcase.start_with?("n")
+  if migrate_database
+    rake "db:migrate"
+  end
 end
 
 # =================================================================
