@@ -1159,7 +1159,7 @@ GITIGNORE
 # -----------------------------------------
 
 file ".tm_properties", <<-TMPROPERTIES
-includeFiles = "{$includeFiles,.env,.gitignore,.foreman}"
+includeFiles = "{$includeFiles,.env,.gitignore,.foreman,.travis.yml}"
 excludeFiles = "{$excludeFiles,*.sqlite3}"
 excludeInFileChooser = "{$excludeInFileChooser,log,tmp}"
 excludeInFolderSearch = "{$excludeInFolderSearch,log,tmp}"
