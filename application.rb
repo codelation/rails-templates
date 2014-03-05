@@ -389,10 +389,64 @@ APPLICATIONCSS
 file "app/controllers/static_pages_controller.rb", <<-STATICPAGESCONTROLLER
 class StaticPagesController < ApplicationController
   
-  def home; end
+  def home
+    @title = "Welcome"
+  end
   
 end
 STATICPAGESCONTROLLER
+
+# -----------------------------------------
+# app/helpers/application_helper.rb
+# -----------------------------------------
+
+run "rm app/helpers/application_helper.rb"
+file "app/helpers/application_helper.rb", <<-APPLICATIONHELPER
+module ApplicationHelper
+  include LocalTimeHelper
+  
+  def body_class
+    @body_class ||= "default"
+    body_class = "blogelator"
+    body_class += " " + controller.controller_name
+    body_class += " " + controller.action_name
+    body_class += " " + @body_class
+    body_class
+  end
+  
+  def page_title
+    page = @title
+    if page
+      "\#{page} • \#{site_title}"
+    else
+      site_title
+    end
+  end
+  
+  def site_title
+    "#{@app_name.titleize}"
+  end
+  
+end
+APPLICATIONHELPER
+
+# -----------------------------------------
+# app/views/layouts/_footer.html.erb
+# -----------------------------------------
+
+file "app/views/layouts/_footer.html.erb", <<-FOOTER
+<footer>
+</footer>
+FOOTER
+
+# -----------------------------------------
+# app/views/layouts/_header.html.erb
+# -----------------------------------------
+
+file "app/views/layouts/_header.html.erb", <<-FOOTER
+<header>
+</header>
+FOOTER
 
 # -----------------------------------------
 # app/views/layouts/application.html.erb
@@ -403,16 +457,21 @@ file "app/views/layouts/application.html.erb", <<-APPLICATIONLAYOUT
 <!DOCTYPE html>
 <html>
 <head>
-  <title>#{@app_name.titleize}</title>
+  <title><%= page_title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
-
+<body class="<%= body_class %>">
+  <%= render partial: "layouts/header" %>
+  <main>
+    <%= yield %>
+  </main>
+  <%= render partial: "layouts/footer" %>
 </body>
+
 </html>
 APPLICATIONLAYOUT
 
@@ -686,6 +745,89 @@ task :start => :environment do
   exec 'RAILS_ENV=development foreman start -f ./Procfile.development'
 end
 DEVELOPMENT
+
+# -----------------------------------------
+# spec/controllers
+# -----------------------------------------
+
+file "spec/controllers/.keep", ""
+
+# -----------------------------------------
+# spec/factories
+# -----------------------------------------
+
+file "spec/factories/.keep", ""
+
+# -----------------------------------------
+# spec/features
+# -----------------------------------------
+
+file "spec/features/.keep", ""
+
+# -----------------------------------------
+# spec/features/user_visits_home_page_spec.rb
+# -----------------------------------------
+
+file "user_visits_home_page_spec.rb", <<-USERVISITSHOMEPAGE
+require "spec_helper"
+
+feature "User visits home page" do
+  
+  it "has the welcome message" do
+    visit root_path
+    page.should have_content "Welcome to #{@app_name.titleize}"
+  end
+  
+end
+USERVISITSHOMEPAGE
+
+# -----------------------------------------
+# spec/models
+# -----------------------------------------
+
+file "spec/models/.keep", ""
+
+# -----------------------------------------
+# spec/spec_helper.rb
+# -----------------------------------------
+
+run "rm -rf test"
+file "spec/spec_helper.rb", <<-SPECHELPER
+# This file is copied to spec/ when you run 'rails generate rspec:install'
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path("../../config/environment", __FILE__)
+require "capybara/rspec"
+require "database_cleaner"
+require "factory_girl_rails"
+require "rspec/rails"
+require "rspec/autorun"
+Rails.backtrace_cleaner.remove_silencers!
+
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir["\#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+# Checks for pending migrations before tests are run.
+# If you are not using ActiveRecord, you can remove this line.
+ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+
+RSpec.configure do |config|
+  config.mock_with :rspec
+  config.use_transactional_fixtures = true
+  config.infer_base_class_for_anonymous_controllers = false
+  config.order = "random"
+  config.include FactoryGirl::Syntax::Methods
+  
+  config.before(:suite) do
+    begin
+      DatabaseCleaner.start
+      FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
+    end
+  end
+end
+SPECHELPER
 
 # -----------------------------------------
 # vendor/assets/stylesheets/normalize.css
@@ -1155,6 +1297,14 @@ file ".gitignore", <<-GITIGNORE
 GITIGNORE
 
 # -----------------------------------------
+# .rspec
+# -----------------------------------------
+
+file ".rspec", <<-RSPEC
+--color
+RSPEC
+
+# -----------------------------------------
 # .tm_properties
 # -----------------------------------------
 
@@ -1185,6 +1335,7 @@ gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
 gem "ember-source"
 gem "jquery-rails"
+gem "local_time"
 gem "neat"
 gem "newrelic_rpm"
 gem "pg"
@@ -1203,8 +1354,11 @@ group :development, :test do
 end
 
 group :test do
+  gem "capybara"
+  gem "database_cleaner"
   gem "factory_girl_rails"
   gem "faker"
+  gem "guard"
   gem "guard-rspec"
   gem "rb-fsevent"
   gem "rspec-rails"
@@ -1217,6 +1371,32 @@ group :production do
   gem "rails_12factor"
 end
 GEMFILE
+
+# -----------------------------------------
+# Guardfile
+# -----------------------------------------
+
+file "Guardfile", <<-GUARDFILE
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
+guard :rspec do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/\#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
+
+  # Rails example
+  watch(%r{^app/(.+)\.rb$})                           { |m| "spec/\#{m[1]}_spec.rb" }
+  watch(%r{^app/(.*)(\.erb|\.haml|\.slim)$})          { |m| "spec/\#{m[1]}\#{m[2]}_spec.rb" }
+  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| ["spec/routing/\#{m[1]}_routing_spec.rb", "spec/\#{m[2]}s/\#{m[1]}_\#{m[2]}_spec.rb", "spec/acceptance/\#{m[1]}_spec.rb"] }
+  watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
+  watch('config/routes.rb')                           { "spec/routing" }
+  watch('app/controllers/application_controller.rb')  { "spec/controllers" }
+
+  # Capybara features specs
+  watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})     { |m| "spec/features/\#{m[1]}_spec.rb" }
+end
+GUARDFILE
 
 # -----------------------------------------
 # Procfile
