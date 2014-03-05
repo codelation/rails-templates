@@ -80,6 +80,7 @@ file "app/assets/stylesheets/application/static_pages/home.scss", <<-HOMESCSS
 
 body.static-pages.home {
   h1 {
+    margin: 2em auto;
     text-align: center;
   }
 }
@@ -376,6 +377,7 @@ run "rm app/assets/stylesheets/application.css"
 file "app/assets/stylesheets/application.css.scss", <<-APPLICATIONCSS
 /*
  *= require normalize
+ *= require font-awesome
  *= require_tree ./shared
  *= require_tree ./application
  *= require_self
@@ -408,8 +410,8 @@ module ApplicationHelper
   def body_class
     @body_class ||= "default"
     body_class = "blogelator"
-    body_class += " " + controller.controller_name
-    body_class += " " + controller.action_name
+    body_class += " " + controller.controller_name.dasherize
+    body_class += " " + controller.action_name.dasherize
     body_class += " " + @body_class
     body_class
   end
@@ -481,7 +483,10 @@ APPLICATIONLAYOUT
 
 file "app/views/static_pages/home.html.erb", <<-HOMEERB
 <div class="static-pages home">
-  <h1>Welcome to #{@app_name.titleize}</h1>
+  <h1>
+    <i class="fa fa-github"></i>
+    Welcome to #{@app_name.titleize}
+  </h1>
 </div>
 HOMEERB
 
@@ -768,7 +773,7 @@ file "spec/features/.keep", ""
 # spec/features/user_visits_home_page_spec.rb
 # -----------------------------------------
 
-file "user_visits_home_page_spec.rb", <<-USERVISITSHOMEPAGE
+file "spec/features/user_visits_home_page_spec.rb", <<-USERVISITSHOMEPAGE
 require "spec_helper"
 
 feature "User visits home page" do
@@ -1334,6 +1339,7 @@ gem "bourbon"#{install_devise ? "\ngem \"cancan\"" : ""}
 gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
 gem "ember-source"
+gem "font-awesome-sass"
 gem "jquery-rails"
 gem "local_time"
 gem "neat"
