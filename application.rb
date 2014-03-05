@@ -1,4 +1,14 @@
 # =================================================================
+# Determine the app class name
+# =================================================================
+
+@app_class = @app_name.underscore.classify
+
+if @app_name.end_with?("s") && !@app_class.end_with?("s")
+  @app_class += "s"
+end
+
+# =================================================================
 # Ask if Devise and CanCan should be installed
 # =================================================================
 
@@ -496,7 +506,7 @@ HOMEERB
 
 run "rm config/environments/development.rb"
 file "config/environments/development.rb", <<-DEVELOPMENT
-#{@app_name.underscore.classify}::Application.configure do
+#{@app_class}::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -541,7 +551,7 @@ DEVELOPMENT
 
 run "rm config/environments/production.rb"
 file "config/environments/production.rb", <<-PRODUCTION
-#{@app_name.underscore.classify}::Application.configure do
+#{@app_class}::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -648,7 +658,7 @@ file "config/initializers/secret_token.rb", <<-SECRETTOKEN
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-#{@app_name.underscore.classify}::Application.config.secret_key_base = ENV["SECRET_TOKEN"]
+#{@app_class}::Application.config.secret_key_base = ENV["SECRET_TOKEN"]
 SECRETTOKEN
 
 # -----------------------------------------
@@ -732,7 +742,7 @@ JSHINT
 
 run "rm config/routes.rb"
 file "config/routes.rb", <<-ROUTES
-#{@app_name.underscore.classify}::Application.routes.draw do
+#{@app_class}::Application.routes.draw do
 end
 ROUTES
 
