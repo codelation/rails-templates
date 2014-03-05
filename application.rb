@@ -492,12 +492,10 @@ APPLICATIONLAYOUT
 # -----------------------------------------
 
 file "app/views/static_pages/home.html.erb", <<-HOMEERB
-<div class="static-pages home">
-  <h1>
-    <i class="fa fa-github"></i>
-    Welcome to #{@app_name.titleize}
-  </h1>
-</div>
+<h1>
+  <i class="fa fa-github"></i>
+  Welcome to #{@app_name.titleize}
+</h1>
 HOMEERB
 
 # -----------------------------------------
