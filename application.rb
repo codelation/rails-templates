@@ -1340,7 +1340,7 @@ source "http://rubygems.org"
 ruby "2.0.0"
 gem "rails", "4.0.3"
 
-gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\", github: \"codelation/blogelator\"" : ""}
+gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "bourbon"#{install_devise ? "\ngem \"cancan\"" : ""}
 gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
