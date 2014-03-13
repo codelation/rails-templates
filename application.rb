@@ -259,7 +259,6 @@ textarea,
   font-size: $form-font-size;
   margin-bottom: $base-line-height / 2;
   padding: ($base-line-height / 3) ($base-line-height / 3);
-  resize: vertical;
   width: 100%;
 
   &:hover {
