@@ -107,7 +107,7 @@ file "app/assets/stylesheets/application/static_pages.scss", <<-STATICPAGESSCSS
 @import "variables";
 
 body.static-pages {
-  
+
 }
 STATICPAGESSCSS
 
@@ -119,7 +119,14 @@ file "app/assets/stylesheets/shared/typography/body.scss", <<-BODYSCSS
 @import "bourbon";
 @import "variables";
 
+body {
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+}
+
 p {
+  line-height: $base-line-height;
   margin: 0 0 ($base-line-height * .5);
 }
 
@@ -399,11 +406,11 @@ APPLICATIONCSS
 
 file "app/controllers/static_pages_controller.rb", <<-STATICPAGESCONTROLLER
 class StaticPagesController < ApplicationController
-  
+
   def home
     @title = "Welcome"
   end
-  
+
 end
 STATICPAGESCONTROLLER
 
@@ -415,14 +422,14 @@ run "rm app/helpers/application_helper.rb"
 file "app/helpers/application_helper.rb", <<-APPLICATIONHELPER
 module ApplicationHelper
   include LocalTimeHelper
-  
+
   def body_class
     body_class = @body_class || "default"
     body_class += " " + controller.controller_name.dasherize
     body_class += " " + controller.action_name.dasherize
     body_class
   end
-  
+
   def page_title
     page = @title
     if page
@@ -431,11 +438,11 @@ module ApplicationHelper
       site_title
     end
   end
-  
+
   def site_title
     "#{@app_name.titleize}"
   end
-  
+
 end
 APPLICATIONHELPER
 
@@ -529,12 +536,12 @@ file "config/environments/development.rb", <<-DEVELOPMENT
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Use Letter Opener for sending email in development
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
   config.action_mailer.asset_host = "http://localhost:3000"
   config.action_mailer.delivery_method = :letter_opener
-  
+
   # Set Ember.js file to load
   config.ember.variant = :development
 end
@@ -612,7 +619,7 @@ file "config/environments/production.rb", <<-PRODUCTION
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-  
+
   # Use SMTP for sending email in production
   config.action_mailer.default_url_options = { :host => ENV["HOSTNAME"] }
   config.action_mailer.asset_host = "http://\#{ENV["HOSTNAME"]}"
@@ -630,7 +637,7 @@ file "config/environments/production.rb", <<-PRODUCTION
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  
+
   # Set Ember.js file to load
   config.ember.variant = :production
 end
@@ -681,12 +688,12 @@ development:
   adapter: postgresql
   database: #{@app_name.underscore}_development
   host: localhost
-  
+
 test:
   adapter: postgresql
   database: #{@app_name.underscore}_test
   host: localhost
-  
+
 production:
   adapter: postgresql
   database: #{@app_name.underscore}_production
@@ -782,12 +789,12 @@ file "spec/features/user_visits_home_page_spec.rb", <<-USERVISITSHOMEPAGE
 require "spec_helper"
 
 feature "User visits home page" do
-  
+
   it "has the welcome message" do
     visit root_path
     page.should have_content "Welcome to #{@app_name.titleize}"
   end
-  
+
 end
 USERVISITSHOMEPAGE
 
@@ -827,7 +834,7 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
-  
+
   config.before(:suite) do
     begin
       DatabaseCleaner.start
@@ -1435,7 +1442,7 @@ file "README.md", <<-README
 
 ## Requirements
 
-If you've manage to generate the app, all you 
+If you've manage to generate the app, all you
 should need is [Postgres.app](http://postgresapp.com).
 
 The version expected is Postgres93.app. If a different version is used, the
@@ -1444,7 +1451,7 @@ the `rake start` command.
 
 ## Running Locally
 
-A rake command is included to start up Postgres.app 
+A rake command is included to start up Postgres.app
 if it isn't running already and then start the Rails
 app with Puma at <http://localhost:3000>.
 
@@ -1501,13 +1508,13 @@ README
 route 'root to: "static_pages#home"'
 
 # =================================================================
-# Install Gems 
+# Install Gems
 # =================================================================
 
 run "bundle install"
 
 # =================================================================
-# Install Blogelator 
+# Install Blogelator
 # =================================================================
 
 if install_blogelator
@@ -1515,14 +1522,14 @@ if install_blogelator
 end
 
 # =================================================================
-# Install Devise 
+# Install Devise
 # =================================================================
 
 if install_devise
   run "rails generate devise:install"
   run "rails generate devise User"
   run "rails generate cancan:ability"
-  
+
   run "rm config/initializers/devise.rb"
   file "config/initializers/devise.rb", <<-DEVISERB
 # Use this hook to configure devise mailer, warden hooks and so forth.
@@ -1789,7 +1796,7 @@ end
 create_database = !ask("Do you want to create the database? [yes]").downcase.start_with?("n")
 if create_database
   rake "db:create"
-  
+
   migrate_database = !ask("Do you want to run the database migrations? [yes]").downcase.start_with?("n")
   if migrate_database
     rake "db:migrate"
