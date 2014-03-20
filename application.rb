@@ -1369,6 +1369,7 @@ group :development, :test do
   gem "foreman"
   gem "letter_opener"
   gem "quiet_assets"
+  gem "rspec-rails"
 end
 
 group :test do
@@ -1379,7 +1380,6 @@ group :test do
   gem "guard"
   gem "guard-rspec"
   gem "rb-fsevent"
-  gem "rspec-rails"
   gem "terminal-notifier-guard"
   gem "vcr"
   gem "webmock"
