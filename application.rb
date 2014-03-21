@@ -25,17 +25,52 @@ install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?
 # =================================================================
 
 # -----------------------------------------
+# app/assets/javascripts/application/
+# -----------------------------------------
+
+file "app/assets/javascripts/application/.keep", ""
+
+# -----------------------------------------------
+# app/assets/javascripts/shared/flash_messages.js
+# -----------------------------------------------
+
+file "app/assets/javascripts/shared/flash_messages.js", <<-FLASHMESSAGESJS
+(function() {
+  "use strict";
+
+  $(function() {
+    $('.flash-alert i, .flash-notice i').click(function() {
+      var flashElement = $(this).parent();
+      flashElement.animate({
+        borderWidth: 0,
+        height: 0,
+        marginBottom: 0,
+        marginTop: 0,
+        opacity: 0,
+        paddingBottom: 0,
+        paddingTop: 0
+      });
+      return false;
+    });
+  });
+
+})();
+FLASHMESSAGESJS
+
+file "app/assets/javascripts/application/.keep", ""
+
+# -----------------------------------------
 # app/assets/javascripts/application.js
 # -----------------------------------------
 
 run "rm app/assets/javascripts/application.js"
-file "app/assets/javascripts/application/.keep", ""
 file "app/assets/javascripts/application.js", <<-APPLICATIONJS
 //= require jquery
 //= require jquery_ujs
 // require handlebars
 // require ember
 // require ember-data
+//= require_tree ./shared
 //= require_tree ./application
 APPLICATIONJS
 
@@ -73,14 +108,13 @@ $hover-link-color: darken($base-accent-color, 8%);
 $base-border-color: #ddd;
 
 // Flash Colors
-$error-color: #fbe3e4;
-$notice-color: #fff6bf;
-$success-color: #e6efc2;
+$alert-color: #db0026;
+$notice-color: #0074d9;
 VARIABLESSCSS
 
-# -----------------------------------------
+# ---------------------------------------------------------
 # app/assets/stylesheets/application/static_pages/home.scss
-# -----------------------------------------
+# ---------------------------------------------------------
 
 file "app/assets/stylesheets/application/static_pages/home.scss", <<-HOMESCSS
 // Styles specific to StaticPagesController#home
@@ -96,9 +130,9 @@ body.static-pages.home {
 }
 HOMESCSS
 
-# -----------------------------------------
+# ----------------------------------------------------
 # app/assets/stylesheets/application/static_pages.scss
-# -----------------------------------------
+# ----------------------------------------------------
 
 file "app/assets/stylesheets/application/static_pages.scss", <<-STATICPAGESSCSS
 // Styles shared by all StaticPagesController actions
@@ -111,9 +145,9 @@ body.static-pages {
 }
 STATICPAGESSCSS
 
-# -----------------------------------------
+# --------------------------------------------------
 # app/assets/stylesheets/shared/typography/body.scss
-# -----------------------------------------
+# --------------------------------------------------
 
 file "app/assets/stylesheets/shared/typography/body.scss", <<-BODYSCSS
 @import "bourbon";
@@ -209,9 +243,9 @@ cite {
 }
 BODYSCSS
 
-# -----------------------------------------
+# ---------------------------------------------------
 # app/assets/stylesheets/shared/typography/forms.scss
-# -----------------------------------------
+# ---------------------------------------------------
 
 file "app/assets/stylesheets/shared/typography/forms.scss", <<-FORMSSCSS
 @import "bourbon";
@@ -236,12 +270,12 @@ fieldset {
 input,
 label,
 select {
-  display: block;
   font-family: $form-font-family;
   font-size: $form-font-size;
 }
 
 label {
+  cursor: pointer;
   font-weight: bold;
   margin-bottom: $base-line-height / 4;
 
@@ -296,20 +330,11 @@ select {
   width: auto;
   margin-bottom: $base-line-height;
 }
-
-button,
-input[type="submit"] {
-  @include appearance(none);
-  cursor: pointer;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-}
 FORMSSCSS
 
-# -----------------------------------------
+# ------------------------------------------------------
 # app/assets/stylesheets/shared/typography/headings.scss
-# -----------------------------------------
+# ------------------------------------------------------
 
 file "app/assets/stylesheets/shared/typography/headings.scss", <<-HEADINGSSCSS
 @import "bourbon";
@@ -353,9 +378,9 @@ h6 {
 }
 HEADINGSSCSS
 
-# -----------------------------------------
+# ---------------------------------------------------
 # app/assets/stylesheets/shared/typography/lists.scss
-# -----------------------------------------
+# ---------------------------------------------------
 
 file "app/assets/stylesheets/shared/typography/lists.scss", <<-LISTSSCSS
 @import "bourbon";
@@ -385,9 +410,87 @@ body.blogelator {
 }
 LISTSSCSS
 
-# -----------------------------------------
+# ------------------------------------------
+# app/assets/stylesheets/shared/buttons.scss
+# ------------------------------------------
+
+file "app/assets/stylesheets/shared/buttons.scss", <<-BUTTONSSCSS
+@import "bourbon";
+@import "variables";
+
+.button,
+button,
+input[type="submit"] {
+  @include appearance(none);
+  background-color: $base-accent-color;
+  border: 1px solid $base-accent-color;
+  border-radius: $base-border-radius;
+  box-shadow: 0 0 5px 0 $base-body-color;
+  color: $base-body-color;
+  cursor: pointer;
+  display: block;
+  font-size: $base-font-size;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  @include transition(all 0.1s ease);
+
+  &:hover {
+    background-color: lighten($base-accent-color, 8%);
+    border-color: lighten($base-accent-color, 8%);
+  }
+
+  &:active {
+    background-color: $base-accent-color;
+    border-color: $base-accent-color;
+  }
+}
+BUTTONSSCSS
+
+# -------------------------------------------------
+# app/assets/stylesheets/shared/flash_messages.scss
+# -------------------------------------------------
+
+file "app/assets/stylesheets/shared/flash_messages.scss", <<-FLASHMESSAGESSCSS
+@import "bourbon";
+@import "variables";
+@import "neat";
+
+.flash-alert,
+.flash-notice {
+  @include outer-container;
+  background-color: lighten($alert-color, 50%);
+  border: 1px solid darken($alert-color, 5%);
+  border-radius: $base-border-radius;
+  color: darken($alert-color, 5%);
+  font-weight: bold;
+  margin: 1em auto;
+  overflow: hidden;
+  padding: 0.5em 1em 0.5em 0;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+
+  i {
+    cursor: pointer;
+    float: left;
+    padding: 0.2em 1em 0;
+  }
+}
+
+.flash-notice {
+  background-color: lighten($notice-color, 40%);
+  border: 1px solid darken($notice-color, 5%);
+  color: darken($notice-color, 5%);
+}
+FLASHMESSAGESSCSS
+
+# -------------------------------------------
 # app/assets/stylesheets/application.css.scss
-# -----------------------------------------
+# -------------------------------------------
 
 run "rm app/assets/stylesheets/application.css"
 file "app/assets/stylesheets/application.css.scss", <<-APPLICATIONCSS
@@ -475,17 +578,36 @@ file "app/views/layouts/application.html.erb", <<-APPLICATIONLAYOUT
 <head>
   <title><%= page_title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
 
 <body class="<%= body_class %>">
   <%= render partial: "layouts/header" %>
+
+  <% if alert %>
+    <p class="flash-alert">
+      <i class="fa fa-times"></i>
+      <%= alert %>
+    </p>
+  <% end %>
+
+  <% if notice %>
+    <p class="flash-notice">
+      <i class="fa fa-times"></i>
+      <%= notice %>
+    </p>
+  <% end %>
+
   <main>
     <%= yield %>
   </main>
+
   <%= render partial: "layouts/footer" %>
+
+  <%= javascript_include_tag "application" %>
+  <%= yield :scripts %>
 </body>
 
 </html>
@@ -1529,6 +1651,239 @@ if install_devise
   run "rails generate devise:install"
   run "rails generate devise User"
   run "rails generate cancan:ability"
+
+  # ----------------------------------------------------
+  # app/assets/stylesheets/shared/devise.scss
+  # ----------------------------------------------------
+
+  file "app/assets/stylesheets/shared/devise.scss", <<-DEVISESCSS
+@import "bourbon";
+@import "variables";
+@import "neat";
+
+body.confirmations,
+body.passwords,
+body.registrations,
+body.sessions,
+body.unlocks {
+  main {
+    @include outer-container;
+    max-width: 500px;
+    padding: 1em;
+  }
+
+  main form {
+    & > div {
+      margin-bottom: 0.8em;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 0.5em;
+    }
+
+    a {
+      color: lighten($base-font-color, 50%);
+      font-size: 0.8em;
+      margin-left: 4px;
+      text-decoration: none;
+
+      &:hover {
+        color: $base-accent-color;
+      }
+    }
+
+    input[type="submit"] {
+      width: 100%;
+    }
+  }
+
+  .devise-links {
+    text-align: center;
+  }
+}
+DEVISESCSS
+
+  # ----------------------------------------------------
+  # app/views/devise/confirmations/new.html.erb
+  # ----------------------------------------------------
+
+  file "app/views/devise/confirmations/new.html.erb", <<-NEWHTML
+<h2>Resend Confirmation Instructions</h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :email %><br >
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Resend Confirmation Instructions" %>
+  </div>
+<% end %>
+NEWHTML
+
+  # ----------------------------------------------------
+  # app/views/devise/passwords/edit.html.erb
+  # ----------------------------------------------------
+
+  file "app/views/devise/passwords/edit.html.erb", <<-EDITHTML
+<h2>Reset Your Password</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div>
+    <%= f.label :password, "New password" %><br>
+    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, "Confirm new password" %><br>
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div>
+    <%= f.submit "Update My Password" %>
+  </div>
+<% end %>
+
+<div class="devise-links">
+  <%= link_to "Sign In", new_session_path(resource_name) %>
+  <% if devise_mapping.registerable? %>
+    or <%= link_to "Sign Up", new_registration_path(resource_name) %>
+  <% end %>
+</div>
+EDITHTML
+
+  # ----------------------------------------------------
+  # app/views/devise/passwords/new.html.erb
+  # ----------------------------------------------------
+
+  file "app/views/devise/passwords/new.html.erb", <<-NEWHTML
+<h2>Forgot Your Password?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Send Password Reset Instructions" %>
+  </div>
+<% end %>
+
+<div class="devise-links">
+  Remember your password?
+  <%= link_to "Sign In", new_session_path(resource_name) %>
+</div>
+NEWHTML
+
+  # ----------------------------------------------------
+  # app/views/devise/registrations/new.html.erb
+  # ----------------------------------------------------
+
+  file "app/views/devise/registrations/new.html.erb", <<-NEWHTML
+<h2>Sign Up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div>
+    <%= f.submit "Sign Up" %>
+  </div>
+<% end %>
+
+<div class="devise-links">
+  Already have an account?
+  <%= link_to "Sign In", new_session_path(resource_name) %>
+</div>
+NEWHTML
+
+  # ----------------------------------------------------
+  # app/views/devise/sessions/new.html.erb
+  # ----------------------------------------------------
+
+  file "app/views/devise/sessions/new.html.erb", <<-NEWHTML
+<h2>Sign In</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= link_to "Forgot your password?", new_password_path(resource_name) if devise_mapping.recoverable? %><br>
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div>
+    <%= f.submit "Sign In", class: "button" %>
+  </div>
+<% end %>
+
+<% if devise_mapping.registerable? %>
+  <div class="devise-links">
+    Don&#8217;t have an account?
+    <%= link_to "Sign Up", new_registration_path(resource_name) %>
+  </div>
+<% end %>
+NEWHTML
+
+  # ----------------------------------------------------
+  # app/views/devise/unlocks/new.html.erb
+  # ----------------------------------------------------
+
+  file "app/views/devise/unlocks/new.html.erb", <<-NEWHTML
+<h2>Resend Unlock Instructions</h2>
+
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Resend Unlock Instructions" %>
+  </div>
+<% end %>
+NEWHTML
+
+  # ----------------------------------------------------
+  # config/initializers/devise.rb
+  # ----------------------------------------------------
 
   run "rm config/initializers/devise.rb"
   file "config/initializers/devise.rb", <<-DEVISERB
