@@ -960,11 +960,18 @@ RSpec.configure do |config|
   config.before(:suite) do
     begin
       DatabaseCleaner.start
-      FactoryGirl.lint
+      VCR.use_cassette(:factory_girl) do
+        FactoryGirl.lint
+      end
     ensure
       DatabaseCleaner.clean
     end
   end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/vcr_cassettes"
+  config.hook_into :webmock
 end
 SPECHELPER
 
