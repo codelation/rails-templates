@@ -797,7 +797,6 @@ ActionMailer::Base.smtp_settings = {
   :password       => ENV["SMTP_PASSWORD"],
   :domain         => ENV["HOSTNAME"]
 }
-ActionMailer::Base.delivery_method = :smtp
 SMTP
 
 # -----------------------------------------
