@@ -469,6 +469,7 @@ file "app/assets/stylesheets/shared/flash_messages.scss", <<-FLASHMESSAGESSCSS
   color: darken($alert-color, 5%);
   font-weight: bold;
   margin: 1em auto;
+  max-width: 90%;
   overflow: hidden;
   padding: 0.5em 1em 0.5em 0;
   text-align: center;
