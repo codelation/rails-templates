@@ -550,6 +550,34 @@ end
 APPLICATIONHELPER
 
 # -----------------------------------------
+# app/views/layouts/_analytics.html.erb
+# -----------------------------------------
+
+file "app/views/layouts/_analytics.html.erb", <<-ANALYTICS
+<%# Include scripts for analytics %>
+ANALYTICS
+
+# -----------------------------------------
+# app/views/layouts/_flash_messages.html.erb
+# -----------------------------------------
+
+file "app/views/layouts/_flash_messages.html.erb", <<-FLASHMESSAGES
+<% if alert %>
+  <p class="flash-alert">
+    <i class="fa fa-times"></i>
+    <%= alert %>
+  </p>
+<% end %>
+
+<% if notice %>
+  <p class="flash-notice">
+    <i class="fa fa-times"></i>
+    <%= notice %>
+  </p>
+<% end %>
+FLASHMESSAGES
+
+# -----------------------------------------
 # app/views/layouts/_footer.html.erb
 # -----------------------------------------
 
@@ -562,10 +590,11 @@ FOOTER
 # app/views/layouts/_header.html.erb
 # -----------------------------------------
 
-file "app/views/layouts/_header.html.erb", <<-FOOTER
+file "app/views/layouts/_header.html.erb", <<-HEADER
 <header>
+  <%= link_to #{@app_name.titleize}, root_path %>
 </header>
-FOOTER
+HEADER
 
 # -----------------------------------------
 # app/views/layouts/application.html.erb
@@ -585,20 +614,7 @@ file "app/views/layouts/application.html.erb", <<-APPLICATIONLAYOUT
 
 <body class="<%= body_class %>">
   <%= render partial: "layouts/header" %>
-
-  <% if alert %>
-    <p class="flash-alert">
-      <i class="fa fa-times"></i>
-      <%= alert %>
-    </p>
-  <% end %>
-
-  <% if notice %>
-    <p class="flash-notice">
-      <i class="fa fa-times"></i>
-      <%= notice %>
-    </p>
-  <% end %>
+  <%= render partial: "layouts/flash_messages" %>
 
   <main>
     <%= yield %>
@@ -608,6 +624,7 @@ file "app/views/layouts/application.html.erb", <<-APPLICATIONLAYOUT
 
   <%= javascript_include_tag "application" %>
   <%= yield :scripts %>
+  <%= render partial: "layouts/analytics" %>
 </body>
 
 </html>
@@ -1482,12 +1499,12 @@ gem "ember-source"
 gem "font-awesome-sass"
 gem "jquery-rails"
 gem "local_time"
-gem "neat"
+gem "neat", "~> 1.5.0"
 gem "newrelic_rpm"
 gem "pg"
 gem "puma"
 gem "roadie"
-gem "sass-rails"
+gem "sass-rails", "~> 4.0.2"
 gem "uglifier"
 
 group :development, :test do
