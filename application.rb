@@ -1604,7 +1604,7 @@ end
 
 guard :teaspoon do
   # Implementation files
-  watch(%r{app/assets/javascripts/(.+).js}) { |m| "#{m[1]}_spec.js" }
+  watch(%r{app/assets/javascripts/(.+).js}) { |m| "\#{m[1]}_spec.js" }
 
   # Specs / Helpers
   watch(%r{spec/javascripts/(.*)})
