@@ -593,7 +593,7 @@ FOOTER
 
 file "app/views/layouts/_header.html.erb", <<-HEADER
 <header>
-  <%= link_to #{@app_name.titleize}, root_path %>
+  <%= link_to "#{@app_name.titleize}", root_path %>
 </header>
 HEADER
 
@@ -936,6 +936,44 @@ feature "User visits home page" do
 
 end
 USERVISITSHOMEPAGE
+
+# -----------------------------------------
+# spec/javascripts/controllers
+# -----------------------------------------
+
+file "spec/javascripts/controllers/.keep", ""
+
+# -----------------------------------------
+# spec/javascripts/fixtures
+# -----------------------------------------
+
+file "spec/javascripts/fixtures/.keep", ""
+
+# -----------------------------------------
+# spec/javascripts/models
+# -----------------------------------------
+
+file "spec/javascripts/models/.keep", ""
+
+# -----------------------------------------
+# spec/javascripts/routes
+# -----------------------------------------
+
+file "spec/javascripts/routes/.keep", ""
+
+# -----------------------------------------
+# spec/javascripts/support
+# -----------------------------------------
+
+file "spec/javascripts/support/.keep", ""
+
+# -----------------------------------------
+# spec/javascripts/spec_helper.js
+# -----------------------------------------
+
+file "spec/javascripts/spec_helper.js", <<-SPECHELPERJS
+
+SPECHELPERJS
 
 # -----------------------------------------
 # spec/models
@@ -1489,8 +1527,8 @@ run "rm Gemfile"
 file "Gemfile", <<-GEMFILE
 source "http://rubygems.org"
 
-ruby "2.0.0"
-gem "rails", "4.0.3"
+ruby "2.1.1"
+gem "rails", "4.1.0"
 
 gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "bourbon"#{install_devise ? "\ngem \"cancan\"" : ""}
@@ -1512,19 +1550,22 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "dotenv-rails"
+  gem "factory_girl_rails"
   gem "foreman"
   gem "letter_opener"
   gem "quiet_assets"
   gem "rspec-rails"
+  gem "spring"
+  gem "teaspoon"
 end
 
 group :test do
   gem "capybara"
   gem "database_cleaner"
-  gem "factory_girl_rails"
   gem "faker"
   gem "guard"
   gem "guard-rspec"
+  gem "guard-teaspoon"
   gem "rb-fsevent"
   gem "terminal-notifier-guard"
   gem "vcr"
@@ -1559,6 +1600,14 @@ guard :rspec do
 
   # Capybara features specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})     { |m| "spec/features/\#{m[1]}_spec.rb" }
+end
+
+guard :teaspoon do
+  # Implementation files
+  watch(%r{app/assets/javascripts/(.+).js}) { |m| "#{m[1]}_spec.js" }
+
+  # Specs / Helpers
+  watch(%r{spec/javascripts/(.*)})
 end
 GUARDFILE
 
