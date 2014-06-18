@@ -1514,6 +1514,8 @@ excludeInFolderSearch = "{$excludeInFolderSearch,log,tmp}"
 
 softTabs = true
 tabSize = 2
+
+TM_STRIP_WHITESPACE_ON_SAVE = true
 TMPROPERTIES
 
 # -----------------------------------------
