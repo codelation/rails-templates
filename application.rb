@@ -894,11 +894,8 @@ ROUTES
 file "lib/tasks/development.rake", <<-DEVELOPMENT
 desc "Start the server in development mode"
 task :start => :environment do
-  unless `ps ux | grep Postgres93.app`.include?('Applications/Postgres93.app')
-    pid = spawn('open /Applications/Postgres93.app')
-    Process.detach(pid)
-  end
-  exec 'RAILS_ENV=development foreman start -f ./Procfile.development'
+  `open /Applications/Postgres.app`
+  exec "RAILS_ENV=development foreman start -f ./Procfile.development"
 end
 DEVELOPMENT
 
@@ -1639,10 +1636,6 @@ file "README.md", <<-README
 
 If you've manage to generate the app, all you
 should need is [Postgres.app](http://postgresapp.com).
-
-The version expected is Postgres93.app. If a different version is used, the
-rake command in `lib/tasks/development.rake` will need to be updated to use
-the `rake start` command.
 
 ## Running Locally
 
