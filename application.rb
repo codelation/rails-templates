@@ -680,7 +680,7 @@ file "config/environments/development.rb", <<-DEVELOPMENT
   # Use Letter Opener for sending email in development
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
   config.action_mailer.asset_host = "http://localhost:3000"
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :letter_opener_web
 
   # Set Ember.js file to load
   config.ember.variant = :development
@@ -884,6 +884,9 @@ JSHINT
 run "rm config/routes.rb"
 file "config/routes.rb", <<-ROUTES
 #{@app_class}::Application.routes.draw do
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/email"
+  end
 end
 ROUTES
 
@@ -1551,7 +1554,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "foreman"
-  gem "letter_opener"
+  gem "letter_opener_web"
   gem "quiet_assets"
   gem "rspec-rails"
   gem "spring"
@@ -1676,7 +1679,7 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 - [Better Errors](https://github.com/charliesome/better_errors)
 - [dotenv](https://github.com/bkeepers/dotenv)
 - [Foreman](https://github.com/ddollar/foreman)
-- [Letter Opener](https://github.com/ryanb/letter_opener)
+- [Letter Opener](https://github.com/fgrehm/letter_opener_web)
 - [Quiet Assets](https://github.com/evrone/quiet_assets)
 
 ### Test
