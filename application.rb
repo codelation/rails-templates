@@ -1517,6 +1517,7 @@ gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
 gem "ember-source"
 gem "font-awesome-sass"
+gem "jbuilder"
 gem "jquery-rails"
 gem "local_time"
 gem "neat", "~> 1.5.0"
