@@ -1525,6 +1525,7 @@ gem "newrelic_rpm"
 gem "pg"
 gem "puma"
 gem "roadie"
+gem "roadie-rails"
 gem "sass-rails", "~> 4.0.2"
 gem "uglifier"
 
