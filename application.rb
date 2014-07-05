@@ -1509,7 +1509,7 @@ file "Gemfile", <<-GEMFILE
 source "http://rubygems.org"
 
 ruby "2.1.1"
-gem "rails", "4.1.1"
+gem "rails", "4.1.4"
 
 gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "bourbon"#{install_devise ? "\ngem \"cancan\"" : ""}
