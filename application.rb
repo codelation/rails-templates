@@ -1508,7 +1508,7 @@ run "rm Gemfile"
 file "Gemfile", <<-GEMFILE
 source "http://rubygems.org"
 
-ruby "2.1.1"
+ruby "2.1.2"
 gem "rails", "4.1.4"
 
 gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\"" : ""}
