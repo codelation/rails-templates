@@ -1,0 +1,38 @@
+@import "imports";
+
+.button,
+button,
+input[type="submit"] {
+  @include appearance(none);
+  background-color: $base-accent-color;
+  border: 1px solid $base-accent-color;
+  border-radius: $base-border-radius;
+  box-shadow: 0 0 5px 0 rgba(#000, 0.1);
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: $base-font-size;
+  font-weight: bold;
+  outline: none;
+  padding: 0.5em 1em;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  @include transition(all 0.1s ease);
+
+  &:hover {
+    background-color: lighten($base-accent-color, 8%);
+    border-color: lighten($base-accent-color, 8%);
+    box-shadow: none;
+    color: #fff;
+  }
+
+  &:active {
+    background-color: $base-accent-color;
+    border-color: $base-accent-color;
+    box-shadow: none;
+    color: #fff;
+  }
+}

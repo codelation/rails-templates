@@ -1,3 +1,5 @@
+Dir["#{File.dirname(__FILE__)}/application/*.rb"].each {|file| require file }
+
 # =================================================================
 # Determine the app class name
 # =================================================================
@@ -21,803 +23,70 @@ install_devise = ask("Do you want to add authentication? [no]").downcase.start_w
 install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?("y")
 
 # =================================================================
-# Files
+# Asset Files
 # =================================================================
 
 # -----------------------------------------
-# app/assets/javascripts/application/
-# -----------------------------------------
-
-file "app/assets/javascripts/application/.keep", ""
-
-# -----------------------------------------------
-# app/assets/javascripts/shared/flash_messages.js
-# -----------------------------------------------
-
-file "app/assets/javascripts/shared/flash_messages.js", <<-FLASHMESSAGESJS
-(function() {
-  "use strict";
-
-  $(function() {
-    $('.flash-alert i, .flash-notice i').click(function() {
-      var flashElement = $(this).parent();
-      flashElement.animate({
-        borderWidth: 0,
-        height: 0,
-        marginBottom: 0,
-        marginTop: 0,
-        opacity: 0,
-        paddingBottom: 0,
-        paddingTop: 0
-      });
-      return false;
-    });
-  });
-
-})();
-FLASHMESSAGESJS
-
-file "app/assets/javascripts/application/.keep", ""
-
-# -----------------------------------------
-# app/assets/javascripts/application.js
+# Javascript Files
 # -----------------------------------------
 
 run "rm app/assets/javascripts/application.js"
-file "app/assets/javascripts/application.js", <<-APPLICATIONJS
-//= require jquery
-//= require jquery_ujs
-// require handlebars
-// require ember
-// require ember-data
-//= require_tree ./shared
-//= require_tree ./application
-APPLICATIONJS
+file "app/assets/javascripts/application/.keep", ""
+
+file "app/assets/javascripts/application.js",           Javascripts.application
+file "app/assets/javascripts/shared/flash_messages.js", Javascripts.flash_messages
 
 # -----------------------------------------
-# app/assets/stylesheets/_variables.scss
+# Stylesheet Files
 # -----------------------------------------
-
-file "app/assets/stylesheets/_variables.scss", <<-VARIABLESSCSS
-@import "bourbon";
-
-// Typography
-$sans-serif: $helvetica;
-$serif: $georgia;
-
-$base-font-family: $sans-serif;
-$header-font-family: $base-font-family;
-
-// Sizes
-$base-font-size: 16px;
-$base-line-height: $base-font-size * 1.5;
-$base-border-radius: em(3);
-
-// Body Color
-$base-body-color: #fff;
-
-// Font Colors
-$base-font-color: #3e3e3e;
-$base-accent-color: #df0061;
-
-// Text Link Colors
-$base-link-color: $base-accent-color;
-$hover-link-color: darken($base-accent-color, 8%);
-
-// Border color
-$base-border-color: #ddd;
-
-// Flash Colors
-$alert-color: #db0026;
-$notice-color: #0074d9;
-VARIABLESSCSS
-
-# ---------------------------------------------------------
-# app/assets/stylesheets/application/static_pages/home.scss
-# ---------------------------------------------------------
-
-file "app/assets/stylesheets/application/static_pages/home.scss", <<-HOMESCSS
-// Styles specific to StaticPagesController#home
-
-@import "bourbon";
-@import "variables";
-
-body.static-pages.home {
-  h1 {
-    margin: 2em auto;
-    text-align: center;
-  }
-}
-HOMESCSS
-
-# ----------------------------------------------------
-# app/assets/stylesheets/application/static_pages.scss
-# ----------------------------------------------------
-
-file "app/assets/stylesheets/application/static_pages.scss", <<-STATICPAGESSCSS
-// Styles shared by all StaticPagesController actions
-
-@import "bourbon";
-@import "variables";
-
-body.static-pages {
-
-}
-STATICPAGESSCSS
-
-# --------------------------------------------------
-# app/assets/stylesheets/shared/typography/body.scss
-# --------------------------------------------------
-
-file "app/assets/stylesheets/shared/typography/body.scss", <<-BODYSCSS
-@import "bourbon";
-@import "variables";
-
-body {
-  color: $base-font-color;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
-}
-
-p {
-  line-height: $base-line-height;
-  margin: 0 0 ($base-line-height * .5);
-}
-
-a {
-  color: $base-link-color;
-  @include transition(color 0.1s linear);
-
-  &:hover {
-    color: $hover-link-color;
-  }
-
-  &:active, &:focus {
-    color: $hover-link-color;
-    outline: none;
-  }
-}
-
-hr {
-  border-bottom: 1px solid $base-border-color;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  margin: $base-line-height 0;
-}
-
-img {
-  margin: 0;
-  max-width: 100%;
-}
-
-abbr, acronym {
-  border-bottom: 1px dotted $base-border-color;
-  cursor: help;
-}
-
-address {
-  display: block;
-  margin: 0 0 ($base-line-height / 2);
-}
-
-hgroup {
-  margin-bottom: $base-line-height / 2;
-}
-
-del {
-  color: lighten($base-font-color, 15);
-}
-
-pre {
-  font-family: "Menlo", "Monaco", monospace;
-  margin: 0;
-  padding: 0;
-}
-
-code {
-  background-color: darken($base-body-color, 3%);
-  border: 1px solid $base-border-color;
-  border-radius: $base-border-radius;
-  font-family: "Menlo", "Monaco", monospace;
-  font-size: 0.95em;
-  margin-left: 1px;
-  margin-right: 1px;
-  padding: 0 4px;
-}
-
-blockquote {
-  border-left: 2px solid $base-border-color;
-  color: lighten($base-font-color, 15);
-  margin: $base-line-height 0;
-  padding-left: $base-line-height / 2;
-}
-
-cite {
-  color: lighten($base-font-color, 25);
-  font-style: italic;
-
-  &:before {
-    content: '\\2014 \\00A0';
-  }
-}
-BODYSCSS
-
-# ---------------------------------------------------
-# app/assets/stylesheets/shared/typography/forms.scss
-# ---------------------------------------------------
-
-file "app/assets/stylesheets/shared/typography/forms.scss", <<-FORMSSCSS
-@import "bourbon";
-@import "variables";
-
-$form-border-color: $base-border-color;
-$form-border-color-hover: darken($base-border-color, 10);
-$form-border-color-focus: $base-accent-color;
-$form-border-radius: $base-border-radius;
-$form-box-shadow: inset 0 1px 3px hsla(0, 0%, 0%, 0.06);
-$form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), 0.7);
-$form-font-size: $base-font-size;
-$form-font-family: $base-font-family;
-
-fieldset {
-  background: lighten($base-border-color, 10);
-  border: 1px solid $base-border-color;
-  margin: 0 0 ($base-line-height / 2) 0;
-  padding: $base-line-height;
-}
-
-input,
-label,
-select {
-  font-family: $form-font-family;
-  font-size: $form-font-size;
-}
-
-label {
-  cursor: pointer;
-  font-weight: bold;
-  margin-bottom: $base-line-height / 4;
-
-  &.required:after {
-    content: "*";
-  }
-
-  abbr {
-    display: none;
-  }
-}
-
-textarea,
-\#{$all-text-inputs} {
-  @include box-sizing(border-box);
-  @include transition(border-color);
-  background-color: white;
-  border-radius: $form-border-radius;
-  border: 1px solid $form-border-color;
-  box-shadow: $form-box-shadow;
-  font-family: $form-font-family;
-  font-size: $form-font-size;
-  margin-bottom: $base-line-height / 2;
-  padding: ($base-line-height / 3) ($base-line-height / 3);
-  width: 100%;
-
-  &:hover {
-    border-color: $form-border-color-hover;
-  }
-
-  &:focus {
-    border-color: $form-border-color-focus;
-    box-shadow: $form-box-shadow-focus;
-    outline: none;
-  }
-}
-
-input[type="search"] {
-  @include appearance(none);
-}
-
-input[type="checkbox"], input[type="radio"] {
-  display: inline;
-  margin-right: $base-line-height / 4;
-}
-
-input[type="file"] {
-  width: 100%;
-}
-
-select {
-  width: auto;
-  margin-bottom: $base-line-height;
-}
-FORMSSCSS
-
-# ------------------------------------------------------
-# app/assets/stylesheets/shared/typography/headings.scss
-# ------------------------------------------------------
-
-file "app/assets/stylesheets/shared/typography/headings.scss", <<-HEADINGSSCSS
-@import "bourbon";
-@import "variables";
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: $header-font-family;
-  line-height: 1.25em;
-  margin: 0 0 0.5em;
-  text-rendering: optimizeLegibility; // Fix the character spacing for headings
-}
-
-h1 {
-  font-size: $base-font-size * 2.25; // 16 * 2.25 = 36px
-  margin-bottom: 1em;
-}
-
-h2 {
-  font-size: $base-font-size * 2; // 16 * 2 = 32px
-  margin-bottom: 0.7em;
-}
-
-h3 {
-  font-size: $base-font-size * 1.75; // 16 * 1.75 = 28px
-  margin-bottom: 0.5em;
-}
-
-h4 {
-  font-size: $base-font-size * 1.5; // 16 * 1.5 = 24px
-  margin-bottom: 0.25em;
-}
-
-h5 {
-  font-size: $base-font-size * 1.25; // 16 * 1.25 = 20px
-  margin-bottom: 0.25em;
-}
-
-h6 {
-  font-size: $base-font-size;
-  margin-bottom: 0.25em;
-}
-HEADINGSSCSS
-
-# ---------------------------------------------------
-# app/assets/stylesheets/shared/typography/lists.scss
-# ---------------------------------------------------
-
-file "app/assets/stylesheets/shared/typography/lists.scss", <<-LISTSSCSS
-@import "bourbon";
-@import "variables";
-
-body.blogelator {
-  ul, ol {
-    margin: 0;
-    padding: 0;
-    margin-bottom: $base-line-height / 2;
-    padding-left: $base-line-height;
-  }
-
-  dl {
-    line-height: $base-line-height;
-    margin-bottom: $base-line-height / 2;
-
-    dt {
-      font-weight: bold;
-      margin-top: $base-line-height / 2;
-    }
-
-    dd {
-      margin: 0;
-    }
-  }
-}
-LISTSSCSS
-
-# ------------------------------------------
-# app/assets/stylesheets/shared/buttons.scss
-# ------------------------------------------
-
-file "app/assets/stylesheets/shared/buttons.scss", <<-BUTTONSSCSS
-@import "bourbon";
-@import "variables";
-
-.button,
-button,
-input[type="submit"] {
-  @include appearance(none);
-  background-color: $base-accent-color;
-  border: 1px solid $base-accent-color;
-  border-radius: $base-border-radius;
-  box-shadow: 0 0 5px 0 $base-body-color;
-  color: $base-body-color;
-  cursor: pointer;
-  display: block;
-  font-size: $base-font-size;
-  font-weight: bold;
-  padding: 0.5em 1em;
-  text-align: center;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  -webkit-font-smoothing: antialiased;
-  @include transition(all 0.1s ease);
-
-  &:hover {
-    background-color: lighten($base-accent-color, 8%);
-    border-color: lighten($base-accent-color, 8%);
-  }
-
-  &:active {
-    background-color: $base-accent-color;
-    border-color: $base-accent-color;
-  }
-}
-BUTTONSSCSS
-
-# -------------------------------------------------
-# app/assets/stylesheets/shared/flash_messages.scss
-# -------------------------------------------------
-
-file "app/assets/stylesheets/shared/flash_messages.scss", <<-FLASHMESSAGESSCSS
-@import "bourbon";
-@import "variables";
-@import "neat";
-
-.flash-alert,
-.flash-notice {
-  @include outer-container;
-  background-color: lighten($alert-color, 50%);
-  border: 1px solid darken($alert-color, 5%);
-  border-radius: $base-border-radius;
-  color: darken($alert-color, 5%);
-  font-weight: bold;
-  margin: 1em auto;
-  max-width: 90%;
-  overflow: hidden;
-  padding: 0.5em 1em 0.5em 0;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-
-  i {
-    cursor: pointer;
-    float: left;
-    padding: 0.2em 1em 0;
-  }
-}
-
-.flash-notice {
-  background-color: lighten($notice-color, 40%);
-  border: 1px solid darken($notice-color, 5%);
-  color: darken($notice-color, 5%);
-}
-FLASHMESSAGESSCSS
-
-# -------------------------------------------
-# app/assets/stylesheets/application.css.scss
-# -------------------------------------------
 
 run "rm app/assets/stylesheets/application.css"
-file "app/assets/stylesheets/application.css.scss", <<-APPLICATIONCSS
-/*
- *= require normalize
- *= require font-awesome
- *= require_tree ./shared
- *= require_tree ./application
- *= require_self
- */
-APPLICATIONCSS
+
+file "app/assets/stylesheets/_imports.scss",                   Stylesheets.imports
+file "app/assets/stylesheets/_variables.scss",                 Stylesheets.variables
+file "app/assets/stylesheets/application.css.scss",            Stylesheets.application
+file "app/assets/stylesheets/shared/typography/body.scss",     Stylesheets.body
+file "app/assets/stylesheets/shared/typography/forms.scss",    Stylesheets.forms
+file "app/assets/stylesheets/shared/typography/headings.scss", Stylesheets.headings
+file "app/assets/stylesheets/shared/typography/lists.scss",    Stylesheets.lists
+file "app/assets/stylesheets/shared/buttons.scss",             Stylesheets.buttons
+file "app/assets/stylesheets/shared/flash_messages.scss",      Stylesheets.flash_messages
+
+# =================================================================
+# App Files
+# =================================================================
 
 # -----------------------------------------
-# app/controllers/static_pages_controller.rb
-# -----------------------------------------
-
-file "app/controllers/static_pages_controller.rb", <<-STATICPAGESCONTROLLER
-class StaticPagesController < ApplicationController
-
-  def home
-    @title = "Welcome"
-  end
-
-end
-STATICPAGESCONTROLLER
-
-# -----------------------------------------
-# app/helpers/application_helper.rb
+# Helper Files
 # -----------------------------------------
 
 run "rm app/helpers/application_helper.rb"
-file "app/helpers/application_helper.rb", <<-APPLICATIONHELPER
-module ApplicationHelper
-  include LocalTimeHelper
-
-  def body_class
-    body_class = @body_class || "default"
-    body_class += " " + controller.controller_name.dasherize
-    body_class += " " + controller.action_name.dasherize
-    body_class
-  end
-
-  def page_title
-    page = @title
-    if page
-      "\#{page} • \#{site_title}"
-    else
-      site_title
-    end
-  end
-
-  def site_title
-    "#{@app_name.titleize}"
-  end
-
-end
-APPLICATIONHELPER
+file "app/helpers/application_helper.rb", Helpers.application(@app_name)
 
 # -----------------------------------------
-# app/views/layouts/_analytics.html.erb
-# -----------------------------------------
-
-file "app/views/layouts/_analytics.html.erb", <<-ANALYTICS
-<%# Include scripts for analytics %>
-ANALYTICS
-
-# -----------------------------------------
-# app/views/layouts/_flash_messages.html.erb
-# -----------------------------------------
-
-file "app/views/layouts/_flash_messages.html.erb", <<-FLASHMESSAGES
-<% if alert %>
-  <p class="flash-alert">
-    <i class="fa fa-times"></i>
-    <%= alert %>
-  </p>
-<% end %>
-
-<% if notice %>
-  <p class="flash-notice">
-    <i class="fa fa-times"></i>
-    <%= notice %>
-  </p>
-<% end %>
-FLASHMESSAGES
-
-# -----------------------------------------
-# app/views/layouts/_footer.html.erb
-# -----------------------------------------
-
-file "app/views/layouts/_footer.html.erb", <<-FOOTER
-<footer>
-</footer>
-FOOTER
-
-# -----------------------------------------
-# app/views/layouts/_header.html.erb
-# -----------------------------------------
-
-file "app/views/layouts/_header.html.erb", <<-HEADER
-<header>
-  <%= link_to "#{@app_name.titleize}", root_path %>
-</header>
-HEADER
-
-# -----------------------------------------
-# app/views/layouts/application.html.erb
+# View Files
 # -----------------------------------------
 
 run "rm app/views/layouts/application.html.erb"
-file "app/views/layouts/application.html.erb", <<-APPLICATIONLAYOUT
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= page_title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag "application" %>
-  <%= csrf_meta_tags %>
-  <%= yield :head %>
-</head>
 
-<body class="<%= body_class %>">
-  <%= render partial: "layouts/header" %>
-  <%= render partial: "layouts/flash_messages" %>
-
-  <main>
-    <%= yield %>
-  </main>
-
-  <%= render partial: "layouts/footer" %>
-
-  <%= javascript_include_tag "application" %>
-  <%= yield :scripts %>
-  <%= render partial: "layouts/analytics" %>
-</body>
-
-</html>
-APPLICATIONLAYOUT
+file "app/views/layouts/_analytics.html.erb",      Views.analytics
+file "app/views/layouts/_flash_messages.html.erb", Views.flash_messages
+file "app/views/layouts/_footer.html.erb",         Views.footer
+file "app/views/layouts/_header.html.erb",         Views.header(@app_name)
+file "app/views/layouts/application.html.erb",     Views.application
 
 # -----------------------------------------
-# app/views/static_pages/home.html.erb
-# -----------------------------------------
-
-file "app/views/static_pages/home.html.erb", <<-HOMEERB
-<h1>
-  <i class="fa fa-github"></i>
-  Welcome to #{@app_name.titleize}
-</h1>
-HOMEERB
-
-# -----------------------------------------
-# config/environments/development.rb
+# Configuration Files
 # -----------------------------------------
 
 run "rm config/environments/development.rb"
-file "config/environments/development.rb", <<-DEVELOPMENT
-#{@app_class}::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-
-  # In the development environment your application's code is reloaded on
-  # every request. This slows down response time but is perfect for development
-  # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = false
-
-  # Do not eager load code on boot.
-  config.eager_load = false
-
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
-
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
-  # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
-
-  # Raise an error on page load if there are pending migrations
-  config.active_record.migration_error = :page_load
-
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
-  config.assets.debug = true
-
-  # Use Letter Opener for sending email in development
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
-  config.action_mailer.asset_host = "http://localhost:3000"
-  config.action_mailer.delivery_method = :letter_opener_web
-
-  # Set Ember.js file to load
-  config.ember.variant = :development
-end
-DEVELOPMENT
-
-# -----------------------------------------
-# config/environments/production.rb
-# -----------------------------------------
-
 run "rm config/environments/production.rb"
-file "config/environments/production.rb", <<-PRODUCTION
-#{@app_class}::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-
-  # Code is not reloaded between requests.
-  config.cache_classes = true
-
-  # Eager load code on boot. This eager loads most of Rails and
-  # your application in memory, allowing both thread web servers
-  # and those relying on copy on write to perform better.
-  # Rake tasks automatically ignore this option for performance.
-  config.eager_load = true
-
-  # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
-
-  # Enable Rack::Cache to put a simple HTTP cache in front of your application
-  # Add `rack-cache` to your Gemfile before enabling this.
-  # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
-  # config.action_dispatch.rack_cache = true
-
-  # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
-
-  # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  config.assets.css_compressor = :sass
-
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-
-  # Generate digests for assets URLs.
-  config.assets.digest = true
-
-  # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = "1.0"
-
-  # Specifies the header that your server uses for sending files.
-  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for nginx
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
-
-  # Set to :debug to see everything in the log.
-  config.log_level = :info
-
-  # Prepend all log lines with the following tags.
-  # config.log_tags = [ :subdomain, :uuid ]
-
-  # Use a different logger for distributed setups.
-  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = "http://assets.example.com"
-
-  # Precompile additional assets.
-  # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  # config.assets.precompile += %w( search.js )
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
-
-  # Use SMTP for sending email in production
-  config.action_mailer.default_url_options = { :host => ENV["HOSTNAME"] }
-  config.action_mailer.asset_host = "http://\#{ENV["HOSTNAME"]}"
-  config.action_mailer.delivery_method = :smtp
-
-  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-  # the I18n.default_locale when a translation can not be found).
-  config.i18n.fallbacks = true
-
-  # Send deprecation notices to registered listeners.
-  config.active_support.deprecation = :notify
-
-  # Disable automatic flushing of the log to improve performance.
-  # config.autoflush_log = false
-
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
-
-  # Set Ember.js file to load
-  config.ember.variant = :production
-end
-PRODUCTION
-
-# -----------------------------------------
-# config/initializers/smtp.rb
-# -----------------------------------------
-file "config/initializers/smtp.rb", <<-SMTP
-ActionMailer::Base.smtp_settings = {
-  :address        => ENV["SMTP_ADDRESS"],
-  :port           => ENV["SMTP_PORT"],
-  :authentication => :plain,
-  :user_name      => ENV["SMTP_USER_NAME"],
-  :password       => ENV["SMTP_PASSWORD"],
-  :domain         => ENV["HOSTNAME"]
-}
-SMTP
-
-# -----------------------------------------
-# config/database.yml
-# -----------------------------------------
-
 run "rm config/database.yml"
-file "config/database.yml", <<-DATABASE
-development:
-  adapter: postgresql
-  database: #{@app_name.underscore}_development
-  host: localhost
 
-test:
-  adapter: postgresql
-  database: #{@app_name.underscore}_test
-  host: localhost
-
-production:
-  adapter: postgresql
-  database: #{@app_name.underscore}_production
-  host: localhost
-DATABASE
+file "config/environments/development.rb", Configurations.development(@app_class)
+file "config/environments/production.rb",  Configurations.production(@app_class)
+file "config/initializers/smtp.rb",        Configurations.smtp
+file "config/database.yml",                Configurations.database(@app_name)
 
 # -----------------------------------------
 # config/jshint.json
@@ -1509,29 +778,23 @@ file "Gemfile", <<-GEMFILE
 source "http://rubygems.org"
 
 ruby "2.1.2"
-gem "rails", "4.1.4"
+gem "rails", "4.1.5"
 
-gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\"" : ""}
-gem "bourbon"#{install_devise ? "\ngem \"cancan\"" : ""}
+gem "awesome_print"#{install_blogelator ? "\ngem \"blogelator\"" : ""}#{install_devise ? "\ngem \"cancan\"" : ""}
 gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
 gem "ember-source"
-gem "font-awesome-sass"
 gem "jbuilder"
 gem "jquery-rails"
 gem "local_time"
-gem "neat", "~> 1.5.0"
-gem "newrelic_rpm"
 gem "pg"
 gem "puma"
 gem "roadie"
 gem "roadie-rails"
-gem "sass-rails", "~> 4.0.2"
+gem "sass-rails"
 gem "uglifier"
 
 group :development, :test do
-  gem "better_errors"
-  gem "binding_of_caller"
   gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "foreman"
@@ -1539,7 +802,6 @@ group :development, :test do
   gem "quiet_assets"
   gem "rspec-rails"
   gem "spring"
-  gem "teaspoon"
 end
 
 group :test do
@@ -1548,15 +810,9 @@ group :test do
   gem "faker"
   gem "guard"
   gem "guard-rspec"
-  gem "guard-teaspoon"
   gem "rb-fsevent"
   gem "terminal-notifier-guard"
-  gem "vcr"
   gem "webmock"
-end
-
-group :production do
-  gem "rails_12factor"
 end
 GEMFILE
 
@@ -1569,28 +825,20 @@ file "Guardfile", <<-GUARDFILE
 # More info at https://github.com/guard/guard#readme
 
 guard :rspec do
-  watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/\#{m[1]}_spec.rb" }
-  watch('spec/spec_helper.rb')  { "spec" }
+  watch(%r{^spec/.+_spec.rb$})
+  watch(%r{^lib/(.+).rb$})     {|m| "spec/lib/\#{m[1]}_spec.rb" }
+  watch("spec/spec_helper.rb") { "spec" }
 
   # Rails example
-  watch(%r{^app/(.+)\.rb$})                           { |m| "spec/\#{m[1]}_spec.rb" }
-  watch(%r{^app/(.*)(\.erb|\.haml|\.slim)$})          { |m| "spec/\#{m[1]}\#{m[2]}_spec.rb" }
-  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| ["spec/routing/\#{m[1]}_routing_spec.rb", "spec/\#{m[2]}s/\#{m[1]}_\#{m[2]}_spec.rb", "spec/acceptance/\#{m[1]}_spec.rb"] }
-  watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
-  watch('config/routes.rb')                           { "spec/routing" }
-  watch('app/controllers/application_controller.rb')  { "spec/controllers" }
+  watch(%r{^app/(.+).rb$})                           {|m| "spec/\#{m[1]}_spec.rb" }
+  watch(%r{^app/(.*)(.erb|.haml|.slim)$})            {|m| "spec/\#{m[1]}\#{m[2]}_spec.rb" }
+  watch(%r{^app/controllers/(.+)_(controller).rb$})  {|m| ["spec/routing/\#{m[1]}_routing_spec.rb", "spec/\#{m[2]}s/\#{m[1]}_\#{m[2]}_spec.rb", "spec/acceptance/\#{m[1]}_spec.rb"] }
+  watch(%r{^spec/support/(.+).rb$})                  { "spec" }
+  watch("config/routes.rb")                          { "spec/routing" }
+  watch("app/controllers/application_controller.rb") { "spec/controllers" }
 
   # Capybara features specs
-  watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$})     { |m| "spec/features/\#{m[1]}_spec.rb" }
-end
-
-guard :teaspoon do
-  # Implementation files
-  watch(%r{app/assets/javascripts/(.+).js}) { |m| "\#{m[1]}_spec.js" }
-
-  # Specs / Helpers
-  watch(%r{spec/javascripts/(.*)})
+  watch(%r{^app/views/(.+)/.*.(erb|haml|slim)$})     {|m| "spec/features/\#{m[1]}_spec.rb" }
 end
 GUARDFILE
 
@@ -1643,12 +891,10 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 
 ### Production/Development/Test
 
-- [Awesome Print](https://github.com/michaeldv/awesome_print)#{install_blogelator ? "\n- [Blogelator](https://github.com/codelation/blogelator)" : ""}
-- [Bourbon](http://bourbon.io)#{install_devise ? "\n- [CanCan](https://github.com/ryanb/cancan)" : ""}
+- [Awesome Print](https://github.com/michaeldv/awesome_print)#{install_blogelator ? "\n- [Blogelator](https://github.com/codelation/blogelator)" : ""}#{install_devise ? "\n- [CanCan](https://github.com/ryanb/cancan)" : ""}
 - [Coffee-Rails](https://github.com/rails/coffee-rails)#{install_devise ? "\n- [Devise](https://github.com/plataformatec/devise)" : ""}
 - [ember-rails](https://github.com/emberjs/ember-rails)
 - [jquery-rails](https://github.com/rails/jquery-rails)
-- [New Relic Ruby Agent](https://github.com/newrelic/rpm)
 - [pg](https://bitbucket.org/ged/ruby-pg)
 - [Puma](http://puma.io)
 - [Roadie](https://github.com/Mange/roadie)
@@ -1657,7 +903,6 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 
 ### Development/Test
 
-- [Better Errors](https://github.com/charliesome/better_errors)
 - [dotenv](https://github.com/bkeepers/dotenv)
 - [Foreman](https://github.com/ddollar/foreman)
 - [Letter Opener](https://github.com/fgrehm/letter_opener_web)
@@ -1671,7 +916,6 @@ from `.env` are set on Heroku using `heroku config:set VARIABLE_NAME=VALUE`.
 - [rb-fsevent](https://github.com/thibaudgg/rb-fsevent)
 - [rspec-rails](https://github.com/rspec/rspec-rails)
 - [TerminalNotifier for Guard](https://github.com/Springest/terminal-notifier-guard)
-- [VCR](https://github.com/vcr/vcr)
 - [WebMock](https://github.com/bblimke/webmock)
 README
 
@@ -2036,7 +1280,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '52dd4043b16c1b137c3cfec3c4a32724a47aab6cc728ee8d2c450da0454563a7366a385e99be929a12ecd106676d1107112a035b1d922cff6812732f3d3f9f8f'
+  # config.pepper = '#{SecureRandom.hex(64)}'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
