@@ -6,7 +6,7 @@ source "http://rubygems.org"
 ruby "2.1.2"
 gem "rails", "4.1.5"
 
-gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}#{install_devise ? "\ngem \"cancan\"" : ""}
+gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}#{install_devise ? "\ngem \"cancancan\"" : ""}
 gem "coffee-rails"#{install_devise ? "\ngem \"devise\"" : ""}
 gem "ember-rails"
 gem "ember-source"

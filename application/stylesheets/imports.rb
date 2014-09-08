@@ -1,5 +1,9 @@
 module ImportsStylesheet
-  def imports
-    File.read("#{File.dirname(__FILE__)}/imports.scss")
+  def imports(app_name)
+    return <<-IMPORTS
+@import "#{app_name}/bourbon";
+@import "variables";
+@import "#{app_name}/neat";
+IMPORTS
   end
 end
