@@ -1,4 +1,5 @@
 Dir["#{File.dirname(__FILE__)}/application/*.rb"].each {|file| require file }
+Dir["#{File.dirname(__FILE__)}/saas/*.rb"].each        {|file| require file }
 `open /Applications/Postgres.app`
 
 # =================================================================
@@ -19,7 +20,7 @@ end
 # Ask which gems/engines should be added
 # -----------------------------------------
 
-install_devise = ask("Do you want to add authentication? [no]").downcase.start_with?("y")
+install_devise = true
 install_blocky = ask("Do you want to add editable content blocks? [no]").downcase.start_with?("y")
 install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?("y")
 
@@ -50,6 +51,7 @@ end
 
 if install_devise
   run "rails g devise:install"
+  run "rails g devise AdminUser"
   run "rails g devise User"
   run "rails g cancan:ability"
 end
@@ -123,6 +125,29 @@ run "rm app/helpers/application_helper.rb"
 file "app/helpers/application_helper.rb", Helpers.application(@app_name)
 
 # -----------------------------------------
+# Model Files
+# -----------------------------------------
+
+file "app/models/ability.rb",           Saas::Models.ability
+file "app/models/admin_user.rb",        Saas::Models.admin_user
+file "app/models/organization_role.rb", Saas::Models.organization_role
+file "app/models/organization.rb",      Saas::Models.organization
+file "app/models/subscription_plan.rb", Saas::Models.subscription_plan
+file "app/models/subscription.rb",      Saas::Models.subscription
+file "app/models/user.rb",              Saas::Models.user
+
+file "spec/models/organization_spec.rb",      Saas::Models.organization_spec
+file "spec/models/subscription_plan_spec.rb", Saas::Models.subscription_plan_spec
+file "spec/models/user_spec.rb",              Saas::Models.user_spec
+
+# -----------------------------------------
+# Concern Files
+# -----------------------------------------
+
+file "app/models/concerns/subscriber.rb",       Saas::Concerns.subscriber
+file "spec/models/concerns/subscriber_spec.rb", Saas::Concerns.subscriber_spec
+
+# -----------------------------------------
 # View Files
 # -----------------------------------------
 
@@ -146,7 +171,6 @@ file "app/views/layouts/application.html.erb",      Views.application
 
 run "rm config/environments/development.rb"
 run "rm config/environments/production.rb"
-run "rm config/initializers/devise.rb"      if install_devise
 
 run "rm .gitignore"
 
