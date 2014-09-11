@@ -32,14 +32,11 @@ run "rm config/database.yml"
 run "rm config/routes.rb"
 run "rm Gemfile"
 
-file "config/database.yml", Configurations.database(@app_name)
-file "config/routes.rb",    Configurations.routes(@app_class)
-file "Gemfile",             Configurations.gemfile(install_blocky, install_blogelator, install_devise)
+file "config/database.yml", Saas::Configurations.database(@app_name)
+file "config/routes.rb",    Saas::Configurations.routes(@app_class)
+file "Gemfile",             Saas::Configurations.gemfile(install_blocky, install_blogelator)
 
 run "bundle install"
-rake "db:drop"
-rake "db:create"
-rake "db:migrate"
 
 if install_blocky
   run "rails g blocky:install"
@@ -48,15 +45,6 @@ end
 if install_blogelator
   run "rails g blogelator:install"
 end
-
-if install_devise
-  run "rails g devise:install"
-  run "rails g devise AdminUser"
-  run "rails g devise User"
-  run "rails g cancan:ability"
-end
-
-rake "db:migrate"
 
 # =================================================================
 # Asset Files
@@ -90,7 +78,7 @@ file "app/assets/stylesheets/shared/typography/forms.scss",    Stylesheets.forms
 file "app/assets/stylesheets/shared/typography/headings.scss", Stylesheets.headings
 file "app/assets/stylesheets/shared/typography/lists.scss",    Stylesheets.lists
 file "app/assets/stylesheets/shared/buttons.scss",             Stylesheets.buttons
-file "app/assets/stylesheets/shared/devise.scss",              Stylesheets.devise if install_devise
+file "app/assets/stylesheets/shared/devise.scss",              Stylesheets.devise
 file "app/assets/stylesheets/shared/flash_messages.scss",      Stylesheets.flash_messages
 
 # Vendor Stylesheets
@@ -153,12 +141,12 @@ file "spec/models/concerns/subscriber_spec.rb", Saas::Concerns.subscriber_spec
 
 run "rm app/views/layouts/application.html.erb"
 
-file "app/views/devise/confirmations/new.html.erb", Views.devise_confirmations_new if install_devise
-file "app/views/devise/passwords/edit.html.erb",    Views.devise_passwords_edit    if install_devise
-file "app/views/devise/passwords/new.html.erb",     Views.devise_passwords_new     if install_devise
-file "app/views/devise/registrations/new.html.erb", Views.devise_registrations_new if install_devise
-file "app/views/devise/sessions/new.html.erb",      Views.devise_sessions_new      if install_devise
-file "app/views/devise/unlocks/new.html.erb",       Views.devise_unlocks_new       if install_devise
+file "app/views/devise/confirmations/new.html.erb", Views.devise_confirmations_new
+file "app/views/devise/passwords/edit.html.erb",    Views.devise_passwords_edit
+file "app/views/devise/passwords/new.html.erb",     Views.devise_passwords_new
+file "app/views/devise/registrations/new.html.erb", Views.devise_registrations_new
+file "app/views/devise/sessions/new.html.erb",      Views.devise_sessions_new
+file "app/views/devise/unlocks/new.html.erb",       Views.devise_unlocks_new
 file "app/views/layouts/_analytics.html.erb",       Views.analytics
 file "app/views/layouts/_flash_messages.html.erb",  Views.flash_messages
 file "app/views/layouts/_footer.html.erb",          Views.footer
@@ -174,18 +162,30 @@ run "rm config/environments/production.rb"
 
 run "rm .gitignore"
 
-file "config/environments/development.rb", Configurations.development(@app_class)
-file "config/environments/production.rb",  Configurations.production(@app_class)
-file "config/initializers/devise.rb",      Configurations.devise                  if install_devise
-file "config/initializers/smtp.rb",        Configurations.smtp
-file "config/jshint.json",                 Configurations.jshint
-file ".env",                               Configurations.env
-file ".rspec",                             Configurations.rspec
-file ".gitignore",                         Configurations.gitignore
-file ".tm_properties",                     Configurations.tm_properties
-file "Guardfile",                          Configurations.guardfile
-file "Procfile",                           Configurations.procfile
-file "Procfile.development",               Configurations.procfile_development
+file "config/environments/development.rb", Saas::Configurations.development(@app_class)
+file "config/environments/production.rb",  Saas::Configurations.production(@app_class)
+file "config/initializers/devise.rb",      Saas::Configurations.devise
+file "config/initializers/smtp.rb",        Saas::Configurations.smtp
+file "config/jshint.json",                 Saas::Configurations.jshint
+file ".env",                               Saas::Configurations.env
+file ".rspec",                             Saas::Configurations.rspec
+file ".gitignore",                         Saas::Configurations.gitignore
+file ".tm_properties",                     Saas::Configurations.tm_properties
+file "Guardfile",                          Saas::Configurations.guardfile
+file "Procfile",                           Saas::Configurations.procfile
+file "Procfile.development",               Saas::Configurations.procfile_development
+
+# =================================================================
+# Migration Files
+# =================================================================
+
+file "#{(Time.now + 0).strftime("%Y%m%d%H%M%S")}_create_admin_users.rb",              Saas::Migrations.create_admin_users
+file "#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
+file "#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
+file "#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
+file "#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
+file "#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
+file "#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
 
 # =================================================================
 # Task Files
@@ -220,6 +220,10 @@ file "README.md", Documentation.readme(@app_name, install_blocky, install_blogel
 # =================================================================
 
 # Make sure all files have been generated before first commit
+rake "db:drop"
+rake "db:create"
+rake "db:migrate"
+
 run "bundle exec spring binstub --all"
 
 git :init
