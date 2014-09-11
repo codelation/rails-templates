@@ -16,7 +16,7 @@ module Subscriber
   end
 
   # The current subscription for the subscriber.
-  # @return [Saaso::Subscription]
+  # @return [Subscription]
   def current_subscription
     self.subscriptions.current.first
   end
@@ -34,7 +34,7 @@ module Subscriber
     end
 
     new_subscription = Subscription.create(plan: subscription_plan)
-    if plan.trial_length > 0
+    if subscription_plan.trial_length > 0
       new_subscription.trialing!
     else
       new_subscription.active!

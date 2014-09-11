@@ -1,4 +1,4 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :name
@@ -25,7 +25,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :saaso_users, :email
-    add_index :saaso_users, :reset_password_token, unique: true
+    add_index :users, :email
+    add_index :users, :reset_password_token, unique: true
   end
 end

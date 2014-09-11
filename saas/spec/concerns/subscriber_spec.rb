@@ -65,7 +65,7 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
   it "should return the created Subscription" do
     @subscription = @organization.subscribe_to_plan(@plan)
-    expect(@subscription.class).to eq(Saaso::Subscription)
+    expect(@subscription.class).to eq(Subscription)
   end
 
   it "should set the subscription plan on the Subscription" do

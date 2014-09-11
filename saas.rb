@@ -116,17 +116,25 @@ file "app/helpers/application_helper.rb", Helpers.application(@app_name)
 # Model Files
 # -----------------------------------------
 
-file "app/models/ability.rb",           Saas::Models.ability
-file "app/models/admin_user.rb",        Saas::Models.admin_user
-file "app/models/organization_role.rb", Saas::Models.organization_role
-file "app/models/organization.rb",      Saas::Models.organization
-file "app/models/subscription_plan.rb", Saas::Models.subscription_plan
-file "app/models/subscription.rb",      Saas::Models.subscription
-file "app/models/user.rb",              Saas::Models.user
+file "app/models/ability.rb",                 Saas::Models.ability
+file "app/models/admin_user.rb",              Saas::Models.admin_user
+file "app/models/organization_membership.rb", Saas::Models.organization_membership
+file "app/models/organization_role.rb",       Saas::Models.organization_role
+file "app/models/organization.rb",            Saas::Models.organization
+file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
+file "app/models/subscription.rb",            Saas::Models.subscription
+file "app/models/user.rb",                    Saas::Models.user
 
 file "spec/models/organization_spec.rb",      Saas::Models.organization_spec
 file "spec/models/subscription_plan_spec.rb", Saas::Models.subscription_plan_spec
 file "spec/models/user_spec.rb",              Saas::Models.user_spec
+
+file "spec/factories/organization_factory.rb",            Saas::Factories.organization_factory
+file "spec/factories/organization_membership_factory.rb", Saas::Factories.organization_membership_factory
+file "spec/factories/organization_role_factory.rb",       Saas::Factories.organization_role_factory
+file "spec/factories/subscription_factory.rb",            Saas::Factories.subscription_factory
+file "spec/factories/subscription_plan_factory.rb",       Saas::Factories.subscription_plan_factory
+file "spec/factories/user_factory.rb",                    Saas::Factories.user_factory
 
 # -----------------------------------------
 # Concern Files
@@ -179,13 +187,13 @@ file "Procfile.development",               Saas::Configurations.procfile_develop
 # Migration Files
 # =================================================================
 
-file "#{(Time.now + 0).strftime("%Y%m%d%H%M%S")}_create_admin_users.rb",              Saas::Migrations.create_admin_users
-file "#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
-file "#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
-file "#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
-file "#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
-file "#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
-file "#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
+file "db/migrate/#{(Time.now + 0).strftime("%Y%m%d%H%M%S")}_create_admin_users.rb",              Saas::Migrations.create_admin_users
+file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
+file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
+file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
+file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
+file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
+file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
 
 # =================================================================
 # Task Files

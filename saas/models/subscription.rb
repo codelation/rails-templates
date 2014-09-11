@@ -2,7 +2,7 @@
 # current billing cycle, trial end time, whether it auto renews, etc.
 class Subscription < ActiveRecord::Base
   belongs_to :subscriber, polymorphic: true
-  belongs_to :plan, class_name: "SubscriptionPlan"
+  belongs_to :plan, class_name: "SubscriptionPlan", foreign_key: "subscription_plan_id"
 
   before_save :build_from_plan
 
