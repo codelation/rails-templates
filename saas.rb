@@ -55,10 +55,12 @@ end
 # -----------------------------------------
 
 run "rm app/assets/javascripts/application.js"
-file "app/assets/javascripts/application/.keep", ""
 
-file "app/assets/javascripts/application.js",           Javascripts.application
-file "app/assets/javascripts/shared/flash_messages.js", Javascripts.flash_messages
+file "app/assets/javascripts/application/.keep",        ""
+file "app/assets/javascripts/home/.keep",               ""
+file "app/assets/javascripts/shared/flash_messages.js", Saas::Javascripts.flash_messages
+file "app/assets/javascripts/application.js",           Saas::Javascripts.application
+file "app/assets/javascripts/home.js",                  Saas::Javascripts.home
 
 # -----------------------------------------
 # Stylesheet Files
@@ -67,28 +69,32 @@ file "app/assets/javascripts/shared/flash_messages.js", Javascripts.flash_messag
 run "rm app/assets/stylesheets/application.css"
 
 # Application Stylesheets
-file "app/assets/stylesheets/_imports.scss",        Stylesheets.imports(@app_name)
-file "app/assets/stylesheets/_variables.scss",      Stylesheets.variables
+file "app/assets/stylesheets/_imports.scss",        Saas::Stylesheets.imports(@app_name)
+file "app/assets/stylesheets/_variables.scss",      Saas::Stylesheets.variables
 file "app/assets/stylesheets/application/.keep",    ""
-file "app/assets/stylesheets/application.css.scss", Stylesheets.application(@app_name)
+file "app/assets/stylesheets/application.css.scss", Saas::Stylesheets.application(@app_name)
+
+# Home Styleshseets
+file "app/assets/stylesheets/home/.keep",    ""
+file "app/assets/stylesheets/home.css.scss", Saas::Stylesheets.home(@app_name)
 
 # Shared Stylesheets
-file "app/assets/stylesheets/shared/typography/body.scss",     Stylesheets.body
-file "app/assets/stylesheets/shared/typography/forms.scss",    Stylesheets.forms
-file "app/assets/stylesheets/shared/typography/headings.scss", Stylesheets.headings
-file "app/assets/stylesheets/shared/typography/lists.scss",    Stylesheets.lists
-file "app/assets/stylesheets/shared/buttons.scss",             Stylesheets.buttons
-file "app/assets/stylesheets/shared/devise.scss",              Stylesheets.devise
-file "app/assets/stylesheets/shared/flash_messages.scss",      Stylesheets.flash_messages
+file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body
+file "app/assets/stylesheets/shared/typography/forms.scss",    Saas::Stylesheets.forms
+file "app/assets/stylesheets/shared/typography/headings.scss", Saas::Stylesheets.headings
+file "app/assets/stylesheets/shared/typography/lists.scss",    Saas::Stylesheets.lists
+file "app/assets/stylesheets/shared/buttons.scss",             Saas::Stylesheets.buttons
+file "app/assets/stylesheets/shared/devise.scss",              Saas::Stylesheets.devise
+file "app/assets/stylesheets/shared/flash_messages.scss",      Saas::Stylesheets.flash_messages
 
 # Vendor Stylesheets
-file "vendor/assets/stylesheets/#{@app_name.underscore}/_bourbon.scss",     Stylesheets.bourbon
-file "vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip",       Stylesheets.bourbon_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/_neat.scss",        Stylesheets.neat
-file "vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip",          Stylesheets.neat_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.scss", Stylesheets.font_awesome
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip",  Stylesheets.font_awesome_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Stylesheets.normalize
+file "vendor/assets/stylesheets/#{@app_name.underscore}/_bourbon.scss",     Saas::Stylesheets.bourbon
+file "vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip",       Saas::Stylesheets.bourbon_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/_neat.scss",        Saas::Stylesheets.neat
+file "vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip",          Saas::Stylesheets.neat_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.scss", Saas::Stylesheets.font_awesome
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip",  Saas::Stylesheets.font_awesome_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Saas::Stylesheets.normalize
 
 # Unzip additional stylesheets
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
@@ -106,6 +112,12 @@ run "rm vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip"
 # =================================================================
 
 # -----------------------------------------
+# Controller Files
+# -----------------------------------------
+
+file "app/controllers/home_controller.rb", Saas::Controllers.home_controller
+
+# -----------------------------------------
 # Helper Files
 # -----------------------------------------
 
@@ -118,6 +130,7 @@ file "app/helpers/application_helper.rb", Helpers.application(@app_name)
 
 file "app/models/ability.rb",                 Saas::Models.ability
 file "app/models/admin_user.rb",              Saas::Models.admin_user
+file "app/models/contact_message.rb",         Saas::Models.contact_message
 file "app/models/organization_membership.rb", Saas::Models.organization_membership
 file "app/models/organization_role.rb",       Saas::Models.organization_role
 file "app/models/organization.rb",            Saas::Models.organization
@@ -144,22 +157,47 @@ file "app/models/concerns/subscriber.rb",       Saas::Concerns.subscriber
 file "spec/models/concerns/subscriber_spec.rb", Saas::Concerns.subscriber_spec
 
 # -----------------------------------------
+# Mailer Files
+# -----------------------------------------
+
+file "app/mailers/contact_message_mailer", Saas::Mailers.contact_message(@app_name)
+
+# -----------------------------------------
 # View Files
 # -----------------------------------------
 
 run "rm app/views/layouts/application.html.erb"
 
-file "app/views/devise/confirmations/new.html.erb", Views.devise_confirmations_new
-file "app/views/devise/passwords/edit.html.erb",    Views.devise_passwords_edit
-file "app/views/devise/passwords/new.html.erb",     Views.devise_passwords_new
-file "app/views/devise/registrations/new.html.erb", Views.devise_registrations_new
-file "app/views/devise/sessions/new.html.erb",      Views.devise_sessions_new
-file "app/views/devise/unlocks/new.html.erb",       Views.devise_unlocks_new
-file "app/views/layouts/_analytics.html.erb",       Views.analytics
-file "app/views/layouts/_flash_messages.html.erb",  Views.flash_messages
-file "app/views/layouts/_footer.html.erb",          Views.footer
-file "app/views/layouts/_header.html.erb",          Views.header(@app_name)
-file "app/views/layouts/application.html.erb",      Views.application
+file "app/views/devise/confirmations/new.html.erb",       Saas::Views.devise_confirmations_new
+file "app/views/devise/passwords/edit.html.erb",          Saas::Views.devise_passwords_edit
+file "app/views/devise/passwords/new.html.erb",           Saas::Views.devise_passwords_new
+file "app/views/devise/registrations/new.html.erb",       Saas::Views.devise_registrations_new
+file "app/views/devise/sessions/new.html.erb",            Saas::Views.devise_sessions_new
+file "app/views/devise/unlocks/new.html.erb",             Saas::Views.devise_unlocks_new
+
+file "app/views/layouts/application/_footer.html.erb",    Saas::Views.footer
+file "app/views/layouts/application/_header.html.erb",    Saas::Views.header(@app_name)
+
+file "app/views/layouts/home/_footer.html.erb",           Saas::Views.home_footer
+file "app/views/layouts/home/_header.html.erb",           Saas::Views.home_header
+
+file "app/views/layouts/shared/_analytics.html.erb",      Saas::Views.analytics
+file "app/views/layouts/shared/_flash_messages.html.erb", Saas::Views.flash_messages
+
+file "app/views/layouts/home.html.erb",                   Saas::Views.home
+file "app/views/layouts/application.html.erb",            Saas::Views.application
+
+file "app/views/home/_footer.html.erb",                   Saas::Views.home_footer
+file "app/views/home/_header.html.erb",                   Saas::Views.home_header
+file "app/views/home/about.html.erb",                     Saas::Views.home_about
+file "app/views/home/features.html.erb",                  Saas::Views.home_features
+file "app/views/home/index.html.erb",                     Saas::Views.home_index
+file "app/views/home/pricing.html.erb",                   Saas::Views.home_pricing
+file "app/views/home/privacy.html.erb",                   Saas::Views.home_privacy
+file "app/views/home/terms.html.erb",                     Saas::Views.home_terms
+
+file "app/views/mailers/contact_message_mailer/contact_email.html.erb", Saas::Views.contact_message_mailer_contact_email
+file "app/views/subscription_plans/_subscription_plan.html.erb",        Saas::Views.subscription_plans_subscription_plan
 
 # =================================================================
 # Configuration Files
@@ -188,12 +226,13 @@ file "Procfile.development",               Saas::Configurations.procfile_develop
 # =================================================================
 
 file "db/migrate/#{(Time.now + 0).strftime("%Y%m%d%H%M%S")}_create_admin_users.rb",              Saas::Migrations.create_admin_users
-file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
-file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
-file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
-file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
-file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
-file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
+file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_contact_messages.rb",         Saas::Migrations.create_contact_messages
+file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
+file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
+file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
+file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
+file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
+file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
 
 # =================================================================
 # Task Files

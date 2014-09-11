@@ -48,5 +48,28 @@ group :test do
 end
 GEMFILE
     end
+
+    def self.routes(app_class)
+      return <<-ROUTES
+#{app_class}::Application.routes.draw do
+  # Sales Site Routes
+  root to: "home#index"
+  %w(about contact features pricing privacy terms).each do |page|
+    get page, to: "home#\#{page}", as: page
+  end
+
+  # Resource Routes
+  resources :contact_messages
+
+  # Authentication Routes
+  devise_for :admin_users
+  devise_for :users
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/email"
+  end
+end
+ROUTES
+    end
   end
 end

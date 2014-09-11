@@ -9,6 +9,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/admin_user.rb")
     end
 
+    def self.contact_message
+      File.read("#{File.dirname(__FILE__)}/models/contact_message.rb")
+    end
+
     def self.organization_membership
       File.read("#{File.dirname(__FILE__)}/models/organization_membership.rb")
     end

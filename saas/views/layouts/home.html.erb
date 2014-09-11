@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag "home" %>
+  <%= csrf_meta_tags %>
+  <%= yield :head %>
+</head>
+
+<body class="<%= body_class %>">
+  <%= render partial: "layouts/home/header" unless @hide_header %>
+  <%= render partial: "layouts/shared/flash_messages" %>
+
+  <main>
+    <%= yield %>
+  </main>
+
+  <%= render partial: "layouts/home/footer" unless @hide_footer %>
+
+  <%= javascript_include_tag "home" %>
+  <%= yield :scripts %>
+  <%= render partial: "layouts/shared/analytics" %>
+</body>
+
+</html>

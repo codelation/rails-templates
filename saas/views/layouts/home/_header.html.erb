@@ -1,0 +1,18 @@
+<header>
+  <div class="branding">
+    <%= link_to root_path do %>
+      <i class="fa-pied-piper-alt"></i>
+      <%= site_title %>
+    <% end %>
+  </div>
+  <nav>
+    <ul>
+      <li class="features"><%= link_to "Features", features_path %></li>
+      <li class="pricing"><%= link_to "Pricing", pricing_path %></li>
+      <li class="contact"><%= link_to "Contact", contact_path %></li>
+      <li class="divider"></li>
+      <li class="new-session"><%= link_to "Sign In", new_user_session_path %></li>
+      <li class="new-registration"><%= link_to "Sign Up", new_user_registration_path %></li>
+    </ul>
+  </nav>
+</header>

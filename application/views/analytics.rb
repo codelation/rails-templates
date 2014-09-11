@@ -1,5 +1,5 @@
 module AnalyticsView
   def analytics
-    File.read("#{File.dirname(__FILE__)}/analytics.html.erb")
+    File.read("#{File.dirname(__FILE__)}/layouts/shared/_analytics.html.erb")
   end
 end
