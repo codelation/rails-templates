@@ -61,6 +61,19 @@ rake "db:migrate"
 # =================================================================
 
 # -----------------------------------------
+# Font Files
+# -----------------------------------------
+
+# Vendor Fonts
+file "vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip", Fonts.font_awesome_zip
+
+# Unzip fonts
+run "unzip vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip -d vendor/assets/fonts/#{@app_name.underscore}"
+
+# Delete unzipped files
+run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
+
+# -----------------------------------------
 # Javascript Files
 # -----------------------------------------
 
@@ -104,6 +117,7 @@ file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Styl
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome/_font-awesome-sprockets.scss",  Stylesheets.font_awesome_sprockets(@app_name)
 
 # Delete unzipped files
 run "rm vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip"

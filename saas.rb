@@ -51,6 +51,19 @@ end
 # =================================================================
 
 # -----------------------------------------
+# Font Files
+# -----------------------------------------
+
+# Vendor Fonts
+file "vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip",  Fonts.font_awesome_zip
+
+# Unzip fonts
+run "unzip vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip -d vendor/assets/fonts/#{@app_name.underscore}"
+
+# Delete unzipped files
+run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
+
+# -----------------------------------------
 # Javascript Files
 # -----------------------------------------
 
@@ -84,7 +97,7 @@ file "app/assets/stylesheets/shared/typography/forms.scss",    Saas::Stylesheets
 file "app/assets/stylesheets/shared/typography/headings.scss", Saas::Stylesheets.headings
 file "app/assets/stylesheets/shared/typography/lists.scss",    Saas::Stylesheets.lists
 file "app/assets/stylesheets/shared/buttons.scss",             Saas::Stylesheets.buttons
-file "app/assets/stylesheets/shared/devise.scss",              Saas::Stylesheets.devise
+file "app/assets/stylesheets/shared/devise.scss",              Saas::Stylesheets.devise if install_devise
 file "app/assets/stylesheets/shared/flash_messages.scss",      Saas::Stylesheets.flash_messages
 
 # Vendor Stylesheets
@@ -100,6 +113,7 @@ file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Saas
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome/_font-awesome-sprockets.scss",  Saas::Stylesheets.font_awesome_sprockets(@app_name)
 
 # Delete unzipped files
 run "rm vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip"
@@ -187,8 +201,6 @@ file "app/views/layouts/shared/_flash_messages.html.erb", Saas::Views.flash_mess
 file "app/views/layouts/home.html.erb",                   Saas::Views.home
 file "app/views/layouts/application.html.erb",            Saas::Views.application
 
-file "app/views/home/_footer.html.erb",                   Saas::Views.home_footer
-file "app/views/home/_header.html.erb",                   Saas::Views.home_header
 file "app/views/home/about.html.erb",                     Saas::Views.home_about
 file "app/views/home/features.html.erb",                  Saas::Views.home_features
 file "app/views/home/index.html.erb",                     Saas::Views.home_index
