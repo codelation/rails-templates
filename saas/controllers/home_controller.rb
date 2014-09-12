@@ -9,6 +9,8 @@ class HomeController < ApplicationController
     @contact_message = ContactMessage.new
 
     @title = "Contact Us"
+    @body_class = "contact-messages"
+    render "contact_messages/new"
   end
 
   def features

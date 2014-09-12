@@ -90,11 +90,11 @@ file "app/assets/stylesheets/application/.keep",    ""
 file "app/assets/stylesheets/application.css.scss", Saas::Stylesheets.application(@app_name)
 
 # Home Styleshseets
-file "app/assets/stylesheets/home/.keep",               ""
-file "app/assets/stylesheets/home.css.scss",            Saas::Stylesheets.home(@app_name)
-file "app/assets/stylesheets/home/layout/_footer.scss", Saas::Stylesheets.home_footer
-file "app/assets/stylesheets/home/layout/_header.scss", Saas::Stylesheets.home_header
-file "app/assets/stylesheets/home/contact.scss",        Saas::Stylesheets.home_contact
+file "app/assets/stylesheets/home/.keep",                      ""
+file "app/assets/stylesheets/home.css.scss",                   Saas::Stylesheets.home(@app_name)
+file "app/assets/stylesheets/home/layout/_footer.scss",        Saas::Stylesheets.home_footer
+file "app/assets/stylesheets/home/layout/_header.scss",        Saas::Stylesheets.home_header
+file "app/assets/stylesheets/home/contact_messages/main.scss", Saas::Stylesheets.contact_messages_main
 
 # Shared Stylesheets
 file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body
@@ -139,6 +139,7 @@ file "app/controllers/authentication/passwords_controller.rb",     Saas::Control
 file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.registrations_controller
 file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.sessions_controller
 file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.unlocks_controller
+file "app/controllers/contact_messages_controller.rb",             Saas::Controllers.contact_messages_controller
 file "app/controllers/current_users_controller.rb",                Saas::Controllers.current_users_controller
 file "app/controllers/home_controller.rb",                         Saas::Controllers.home_controller
 
@@ -185,7 +186,7 @@ file "spec/models/concerns/subscriber_spec.rb", Saas::Concerns.subscriber_spec
 # Mailer Files
 # -----------------------------------------
 
-file "app/mailers/contact_message_mailer", Saas::Mailers.contact_message(@app_name)
+file "app/mailers/contact_message_mailer.rb", Saas::Mailers.contact_message(@app_name)
 
 # -----------------------------------------
 # View Files
@@ -199,6 +200,9 @@ file "app/views/authentication/passwords/new.html.erb",     Saas::Views.devise_p
 file "app/views/authentication/registrations/new.html.erb", Saas::Views.devise_registrations_new
 file "app/views/authentication/sessions/new.html.erb",      Saas::Views.devise_sessions_new
 file "app/views/authentication/unlocks/new.html.erb",       Saas::Views.devise_unlocks_new
+
+file "app/views/contact_messages/new.html.erb",             Saas::Views.contact_messages_new
+file "app/views/contact_messages/show.html.erb",            Saas::Views.contact_messages_show
 
 file "app/views/current_users/edit.html.erb",               Saas::Views.current_users_edit
 
@@ -215,15 +219,14 @@ file "app/views/layouts/home.html.erb",                     Saas::Views.home
 file "app/views/layouts/application.html.erb",              Saas::Views.application
 
 file "app/views/home/about.html.erb",                       Saas::Views.home_about
-file "app/views/home/contact.html.erb",                     Saas::Views.home_contact
 file "app/views/home/features.html.erb",                    Saas::Views.home_features
 file "app/views/home/index.html.erb",                       Saas::Views.home_index
 file "app/views/home/pricing.html.erb",                     Saas::Views.home_pricing
 file "app/views/home/privacy.html.erb",                     Saas::Views.home_privacy
 file "app/views/home/terms.html.erb",                       Saas::Views.home_terms
 
-file "app/views/mailers/contact_message_mailer/contact_email.html.erb", Saas::Views.contact_message_mailer_contact_email
-file "app/views/subscription_plans/_subscription_plan.html.erb",        Saas::Views.subscription_plans_subscription_plan
+file "app/views/contact_message_mailer/contact_email.html.erb",  Saas::Views.contact_message_mailer_contact_email
+file "app/views/subscription_plans/_subscription_plan.html.erb", Saas::Views.subscription_plans_subscription_plan
 
 # =================================================================
 # Configuration Files

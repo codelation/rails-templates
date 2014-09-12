@@ -8,7 +8,11 @@ class ContactMessageMailer < ActionMailer::Base
 
   def contact_email(contact_message)
     @contact_message = contact_message
-    mail(to: ENV["CONTACT_EMAIL_ADDRESS"], subject: "[#{app_name}] New Contact Form Submission")
+    mail(
+      to:      ENV["CONTACT_EMAIL_ADDRESS"],
+      from:    contact_message.email,
+      subject: "[#{app_name.titleize}] New Contact Form Submission"
+    )
   end
 end
 CONTACTMESSAGE

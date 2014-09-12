@@ -5,6 +5,14 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/contact_message_mailer/contact_email.html.erb")
     end
 
+    def self.contact_messages_new
+      File.read("#{File.dirname(__FILE__)}/views/contact_messages/new.html.erb")
+    end
+
+    def self.contact_messages_show
+      File.read("#{File.dirname(__FILE__)}/views/contact_messages/show.html.erb")
+    end
+
     def self.current_users_edit
       File.read("#{File.dirname(__FILE__)}/views/current_users/edit.html.erb")
     end
@@ -19,10 +27,6 @@ module Saas
 
     def self.home_about
       File.read("#{File.dirname(__FILE__)}/views/home/about.html.erb")
-    end
-
-    def self.home_contact
-      File.read("#{File.dirname(__FILE__)}/views/home/contact.html.erb")
     end
 
     def self.home_features

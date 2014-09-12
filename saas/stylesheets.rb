@@ -1,5 +1,10 @@
 module Saas
   class Stylesheets < ::Stylesheets
+
+    def self.contact_messages_main
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact_messages/main.scss")
+    end
+
     def self.home(app_name)
       return <<-APPLICATION
 /*
