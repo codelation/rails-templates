@@ -19,6 +19,11 @@
   </div>
 
   <div>
+    <%= f.label :subscription_plan_id, "Subscription Plan", class: "required" %><br>
+    <%= f.select :subscription_plan_id, options_from_collection_for_select(SubscriptionPlan.user.active, :id, :name) %>
+  </div>
+
+  <div>
     <%= f.submit "Sign Up" %>
   </div>
 <% end %>

@@ -13,3 +13,16 @@ describe User, "#time" do
 
 end
 
+# ---------------------------------------------------------
+# Private Methods
+# ---------------------------------------------------------
+
+describe User, "#set_subscription_plan" do
+
+  it "should set the subscription plan for the user after create" do
+    @subscription_plan = create(:subscription_plan)
+    @user = create(:user, subscription_plan_id: @subscription_plan.id)
+
+    expect(@user.current_subscription.plan).to eq(@subscription_plan)
+  end
+end

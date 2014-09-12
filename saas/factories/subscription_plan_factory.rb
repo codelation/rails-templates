@@ -5,6 +5,7 @@ FactoryGirl.define do
     name              "Paid Plan"
     active            true
     price             Money.new(1900, "USD") # $19.00 USD
+    account_type      :user
     interval          :month
     interval_count    1
     trial_period_days 14

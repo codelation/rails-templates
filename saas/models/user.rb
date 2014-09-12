@@ -10,7 +10,12 @@ class User < ActiveRecord::Base
   has_many :organization_memberships
 
   # Validations
-  validates_presence_of :name
+  validates_presence_of :name, :subscription_plan_id
+
+  # Callbacks
+  after_create :set_subscription_plan
+
+  attr_accessor :subscription_plan_id
 
   # Returns whether or not the user can perform
   # an action on a subject based on roles/permissions.
@@ -26,6 +31,14 @@ class User < ActiveRecord::Base
   def time
     Time.zone = self.time_zone
     Time.zone
+  end
+
+private
+
+  # Subscribes the user to the selected subscription plan.
+  def set_subscription_plan
+    subscription_plan = SubscriptionPlan.find(self.subscription_plan_id)
+    self.subscribe_to_plan(subscription_plan)
   end
 
 end
