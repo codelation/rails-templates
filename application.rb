@@ -32,7 +32,6 @@ run "rm config/routes.rb"
 run "rm Gemfile"
 
 file "config/database.yml", Configurations.database(@app_name)
-file "config/routes.rb",    Configurations.routes(@app_class)
 file "Gemfile",             Configurations.gemfile(install_blocky, install_blogelator, install_devise)
 
 run "bundle install"
@@ -55,6 +54,9 @@ if install_devise
 end
 
 rake "db:migrate"
+
+# Copy routes.rb after generators to avoid errors
+file "config/routes.rb", Configurations.routes(@app_class)
 
 # =================================================================
 # Asset Files

@@ -1,9 +1,10 @@
 @import "imports";
 
 $header-background-color: #323232;
-$header-link-color: lighten($base-link-color, 5%);
+$header-link-color: lighten($base-link-color, 15%);
+$sign-in-link-color: adjust-hue($header-link-color, 80deg);
 
-body.home header {
+body.home-layout header {
   @include clearfix;
   background-color: $header-background-color;
 
@@ -14,13 +15,13 @@ body.home header {
   .branding {
     display: inline-block;
     float: left;
-    font-size: 1.5em;
+    font-size: 26px;
     font-weight: bold;
 
     a {
       color: $header-link-color;
       display: inline-block;
-      padding: 0.4em 1em 0.4em;
+      padding: 10px 15px 8px 10px;
       text-decoration: none;
 
       &:hover {
@@ -47,7 +48,7 @@ body.home header {
       color: $header-link-color;
       display: inline-block;
       font-weight: bold;
-      padding: 1em;
+      padding: 18px;
       text-decoration: none;
       text-transform: uppercase;
       -webkit-font-smoothing: antialiased;
@@ -59,25 +60,49 @@ body.home header {
   }
 }
 
-body.home header li.divider {
-  margin: 0 0.8em;
+body.home-layout header li.divider {
+  margin: 0 14px;
   position: relative;
 
   &:after {
     content: " ";
     display: block;
-    height: 1.7em;
+    height: 30px;
     position: absolute;
-    top: -1.2em;
+    top: -20px;
     width: 1px;
     @include radial-gradient(lighten($header-background-color, 30%), darken($header-background-color, 10%));
   }
 }
 
-body.home header li.new-registration a {
-  background-color: $base-accent-color;
+body.home-layout header li.new-session {
+  a {
+    color: $sign-in-link-color;
+
+    &:hover {
+      color: lighten($sign-in-link-color, 12%);
+    }
+  }
+
+  &:after {
+    color: darken(invert($header-background-color), 15%);
+    content: "OR";
+    display: inline-block;
+    font-size: 10px;
+    margin: 0px 14px 0 4px;
+    position: relative;
+    top: -2px;
+  }
+}
+
+body.home-layout header li.new-registration a {
+  background-color: $sign-in-link-color;
   border-radius: $base-border-radius;
   color: #fff;
-  margin: 0.6em 0.3em;
-  padding: 0.4em 0.7em;
+  margin: 9px 10px 15px;
+  padding: 3px 8px 5px;
+
+  &:hover {
+    background-color: lighten($sign-in-link-color, 10%);
+  }
 }

@@ -49,7 +49,7 @@ end
 GEMFILE
     end
 
-    def self.routes(app_class)
+    def self.routes(app_class, install_blocky, install_blogelator)
       return <<-ROUTES
 #{app_class}::Application.routes.draw do
   # Sales Site Routes
@@ -63,8 +63,14 @@ GEMFILE
 
   # Authentication Routes
   devise_for :admin_users
-  devise_for :users
-
+  devise_for :users, controllers: {
+    confirmations: "authentication/confirmations",
+    passwords:     "authentication/passwords",
+    registrations: "authentication/registrations",
+    sessions:      "authentication/sessions",
+    unlocks:       "authentication/unlocks"
+  }
+#{install_blocky ? "\n  mount Blocky::Engine, at: \"/admin/content\"" : ""}#{install_blogelator ? "\n  mount Blogelator::Engine, at: \"/blog\"" : ""}
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/email"
   end

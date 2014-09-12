@@ -1,6 +1,6 @@
 @import "imports";
 
-body.home footer {
+body.home-layout footer {
   @include clearfix;
   border-top: 1px solid $base-border-color;
 
@@ -15,7 +15,8 @@ body.home footer {
     a {
       color: #aaa;
       display: inline-block;
-      padding: 0.6em 1em 0.4em;
+      font-size: 16px;
+      padding: 10px;
       text-decoration: none;
 
       &:hover {
@@ -40,8 +41,8 @@ body.home footer {
     a {
       color: #aaa;
       display: inline-block;
-      font-size: 0.8em;
-      padding: 0.6em 1em 0.4em;
+      font-size: 14px;
+      padding: 10px;
       text-decoration: none;
 
       &:hover {

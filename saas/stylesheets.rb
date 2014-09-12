@@ -12,6 +12,10 @@ module Saas
 APPLICATION
     end
 
+    def self.home_contact
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact.scss")
+    end
+
     def self.home_footer
       File.read("#{File.dirname(__FILE__)}/stylesheets/home/layout/_footer.scss")
     end

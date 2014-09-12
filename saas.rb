@@ -29,11 +29,9 @@ install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?
 # -----------------------------------------
 
 run "rm config/database.yml"
-run "rm config/routes.rb"
 run "rm Gemfile"
 
 file "config/database.yml", Saas::Configurations.database(@app_name)
-file "config/routes.rb",    Saas::Configurations.routes(@app_class)
 file "Gemfile",             Saas::Configurations.gemfile(install_blocky, install_blogelator)
 
 run "bundle install"
@@ -45,6 +43,10 @@ end
 if install_blogelator
   run "rails g blogelator:install"
 end
+
+# Copy routes.rb after generators to avoid errors
+run "rm config/routes.rb"
+file "config/routes.rb", Saas::Configurations.routes(@app_class, install_blocky, install_blogelator)
 
 # =================================================================
 # Asset Files
@@ -92,6 +94,7 @@ file "app/assets/stylesheets/home/.keep",               ""
 file "app/assets/stylesheets/home.css.scss",            Saas::Stylesheets.home(@app_name)
 file "app/assets/stylesheets/home/layout/_footer.scss", Saas::Stylesheets.home_footer
 file "app/assets/stylesheets/home/layout/_header.scss", Saas::Stylesheets.home_header
+file "app/assets/stylesheets/home/contact.scss",        Saas::Stylesheets.home_contact
 
 # Shared Stylesheets
 file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body
@@ -131,7 +134,12 @@ run "rm vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip"
 # Controller Files
 # -----------------------------------------
 
-file "app/controllers/home_controller.rb", Saas::Controllers.home_controller
+file "app/controllers/authentication/confirmations_controller.rb", Saas::Controllers.confirmations_controller
+file "app/controllers/authentication/passwords_controller.rb",     Saas::Controllers.passwords_controller
+file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.registrations_controller
+file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.sessions_controller
+file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.unlocks_controller
+file "app/controllers/home_controller.rb",                         Saas::Controllers.home_controller
 
 # -----------------------------------------
 # Helper Files
@@ -184,32 +192,32 @@ file "app/mailers/contact_message_mailer", Saas::Mailers.contact_message(@app_na
 
 run "rm app/views/layouts/application.html.erb"
 
-file "app/views/devise/confirmations/new.html.erb",       Saas::Views.devise_confirmations_new
-file "app/views/devise/passwords/edit.html.erb",          Saas::Views.devise_passwords_edit
-file "app/views/devise/passwords/new.html.erb",           Saas::Views.devise_passwords_new
-file "app/views/devise/registrations/new.html.erb",       Saas::Views.devise_registrations_new
-file "app/views/devise/sessions/new.html.erb",            Saas::Views.devise_sessions_new
-file "app/views/devise/unlocks/new.html.erb",             Saas::Views.devise_unlocks_new
+file "app/views/authentication/confirmations/new.html.erb", Saas::Views.devise_confirmations_new
+file "app/views/authentication/passwords/edit.html.erb",    Saas::Views.devise_passwords_edit
+file "app/views/authentication/passwords/new.html.erb",     Saas::Views.devise_passwords_new
+file "app/views/authentication/registrations/new.html.erb", Saas::Views.devise_registrations_new
+file "app/views/authentication/sessions/new.html.erb",      Saas::Views.devise_sessions_new
+file "app/views/authentication/unlocks/new.html.erb",       Saas::Views.devise_unlocks_new
 
-file "app/views/layouts/application/_footer.html.erb",    Saas::Views.footer
-file "app/views/layouts/application/_header.html.erb",    Saas::Views.header(@app_name)
+file "app/views/layouts/application/_footer.html.erb",      Saas::Views.footer
+file "app/views/layouts/application/_header.html.erb",      Saas::Views.header(@app_name)
 
-file "app/views/layouts/home/_footer.html.erb",           Saas::Views.home_footer
-file "app/views/layouts/home/_header.html.erb",           Saas::Views.home_header
+file "app/views/layouts/home/_footer.html.erb",             Saas::Views.home_footer
+file "app/views/layouts/home/_header.html.erb",             Saas::Views.home_header
 
-file "app/views/layouts/shared/_analytics.html.erb",      Saas::Views.analytics
-file "app/views/layouts/shared/_flash_messages.html.erb", Saas::Views.flash_messages
+file "app/views/layouts/shared/_analytics.html.erb",        Saas::Views.analytics
+file "app/views/layouts/shared/_flash_messages.html.erb",   Saas::Views.flash_messages
 
-file "app/views/layouts/home.html.erb",                   Saas::Views.home
-file "app/views/layouts/application.html.erb",            Saas::Views.application
+file "app/views/layouts/home.html.erb",                     Saas::Views.home
+file "app/views/layouts/application.html.erb",              Saas::Views.application
 
-file "app/views/home/about.html.erb",                     Saas::Views.home_about
-file "app/views/home/contact.html.erb",                   Saas::Views.home_contact
-file "app/views/home/features.html.erb",                  Saas::Views.home_features
-file "app/views/home/index.html.erb",                     Saas::Views.home_index
-file "app/views/home/pricing.html.erb",                   Saas::Views.home_pricing
-file "app/views/home/privacy.html.erb",                   Saas::Views.home_privacy
-file "app/views/home/terms.html.erb",                     Saas::Views.home_terms
+file "app/views/home/about.html.erb",                       Saas::Views.home_about
+file "app/views/home/contact.html.erb",                     Saas::Views.home_contact
+file "app/views/home/features.html.erb",                    Saas::Views.home_features
+file "app/views/home/index.html.erb",                       Saas::Views.home_index
+file "app/views/home/pricing.html.erb",                     Saas::Views.home_pricing
+file "app/views/home/privacy.html.erb",                     Saas::Views.home_privacy
+file "app/views/home/terms.html.erb",                       Saas::Views.home_terms
 
 file "app/views/mailers/contact_message_mailer/contact_email.html.erb", Saas::Views.contact_message_mailer_contact_email
 file "app/views/subscription_plans/_subscription_plan.html.erb",        Saas::Views.subscription_plans_subscription_plan

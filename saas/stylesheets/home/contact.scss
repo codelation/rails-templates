@@ -1,0 +1,11 @@
+@import "imports";
+
+body.home.contact main {
+  @include outer-container;
+  max-width: 500px;
+  padding: 3em 1em 6em;
+
+  input[type="submit"] {
+    width: 100%;
+  }
+}
