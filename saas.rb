@@ -88,8 +88,10 @@ file "app/assets/stylesheets/application/.keep",    ""
 file "app/assets/stylesheets/application.css.scss", Saas::Stylesheets.application(@app_name)
 
 # Home Styleshseets
-file "app/assets/stylesheets/home/.keep",    ""
-file "app/assets/stylesheets/home.css.scss", Saas::Stylesheets.home(@app_name)
+file "app/assets/stylesheets/home/.keep",               ""
+file "app/assets/stylesheets/home.css.scss",            Saas::Stylesheets.home(@app_name)
+file "app/assets/stylesheets/home/layout/_footer.scss", Saas::Stylesheets.home_footer
+file "app/assets/stylesheets/home/layout/_header.scss", Saas::Stylesheets.home_header
 
 # Shared Stylesheets
 file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body
@@ -202,6 +204,7 @@ file "app/views/layouts/home.html.erb",                   Saas::Views.home
 file "app/views/layouts/application.html.erb",            Saas::Views.application
 
 file "app/views/home/about.html.erb",                     Saas::Views.home_about
+file "app/views/home/contact.html.erb",                   Saas::Views.home_contact
 file "app/views/home/features.html.erb",                  Saas::Views.home_features
 file "app/views/home/index.html.erb",                     Saas::Views.home_index
 file "app/views/home/pricing.html.erb",                   Saas::Views.home_pricing

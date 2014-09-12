@@ -1,0 +1,52 @@
+@import "imports";
+
+body.home footer {
+  @include clearfix;
+  border-top: 1px solid $base-border-color;
+
+  .outer-container {
+    @include outer-container;
+  }
+
+  .branding {
+    display: inline-block;
+    float: left;
+
+    a {
+      color: #aaa;
+      display: inline-block;
+      padding: 0.6em 1em 0.4em;
+      text-decoration: none;
+
+      &:hover {
+        color: #888;
+      }
+    }
+  }
+
+  nav {
+    float: right;
+  }
+
+  ul {
+    display: block;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+
+    a {
+      color: #aaa;
+      display: inline-block;
+      font-size: 0.8em;
+      padding: 0.6em 1em 0.4em;
+      text-decoration: none;
+
+      &:hover {
+        color: #888;
+      }
+    }
+  }
+}

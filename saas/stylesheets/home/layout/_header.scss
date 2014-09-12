@@ -1,0 +1,83 @@
+@import "imports";
+
+$header-background-color: #323232;
+$header-link-color: lighten($base-link-color, 5%);
+
+body.home header {
+  @include clearfix;
+  background-color: $header-background-color;
+
+  .outer-container {
+    @include outer-container;
+  }
+
+  .branding {
+    display: inline-block;
+    float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+
+    a {
+      color: $header-link-color;
+      display: inline-block;
+      padding: 0.4em 1em 0.4em;
+      text-decoration: none;
+
+      &:hover {
+        color: lighten($header-link-color, 12%);
+      }
+    }
+  }
+
+  nav {
+    float: right;
+  }
+
+  ul {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+
+    a {
+      color: $header-link-color;
+      display: inline-block;
+      font-weight: bold;
+      padding: 1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      -webkit-font-smoothing: antialiased;
+
+      &:hover {
+        color: lighten($header-link-color, 12%);
+      }
+    }
+  }
+}
+
+body.home header li.divider {
+  margin: 0 0.8em;
+  position: relative;
+
+  &:after {
+    content: " ";
+    display: block;
+    height: 1.7em;
+    position: absolute;
+    top: -1.2em;
+    width: 1px;
+    @include radial-gradient(lighten($header-background-color, 30%), darken($header-background-color, 10%));
+  }
+}
+
+body.home header li.new-registration a {
+  background-color: $base-accent-color;
+  border-radius: $base-border-radius;
+  color: #fff;
+  margin: 0.6em 0.3em;
+  padding: 0.4em 0.7em;
+}
