@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :owned_organizations, class_name: "Organization", foreign_key: :owner_id
   has_many :organization_memberships
 
+  # Validations
+  validates_presence_of :name
+
   # Returns whether or not the user can perform
   # an action on a subject based on roles/permissions.
   # @param action [Symbol]

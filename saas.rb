@@ -258,6 +258,14 @@ file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_subscriptions
 file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
 
 # =================================================================
+# DB Seed Files
+# =================================================================
+
+file "db/seeds/admin_user_seeds.rb",        Saas::Seeds.admin_user_seeds
+file "db/seeds/subscription_plan_seeds.rb", Saas::Seeds.subscription_plan_seeds
+file "db/seeds.rb",                         Saas::Seeds.seeds
+
+# =================================================================
 # Task Files
 # =================================================================
 
@@ -293,6 +301,7 @@ file "README.md", Documentation.readme(@app_name, install_blocky, install_blogel
 rake "db:drop"
 rake "db:create"
 rake "db:migrate"
+rake "db:seed"
 
 run "bundle exec spring binstub --all"
 

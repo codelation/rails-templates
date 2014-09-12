@@ -2,10 +2,17 @@ class SubscriptionPlan < ActiveRecord::Base
   scope :active, -> { where(active: true) }
 
   monetize :price_cents
+  monetize :price_per_user
+  monetize :setup_price
 
   validates_presence_of :interval, :interval_count
 
   scope :active, -> { where(active: true) }
+
+  enum account_type: {
+    user:         0,
+    organization: 1
+  }
 
   enum interval: {
     month: 0,
