@@ -34,7 +34,7 @@ label {
   margin-bottom: $base-line-height / 4;
 
   &.required:after {
-    color: #e00;
+    color: rgba($alert-color, 0.7);
     content: "*";
   }
 
@@ -65,6 +65,30 @@ textarea,
     border-color: $form-border-color-focus;
     box-shadow: $form-box-shadow-focus;
     outline: none;
+  }
+}
+
+form .field_with_errors {
+  label {
+    color: $alert-color;
+  }
+
+  textarea,
+  #{$all-text-inputs} {
+    border-color: rgba($alert-color, 0.6);
+
+    &:hover {
+      border-color: $alert-color;
+    }
+
+    &:focus {
+      border-color: $alert-color;
+      box-shadow: $form-box-shadow, 0 0 5px rgba(darken($alert-color, 5), 0.7);
+    }
+  }
+
+  & + br {
+    display: none;
   }
 }
 

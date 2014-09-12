@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :time_zone
 
       ## Database authenticatable
-      t.string :email
+      t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -25,7 +25,7 @@ class CreateUsers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :users, :email
+    add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
   end
 end

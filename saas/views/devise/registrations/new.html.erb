@@ -4,17 +4,17 @@
   <%= devise_error_messages! %>
 
   <div>
-    <%= f.label :name %><br>
+    <%= f.label :name, class: "required" %><br>
     <%= f.text_field :name, autofocus: true %>
   </div>
 
   <div>
-    <%= f.label :email, "Email Address" %><br>
+    <%= f.label :email, "Email Address", class: "required" %><br>
     <%= f.email_field :email %>
   </div>
 
   <div>
-    <%= f.label :password %><br>
+    <%= f.label :password, class: "required" %><br>
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
