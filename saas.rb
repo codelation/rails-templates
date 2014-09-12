@@ -261,6 +261,8 @@ file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_users.rb",   
 # DB Seed Files
 # =================================================================
 
+run "rm db/seeds.rb"
+
 file "db/seeds/admin_user_seeds.rb",        Saas::Seeds.admin_user_seeds
 file "db/seeds/subscription_plan_seeds.rb", Saas::Seeds.subscription_plan_seeds
 file "db/seeds.rb",                         Saas::Seeds.seeds
