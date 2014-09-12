@@ -2,11 +2,12 @@
 
 $header-background-color: #323232;
 $header-link-color: lighten($base-link-color, 15%);
-$sign-in-link-color: adjust-hue($header-link-color, 80deg);
+$user-link-color: adjust-hue($header-link-color, 80deg);
 
 body.home-layout header {
   @include clearfix;
   background-color: $header-background-color;
+  color: #fff;
 
   .outer-container {
     @include outer-container;
@@ -77,10 +78,10 @@ body.home-layout header li.divider {
 
 body.home-layout header li.new-session {
   a {
-    color: $sign-in-link-color;
+    color: $user-link-color;
 
     &:hover {
-      color: lighten($sign-in-link-color, 12%);
+      color: lighten($user-link-color, 12%);
     }
   }
 
@@ -96,13 +97,28 @@ body.home-layout header li.new-session {
 }
 
 body.home-layout header li.new-registration a {
-  background-color: $sign-in-link-color;
+  background-color: $user-link-color;
   border-radius: $base-border-radius;
   color: #fff;
   margin: 9px 10px 15px;
   padding: 3px 8px 5px;
 
   &:hover {
-    background-color: lighten($sign-in-link-color, 10%);
+    background-color: lighten($user-link-color, 10%);
+  }
+}
+
+body.home-layout header li.user {
+  span {
+    margin: 0 6px;
+  }
+
+  a {
+    color: $user-link-color;
+    padding: 18px 6px;
+
+    &:hover {
+      color: lighten($user-link-color, 12%);
+    }
   }
 }

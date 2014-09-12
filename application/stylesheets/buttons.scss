@@ -25,7 +25,6 @@ input[type="submit"] {
   &:hover {
     background-color: lighten($base-accent-color, 8%);
     border-color: lighten($base-accent-color, 8%);
-    box-shadow: none;
     color: #fff;
   }
 

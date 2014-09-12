@@ -26,6 +26,13 @@ class User < ActiveRecord::Base
     ability.can?(action, subject, *args)
   end
 
+  # Returns the name to be displayed for the user. The user's name will be
+  # returned if it exists and will fall back to the user's email address.
+  # @return [String]
+  def display_name
+    self.name || self.email
+  end
+
   # Returns a Time-like class with the user's selected time zone.
   # @return [ActiveSupport::TimeWithZone]
   def time

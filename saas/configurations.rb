@@ -60,6 +60,7 @@ GEMFILE
   end
 
   # Resource Routes
+  resource  :current_user
   resources :contact_messages
 
   # Authentication Routes

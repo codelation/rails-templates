@@ -1,15 +1,15 @@
 <div class="subscription-plan">
   <h3 class="name">
-    <%= subscription.name %>
+    <%= subscription_plan.name %>
   </h3>
   <h4 class="price">
-    <%= number_to_currency(subscription.price) %> /
-    <%= subscription.interval_count > 1 ? pluralize(subscription.interval_count, subscription.interval) : pluralize(subscription.interval) %>
+    <%= number_to_currency(subscription_plan.price) %> /
+    <%= subscription_plan.interval_count > 1 ? pluralize(subscription_plan.interval_count, subscription_plan.interval) : subscription_plan.interval %>
   </h4>
 
-  <% if subscription.trial_period_days.to_i > 0 %>
+  <% if subscription_plan.trial_period_days.to_i > 0 %>
     <div class="trial">
-      <%= "#{subscription.trial_period_days} Day Free Trial") %>
+      <%= "#{subscription_plan.trial_period_days} Day Free Trial" %>
     </div>
   <% end %>
 </div>

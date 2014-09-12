@@ -5,6 +5,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/contact_message_mailer/contact_email.html.erb")
     end
 
+    def self.current_users_edit
+      File.read("#{File.dirname(__FILE__)}/views/current_users/edit.html.erb")
+    end
+
     def self.devise_registrations_new
       File.read("#{File.dirname(__FILE__)}/views/devise/registrations/new.html.erb")
     end

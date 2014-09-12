@@ -139,6 +139,7 @@ file "app/controllers/authentication/passwords_controller.rb",     Saas::Control
 file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.registrations_controller
 file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.sessions_controller
 file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.unlocks_controller
+file "app/controllers/current_users_controller.rb",                Saas::Controllers.current_users_controller
 file "app/controllers/home_controller.rb",                         Saas::Controllers.home_controller
 
 # -----------------------------------------
@@ -198,6 +199,8 @@ file "app/views/authentication/passwords/new.html.erb",     Saas::Views.devise_p
 file "app/views/authentication/registrations/new.html.erb", Saas::Views.devise_registrations_new
 file "app/views/authentication/sessions/new.html.erb",      Saas::Views.devise_sessions_new
 file "app/views/authentication/unlocks/new.html.erb",       Saas::Views.devise_unlocks_new
+
+file "app/views/current_users/edit.html.erb",               Saas::Views.current_users_edit
 
 file "app/views/layouts/application/_footer.html.erb",      Saas::Views.footer
 file "app/views/layouts/application/_header.html.erb",      Saas::Views.header(@app_name)

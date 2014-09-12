@@ -5,6 +5,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/confirmations_controller.rb")
     end
 
+    def self.current_users_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/current_users_controller.rb")
+    end
+
     def self.home_controller
       File.read("#{File.dirname(__FILE__)}/controllers/home_controller.rb")
     end
