@@ -7,6 +7,7 @@ module Saas
 
     def self.home(app_name)
       return <<-APPLICATION
+@import url(http://fonts.googleapis.com/css?family=Ovo|Questrial);
 /*
  *= require #{app_name.underscore}/font-awesome
  *= require #{app_name.underscore}/normalize
@@ -34,11 +35,11 @@ APPLICATION
     end
 
     def self.home_footer
-      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/layout/_footer.scss")
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/layout/_footer.scss")
     end
 
     def self.home_header
-      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/layout/_header.scss")
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/layout/_header.scss")
     end
   end
 end
