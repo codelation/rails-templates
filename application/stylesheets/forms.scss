@@ -1,14 +1,5 @@
 @import "imports";
 
-$form-border-color: $base-border-color;
-$form-border-color-hover: darken($base-border-color, 10);
-$form-border-color-focus: $base-accent-color;
-$form-border-radius: $base-border-radius;
-$form-box-shadow: inset 0 1px 3px hsla(0, 0%, 0%, 0.06);
-$form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), 0.7);
-$form-font-size: $base-font-size;
-$form-font-family: $base-font-family;
-
 fieldset {
   background: lighten($base-border-color, 10);
   border: 1px solid $base-border-color;
@@ -28,6 +19,7 @@ select {
 }
 
 label {
+  color: lighten($base-font-color, 10%);
   cursor: pointer;
   display: inline-block;
   font-weight: bold;
@@ -83,7 +75,7 @@ form .field_with_errors {
 
     &:focus {
       border-color: $alert-color;
-      box-shadow: $form-box-shadow, 0 0 5px rgba(darken($alert-color, 5), 0.7);
+      box-shadow: $form-box-shadow, 0 1px 2px rgba(darken($alert-color, 5), 0.5);
     }
   }
 

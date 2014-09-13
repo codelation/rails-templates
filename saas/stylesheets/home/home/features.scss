@@ -1,15 +1,11 @@
 @import "imports";
 
-$header-background-color: $base-accent-color;
-$header-link-color: #f8f8f8;
-$user-link-color: #f8f8f8;
-
-body.home-layout.home.index section.feature {
+body.home-layout.home section.feature {
   @include outer-container;
   margin: 2em auto 3em;
 }
 
-body.home-layout.home.index .feature-text {
+body.home-layout.home .feature-text {
   color: #555;
   float: left;
   margin: 70px 0 0 60px;
@@ -17,9 +13,7 @@ body.home-layout.home.index .feature-text {
   width: 628px;
 
   h3 {
-    font-family: 'Ovo', serif;
     font-size: 40px;
-    font-weight: 300;
 
     &:after {
       content: " ";
@@ -39,7 +33,7 @@ body.home-layout.home.index .feature-text {
   }
 }
 
-body.home-layout.home.index .browser {
+body.home-layout.home .browser {
   background-color: #eee;
   border-radius: 4px;
   box-shadow: 1px 1px 2px #ccc;
@@ -100,7 +94,7 @@ body.home-layout.home.index .browser {
   }
 }
 
-body.home-layout.home.index .browser {
+body.home-layout.home .browser {
   .address-bar {
     background-color: #fff;
     border-radius: 3px;
@@ -122,7 +116,7 @@ body.home-layout.home.index .browser {
   }
 }
 
-body.home-layout.home.index .browser {
+body.home-layout.home .browser {
   .page {
     background-color: #fff;
     display: block;
@@ -136,7 +130,7 @@ body.home-layout.home.index .browser {
   }
 }
 
-body.home-layout.home.index .browser .page {
+body.home-layout.home .browser .page {
   padding: 10px;
 
   ul {
@@ -187,3 +181,4 @@ body.home-layout.home.index .browser .page {
     }
   }
 }
+

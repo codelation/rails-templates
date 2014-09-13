@@ -1,8 +1,6 @@
-<h1>Contact Us</h1>
-
 <% unless @contact_message.errors.count == 0 %>
-  <div class="errors">
-    <h4><%= pluralize(@contact_message.errors.count, "error") %> prohibited this form from being sent:</h4>
+  <div id="error_explanation">
+    <h2><%= pluralize(@contact_message.errors.count, "error") %> prohibited this form from being sent:</h2>
     <ul>
       <% @contact_message.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,28 +9,41 @@
   </div>
 <% end %>
 
-<%= form_for @contact_message do |f| %>
-  <div>
-    <%= f.label :name, class: "required" %>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+<div class="title">
+  <h1>Contact Us</h1>
+</div>
 
-  <div>
-    <%= f.label :email, "Email Address", class: "required" %>
-    <%= f.text_field :email %>
-  </div>
+<div class="outer-container">
+  <%= form_for @contact_message do |f| %>
+    <div class="logo">
+      <i class="fa fa-pied-piper"></i>
+    </div>
 
-  <div>
-    <%= f.label :phone_number, "Phone Number" %>
-    <%= f.text_field :phone_number %>
-  </div>
+    <div class="contact-info">
+      <div>
+        <%= f.label :name, class: "required" %>
+        <%= f.text_field :name, autofocus: true %>
+      </div>
 
-  <div>
-    <%= f.label :message, class: "required" %>
-    <%= f.text_area :message %>
-  </div>
+      <div>
+        <%= f.label :email, "Email Address", class: "required" %>
+        <%= f.text_field :email %>
+      </div>
 
-  <div>
-    <%= f.submit "Submit" %>
-  </div>
-<% end %>
+      <div>
+        <%= f.label :phone_number, "Phone Number" %>
+        <%= f.text_field :phone_number %>
+      </div>
+    </div>
+
+    <div class="message">
+      <%= f.label :message, class: "required" %>
+      <%= f.text_area :message %>
+    </div>
+
+    <div class="submit">
+      <%= f.submit "Submit" %>
+    </div>
+  <% end %>
+
+</div>

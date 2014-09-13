@@ -1,11 +1,53 @@
 @import "imports";
 
-body.contact-messages main {
+body.contact-messages main .outer-container {
   @include outer-container;
-  max-width: 500px;
-  padding: 3em 1em 6em;
+  padding: 3em 10px 5em;
 
-  input[type="submit"] {
-    width: 100%;
+  .logo {
+    @include span-columns(4);
+    text-align: center;
+
+    i {
+      color: $base-accent-color;
+      font-size: 190px;
+      margin-top: 10px;
+      text-shadow: 1px 1px 2px darken($base-accent-color, 20%);
+    }
+  }
+
+  .contact-info {
+    @include span-columns(4);
+  }
+
+  .message {
+    @include span-columns(4);
+    @include omega;
+
+    textarea {
+      height: 205px;
+    }
+  }
+
+  form > div {
+    margin-bottom: 0.5em;
+
+    & > div {
+      margin-bottom: 0.9em;
+    }
+  }
+
+  .message .field_with_errors {
+    margin: 0;
+  }
+
+  .submit {
+    @include span-columns(4);
+    @include shift(8);
+
+    input[type="submit"] {
+      float: right;
+      width: 50%;
+    }
   }
 }

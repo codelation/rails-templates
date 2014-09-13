@@ -5,15 +5,17 @@ body.passwords,
 body.registrations,
 body.sessions,
 body.unlocks {
-  main {
+  main .outer-container {
     @include outer-container;
-    max-width: 500px;
-    padding: 3em 1em 6em;
+    padding: 3em 10px 6em;
   }
 
-  main form {
+  form {
+    margin: 0 auto;
+    max-width: 420px;
+
     & > div {
-      margin-bottom: 0.8em;
+      margin-bottom: 0.9em;
     }
 
     label {
@@ -42,6 +44,8 @@ body.unlocks {
   }
 
   .devise-links {
+    color: lighten($base-font-color, 10%);
+    font-size: 0.9em;
     text-align: center;
   }
 }

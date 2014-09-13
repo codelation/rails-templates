@@ -94,11 +94,15 @@ file "app/assets/stylesheets/home/.keep",                      ""
 file "app/assets/stylesheets/home.css.scss",                   Saas::Stylesheets.home(@app_name)
 file "app/assets/stylesheets/home/layout/_footer.scss",        Saas::Stylesheets.home_footer
 file "app/assets/stylesheets/home/layout/_header.scss",        Saas::Stylesheets.home_header
+file "app/assets/stylesheets/home/layout/fonts.scss",          Saas::Stylesheets.home_fonts
+file "app/assets/stylesheets/home/layout/title.scss",          Saas::Stylesheets.home_title
 file "app/assets/stylesheets/home/contact_messages/main.scss", Saas::Stylesheets.contact_messages_main
-file "app/assets/stylesheets/home/home/index.scss",            Saas::Stylesheets.home_index
-file "app/assets/stylesheets/home/home/index/feature.scss",    Saas::Stylesheets.home_index_feature
 file "app/assets/stylesheets/home/home/index/header.scss",     Saas::Stylesheets.home_index_header
 file "app/assets/stylesheets/home/home/index/sign_up.scss",    Saas::Stylesheets.home_index_sign_up
+file "app/assets/stylesheets/home/home/features.scss",         Saas::Stylesheets.home_features
+file "app/assets/stylesheets/home/home/index.scss",            Saas::Stylesheets.home_index
+file "app/assets/stylesheets/home/home/privacy.scss",          Saas::Stylesheets.home_privacy
+file "app/assets/stylesheets/home/home/terms.scss",            Saas::Stylesheets.home_terms
 
 # Shared Stylesheets
 file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body

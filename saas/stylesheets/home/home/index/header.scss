@@ -1,9 +1,5 @@
 @import "imports";
 
-$header-background-color: $base-accent-color;
-$header-link-color: #f8f8f8;
-$user-link-color: #f8f8f8;
-
 body.home-layout.home.index header {
   background-color: $header-background-color;
   text-align: center;
