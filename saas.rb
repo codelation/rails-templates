@@ -95,6 +95,10 @@ file "app/assets/stylesheets/home.css.scss",                   Saas::Stylesheets
 file "app/assets/stylesheets/home/layout/_footer.scss",        Saas::Stylesheets.home_footer
 file "app/assets/stylesheets/home/layout/_header.scss",        Saas::Stylesheets.home_header
 file "app/assets/stylesheets/home/contact_messages/main.scss", Saas::Stylesheets.contact_messages_main
+file "app/assets/stylesheets/home/home/index.scss",            Saas::Stylesheets.home_index
+file "app/assets/stylesheets/home/home/index/feature.scss",    Saas::Stylesheets.home_index_feature
+file "app/assets/stylesheets/home/home/index/header.scss",     Saas::Stylesheets.home_index_header
+file "app/assets/stylesheets/home/home/index/sign_up.scss",    Saas::Stylesheets.home_index_sign_up
 
 # Shared Stylesheets
 file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body

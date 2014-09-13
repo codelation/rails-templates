@@ -1,0 +1,38 @@
+@import "imports";
+
+body.home-layout.home.index .sign-up {
+  border-top: 1px solid lighten($base-border-color, 5%);
+  padding: 4em 0 6em;
+
+  .outer-container {
+    @include outer-container;
+  }
+
+  h3 {
+    font-family: 'Ovo', serif;
+    font-size: 40px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  h4 {
+    color: #555;
+    font-family: 'Questrial', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-align: center;
+
+    strong {
+      color: #222;
+      font-size: 19px;
+    }
+  }
+
+  .button {
+    display: block;
+    font-size: 25px;
+    margin: 20px auto;
+    width: 25%;
+  }
+}

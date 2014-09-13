@@ -17,16 +17,28 @@ module Saas
 APPLICATION
     end
 
-    def self.home_contact
-      File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact.scss")
+    def self.home_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/index.scss")
+    end
+
+    def self.home_index_feature
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/index/feature.scss")
+    end
+
+    def self.home_index_header
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/index/header.scss")
+    end
+
+    def self.home_index_sign_up
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/index/sign_up.scss")
     end
 
     def self.home_footer
-      File.read("#{File.dirname(__FILE__)}/stylesheets/home/layout/_footer.scss")
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/layout/_footer.scss")
     end
 
     def self.home_header
-      File.read("#{File.dirname(__FILE__)}/stylesheets/home/layout/_header.scss")
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/layout/_header.scss")
     end
   end
 end

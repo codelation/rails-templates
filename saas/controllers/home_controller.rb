@@ -18,6 +18,7 @@ class HomeController < ApplicationController
   end
 
   def index
+    @hide_header = true
     @title = "Welcome"
   end
 

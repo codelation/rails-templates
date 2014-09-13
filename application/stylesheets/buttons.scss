@@ -16,6 +16,7 @@ input[type="submit"] {
   outline: none;
   padding: 0.5em 1em;
   text-align: center;
+  text-decoration: none;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
@@ -23,8 +24,9 @@ input[type="submit"] {
   @include transition(all 0.1s ease);
 
   &:hover {
-    background-color: lighten($base-accent-color, 8%);
-    border-color: lighten($base-accent-color, 8%);
+    background-color: lighten($base-accent-color, 2%);
+    border-color: lighten($base-accent-color, 2%);
+    box-shadow: 0 1px 3px 0 rgba(#000, 0.2), 0 1px 3px 1px rgba(lighten($base-accent-color, 20%), 0.5);
     color: #fff;
   }
 

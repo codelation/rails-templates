@@ -1,8 +1,9 @@
 @import "imports";
+@import url(http://fonts.googleapis.com/css?family=Questrial);
 
-$header-background-color: #323232;
-$header-link-color: lighten($base-link-color, 15%);
-$user-link-color: adjust-hue($header-link-color, 80deg);
+$header-background-color: $base-accent-color;
+$header-link-color: #f8f8f8;
+$user-link-color: #f8f8f8;
 
 body.home-layout header {
   @include clearfix;
@@ -13,20 +14,31 @@ body.home-layout header {
     @include outer-container;
   }
 
+  a {
+    @include transition(all 0.1s ease);
+  }
+
   .branding {
     display: inline-block;
     float: left;
+    font-family: 'Questrial', sans-serif;
     font-size: 26px;
-    font-weight: bold;
+    letter-spacing: 6px;
+    text-transform: uppercase;
 
     a {
       color: $header-link-color;
       display: inline-block;
-      padding: 10px 15px 8px 10px;
+      padding: 13px 15px 8px 10px;
       text-decoration: none;
 
       &:hover {
         color: lighten($header-link-color, 12%);
+      }
+
+      i {
+        position: relative;
+        top: -2px;
       }
     }
   }
@@ -46,15 +58,18 @@ body.home-layout header {
     display: inline-block;
 
     a {
+      border-bottom: 2px solid $header-background-color;
       color: $header-link-color;
       display: inline-block;
-      font-weight: bold;
-      padding: 18px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin: 13px 17px;
+      padding: 5px 1px;
       text-decoration: none;
       text-transform: uppercase;
-      -webkit-font-smoothing: antialiased;
 
       &:hover {
+        border-bottom: 2px solid $header-link-color;
         color: lighten($header-link-color, 12%);
       }
     }
@@ -86,7 +101,7 @@ body.home-layout header li.new-session {
   }
 
   &:after {
-    color: darken(invert($header-background-color), 15%);
+    color: rgba(#fff, 0.7);
     content: "OR";
     display: inline-block;
     font-size: 10px;
@@ -97,14 +112,15 @@ body.home-layout header li.new-session {
 }
 
 body.home-layout header li.new-registration a {
-  background-color: $user-link-color;
+  border: 1px solid $header-link-color;
   border-radius: $base-border-radius;
-  color: #fff;
+  color: $header-link-color;
   margin: 9px 10px 15px;
   padding: 3px 8px 5px;
 
   &:hover {
-    background-color: lighten($user-link-color, 10%);
+    background-color: lighten($header-background-color, 2%);
+    box-shadow: 0 0 8px rgba(#fff, 0.3);
   }
 }
 
