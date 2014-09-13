@@ -7,23 +7,13 @@
 <div class="outer-container">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div>
-      <%= f.label :name, class: "required" %><br>
-      <%= f.text_field :name, autofocus: true %>
-    </div>
-
-    <div>
       <%= f.label :email, "Email Address", class: "required" %><br>
-      <%= f.email_field :email %>
+      <%= f.email_field :email, autofocus: true %>
     </div>
 
     <div>
       <%= f.label :password, class: "required" %><br>
       <%= f.password_field :password, autocomplete: "off" %>
-    </div>
-
-    <div>
-      <%= f.label :subscription_plan_id, "Subscription Plan", class: "required" %><br>
-      <%= f.select :subscription_plan_id, options_from_collection_for_select(SubscriptionPlan.user.active, :id, :name) %>
     </div>
 
     <div>
