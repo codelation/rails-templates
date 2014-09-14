@@ -101,6 +101,7 @@ file "app/assets/stylesheets/home/home/index/header.scss",     Saas::Stylesheets
 file "app/assets/stylesheets/home/home/index/sign_up.scss",    Saas::Stylesheets.home_index_sign_up
 file "app/assets/stylesheets/home/home/features.scss",         Saas::Stylesheets.home_features
 file "app/assets/stylesheets/home/home/index.scss",            Saas::Stylesheets.home_index
+file "app/assets/stylesheets/home/home/pricing.scss",          Saas::Stylesheets.home_pricing
 file "app/assets/stylesheets/home/home/privacy.scss",          Saas::Stylesheets.home_privacy
 file "app/assets/stylesheets/home/home/terms.scss",            Saas::Stylesheets.home_terms
 

@@ -12,9 +12,10 @@ body.home-layout .title {
     font-family: 'Questrial', sans-serif;
     font-size: 30px;
     font-weight: 300;
-    letter-spacing: 8px;
+    letter-spacing: 7px;
     margin: 0 auto;
     padding: 20px 10px;
+    text-shadow: 2px 2px 0px #f8f8f8;
     text-transform: uppercase;
   }
 }
@@ -24,6 +25,10 @@ body.home-layout {
   .flash-alert,
   .flash-notice {
     & + .title {
+      box-shadow: none;
+    }
+
+    & + main > .title:first-child {
       box-shadow: none;
     }
   }

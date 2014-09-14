@@ -12,8 +12,8 @@ module Saas
     def self.home(app_name)
       return <<-HOME
 /*
- *= require pied_piper/font-awesome
- *= require pied_piper/normalize
+ *= require #{app_name.underscore}/font-awesome
+ *= require #{app_name.underscore}/normalize
  *= require_tree ./shared
  *= require_tree ./home
  *= require_self
@@ -49,6 +49,10 @@ HOME
 
     def self.home_index_sign_up
       File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/index/sign_up.scss")
+    end
+
+    def self.home_pricing
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/home/pricing.scss")
     end
 
     def self.home_privacy

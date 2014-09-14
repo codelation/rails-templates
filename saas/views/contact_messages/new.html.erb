@@ -1,5 +1,6 @@
 <% unless @contact_message.errors.count == 0 %>
   <div id="error_explanation">
+    <i class="fa fa-times"></i>
     <h2><%= pluralize(@contact_message.errors.count, "error") %> prohibited this form from being sent:</h2>
     <ul>
       <% @contact_message.errors.full_messages.each do |message| %>
@@ -16,7 +17,7 @@
 <div class="outer-container">
   <%= form_for @contact_message do |f| %>
     <div class="logo">
-      <i class="fa fa-pied-piper"></i>
+      <i class="fa fa-comments"></i>
     </div>
 
     <div class="contact-info">

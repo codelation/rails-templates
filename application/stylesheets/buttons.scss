@@ -7,7 +7,7 @@ input[type="submit"] {
   background-color: $base-accent-color;
   border: 1px solid $base-accent-color;
   border-radius: $base-border-radius;
-  box-shadow: 0 1px 3px 0 rgba(#000, 0.2);
+  box-shadow: 0 1px 2px rgba(#000, 0.4);
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -21,19 +21,19 @@ input[type="submit"] {
   vertical-align: middle;
   white-space: nowrap;
   -webkit-font-smoothing: antialiased;
-  @include transition(all 0.1s ease);
+  @include transition(all 0.2s ease);
 
   &:hover {
     background-color: lighten($base-accent-color, 2%);
     border-color: lighten($base-accent-color, 2%);
-    box-shadow: 0 1px 3px 0 rgba(#000, 0.2), 0 1px 3px 1px rgba(lighten($base-accent-color, 20%), 0.5);
     color: #fff;
+    @include transform(scale(1.1));
   }
 
   &:active {
     background-color: $base-accent-color;
     border-color: $base-accent-color;
-    box-shadow: none;
+    box-shadow: 0 1px 2px rgba(#000, 0.2);
     color: #fff;
   }
 }
