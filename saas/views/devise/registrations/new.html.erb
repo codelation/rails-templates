@@ -16,22 +16,30 @@
 
 <% if @subscription_plan %>
   <div class="outer-container">
-    <div class="subscription-plan">
-      <h3 class="name" style="background-color: <%= @subscription_plan.color %>;">
-        <%= @subscription_plan.name %>
-      </h3>
+    <fieldset class="selected-plan">
+      <legend>Selected Plan</legend>
 
-      <h4 class="price">
-        <span class="currency"><%= number_to_currency(@subscription_plan.price) %></span> /
-        <%= @subscription_plan.interval_count > 1 ? pluralize(@subscription_plan.interval_count, @subscription_plan.interval) : @subscription_plan.interval %>
-      </h4>
+      <div class="subscription-plan">
+        <h3 class="name" style="background-color: <%= @subscription_plan.color %>;">
+          <%= @subscription_plan.name %>
+        </h3>
 
-      <% if @subscription_plan.trial_period_days.to_i > 0 %>
+        <h4 class="price">
+          <span class="currency"><%= number_to_currency(@subscription_plan.price) %></span> /
+          <%= @subscription_plan.interval_count > 1 ? pluralize(@subscription_plan.interval_count, @subscription_plan.interval) : @subscription_plan.interval %>
+        </h4>
+
         <div class="trial">
-          <%= "#{@subscription_plan.trial_period_days} Day Free Trial" %>
+          <% if @subscription_plan.trial_period_days.to_i > 0 %>
+            <%= "#{@subscription_plan.trial_period_days} Day Free Trial" %>
+          <% else %>
+            &nbsp;
+          <% end %>
         </div>
-      <% end %>
-    </div>
+      </div>
+
+      <%= link_to "« Change Plan", new_user_registration_path, class: "change-plan" %>
+    </fieldset>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= f.hidden_field :subscription_plan_id, value: @subscription_plan.id %>
@@ -80,4 +88,3 @@
     </section>
   <% end %>
 <% end %>
-

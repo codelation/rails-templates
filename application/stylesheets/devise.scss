@@ -66,12 +66,39 @@ body.unlocks {
   }
 }
 
-body.registrations .subscription-plan {
+body.registrations .selected-plan {
   @include span-columns(4);
+  border-radius: $base-border-radius;
+  padding: 1em 1em 0.2em;
+
+  legend {
+    color: lighten($base-font-color, 10%);
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  a.change-plan {
+    color: #aaa;
+    display: block;
+    float: left;
+    padding: 10px 10px 10px 2px;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      color: $base-link-color;
+    }
+  }
+}
+
+body.registrations .subscription-plan {
   background-color: #fff;
   border-radius: $base-border-radius;
   box-shadow: 0 1px 2px rgba(#000, 0.4);
-  margin-bottom: 2em;
+  margin-bottom: 0;
   overflow: hidden;
   text-align: center;
 
