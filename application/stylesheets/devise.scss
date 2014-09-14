@@ -10,9 +10,22 @@ body.unlocks {
     padding: 3em 10px 6em;
   }
 
+  .logo {
+    @include span-columns(4);
+    text-align: center;
+
+    i {
+      color: $header-background-color;
+      font-size: 190px;
+      margin-top: 10px;
+      text-shadow: 1px 1px 2px darken($base-accent-color, 20%);
+    }
+  }
+
   form {
-    margin: 0 auto;
-    max-width: 420px;
+    @include span-columns(4);
+    @include omega;
+    margin-bottom: 2em;
 
     & > div {
       margin-bottom: 0.9em;
@@ -44,8 +57,68 @@ body.unlocks {
   }
 
   .devise-links {
+    clear: both;
     color: lighten($base-font-color, 10%);
+    display: block;
     font-size: 0.9em;
     text-align: center;
+    width: 100%;
+  }
+}
+
+body.registrations .subscription-plan {
+  @include span-columns(4);
+  background-color: #fff;
+  border-radius: $base-border-radius;
+  box-shadow: 0 1px 2px rgba(#000, 0.4);
+  margin-bottom: 2em;
+  overflow: hidden;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+body.registrations .subscription-plan .name {
+  color: #fff;
+  display: block;
+  font-family: 'Ovo', serif;
+  font-size: 2em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+body.registrations .subscription-plan {
+  .price {
+    color: #888;
+    display: block;
+    font-family: 'Ovo', serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 40px auto 4px;
+
+    .currency {
+      color: #777;
+      font-size: 1.8em;
+      text-shadow: 1px 1px 1px #ccc;
+    }
+  }
+
+  .free {
+    color: #777;
+    display: block;
+    font-size: 1.8em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #ccc;
+  }
+
+  .trial {
+    color: #bbb;
+    display: block;
+    margin-bottom: 40px;
   }
 }

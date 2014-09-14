@@ -3,6 +3,10 @@
 </div>
 
 <div class="outer-container">
+  <div class="logo">
+    <i class="fa fa-key"></i>
+  </div>
+
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div>
       <%= f.label :email, "Email Address" %><br>

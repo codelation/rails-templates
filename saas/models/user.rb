@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   has_many :organization_memberships
 
   # Validations
-  validates_presence_of :name, :subscription_plan_id
+  validates_presence_of :name
+  validates_presence_of :subscription_plan_id, on: :create
 
   # Callbacks
   after_create :set_subscription_plan

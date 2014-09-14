@@ -1,7 +1,7 @@
 <% cache ["home#pricing", subscription_plan] do %>
   <div class="subscription-plan">
     <%= link_to new_user_registration_path(subscription_plan_id: subscription_plan.id) do %>
-      <span class="name">
+      <span class="name" style="background-color: <%= subscription_plan.color %>;">
         <%= subscription_plan.name %>
       </span>
 

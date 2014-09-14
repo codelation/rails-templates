@@ -6,6 +6,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Free",
+    color:             "#7eb1c9",
     active:            true,
     price:             Money.new(0, "USD"), # Free
     account_type:      :user,
@@ -17,6 +18,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Value",
+    color:             "#c97fbd",
     active:            true,
     price:             Money.new(900, "USD"), # $9.00
     account_type:      :user,
@@ -28,6 +30,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Pro",
+    color:             "#98c981",
     active:            true,
     price:             Money.new(5900, "USD"), # $59.00
     account_type:      :user,
@@ -43,6 +46,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Small",
+    color:             "#7c8cc8",
     active:            true,
     price:             Money.new(3900, "USD"), # $39.00
     account_type:      :organization,
@@ -54,6 +58,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Medium",
+    color:             "#c87c7f",
     active:            true,
     price:             Money.new(9900, "USD"), # $99.00
     account_type:      :organization,
@@ -65,6 +70,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Large",
+    color:             "#80c9ae",
     active:            true,
     price:             Money.new(19900, "USD"), # $199.00
     account_type:      :organization,
