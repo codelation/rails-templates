@@ -28,8 +28,6 @@ body.application-layout header {
       text-decoration: none;
 
       i {
-        position: relative;
-        top: -2px;
         @include transition(color 0.1s linear);
       }
 
