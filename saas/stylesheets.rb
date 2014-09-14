@@ -1,6 +1,22 @@
 module Saas
   class Stylesheets < ::Stylesheets
 
+    def self.application_layout_footer
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/_footer.scss")
+    end
+
+    def self.application_layout_header
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/_header.scss")
+    end
+
+    def self.application_layout_fonts
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/fonts.scss")
+    end
+
+    def self.application_layout_title
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/title.scss")
+    end
+
     def self.contact_messages_main
       File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact_messages/main.scss")
     end
@@ -18,8 +34,6 @@ module Saas
  *= require_tree ./home
  *= require_self
  */
-
-@import url(http://fonts.googleapis.com/css?family=Ovo|Questrial);
 HOME
     end
 

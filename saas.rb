@@ -84,10 +84,14 @@ file "app/assets/javascripts/home.js",                  Saas::Javascripts.home
 run "rm app/assets/stylesheets/application.css"
 
 # Application Stylesheets
-file "app/assets/stylesheets/_imports.scss",        Saas::Stylesheets.imports(@app_name)
-file "app/assets/stylesheets/_variables.scss",      Saas::Stylesheets.variables
-file "app/assets/stylesheets/application/.keep",    ""
-file "app/assets/stylesheets/application.css.scss", Saas::Stylesheets.application(@app_name)
+file "app/assets/stylesheets/_imports.scss",                   Saas::Stylesheets.imports(@app_name)
+file "app/assets/stylesheets/_variables.scss",                 Saas::Stylesheets.variables
+file "app/assets/stylesheets/application/layout/_footer.scss", Saas::Stylesheets.application_layout_footer
+file "app/assets/stylesheets/application/layout/_header.scss", Saas::Stylesheets.application_layout_header
+file "app/assets/stylesheets/application/layout/fonts.scss",   Saas::Stylesheets.application_layout_fonts
+file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets.application_layout_title
+file "app/assets/stylesheets/application/.keep",               ""
+file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
 
 # Home Styleshseets
 file "app/assets/stylesheets/home/.keep",                      ""
@@ -215,8 +219,8 @@ file "app/views/contact_messages/show.html.erb",            Saas::Views.contact_
 
 file "app/views/current_users/edit.html.erb",               Saas::Views.current_users_edit
 
-file "app/views/layouts/application/_footer.html.erb",      Saas::Views.footer
-file "app/views/layouts/application/_header.html.erb",      Saas::Views.header(@app_name)
+file "app/views/layouts/application/_footer.html.erb",      Saas::Views.home_footer
+file "app/views/layouts/application/_header.html.erb",      Saas::Views.home_header
 
 file "app/views/layouts/home/_footer.html.erb",             Saas::Views.home_footer
 file "app/views/layouts/home/_header.html.erb",             Saas::Views.home_header

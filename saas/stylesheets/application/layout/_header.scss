@@ -1,6 +1,6 @@
 @import "imports";
 
-body.home-layout header {
+body.application-layout header {
   @include clearfix;
   background-color: $header-background-color;
   color: #fff;
@@ -43,10 +43,6 @@ body.home-layout header {
     }
   }
 
-  nav {
-    float: right;
-  }
-
   ul {
     display: block;
     list-style-type: none;
@@ -81,45 +77,7 @@ body.home-layout header {
   }
 }
 
-body.home-layout header li.divider {
-  margin: 0 28px 0 14px;
-  position: relative;
-
-  &:after {
-    background-color: rgba(#fff, 0.7);
-    content: " ";
-    display: block;
-    height: 30px;
-    position: absolute;
-    top: -20px;
-    width: 1px;
-  }
-}
-
-body.home-layout header li.new-session {
-  a {
-    color: $user-link-color;
-
-    &:hover {
-      color: lighten($user-link-color, 12%);
-    }
-  }
-}
-
-body.home-layout header li.new-registration a {
-  border: 1px solid $header-link-color;
-  border-radius: $base-border-radius;
-  color: $header-link-color;
-  margin: 8px 10px 14px;
-  padding: 5px 9px;
-
-  &:hover {
-    background-color: lighten($header-background-color, 2%);
-    box-shadow: 0 0 8px rgba(#fff, 0.3);
-  }
-}
-
-body.home-layout header li.user {
+body.application-layout header li.user {
   font-family: 'Ovo', serif;
   float: right;
 

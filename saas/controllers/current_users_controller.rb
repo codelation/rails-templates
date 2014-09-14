@@ -1,5 +1,5 @@
 class CurrentUsersController < ApplicationController
-  layout "home"
+  before_action :authenticate_user!
 
   def edit
     @user = current_user

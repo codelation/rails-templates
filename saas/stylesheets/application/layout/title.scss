@@ -1,0 +1,35 @@
+@import "imports";
+
+body.application-layout .title {
+  background-color: $base-body-color;
+  border-bottom: 1px solid $base-border-color;
+  color: $header-background-color;
+  box-shadow: inset 0 -10px 0 #fff,
+              inset 0 1px 5px rgba(#000, 0.4);
+
+  h1 {
+    @include outer-container;
+    font-family: 'Questrial', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: 7px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    text-shadow: 2px 2px 0px #f8f8f8;
+    text-transform: uppercase;
+  }
+}
+
+body.application-layout {
+  #error_explanation,
+  .flash-alert,
+  .flash-notice {
+    & + .title {
+      box-shadow: none;
+    }
+
+    & + main > .title:first-child {
+      box-shadow: none;
+    }
+  }
+}
