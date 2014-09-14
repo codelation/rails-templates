@@ -18,7 +18,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Value",
-    color:             "#c97fbd",
+    color:             "#98c981",
     active:            true,
     price:             Money.new(900, "USD"), # $9.00
     account_type:      :user,
@@ -30,7 +30,7 @@ if SubscriptionPlan.count == 0
 
   SubscriptionPlan.create(
     name:              "Pro",
-    color:             "#98c981",
+    color:             "#595b68",
     active:            true,
     price:             Money.new(5900, "USD"), # $59.00
     account_type:      :user,
