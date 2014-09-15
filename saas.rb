@@ -214,38 +214,36 @@ file "app/mailers/contact_message_mailer.rb", Saas::Mailers.contact_message(@app
 
 run "rm app/views/layouts/application.html.erb"
 
-file "app/views/authentication/confirmations/new.html.erb", Saas::Views.devise_confirmations_new
-file "app/views/authentication/passwords/edit.html.erb",    Saas::Views.devise_passwords_edit
-file "app/views/authentication/passwords/new.html.erb",     Saas::Views.devise_passwords_new
-file "app/views/authentication/registrations/new.html.erb", Saas::Views.devise_registrations_new
-file "app/views/authentication/sessions/new.html.erb",      Saas::Views.devise_sessions_new
-file "app/views/authentication/unlocks/new.html.erb",       Saas::Views.devise_unlocks_new
-
-file "app/views/contact_messages/new.html.erb",             Saas::Views.contact_messages_new
-file "app/views/contact_messages/show.html.erb",            Saas::Views.contact_messages_show
-
-file "app/views/current_users/edit.html.erb",               Saas::Views.current_users_edit
-
-file "app/views/layouts/application/_footer.html.erb",      Saas::Views.home_footer
-file "app/views/layouts/application/_header.html.erb",      Saas::Views.home_header
-
-file "app/views/layouts/home/_footer.html.erb",             Saas::Views.home_footer
-file "app/views/layouts/home/_header.html.erb",             Saas::Views.home_header
-
-file "app/views/layouts/shared/_analytics.html.erb",        Saas::Views.analytics
-file "app/views/layouts/shared/_flash_messages.html.erb",   Saas::Views.flash_messages
-
-file "app/views/layouts/home.html.erb",                     Saas::Views.home
-file "app/views/layouts/application.html.erb",              Saas::Views.application
-
-file "app/views/home/about.html.erb",                       Saas::Views.home_about
-file "app/views/home/features.html.erb",                    Saas::Views.home_features
-file "app/views/home/index.html.erb",                       Saas::Views.home_index
-file "app/views/home/pricing.html.erb",                     Saas::Views.home_pricing
-file "app/views/home/privacy.html.erb",                     Saas::Views.home_privacy
-file "app/views/home/terms.html.erb",                       Saas::Views.home_terms
-
 file "app/views/contact_message_mailer/contact_email.html.erb",  Saas::Views.contact_message_mailer_contact_email
+
+file "app/views/authentication/confirmations/new.html.erb",      Saas::Views.devise_confirmations_new
+file "app/views/authentication/passwords/edit.html.erb",         Saas::Views.devise_passwords_edit
+file "app/views/authentication/passwords/new.html.erb",          Saas::Views.devise_passwords_new
+file "app/views/authentication/registrations/new.html.erb",      Saas::Views.devise_registrations_new
+file "app/views/authentication/sessions/new.html.erb",           Saas::Views.devise_sessions_new
+file "app/views/authentication/unlocks/new.html.erb",            Saas::Views.devise_unlocks_new
+
+file "app/views/contact_messages/new.html.erb",                  Saas::Views.contact_messages_new
+file "app/views/contact_messages/show.html.erb",                 Saas::Views.contact_messages_show
+file "app/views/current_users/edit.html.erb",                    Saas::Views.current_users_edit
+
+file "app/views/home/about.html.erb",                            Saas::Views.home_about
+file "app/views/home/features.html.erb",                         Saas::Views.home_features
+file "app/views/home/index.html.erb",                            Saas::Views.home_index
+file "app/views/home/pricing.html.erb",                          Saas::Views.home_pricing
+file "app/views/home/privacy.html.erb",                          Saas::Views.home_privacy
+file "app/views/home/terms.html.erb",                            Saas::Views.home_terms
+
+file "app/views/layouts/application/_footer.html.erb",           Saas::Views.home_footer
+file "app/views/layouts/application/_header.html.erb",           Saas::Views.home_header
+file "app/views/layouts/home/_footer.html.erb",                  Saas::Views.home_footer
+file "app/views/layouts/home/_header.html.erb",                  Saas::Views.home_header
+file "app/views/layouts/shared/_analytics.html.erb",             Saas::Views.analytics
+file "app/views/layouts/shared/_flash_messages.html.erb",        Saas::Views.flash_messages
+file "app/views/layouts/home.html.erb",                          Saas::Views.home
+file "app/views/layouts/application.html.erb",                   Saas::Views.application
+
+file "app/views/organization_memberships/index.html.erb",        Saas::Views.organization_memberships_index
 file "app/views/subscription_plans/_subscription_plan.html.erb", Saas::Views.subscription_plans_subscription_plan
 
 # =================================================================
