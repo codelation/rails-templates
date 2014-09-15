@@ -28,7 +28,6 @@ install_blogelator = ask("Do you want to add a blog? [no]").downcase.start_with?
 # -----------------------------------------
 
 run "rm config/database.yml"
-run "rm config/routes.rb"
 run "rm Gemfile"
 
 file "config/database.yml", Configurations.database(@app_name)
@@ -56,7 +55,8 @@ end
 rake "db:migrate"
 
 # Copy routes.rb after generators to avoid errors
-file "config/routes.rb", Configurations.routes(@app_class)
+run "rm config/routes.rb"
+file "config/routes.rb", Configurations.routes(@app_class, install_blocky, install_blogelator)
 
 # =================================================================
 # Asset Files
@@ -98,28 +98,31 @@ file "app/assets/stylesheets/application/.keep",    ""
 file "app/assets/stylesheets/application.css.scss", Stylesheets.application(@app_name)
 
 # Shared Stylesheets
-file "app/assets/stylesheets/shared/typography/body.scss",     Stylesheets.body
-file "app/assets/stylesheets/shared/typography/forms.scss",    Stylesheets.forms
-file "app/assets/stylesheets/shared/typography/headings.scss", Stylesheets.headings
-file "app/assets/stylesheets/shared/typography/lists.scss",    Stylesheets.lists
-file "app/assets/stylesheets/shared/buttons.scss",             Stylesheets.buttons
-file "app/assets/stylesheets/shared/devise.scss",              Stylesheets.devise if install_devise
-file "app/assets/stylesheets/shared/flash_messages.scss",      Stylesheets.flash_messages
+file "app/assets/stylesheets/shared/body.scss",           Stylesheets.shared_body
+file "app/assets/stylesheets/shared/buttons.scss",        Stylesheets.shared_buttons
+file "app/assets/stylesheets/shared/devise.scss",         Stylesheets.shared_devise if install_devise
+file "app/assets/stylesheets/shared/flash_messages.scss", Stylesheets.shared_flash_messages
+file "app/assets/stylesheets/shared/forms.scss",          Stylesheets.shared_forms
+file "app/assets/stylesheets/shared/headings.scss",       Stylesheets.shared_headings
+file "app/assets/stylesheets/shared/lists.scss",          Stylesheets.shared_lists
+
+# Sass Mixins
+file "app/assets/stylesheets/mixins/button.scss", Stylesheets.mixins_button
 
 # Vendor Stylesheets
-file "vendor/assets/stylesheets/#{@app_name.underscore}/_bourbon.scss",     Stylesheets.bourbon
-file "vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip",       Stylesheets.bourbon_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/_neat.scss",        Stylesheets.neat
-file "vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip",          Stylesheets.neat_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.scss", Stylesheets.font_awesome
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip",  Stylesheets.font_awesome_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Stylesheets.normalize
+file "vendor/assets/stylesheets/#{@app_name.underscore}/_bourbon.scss",     Stylesheets.vendor_bourbon
+file "vendor/assets/stylesheets/#{@app_name.underscore}/_neat.scss",        Stylesheets.vendor_neat
+file "vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip",       Stylesheets.vendor_bourbon_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip",          Stylesheets.vendor_neat_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.scss", Stylesheets.vendor_font_awesome
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip",  Stylesheets.vendor_font_awesome_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Stylesheets.vendor_normalize
 
 # Unzip additional stylesheets
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome/_font-awesome-sprockets.scss",  Stylesheets.font_awesome_sprockets(@app_name)
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome/_font-awesome-sprockets.scss",  Stylesheets.vendor_font_awesome_sprockets(@app_name)
 
 # Delete unzipped files
 run "rm vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip"

@@ -4,8 +4,18 @@ body.application-layout .title {
   background-color: $base-body-color;
   border-bottom: 1px solid $base-border-color;
   color: $header-background-color;
-  box-shadow: inset 0 -10px 0 #fff,
-              inset 0 1px 5px rgba(#000, 0.4);
+  overflow: hidden;
+  position: relative;
+
+  &:after {
+    box-shadow: inset 0 1px 5px rgba(#000, 0.4);
+    content: " ";
+    height: 110%;
+    left: -10%;
+    position: absolute;
+    top: 0;
+    width: 120%;
+  }
 
   h1 {
     @include outer-container;

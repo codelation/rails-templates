@@ -56,7 +56,7 @@ GEMFILE
   # Sales Site Routes
   root to: "home#index"
   %w(about contact features pricing privacy terms).each do |page|
-    get page, to: "home##{page}", as: page
+    get page, to: "home#\#{page}", as: page
   end
 
   # Resource Routes

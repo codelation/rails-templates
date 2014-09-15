@@ -84,5 +84,23 @@ HOME
     def self.home_title
       File.read("#{File.dirname(__FILE__)}/stylesheets/home/layout/title.scss")
     end
+
+    def self.imports(app_name)
+      return <<-IMPORTS
+@import "#{app_name.underscore}/bourbon";
+@import "variables";
+@import "#{app_name.underscore}/neat";
+@import "mixins/button";
+@import "mixins/vertical_navigation";
+IMPORTS
+    end
+
+    def self.mixins_vertical_navigation
+      File.read("#{File.dirname(__FILE__)}/stylesheets/mixins/vertical_navigation.scss")
+    end
+
+    def self.shared_flash_messages
+      File.read("#{File.dirname(__FILE__)}/stylesheets/shared/flash_messages.scss")
+    end
   end
 end

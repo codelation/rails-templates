@@ -45,8 +45,8 @@
       <%= f.hidden_field :subscription_plan_id, value: @subscription_plan.id %>
 
       <div>
-        <%= f.label :name, class: "required" %><br>
-        <%= f.text_field :name, autofocus: true %>
+        <%= f.label :name, "Full Name", class: "required" %><br>
+        <%= f.text_field :name, autofocus: !@subscription_plan.organization? %>
       </div>
 
       <div>

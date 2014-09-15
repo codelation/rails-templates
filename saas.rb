@@ -88,7 +88,7 @@ file "app/assets/stylesheets/_imports.scss",                       Saas::Stylesh
 file "app/assets/stylesheets/_variables.scss",                     Saas::Stylesheets.variables
 file "app/assets/stylesheets/application/current_users/main.scss", Saas::Stylesheets.current_users_main
 file "app/assets/stylesheets/application/layout/_footer.scss",     Saas::Stylesheets.application_layout_footer
-file "app/assets/stylesheets/application/layout/_header.scss"      Saas::Stylesheets.application_layout_header
+file "app/assets/stylesheets/application/layout/_header.scss",     Saas::Stylesheets.application_layout_header
 file "app/assets/stylesheets/application/layout/fonts.scss",       Saas::Stylesheets.application_layout_fonts
 file "app/assets/stylesheets/application/layout/title.scss",       Saas::Stylesheets.application_layout_title
 file "app/assets/stylesheets/application/.keep",                   ""
@@ -111,28 +111,32 @@ file "app/assets/stylesheets/home/home/privacy.scss",          Saas::Stylesheets
 file "app/assets/stylesheets/home/home/terms.scss",            Saas::Stylesheets.home_terms
 
 # Shared Stylesheets
-file "app/assets/stylesheets/shared/typography/body.scss",     Saas::Stylesheets.body
-file "app/assets/stylesheets/shared/typography/forms.scss",    Saas::Stylesheets.forms
-file "app/assets/stylesheets/shared/typography/headings.scss", Saas::Stylesheets.headings
-file "app/assets/stylesheets/shared/typography/lists.scss",    Saas::Stylesheets.lists
-file "app/assets/stylesheets/shared/buttons.scss",             Saas::Stylesheets.buttons
-file "app/assets/stylesheets/shared/devise.scss",              Saas::Stylesheets.devise if install_devise
-file "app/assets/stylesheets/shared/flash_messages.scss",      Saas::Stylesheets.flash_messages
+file "app/assets/stylesheets/shared/body.scss",           Saas::Stylesheets.shared_body
+file "app/assets/stylesheets/shared/buttons.scss",        Saas::Stylesheets.shared_buttons
+file "app/assets/stylesheets/shared/devise.scss",         Saas::Stylesheets.shared_devise
+file "app/assets/stylesheets/shared/forms.scss",          Saas::Stylesheets.shared_forms
+file "app/assets/stylesheets/shared/headings.scss",       Saas::Stylesheets.shared_headings
+file "app/assets/stylesheets/shared/lists.scss",          Saas::Stylesheets.shared_lists
+file "app/assets/stylesheets/shared/flash_messages.scss", Saas::Stylesheets.shared_flash_messages
+
+# Sass Mixins
+file "app/assets/stylesheets/mixins/button.scss",              Saas::Stylesheets.mixins_button
+file "app/assets/stylesheets/mixins/vertical_navigation.scss", Saas::Stylesheets.mixins_vertical_navigation
 
 # Vendor Stylesheets
-file "vendor/assets/stylesheets/#{@app_name.underscore}/_bourbon.scss",     Saas::Stylesheets.bourbon
-file "vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip",       Saas::Stylesheets.bourbon_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/_neat.scss",        Saas::Stylesheets.neat
-file "vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip",          Saas::Stylesheets.neat_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.scss", Saas::Stylesheets.font_awesome
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip",  Saas::Stylesheets.font_awesome_zip
-file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Saas::Stylesheets.normalize
+file "vendor/assets/stylesheets/#{@app_name.underscore}/_bourbon.scss",     Saas::Stylesheets.vendor_bourbon
+file "vendor/assets/stylesheets/#{@app_name.underscore}/_neat.scss",        Saas::Stylesheets.vendor_neat
+file "vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip",       Saas::Stylesheets.vendor_bourbon_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip",          Saas::Stylesheets.vendor_neat_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.scss", Saas::Stylesheets.vendor_font_awesome
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip",  Saas::Stylesheets.vendor_font_awesome_zip
+file "vendor/assets/stylesheets/#{@app_name.underscore}/normalize.css",     Saas::Stylesheets.vendor_normalize
 
 # Unzip additional stylesheets
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
 run "unzip vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip -d vendor/assets/stylesheets/#{@app_name.underscore}"
-file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome/_font-awesome-sprockets.scss",  Saas::Stylesheets.font_awesome_sprockets(@app_name)
+file "vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome/_font-awesome-sprockets.scss",  Saas::Stylesheets.vendor_font_awesome_sprockets(@app_name)
 
 # Delete unzipped files
 run "rm vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip"
