@@ -17,6 +17,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/home_controller.rb")
     end
 
+    def self.organization_memberships_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/organization_memberships_controller.rb")
+    end
+
     def self.passwords_controller
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/passwords_controller.rb")
     end

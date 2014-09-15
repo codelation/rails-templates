@@ -1,13 +1,13 @@
 @import "imports";
 
 fieldset {
-  background: lighten($base-border-color, 10);
+  background-color: lighten($base-border-color, 10);
   border: 1px solid $base-border-color;
   margin-bottom: $base-line-height;
   padding: $base-line-height;
 
   & > div {
-    margin-bottom: $base-line-height;
+    margin-bottom: $base-font-size;
   }
 }
 

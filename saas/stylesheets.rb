@@ -21,6 +21,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact_messages/main.scss")
     end
 
+    def self.current_users_main
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/current_users/main.scss")
+    end
+
     def self.flash_messages
       File.read("#{File.dirname(__FILE__)}/stylesheets/flash_messages.scss")
     end

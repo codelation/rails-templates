@@ -57,6 +57,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/home/terms.html.erb")
     end
 
+    def self.organization_memberships_index
+      File.read("#{File.dirname(__FILE__)}/views/organization_memberships/index.html.erb")
+    end
+
     def self.subscription_plans_subscription_plan
       File.read("#{File.dirname(__FILE__)}/views/subscription_plans/_subscription_plan.html.erb")
     end

@@ -56,11 +56,13 @@ GEMFILE
   # Sales Site Routes
   root to: "home#index"
   %w(about contact features pricing privacy terms).each do |page|
-    get page, to: "home#\#{page}", as: page
+    get page, to: "home##{page}", as: page
   end
 
   # Resource Routes
-  resource  :current_user
+  resource  :current_user do
+    resources :organization_memberships
+  end
   resources :contact_messages
 
   # Authentication Routes

@@ -2,12 +2,14 @@ class User < ActiveRecord::Base
   include Subscriber
 
   # Devise Modules
+  # - Also available: :confirmable, :lockable, and :timeoutable
   devise :database_authenticatable, :omniauthable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Relationships
   has_many :owned_organizations, class_name: "Organization", foreign_key: :owner_id
   has_many :organization_memberships
+  has_many :organizations, through: :organization_memberships
 
   # Validations
   validates_presence_of :name
@@ -16,7 +18,11 @@ class User < ActiveRecord::Base
   # Callbacks
   after_create :set_subscription_plan
 
-  attr_accessor :subscription_plan_id
+  attr_accessor :old_password, :subscription_plan_id
+
+  def all_organizations
+    self.owned_organizations + self.organizations
+  end
 
   # Returns whether or not the user can perform
   # an action on a subject based on roles/permissions.

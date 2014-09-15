@@ -84,14 +84,15 @@ file "app/assets/javascripts/home.js",                  Saas::Javascripts.home
 run "rm app/assets/stylesheets/application.css"
 
 # Application Stylesheets
-file "app/assets/stylesheets/_imports.scss",                   Saas::Stylesheets.imports(@app_name)
-file "app/assets/stylesheets/_variables.scss",                 Saas::Stylesheets.variables
-file "app/assets/stylesheets/application/layout/_footer.scss", Saas::Stylesheets.application_layout_footer
-file "app/assets/stylesheets/application/layout/_header.scss", Saas::Stylesheets.application_layout_header
-file "app/assets/stylesheets/application/layout/fonts.scss",   Saas::Stylesheets.application_layout_fonts
-file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets.application_layout_title
-file "app/assets/stylesheets/application/.keep",               ""
-file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
+file "app/assets/stylesheets/_imports.scss",                       Saas::Stylesheets.imports(@app_name)
+file "app/assets/stylesheets/_variables.scss",                     Saas::Stylesheets.variables
+file "app/assets/stylesheets/application/current_users/main.scss", Saas::Stylesheets.current_users_main
+file "app/assets/stylesheets/application/layout/_footer.scss",     Saas::Stylesheets.application_layout_footer
+file "app/assets/stylesheets/application/layout/_header.scss"      Saas::Stylesheets.application_layout_header
+file "app/assets/stylesheets/application/layout/fonts.scss",       Saas::Stylesheets.application_layout_fonts
+file "app/assets/stylesheets/application/layout/title.scss",       Saas::Stylesheets.application_layout_title
+file "app/assets/stylesheets/application/.keep",                   ""
+file "app/assets/stylesheets/application.css.scss",                Saas::Stylesheets.application(@app_name)
 
 # Home Styleshseets
 file "app/assets/stylesheets/home/.keep",                      ""
@@ -155,6 +156,8 @@ file "app/controllers/authentication/unlocks_controller.rb",       Saas::Control
 file "app/controllers/contact_messages_controller.rb",             Saas::Controllers.contact_messages_controller
 file "app/controllers/current_users_controller.rb",                Saas::Controllers.current_users_controller
 file "app/controllers/home_controller.rb",                         Saas::Controllers.home_controller
+file "app/controllers/organization_memberships_controller.rb",     Saas::Controllers.organization_memberships_controller
+
 
 # -----------------------------------------
 # Helper Files
