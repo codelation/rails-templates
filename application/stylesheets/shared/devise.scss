@@ -66,6 +66,11 @@ body.unlocks {
   }
 }
 
+body.registrations.pricing main .outer-container {
+  padding: 0;
+}
+
+
 body.registrations .selected-plan {
   @include span-columns(4);
   border-radius: $base-border-radius;
