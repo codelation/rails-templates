@@ -1,6 +1,14 @@
 module Saas
   class Views < ::Views
 
+    def self.application_footer
+      File.read("#{File.dirname(__FILE__)}/views/layouts/application/_footer.html.erb")
+    end
+
+    def self.application_header
+      File.read("#{File.dirname(__FILE__)}/views/layouts/application/_header.html.erb")
+    end
+
     def self.contact_message_mailer_contact_email
       File.read("#{File.dirname(__FILE__)}/views/contact_message_mailer/contact_email.html.erb")
     end
@@ -57,12 +65,28 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/home/terms.html.erb")
     end
 
-    def self.organization_memberships_index
-      File.read("#{File.dirname(__FILE__)}/views/organization_memberships/index.html.erb")
-    end
-
     def self.subscription_plans_subscription_plan
       File.read("#{File.dirname(__FILE__)}/views/subscription_plans/_subscription_plan.html.erb")
+    end
+
+    def self.user_account_organization_memberships_index
+      File.read("#{File.dirname(__FILE__)}/views/user_account/organization_memberships/index.html.erb")
+    end
+
+    def self.user_account_sidebar
+      File.read("#{File.dirname(__FILE__)}/views/user_account/_sidebar.html.erb")
+    end
+
+    def self.user_account_subscriptions_edit
+      File.read("#{File.dirname(__FILE__)}/views/user_account/subscriptions/edit.html.erb")
+    end
+
+    def self.user_account_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/views/user_account/subscriptions/new.html.erb")
+    end
+
+    def self.user_account_users_edit
+      File.read("#{File.dirname(__FILE__)}/views/user_account/users/edit.html.erb")
     end
 
   end

@@ -1,6 +1,6 @@
 @import "imports";
 
-body.application-layout .title {
+body.application-layout main > .title {
   background-color: $base-body-color;
   border-bottom: 1px solid $base-border-color;
   color: $header-background-color;

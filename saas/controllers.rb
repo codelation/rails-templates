@@ -9,16 +9,8 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/contact_messages_controller.rb")
     end
 
-    def self.current_users_controller
-      File.read("#{File.dirname(__FILE__)}/controllers/current_users_controller.rb")
-    end
-
     def self.home_controller
       File.read("#{File.dirname(__FILE__)}/controllers/home_controller.rb")
-    end
-
-    def self.organization_memberships_controller
-      File.read("#{File.dirname(__FILE__)}/controllers/organization_memberships_controller.rb")
     end
 
     def self.passwords_controller
@@ -35,6 +27,22 @@ module Saas
 
     def self.unlocks_controller
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/unlocks_controller.rb")
+    end
+
+    def self.user_account_base_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/user_account/base_controller.rb")
+    end
+
+    def self.user_account_organization_memberships_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/user_account/organization_memberships_controller.rb")
+    end
+
+    def self.user_account_subscriptions_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/user_account/subscriptions_controller.rb")
+    end
+
+    def self.user_account_users_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/user_account/users_controller.rb")
     end
 
   end

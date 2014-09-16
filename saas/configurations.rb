@@ -60,8 +60,10 @@ GEMFILE
   end
 
   # Resource Routes
-  resource  :current_user do
-    resources :organization_memberships
+  namespace :user_account do
+    resources :organization_memberships, path: "organizations"
+    resource  :subscription,             path: "billing"
+    resource  :user,                     path: "/"
   end
   resources :contact_messages
 

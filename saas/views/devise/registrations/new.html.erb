@@ -18,26 +18,7 @@
   <div class="outer-container">
     <fieldset class="selected-plan">
       <legend>Selected Plan</legend>
-
-      <div class="subscription-plan">
-        <h3 class="name" style="background-color: <%= @subscription_plan.color %>;">
-          <%= @subscription_plan.name %>
-        </h3>
-
-        <h4 class="price">
-          <span class="currency"><%= number_to_currency(@subscription_plan.price) %></span> /
-          <%= @subscription_plan.interval_count > 1 ? pluralize(@subscription_plan.interval_count, @subscription_plan.interval) : @subscription_plan.interval %>
-        </h4>
-
-        <div class="trial">
-          <% if @subscription_plan.trial_period_days.to_i > 0 %>
-            <%= "#{@subscription_plan.trial_period_days} Day Free Trial" %>
-          <% else %>
-            &nbsp;
-          <% end %>
-        </div>
-      </div>
-
+      <%= render partial: "subscription_plans/subscription_plan", locals: { subscription_plan: @subscription_plan }  %>
       <%= link_to "« Change Plan", new_user_registration_path, class: "change-plan" %>
     </fieldset>
 

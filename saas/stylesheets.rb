@@ -17,12 +17,20 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/title.scss")
     end
 
-    def self.contact_messages_main
-      File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact_messages/main.scss")
+    def self.application_user_account_layout
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/layout.scss")
     end
 
-    def self.current_users_main
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/current_users/main.scss")
+    def self.application_user_account_subscriptions_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/subscriptions/edit.scss")
+    end
+
+    def self.application_user_account_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/subscriptions/new.scss")
+    end
+
+    def self.contact_messages_main
+      File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact_messages/main.scss")
     end
 
     def self.flash_messages
@@ -101,6 +109,10 @@ IMPORTS
 
     def self.shared_flash_messages
       File.read("#{File.dirname(__FILE__)}/stylesheets/shared/flash_messages.scss")
+    end
+
+    def self.shared_subscription_plan
+      File.read("#{File.dirname(__FILE__)}/stylesheets/shared/subscription_plans/_subscription_plan.scss")
     end
   end
 end

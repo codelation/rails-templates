@@ -25,4 +25,13 @@ describe User, "#set_subscription_plan" do
 
     expect(@user.current_subscription.plan).to eq(@subscription_plan)
   end
+
+  it "should create an organization if the subscription plan an organization account type" do
+    @subscription_plan = create(:organization_subscription_plan)
+    @user = create(:user, subscription_plan_id: @subscription_plan.id)
+
+    expect(@user.current_subscription).to eq(nil)
+    expect(@user.owned_organizations.count).to eq(1)
+    expect(@user.owned_organizations.first.current_subscription.plan).to eq(@subscription_plan)
+  end
 end

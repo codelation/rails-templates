@@ -1,6 +1,6 @@
-<% cache ["home#pricing", subscription_plan] do %>
+<% cache ["v1", subscription_plan] do %>
   <div class="subscription-plan">
-    <%= link_to new_user_registration_path(subscription_plan_id: subscription_plan.id) do %>
+    <%= link_to defined?(url) ? url : new_user_registration_path(subscription_plan_id: subscription_plan.id) do %>
       <span class="name" style="background-color: <%= subscription_plan.color %>;">
         <%= subscription_plan.name %>
       </span>
@@ -16,7 +16,11 @@
 
       <span class="trial">
         <% if subscription_plan.trial_period_days.to_i > 0 && subscription_plan.price > 0 %>
-          <%= "#{subscription_plan.trial_period_days} Day Free Trial" %>
+          <% if current_user %>
+            Price difference prorated
+          <% else %>
+            <%= "#{subscription_plan.trial_period_days} Day Free Trial" %>
+          <% end %>
         <% elsif subscription_plan.price == 0 %>
           <%= number_to_currency(subscription_plan.price) %> /
           <%= subscription_plan.interval_count > 1 ? pluralize(subscription_plan.interval_count, subscription_plan.interval) : subscription_plan.interval %>

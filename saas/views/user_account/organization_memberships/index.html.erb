@@ -1,0 +1,24 @@
+<div class="title">
+  <h1>Organizations</h1>
+</div>
+
+<div class="outer-container">
+  <%= render partial: "user_account/sidebar" %>
+
+  <div class="page">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @organization_memberships.each do |membership| %>
+          <tr>
+            <td>Name</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

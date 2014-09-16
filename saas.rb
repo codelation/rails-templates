@@ -84,15 +84,17 @@ file "app/assets/javascripts/home.js",                  Saas::Javascripts.home
 run "rm app/assets/stylesheets/application.css"
 
 # Application Stylesheets
-file "app/assets/stylesheets/_imports.scss",                       Saas::Stylesheets.imports(@app_name)
-file "app/assets/stylesheets/_variables.scss",                     Saas::Stylesheets.variables
-file "app/assets/stylesheets/application/current_users/main.scss", Saas::Stylesheets.current_users_main
-file "app/assets/stylesheets/application/layout/_footer.scss",     Saas::Stylesheets.application_layout_footer
-file "app/assets/stylesheets/application/layout/_header.scss",     Saas::Stylesheets.application_layout_header
-file "app/assets/stylesheets/application/layout/fonts.scss",       Saas::Stylesheets.application_layout_fonts
-file "app/assets/stylesheets/application/layout/title.scss",       Saas::Stylesheets.application_layout_title
-file "app/assets/stylesheets/application/.keep",                   ""
-file "app/assets/stylesheets/application.css.scss",                Saas::Stylesheets.application(@app_name)
+file "app/assets/stylesheets/_imports.scss",                                    Saas::Stylesheets.imports(@app_name)
+file "app/assets/stylesheets/_variables.scss",                                  Saas::Stylesheets.variables
+file "app/assets/stylesheets/application/layout/_footer.scss",                  Saas::Stylesheets.application_layout_footer
+file "app/assets/stylesheets/application/layout/_header.scss",                  Saas::Stylesheets.application_layout_header
+file "app/assets/stylesheets/application/layout/fonts.scss",                    Saas::Stylesheets.application_layout_fonts
+file "app/assets/stylesheets/application/layout/title.scss",                    Saas::Stylesheets.application_layout_title
+file "app/assets/stylesheets/application/user_account/subscriptions/edit.scss", Saas::Stylesheets.application_user_account_subscriptions_edit
+file "app/assets/stylesheets/application/user_account/subscriptions/new.scss",  Saas::Stylesheets.application_user_account_subscriptions_new
+file "app/assets/stylesheets/application/user_account/layout.scss",             Saas::Stylesheets.application_user_account_layout
+file "app/assets/stylesheets/application/.keep",                                ""
+file "app/assets/stylesheets/application.css.scss",                             Saas::Stylesheets.application(@app_name)
 
 # Home Styleshseets
 file "app/assets/stylesheets/home/.keep",                      ""
@@ -111,13 +113,14 @@ file "app/assets/stylesheets/home/home/privacy.scss",          Saas::Stylesheets
 file "app/assets/stylesheets/home/home/terms.scss",            Saas::Stylesheets.home_terms
 
 # Shared Stylesheets
-file "app/assets/stylesheets/shared/body.scss",           Saas::Stylesheets.shared_body
-file "app/assets/stylesheets/shared/buttons.scss",        Saas::Stylesheets.shared_buttons
-file "app/assets/stylesheets/shared/devise.scss",         Saas::Stylesheets.shared_devise
-file "app/assets/stylesheets/shared/forms.scss",          Saas::Stylesheets.shared_forms
-file "app/assets/stylesheets/shared/headings.scss",       Saas::Stylesheets.shared_headings
-file "app/assets/stylesheets/shared/lists.scss",          Saas::Stylesheets.shared_lists
-file "app/assets/stylesheets/shared/flash_messages.scss", Saas::Stylesheets.shared_flash_messages
+file "app/assets/stylesheets/shared/body.scss",                                  Saas::Stylesheets.shared_body
+file "app/assets/stylesheets/shared/buttons.scss",                               Saas::Stylesheets.shared_buttons
+file "app/assets/stylesheets/shared/devise.scss",                                Saas::Stylesheets.shared_devise
+file "app/assets/stylesheets/shared/forms.scss",                                 Saas::Stylesheets.shared_forms
+file "app/assets/stylesheets/shared/headings.scss",                              Saas::Stylesheets.shared_headings
+file "app/assets/stylesheets/shared/lists.scss",                                 Saas::Stylesheets.shared_lists
+file "app/assets/stylesheets/shared/flash_messages.scss",                        Saas::Stylesheets.shared_flash_messages
+file "app/assets/stylesheets/shared/subscription_plans/_subscription_plan.scss", Saas::Stylesheets.shared_subscription_plan
 
 # Sass Mixins
 file "app/assets/stylesheets/mixins/button.scss",              Saas::Stylesheets.mixins_button
@@ -157,10 +160,14 @@ file "app/controllers/authentication/passwords_controller.rb",     Saas::Control
 file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.registrations_controller
 file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.sessions_controller
 file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.unlocks_controller
-file "app/controllers/contact_messages_controller.rb",             Saas::Controllers.contact_messages_controller
-file "app/controllers/current_users_controller.rb",                Saas::Controllers.current_users_controller
-file "app/controllers/home_controller.rb",                         Saas::Controllers.home_controller
-file "app/controllers/organization_memberships_controller.rb",     Saas::Controllers.organization_memberships_controller
+
+file "app/controllers/user_account/base_controller.rb",                     Saas::Controllers.user_account_base_controller
+file "app/controllers/user_account/organization_memberships_controller.rb", Saas::Controllers.user_account_organization_memberships_controller
+file "app/controllers/user_account/subscriptions_controller.rb",            Saas::Controllers.user_account_subscriptions_controller
+file "app/controllers/user_account/users_controller.rb",                    Saas::Controllers.user_account_users_controller
+
+file "app/controllers/contact_messages_controller.rb", Saas::Controllers.contact_messages_controller
+file "app/controllers/home_controller.rb",             Saas::Controllers.home_controller
 
 
 # -----------------------------------------
@@ -225,7 +232,6 @@ file "app/views/authentication/unlocks/new.html.erb",            Saas::Views.dev
 
 file "app/views/contact_messages/new.html.erb",                  Saas::Views.contact_messages_new
 file "app/views/contact_messages/show.html.erb",                 Saas::Views.contact_messages_show
-file "app/views/current_users/edit.html.erb",                    Saas::Views.current_users_edit
 
 file "app/views/home/about.html.erb",                            Saas::Views.home_about
 file "app/views/home/features.html.erb",                         Saas::Views.home_features
@@ -234,8 +240,8 @@ file "app/views/home/pricing.html.erb",                          Saas::Views.hom
 file "app/views/home/privacy.html.erb",                          Saas::Views.home_privacy
 file "app/views/home/terms.html.erb",                            Saas::Views.home_terms
 
-file "app/views/layouts/application/_footer.html.erb",           Saas::Views.home_footer
-file "app/views/layouts/application/_header.html.erb",           Saas::Views.home_header
+file "app/views/layouts/application/_footer.html.erb",           Saas::Views.application_footer
+file "app/views/layouts/application/_header.html.erb",           Saas::Views.application_header
 file "app/views/layouts/home/_footer.html.erb",                  Saas::Views.home_footer
 file "app/views/layouts/home/_header.html.erb",                  Saas::Views.home_header
 file "app/views/layouts/shared/_analytics.html.erb",             Saas::Views.analytics
@@ -243,8 +249,13 @@ file "app/views/layouts/shared/_flash_messages.html.erb",        Saas::Views.fla
 file "app/views/layouts/home.html.erb",                          Saas::Views.home
 file "app/views/layouts/application.html.erb",                   Saas::Views.application
 
-file "app/views/organization_memberships/index.html.erb",        Saas::Views.organization_memberships_index
 file "app/views/subscription_plans/_subscription_plan.html.erb", Saas::Views.subscription_plans_subscription_plan
+
+file "app/views/user_account/_sidebar.html.erb",                       Saas::Views.user_account_sidebar
+file "app/views/user_account/organization_memberships/index.html.erb", Saas::Views.user_account_organization_memberships_index
+file "app/views/user_account/subscriptions/edit.html.erb",             Saas::Views.user_account_subscriptions_edit
+file "app/views/user_account/subscriptions/new.html.erb",              Saas::Views.user_account_subscriptions_new
+file "app/views/user_account/users/edit.html.erb",                     Saas::Views.user_account_users_edit
 
 # =================================================================
 # Configuration Files

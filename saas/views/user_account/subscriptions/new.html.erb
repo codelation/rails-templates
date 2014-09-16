@@ -1,0 +1,14 @@
+<div class="title">
+  <h1>Billing ~ Change Plan</h1>
+</div>
+
+<div class="outer-container">
+  <%= render partial: "user_account/sidebar" %>
+
+  <div class="page">
+    <fieldset>
+      <legend>Select Plan</legend>
+      <%= render partial: "subscription_plans/subscription_plan", collection: @subscription_plans %>
+    </fieldset>
+  </div>
+</div>

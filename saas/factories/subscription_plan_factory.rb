@@ -18,4 +18,15 @@ FactoryGirl.define do
       reference_code    "single-user-yearly-09-2014"
     end
   end
+
+  factory :organization_subscription_plan, class: "SubscriptionPlan" do
+    name              "Organization Plan"
+    active            true
+    price             Money.new(3900, "USD") # $39.00 USD
+    account_type      :organization
+    interval          :month
+    interval_count    1
+    trial_period_days 14
+    reference_code    "organization-monthly-09-2014"
+  end
 end

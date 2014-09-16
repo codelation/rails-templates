@@ -15,22 +15,12 @@
 </div>
 
 <div class="outer-container">
-  <div class="sidebar">
-    <ul>
-      <li class="name">
-        <%= current_user.display_name %>
-      </li>
-      <li class="active"><%= link_to "Account Settings", edit_current_user_path %></li>
-      <li><%= link_to "Billing", current_user_subscriptions_path %></li>
-      <li><%= link_to "Notification Settings" %></li>
-      <li><%= link_to "Organizations", current_user_organization_memberships_path %></li>
-    </ul>
-  </div>
+  <%= render partial: "user_account/sidebar" %>
 
   <div class="page">
-    <%= form_for @user, url: current_user_path do |f| %>
-      <fieldset>
-        <legend>Profile</legend>
+    <fieldset>
+      <legend>Profile</legend>
+      <%= form_for @user, url: user_account_user_path do |f| %>
         <div>
           <%= f.label :name %><br>
           <%= f.text_field :name %>
@@ -44,15 +34,15 @@
         <div class="submit">
           <%= f.submit "Save Profile" %>
         </div>
-      </fieldset>
-    <% end %>
+      <% end %>
+    </fieldset>
 
-    <%= form_for @user, url: current_user_path do |f| %>
-      <fieldset>
-        <legend>Change Password</legend>
+    <fieldset>
+      <legend>Change Password</legend>
+      <%= form_for @user, url: user_account_user_path do |f| %>
         <div>
-          <%= f.label :old_password, "Old Password" %><br>
-          <%= f.password_field :old_password %>
+          <%= f.label :current_password, "Current Password" %><br>
+          <%= f.password_field :current_password %>
         </div>
 
         <div>
@@ -68,7 +58,7 @@
         <div class="submit">
           <%= f.submit "Update Password" %>
         </div>
-      </fieldset>
-    <% end %>
+      <% end %>
+    </fieldset>
   </div>
 </div>

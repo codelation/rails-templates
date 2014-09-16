@@ -95,62 +95,6 @@ body.registrations .selected-plan {
   }
 }
 
-body.registrations .subscription-plan {
-  background-color: #fff;
-  border-radius: $base-border-radius;
-  box-shadow: 0 1px 2px rgba(#000, 0.4);
-  margin-bottom: 0;
-  overflow: hidden;
-  text-align: center;
-
-  a {
-    text-decoration: none;
-  }
-}
-
-body.registrations .subscription-plan .name {
-  color: #fff;
-  display: block;
-  font-family: 'Ovo', serif;
-  font-size: 2em;
-  font-weight: 300;
-  letter-spacing: 1px;
-  margin: 0;
-  padding: 0.5em 1em;
-}
-
-body.registrations .subscription-plan {
-  .price {
-    color: #888;
-    display: block;
-    font-family: 'Ovo', serif;
-    font-size: 24px;
-    font-weight: 300;
-    margin: 40px auto 4px;
-
-    .currency {
-      color: #777;
-      font-size: 1.8em;
-      text-shadow: 1px 1px 1px #ccc;
-    }
-  }
-
-  .free {
-    color: #777;
-    display: block;
-    font-size: 1.8em;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 1px #ccc;
-  }
-
-  .trial {
-    color: #bbb;
-    display: block;
-    margin-bottom: 40px;
-  }
-}
-
 body.registrations .devise-links {
   padding-left: 5%;
 }

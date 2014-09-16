@@ -3,6 +3,7 @@
 body.home-layout.home section.feature {
   @include outer-container;
   margin: 2em auto 3em;
+  padding: 0 10px;
 }
 
 body.home-layout.home .feature-text {
@@ -10,7 +11,7 @@ body.home-layout.home .feature-text {
   float: left;
   margin: 70px 0 0 60px;
   text-align: center;
-  width: 628px;
+  width: 608px;
 
   h3 {
     font-size: 40px;
@@ -181,4 +182,3 @@ body.home-layout.home .browser .page {
     }
   }
 }
-

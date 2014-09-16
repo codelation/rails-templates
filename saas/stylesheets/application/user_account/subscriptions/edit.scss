@@ -1,0 +1,109 @@
+@import "imports";
+
+body.user-account.subscriptions.edit {
+  .current-subscription-plan {
+    @include span-columns(5);
+  }
+
+  .current-subscription {
+    @include span-columns(7);
+    @include omega;
+    margin-top: 0.5em;
+  }
+
+  .payment-history {
+    clear: both;
+  }
+}
+
+body.user-account.subscriptions.edit .current-subscription-plan {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-align: center;
+
+  .subscription-plan {
+    font-size: 0.8em;
+    margin-bottom: 0.8em;
+
+    .trial {
+      height: 0;
+      margin-bottom: 1.5em;
+      visibility: hidden;
+    }
+
+    .note {
+      color: #bbb;
+      display: block;
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+body.user-account.subscriptions.edit .current-subscription {
+  color: #555;
+  margin-bottom: 0;
+  text-align: center;
+
+  table {
+    width: 100%;
+  }
+
+  thead th {
+    padding-bottom: 1em;
+
+    i {
+      font-size: 1.1em;
+      margin-right: 5px;
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  td {
+    padding: 7px 6px;
+    text-align: left;
+  }
+
+  td:first-of-type {
+    font-weight: bold;
+    text-align: right;
+  }
+
+  tfoot td:first-of-type {
+    font-weight: normal;
+    padding-top: 1em;
+    text-align: center;
+  }
+}
+
+body.user-account.subscriptions.edit .payment-history {
+  table {
+    width: 100%;
+  }
+
+  th,
+  td {
+    background-color: rgba($base-body-color, 0.9);
+    border: 1px solid $base-border-color;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th:first-of-type,
+  td:first-of-type {
+    text-align: left;
+  }
+
+  tr:nth-child(even) td {
+    background-color: rgba($base-body-color, 0.3);
+  }
+
+  tr:hover td {
+    background-color: rgba($base-accent-color, 0.04);
+  }
+
+  th {
+    background-color: $header-background-color;
+    color: $header-link-color;
+  }
+}

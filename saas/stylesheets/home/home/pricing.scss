@@ -2,7 +2,6 @@
 
 body.home.pricing main .outer-container {
   @include outer-container;
-  padding: 0 10px;
 }
 
 body.home.pricing section {
@@ -23,18 +22,11 @@ body.home.pricing main h2 {
   text-shadow: 1px 1px 0px #fff;
 }
 
-body.home.pricing .subscription-plan {
+body.home.pricing div.subscription-plan {
   @include span-columns(4);
-  background-color: #fff;
-  border-radius: $base-border-radius;
-  box-shadow: 0 1px 2px rgba(#000, 0.4);
-  margin-bottom: 2em;
-  overflow: hidden;
-  text-align: center;
   @include transform(translate3d(0, 0, 0));
   @include transition(transform 0.2s ease);
   @include transform-style(preserve-3d);
-  -webkit-backface-visibility: hidden;
 
   &:nth-of-type(3n) {
     @include omega;
@@ -44,110 +36,11 @@ body.home.pricing .subscription-plan {
     @include transform(scale3d(1.1, 1.1, 1.0));
   }
 
-  a {
-    text-decoration: none;
-  }
-}
-
-body.home.pricing .subscription-plan .name {
-  background-color: $header-background-color;
-  color: #fff;
-  display: block;
-  font-family: 'Ovo', serif;
-  font-size: 2em;
-  font-weight: 300;
-  letter-spacing: 1px;
-  margin: 0;
-  padding: 0.5em 1em;
-}
-
-$base-plan-color: rgba(adjust-hue($base-accent-color, 10deg), 0.6);
-
-body.home.pricing .single-user .subscription-plan {
-  &:nth-of-type(1) .name {
-    background-color: $base-plan-color;
-  }
-
-  &:nth-of-type(2) .name {
-    background-color: adjust-hue($base-plan-color, 110deg);
-  }
-
-  &:nth-of-type(3) .name {
-    background-color: adjust-hue($base-plan-color, 260deg);
-  }
-}
-
-$base-plan-color: rgba(adjust-hue($base-accent-color, 40deg), 0.6);
-
-body.home.pricing .organization .subscription-plan {
-  &:nth-of-type(1) .name {
-    background-color: $base-plan-color;
-  }
-
-  &:nth-of-type(2) .name {
-    background-color: adjust-hue($base-plan-color, 130deg);
-  }
-
-  &:nth-of-type(3) .name {
-    background-color: adjust-hue($base-plan-color, 290deg);
-  }
-}
-
-body.home.pricing .subscription-plan {
-  .price {
-    color: #888;
-    display: block;
-    font-family: 'Ovo', serif;
-    font-size: 24px;
-    font-weight: 300;
-    margin: 40px auto 4px;
-
-    .currency {
-      color: #777;
-      font-size: 1.8em;
-      text-shadow: 1px 1px 1px #ccc;
-    }
-  }
-
-  .free {
-    color: #777;
-    display: block;
-    font-size: 1.8em;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 1px #ccc;
-  }
-
-  .trial {
-    color: #bbb;
-    display: block;
-    margin-bottom: 40px;
-  }
-
   .sign-up {
     display: block;
   }
 
-  .sign-up span {
-    border: 1px solid $base-link-color;
-    border-radius: $base-border-radius;
-    display: inline-block;
-    margin: 1em 1em 0.5em;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    &:hover {
-      border-color: $hover-link-color;
-    }
-  }
-
   .no-credit-card {
-    color: #999;
     display: block;
-    font-family: 'Ovo', serif;
-    font-size: 13px;
-    font-weight: 300;
-    margin: 0 0 2em;
   }
 }

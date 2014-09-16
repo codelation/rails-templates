@@ -3,6 +3,7 @@
 fieldset {
   background-color: lighten($base-border-color, 10);
   border: 1px solid $base-border-color;
+  margin: 0;
   margin-bottom: $base-line-height;
   padding: $base-line-height;
 

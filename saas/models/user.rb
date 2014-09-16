@@ -18,11 +18,7 @@ class User < ActiveRecord::Base
   # Callbacks
   after_create :set_subscription_plan
 
-  attr_accessor :old_password, :subscription_plan_id
-
-  def all_organizations
-    self.owned_organizations + self.organizations
-  end
+  attr_accessor :subscription_plan_id
 
   # Returns whether or not the user can perform
   # an action on a subject based on roles/permissions.
@@ -51,8 +47,21 @@ private
 
   # Subscribes the user to the selected subscription plan.
   def set_subscription_plan
-    subscription_plan = SubscriptionPlan.find(self.subscription_plan_id)
-    self.subscribe_to_plan(subscription_plan)
+    @subscription_plan = SubscriptionPlan.find(self.subscription_plan_id)
+    if @subscription_plan.user?
+      self.subscribe_to_plan(@subscription_plan)
+    else
+      set_organization_subscription_plan
+    end
+  end
+
+  # Creates an organization when the user chooses an organization plan on sign up.
+  def set_organization_subscription_plan
+    organization = self.owned_organizations.create(
+      name:      "My Organization",
+      time_zone: self.time_zone
+    )
+    organization.subscribe_to_plan(@subscription_plan)
   end
 
 end

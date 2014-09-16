@@ -1,0 +1,19 @@
+<div class="sidebar">
+  <ul>
+    <li class="title">
+      <%= current_user.display_name %>
+    </li>
+    <li class="account-settings<%= current_page?(edit_user_account_user_path) ? " active" : "" %>">
+    <%= link_to "Account Settings", edit_user_account_user_path %>
+    </li>
+    <li class="billing<%= current_page?(edit_user_account_subscription_path) ? " active" : "" %>">
+      <%= link_to "Billing", edit_user_account_subscription_path %>
+    </li>
+    <li>
+      <%= link_to "Notification Settings" %>
+    </li>
+    <li class="organizations<%= current_page?(user_account_organization_memberships_path) ? " active" : "" %>">
+      <%= link_to "Organizations", user_account_organization_memberships_path %>
+    </li>
+  </ul>
+</div>
