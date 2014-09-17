@@ -89,8 +89,8 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
     trial_end = Time.now + @plan.trial_length
     expect(@subscription.trial_ends_at).to be_within(10).of(trial_end)
 
-    @plan.trial_period_days = 0
-    @subscription = @organization.subscribe_to_plan(@plan)
+    @yearly_plan.trial_period_days = 0
+    @subscription = @organization.subscribe_to_plan(@yearly_plan)
 
     expect(@subscription.trial_ends_at).to be_within(10).of(Time.now)
   end
@@ -102,6 +102,14 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
     @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
     @subscription.reload
     expect(@subscription.ended_at).to be_within(10).of(Time.now)
+  end
+
+  it "should not end or create a new subscription if subscribing to the same plan" do
+    @subscription = @organization.subscribe_to_plan(@plan)
+
+    expect(@organization.subscriptions.count).to      eq(1)
+    expect(@organization.subscribe_to_plan(@plan)).to eq(@subscription)
+    expect(@organization.subscriptions.count).to      eq(1)
   end
 
 end

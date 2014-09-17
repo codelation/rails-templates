@@ -71,11 +71,14 @@ run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
 
 run "rm app/assets/javascripts/application.js"
 
-file "app/assets/javascripts/application/.keep",        ""
-file "app/assets/javascripts/home/.keep",               ""
-file "app/assets/javascripts/shared/flash_messages.js", Saas::Javascripts.flash_messages
-file "app/assets/javascripts/application.js",           Saas::Javascripts.application
-file "app/assets/javascripts/home.js",                  Saas::Javascripts.home
+file "app/assets/javascripts/application/.keep",                             ""
+file "app/assets/javascripts/home/.keep",                                    ""
+file "app/assets/javascripts/application/user_account/subscriptions/new.js", Saas::Javascripts.appication_user_account_subscriptions_new
+file "app/assets/javascripts/shared/flash_messages.js",                      Saas::Javascripts.flash_messages
+file "app/assets/javascripts/application.js",                                Saas::Javascripts.application
+file "app/assets/javascripts/home.js",                                       Saas::Javascripts.home
+
+
 
 # -----------------------------------------
 # Stylesheet Files
@@ -84,17 +87,19 @@ file "app/assets/javascripts/home.js",                  Saas::Javascripts.home
 run "rm app/assets/stylesheets/application.css"
 
 # Application Stylesheets
-file "app/assets/stylesheets/_imports.scss",                                    Saas::Stylesheets.imports(@app_name)
-file "app/assets/stylesheets/_variables.scss",                                  Saas::Stylesheets.variables
-file "app/assets/stylesheets/application/layout/_footer.scss",                  Saas::Stylesheets.application_layout_footer
-file "app/assets/stylesheets/application/layout/_header.scss",                  Saas::Stylesheets.application_layout_header
-file "app/assets/stylesheets/application/layout/fonts.scss",                    Saas::Stylesheets.application_layout_fonts
-file "app/assets/stylesheets/application/layout/title.scss",                    Saas::Stylesheets.application_layout_title
+file "app/assets/stylesheets/_imports.scss",                   Saas::Stylesheets.imports(@app_name)
+file "app/assets/stylesheets/_variables.scss",                 Saas::Stylesheets.variables
+file "app/assets/stylesheets/application/layout/_footer.scss", Saas::Stylesheets.application_layout_footer
+file "app/assets/stylesheets/application/layout/_header.scss", Saas::Stylesheets.application_layout_header
+file "app/assets/stylesheets/application/layout/fonts.scss",   Saas::Stylesheets.application_layout_fonts
+file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets.application_layout_title
+file "app/assets/stylesheets/application/.keep",               ""
+file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
+
+file "app/assets/stylesheets/application/user_account/organization_memberships/index.scss", Saas::Stylesheets.application_user_organization_memberships_index
 file "app/assets/stylesheets/application/user_account/subscriptions/edit.scss", Saas::Stylesheets.application_user_account_subscriptions_edit
 file "app/assets/stylesheets/application/user_account/subscriptions/new.scss",  Saas::Stylesheets.application_user_account_subscriptions_new
 file "app/assets/stylesheets/application/user_account/layout.scss",             Saas::Stylesheets.application_user_account_layout
-file "app/assets/stylesheets/application/.keep",                                ""
-file "app/assets/stylesheets/application.css.scss",                             Saas::Stylesheets.application(@app_name)
 
 # Home Styleshseets
 file "app/assets/stylesheets/home/.keep",                      ""

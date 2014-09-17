@@ -21,6 +21,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/layout.scss")
     end
 
+    def self.application_user_organization_memberships_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organization_memberships/index.scss")
+    end
+
     def self.application_user_account_subscriptions_edit
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/subscriptions/edit.scss")
     end

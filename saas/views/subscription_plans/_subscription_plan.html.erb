@@ -1,5 +1,5 @@
 <% cache ["v1", subscription_plan] do %>
-  <div class="subscription-plan">
+  <div class="subscription-plan" data-id="<%= subscription_plan.id %>">
     <%= link_to defined?(url) ? url : new_user_registration_path(subscription_plan_id: subscription_plan.id) do %>
       <span class="name" style="background-color: <%= subscription_plan.color %>;">
         <%= subscription_plan.name %>

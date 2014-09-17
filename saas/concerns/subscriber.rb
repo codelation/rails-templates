@@ -28,6 +28,11 @@ module Subscriber
   # @return [Subscription]
   def subscribe_to_plan(subscription_plan)
     old_subscription = self.current_subscription
+
+    if old_subscription && old_subscription.plan == subscription_plan
+      return old_subscription
+    end
+
     if old_subscription
       old_subscription.ended_at = Time.now
       old_subscription.canceled!

@@ -86,6 +86,10 @@ body.registrations .selected-plan {
     text-transform: uppercase;
   }
 
+  .subscription-plan {
+    margin-bottom: 0;
+  }
+
   a.change-plan {
     color: #aaa;
     display: block;

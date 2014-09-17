@@ -10,8 +10,14 @@ class UserAccount::SubscriptionsController < UserAccount::BaseController
   end
 
   def new
-    @title = "Billing ~ Change Plan"
+    @current_subscription = current_user.current_subscription
+    @subscription = Subscription.new(
+      subscriber: current_user,
+      plan:       @current_subscription ? @current_subscription.plan : nil
+    )
     @subscription_plans = SubscriptionPlan.user
+
+    @title = "Billing ~ Change Plan"
   end
 
 end
