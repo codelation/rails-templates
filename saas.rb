@@ -187,7 +187,10 @@ file "app/helpers/application_helper.rb", Helpers.application(@app_name)
 
 file "app/models/ability.rb",                 Saas::Models.ability
 file "app/models/admin_user.rb",              Saas::Models.admin_user
+file "app/models/charge.rb",                  Saas::Models.charge
 file "app/models/contact_message.rb",         Saas::Models.contact_message
+file "app/models/invoice.rb",                 Saas::Models.invoice
+file "app/models/line_item.rb",               Saas::Models.line_item
 file "app/models/organization_membership.rb", Saas::Models.organization_membership
 file "app/models/organization_role.rb",       Saas::Models.organization_role
 file "app/models/organization.rb",            Saas::Models.organization
@@ -195,11 +198,17 @@ file "app/models/subscription.rb",            Saas::Models.subscription
 file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
 file "app/models/user.rb",                    Saas::Models.user
 
+file "spec/models/charge_spec.rb",            Saas::Models.charge_spec
+file "spec/models/invoice_spec.rb",           Saas::Models.invoice_spec
+file "spec/models/line_item_spec.rb",         Saas::Models.line_item_spec
 file "spec/models/organization_spec.rb",      Saas::Models.organization_spec
 file "spec/models/subscription_spec.rb",      Saas::Models.subscription_spec
 file "spec/models/subscription_plan_spec.rb", Saas::Models.subscription_plan_spec
 file "spec/models/user_spec.rb",              Saas::Models.user_spec
 
+file "spec/factories/charge_factory.rb",                  Saas::Factories.charge_factory
+file "spec/factories/invoice_factory.rb",                 Saas::Factories.invoice_factory
+file "spec/factories/line_item_factory.rb",               Saas::Factories.line_item_factory
 file "spec/factories/organization_factory.rb",            Saas::Factories.organization_factory
 file "spec/factories/organization_membership_factory.rb", Saas::Factories.organization_membership_factory
 file "spec/factories/organization_role_factory.rb",       Saas::Factories.organization_role_factory
@@ -289,13 +298,16 @@ file "Procfile.development",               Saas::Configurations.procfile_develop
 # =================================================================
 
 file "db/migrate/#{(Time.now + 0).strftime("%Y%m%d%H%M%S")}_create_admin_users.rb",              Saas::Migrations.create_admin_users
-file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_contact_messages.rb",         Saas::Migrations.create_contact_messages
-file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
-file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
-file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
-file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
-file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
-file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
+file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_charges.rb",                  Saas::Migrations.create_charges
+file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_contact_messages.rb",         Saas::Migrations.create_contact_messages
+file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_invoices.rb",                 Saas::Migrations.create_invoices
+file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_line_items.rb",               Saas::Migrations.create_line_items
+file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
+file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
+file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
+file "db/migrate/#{(Time.now + 8).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
+file "db/migrate/#{(Time.now + 9).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
+file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_users.rb",                   Saas::Migrations.create_users
 
 # =================================================================
 # DB Seed Files
