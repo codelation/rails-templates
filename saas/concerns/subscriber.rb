@@ -35,19 +35,24 @@ module Subscriber
       end_subscription(old_subscription)
     end
 
-    activate_subscription_plan(subscription_plan)
+    activate_subscription_plan(old_subscription, subscription_plan)
   end
 
 private
 
-  def activate_subscription_plan(subscription_plan)
+  def activate_subscription_plan(old_subscription, subscription_plan)
     new_subscription = Subscription.create(plan: subscription_plan)
 
-    if subscription_plan.trial_length > 0
+    if old_subscription && old_subscription.trialing? && subscription_plan.trial_length >= old_subscription.plan.trial_length
+      trial_length_diff = subscription_plan.trial_length - old_subscription.plan.trial_length
+      new_subscription.trial_ends_at = old_subscription.trial_ends_at + trial_length_diff
+      new_subscription.trialing!
+    elsif subscription_plan.trial_length > 0 && old_subscription.nil?
       new_subscription.trialing!
     else
       new_subscription.active!
     end
+
     self.subscriptions << new_subscription
 
     new_subscription

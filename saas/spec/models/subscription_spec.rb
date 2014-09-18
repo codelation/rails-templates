@@ -1,5 +1,9 @@
 require "rails_helper"
 
+# ---------------------------------------------------------
+# Instance Methods
+# ---------------------------------------------------------
+
 describe Subscription, "#current_period_credit" do
 
   before(:each) do
