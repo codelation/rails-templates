@@ -5,8 +5,20 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/migrations/create_admin_users.rb")
     end
 
+    def self.create_charges
+      File.read("#{File.dirname(__FILE__)}/migrations/create_charges.rb")
+    end
+
     def self.create_contact_messages
       File.read("#{File.dirname(__FILE__)}/migrations/create_contact_messages.rb")
+    end
+
+    def self.create_invoices
+      File.read("#{File.dirname(__FILE__)}/migrations/create_invoices.rb")
+    end
+
+    def self.create_line_items
+      File.read("#{File.dirname(__FILE__)}/migrations/create_line_items.rb")
     end
 
     def self.create_organization_memberships

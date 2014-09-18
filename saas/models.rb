@@ -9,8 +9,32 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/admin_user.rb")
     end
 
+    def self.charge
+      File.read("#{File.dirname(__FILE__)}/models/charge.rb")
+    end
+
+    def self.charge_spec
+      File.read("#{File.dirname(__FILE__)}/spec/models/charge_spec.rb")
+    end
+
     def self.contact_message
       File.read("#{File.dirname(__FILE__)}/models/contact_message.rb")
+    end
+
+    def self.invoice
+      File.read("#{File.dirname(__FILE__)}/models/invoice.rb")
+    end
+
+    def self.invoice_spec
+      File.read("#{File.dirname(__FILE__)}/spec/models/invoice_spec.rb")
+    end
+
+    def self.line_item
+      File.read("#{File.dirname(__FILE__)}/models/line_item.rb")
+    end
+
+    def self.line_item_spec
+      File.read("#{File.dirname(__FILE__)}/spec/models/line_item_spec.rb")
     end
 
     def self.organization_membership
