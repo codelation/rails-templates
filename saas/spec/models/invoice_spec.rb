@@ -67,20 +67,18 @@ end
 describe Invoice, "#calculate_total" do
 
   before(:each) do
-    @invoice = create(:invoice)
+    @invoice = build(:invoice)
   end
 
   it "should set the total to the total of all of its line_items" do
-    single_line_item = create(:single_line_item)
-    multiplied_line_item = create(:multiplied_line_item)
+    single_line_item = build(:single_line_item)
+    multiplied_line_item = build(:multiplied_line_item)
 
     @invoice.line_items << single_line_item
     @invoice.line_items << multiplied_line_item
-
-    expected_total = single_line_item.total + multiplied_line_item.total
-
     @invoice.send(:calculate_total)
 
+    expected_total = single_line_item.total + multiplied_line_item.total
     expect(@invoice.total).to eq(expected_total)
   end
 
