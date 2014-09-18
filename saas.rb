@@ -298,16 +298,16 @@ file "Procfile.development",               Saas::Configurations.procfile_develop
 # =================================================================
 
 file "db/migrate/#{(Time.now + 0).strftime("%Y%m%d%H%M%S")}_create_admin_users.rb",              Saas::Migrations.create_admin_users
-file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_charges.rb",              Saas::Migrations.create_charges
+file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_charges.rb",                  Saas::Migrations.create_charges
 file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_contact_messages.rb",         Saas::Migrations.create_contact_messages
-file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_invoices.rb",         Saas::Migrations.create_invoices
-file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_line_items.rb",         Saas::Migrations.create_line_items
+file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_invoices.rb",                 Saas::Migrations.create_invoices
+file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_line_items.rb",               Saas::Migrations.create_line_items
 file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
 file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
 file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
 file "db/migrate/#{(Time.now + 8).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
 file "db/migrate/#{(Time.now + 9).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
-file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_users.rb",                    Saas::Migrations.create_users
+file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_users.rb",                   Saas::Migrations.create_users
 
 # =================================================================
 # DB Seed Files
