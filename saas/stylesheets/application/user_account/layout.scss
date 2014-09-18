@@ -25,6 +25,21 @@ body.user-account main {
 
 body.user-account .sidebar {
   @include vertical-navigation;
+
+  .organization a {
+    background-color: lighten($header-background-color, 12%);
+    border-top: 1px solid rgba(#fff, 0.85);
+    color: $header-link-color;
+    font-family: 'Ovo', serif;
+    font-size: 1.2em;
+    font-weight: 300;
+    padding: 12px 16px;
+
+    &:hover {
+      background-color: $header-background-color;
+      color: #fff;
+    }
+  }
 }
 
 body.user-account .page {

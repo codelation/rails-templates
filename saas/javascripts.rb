@@ -11,5 +11,9 @@ module Saas
     def self.home
       File.read("#{File.dirname(__FILE__)}/javascripts/home.js")
     end
+
+    def self.vendor_moment
+      File.read("#{File.dirname(__FILE__)}/javascripts/moment.js")
+    end
   end
 end

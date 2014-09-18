@@ -15,5 +15,10 @@
     <li class="organizations<%= current_page?(user_account_organization_memberships_path) ? " active" : "" %>">
       <%= link_to "Organizations", user_account_organization_memberships_path %>
     </li>
+    <% current_user.organizations.each do |organization| %>
+      <li class="organization">
+        <%= link_to organization.name %>
+      </li>
+    <% end %>
   </ul>
 </div>

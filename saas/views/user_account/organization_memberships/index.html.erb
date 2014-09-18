@@ -6,64 +6,30 @@
   <%= render partial: "user_account/sidebar" %>
 
   <div class="page">
-    <fieldset>
-      <legend>My Organizations</legend>
-
-      <p>
-        These are the organizations you own.
-      </p>
-
-      <% if @owned_organizations.length > 0 %>
-        <table>
-          <thead>
+    <% if @organization_memberships.count > 0 %>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @organization_memberships.each do |membership| %>
             <tr>
-              <th>Name</th>
-              <th>Role</th>
-              <th>Transfer Ownership</th>
+              <td><%= membership.organization.name %></td>
+              <td><%= membership.role.titleize %></td>
+              <td>Transfer/Leave</td>
             </tr>
-          </thead>
-          <tbody>
-            <% @owned_organizations.each do |organization| %>
-              <tr>
-                <td><%= organization.name %></td>
-                <td>Owner</td>
-                <td><%= link_to "Transfer", "#", class: "button" %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-    </fieldset>
-
-    <fieldset>
-      <legend>My Memberships</legend>
-
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
       <p>
-        These are additional organizations you belong to.
+        Create an organization so you can include other users under
+        a single account.
       </p>
-
-      <% if @organization_memberships.length > 0 %>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @organization_memberships.each do |membership| %>
-              <tr>
-                <td><%= membership.organization.name %></td>
-                <td><%= membership.role.name %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        <p>
-          You do not belong to any additional organizations.
-        </p>
-      <% end %>
-    </fieldset>
+    <% end %>
   </div>
 </div>

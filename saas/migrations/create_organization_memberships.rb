@@ -4,6 +4,7 @@ class CreateOrganizationMemberships < ActiveRecord::Migration
       t.integer :organization_id, index: true
       t.integer :user_id, index: true
       t.integer :organization_role_id, index: true
+      t.integer :role, default: 0
 
       t.timestamps
     end

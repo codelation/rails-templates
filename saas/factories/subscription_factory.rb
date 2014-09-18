@@ -5,12 +5,10 @@ FactoryGirl.define do
     association :subscriber, factory: :organization
     association :plan,       factory: :subscription_plan
 
-    trial_ends_at        "2014-09-08 15:56:07"
-    current_period_start "2014-09-08 15:56:07"
-    current_period_end   "2014-09-08 15:56:07"
+    trial_ends_at        { Time.now - 30.days }
+    current_period_start { Time.now }
+    current_period_end   { Time.now + 1.month }
     cancel_at_period_end false
-    canceled_at          "2014-09-08 15:56:07"
-    ended_at             "2014-09-08 15:56:07"
-    status               1
+    status               :active
   end
 end

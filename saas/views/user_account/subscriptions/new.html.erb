@@ -7,17 +7,22 @@
 
   <div class="page">
     <fieldset>
-      <legend>Select Plan</legend>
+      <legend>Select a New Plan</legend>
+
       <% @subscription_plans.each do |subscription_plan| %>
         <%= render partial: "subscription_plans/subscription_plan", locals: { subscription_plan: subscription_plan, url: "#" }  %>
       <% end %>
+
+      <p class="message">
+        &nbsp;<br>
+        The selected plan is your current subscription plan.
+      </p>
 
       <%= form_for @subscription, url: user_account_subscription_path do |f| %>
         <%= hidden_field_tag "current_subscription_plan_id", @current_subscription ? @current_subscription.id : nil %>
         <%= f.hidden_field :subscription_plan_id %>
         <%= f.submit "Update Plan" %>
       <% end %>
-
     </fieldset>
   </div>
 </div>
@@ -25,6 +30,6 @@
 
 <%= content_for :scripts do %>
   <script>
-    App.subscriptionPlanSelect();
+    App.subscriptionPlanSelect(<%== @current_subscription.to_json(include: [:plan]) %>, <%== @subscription_plans.to_json %>);
   </script>
 <% end %>

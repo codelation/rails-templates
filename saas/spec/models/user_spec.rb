@@ -31,7 +31,11 @@ describe User, "#set_subscription_plan" do
     @user = create(:user, subscription_plan_id: @subscription_plan.id)
 
     expect(@user.current_subscription).to eq(nil)
-    expect(@user.owned_organizations.count).to eq(1)
-    expect(@user.owned_organizations.first.current_subscription.plan).to eq(@subscription_plan)
+    expect(@user.organizations.count).to eq(1)
+
+    @organization_membership = @user.organization_memberships.first
+
+    expect(@organization_membership.role.to_s).to eq("owner")
+    expect(@organization_membership.organization.current_subscription.plan).to eq(@subscription_plan)
   end
 end

@@ -1,5 +1,10 @@
 class OrganizationMembership < ActiveRecord::Base
   belongs_to :organization
   belongs_to :user
-  belongs_to :role, class_name: "OrganizationRole"
+
+  enum role: {
+    member: 0,
+    admin:  1,
+    owner:  2
+  }
 end

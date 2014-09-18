@@ -112,4 +112,21 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
     expect(@organization.subscriptions.count).to      eq(1)
   end
 
+  it "should give the subscriber prorated credit on their account from the old subscription" do
+    @subscription = @organization.subscribe_to_plan(@plan)
+
+    # Let's make the current period 30 days long and we're right in the middle of it
+    @subscription.current_period_start = Time.now - 15.days
+    @subscription.current_period_end = Time.now + 15.days
+    @subscription.save
+
+    # And make the plan $30/interval so the price is $1/day
+    @subscription.plan.price = Money.new(3000, "USD") # $30.00
+    @subscription.plan.save
+
+    # We should get half the money back as an account credit
+    @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
+    expect(@organization.account_balance).to eq(Money.new(-1500, "USD")) # $15.00
+  end
+
 end

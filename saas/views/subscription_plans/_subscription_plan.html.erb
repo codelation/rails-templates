@@ -17,7 +17,7 @@
       <span class="trial">
         <% if subscription_plan.trial_period_days.to_i > 0 && subscription_plan.price > 0 %>
           <% if current_user %>
-            Price difference prorated
+            &nbsp;
           <% else %>
             <%= "#{subscription_plan.trial_period_days} Day Free Trial" %>
           <% end %>

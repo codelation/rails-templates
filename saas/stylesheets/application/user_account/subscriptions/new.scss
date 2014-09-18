@@ -1,12 +1,22 @@
 @import "imports";
 
 body.user-account.subscriptions.new {
+  text-align: center;
+
   .subscription-plan {
     font-size: 0.8em;
+    overflow: hidden;
+    position: relative;
     @include span-columns(4);
     @include transform(translate3d(0, 0, 0));
     @include transition(transform 0.2s ease);
     @include transform-style(preserve-3d);
+
+    .trial {
+      height: 0;
+      margin-bottom: 1.6em;
+      visibility: hidden;
+    }
 
     &:nth-of-type(3n) {
       @include omega;
@@ -14,6 +24,32 @@ body.user-account.subscriptions.new {
 
     &:hover {
       @include transform(scale3d(1.1, 1.1, 1.0));
+    }
+  }
+
+  .subscription-plan.selected:after {
+    background-color: $header-background-color;
+    border-bottom: 1px solid darken($header-background-color, 10%);
+    border-top: 1px solid darken($header-background-color, 10%);
+    box-shadow: 0 2px 4px rgba(#000, 0.3);
+    color: $header-link-color;
+    content: "Selected";
+    display: block;
+    font-size: 1.2em;
+    left: -45px;
+    padding: 0.3em;
+    position: absolute;
+    text-align: center;
+    top: 20px;
+    width: 150px;
+    @include transform(rotate(-45deg));
+  }
+
+  input[type="submit"]:disabled {
+    opacity: 0.3;
+
+    &:hover {
+      @include transform(none);
     }
   }
 }

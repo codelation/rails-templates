@@ -1,6 +1,7 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
+      t.money  :account_balance
       t.string :name
       t.string :time_zone
 

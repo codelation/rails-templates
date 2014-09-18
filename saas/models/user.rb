@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Relationships
-  has_many :owned_organizations, class_name: "Organization", foreign_key: :owner_id
   has_many :organization_memberships
   has_many :organizations, through: :organization_memberships
 
@@ -57,10 +56,15 @@ private
 
   # Creates an organization when the user chooses an organization plan on sign up.
   def set_organization_subscription_plan
-    organization = self.owned_organizations.create(
+    organization = Organization.create(
       name:      "My Organization",
       time_zone: self.time_zone
     )
+
+    organization_membership = organization.add_user(self)
+    organization_membership.role = :owner
+    organization_membership.save
+
     organization.subscribe_to_plan(@subscription_plan)
   end
 

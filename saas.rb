@@ -77,8 +77,7 @@ file "app/assets/javascripts/application/user_account/subscriptions/new.js", Saa
 file "app/assets/javascripts/shared/flash_messages.js",                      Saas::Javascripts.flash_messages
 file "app/assets/javascripts/application.js",                                Saas::Javascripts.application
 file "app/assets/javascripts/home.js",                                       Saas::Javascripts.home
-
-
+file "vendor/assets/javascripts/moment.js",                                  Saas::Javascripts.vendor_moment
 
 # -----------------------------------------
 # Stylesheet Files
@@ -192,11 +191,12 @@ file "app/models/contact_message.rb",         Saas::Models.contact_message
 file "app/models/organization_membership.rb", Saas::Models.organization_membership
 file "app/models/organization_role.rb",       Saas::Models.organization_role
 file "app/models/organization.rb",            Saas::Models.organization
-file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
 file "app/models/subscription.rb",            Saas::Models.subscription
+file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
 file "app/models/user.rb",                    Saas::Models.user
 
 file "spec/models/organization_spec.rb",      Saas::Models.organization_spec
+file "spec/models/subscription_spec.rb",      Saas::Models.subscription_spec
 file "spec/models/subscription_plan_spec.rb", Saas::Models.subscription_plan_spec
 file "spec/models/user_spec.rb",              Saas::Models.user_spec
 

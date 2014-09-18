@@ -1,8 +1,7 @@
 class CreateOrganizations < ActiveRecord::Migration
   def change
     create_table :organizations do |t|
-      t.belongs_to :owner, index: true
-
+      t.money  :account_balance
       t.string :name
       t.string :time_zone
 

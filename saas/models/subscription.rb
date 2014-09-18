@@ -17,6 +17,22 @@ class Subscription < ActiveRecord::Base
     canceled: 4
   }
 
+  # The amount the subscriber should be credited if
+  # they cancel the subscription right now. Nil is
+  # returned if there is no credit given.
+  # @return [Money]
+  def current_period_credit
+    return if self.trialing?
+    return if self.plan.price == 0
+    return if self.current_period_end < Time.now
+
+    current_period_days = (self.current_period_end - self.current_period_start) / 1.day
+    current_period_days_left = (self.current_period_end - Time.now) / 1.day
+    price_per_day = self.plan.price / current_period_days
+
+    price_per_day * current_period_days_left
+  end
+
 private
 
   def build_from_plan

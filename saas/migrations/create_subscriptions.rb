@@ -6,7 +6,7 @@ class CreateSubscriptions < ActiveRecord::Migration
       t.integer  :subscriber_id, index: true
       t.string   :subscriber_type
 
-      t.integer  :status
+      t.integer  :status, default: 0
       t.boolean  :cancel_at_period_end, default: true
       t.datetime :current_period_start
       t.datetime :current_period_end
