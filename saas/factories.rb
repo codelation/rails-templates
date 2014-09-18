@@ -1,6 +1,18 @@
 module Saas
   class Factories
 
+    def self.charge_factory
+      File.read("#{File.dirname(__FILE__)}/factories/charge_factory.rb")
+    end
+
+    def self.invoice_factory
+      File.read("#{File.dirname(__FILE__)}/factories/invoice_factory.rb")
+    end
+
+    def self.line_item_factory
+      File.read("#{File.dirname(__FILE__)}/factories/line_item_factory.rb")
+    end
+
     def self.organization_factory
       File.read("#{File.dirname(__FILE__)}/factories/organization_factory.rb")
     end
