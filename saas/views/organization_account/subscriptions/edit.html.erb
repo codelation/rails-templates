@@ -1,19 +1,19 @@
 <div class="title">
-  <h1><%= current_user.display_name %> / Billing</h1>
+  <h1><%= @organization.name %> / Billing</h1>
 </div>
 
 <div class="outer-container">
-  <%= render partial: "user_account/sidebar" %>
+  <%= render partial: "organization_account/sidebar" %>
 
   <div class="page">
     <fieldset>
       <legend>Subscription Plan</legend>
       <div class="current-subscription-plan">
         <% if @subscription %>
-          <%= render partial: "subscription_plans/subscription_plan", locals: { subscription_plan: @subscription.plan, url: new_user_account_subscription_path }  %>
+          <%= render partial: "subscription_plans/subscription_plan", locals: { subscription_plan: @subscription.plan, url: new_organization_account_organization_subscription_path(@organization) }  %>
         <% else %>
           <div class="subscription-plan">
-            <%= link_to new_user_account_subscription_path do %>
+            <%= link_to new_organization_account_organization_subscription_path(@organization) do %>
               <span class="name">
                 No Plan
               </span>
@@ -28,7 +28,7 @@
             <% end %>
           </div>
         <% end %>
-        <%= link_to "Change Plan", new_user_account_subscription_path %>
+        <%= link_to "Change Plan", new_organization_account_organization_subscription_path(@organization) %>
       </div>
 
       <div class="current-subscription">
@@ -64,7 +64,7 @@
           <tfoot>
             <tr>
               <td colspan="2">
-                <%= link_to "Update Payment Method", edit_user_account_subscription_path %>
+                <%= link_to "Update Payment Method", edit_organization_account_organization_subscription_path(@organization) %>
               </td>
             </tr>
           </tfoot>

@@ -1,9 +1,9 @@
 <div class="title">
-  <h1><%= current_user.display_name %> / Billing ~ Change Plan</h1>
+  <h1><%= @organization.name %> / Billing ~ Change Plan</h1>
 </div>
 
 <div class="outer-container">
-  <%= render partial: "user_account/sidebar" %>
+  <%= render partial: "organization_account/sidebar" %>
 
   <div class="page">
     <fieldset>
@@ -17,7 +17,7 @@
         &nbsp;<br>&nbsp;
       </p>
 
-      <%= form_for @subscription, url: user_account_subscription_path do |f| %>
+      <%= form_for @subscription, url: organization_account_organization_subscription_path(@organization) do |f| %>
         <%= hidden_field_tag "current_subscription_plan_id", @current_subscription ? @current_subscription.id : nil %>
         <%= f.hidden_field :subscription_plan_id %>
         <%= f.submit "Update Plan" %>

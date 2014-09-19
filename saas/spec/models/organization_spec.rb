@@ -50,3 +50,16 @@ describe Organization, "#time" do
   end
 
 end
+
+# ---------------------------------------------------------
+# Private Methods
+# ---------------------------------------------------------
+
+describe Organization, "#create_initial_subscription" do
+  it "should set the subscription plan for the organization after create" do
+    @subscription_plan = create(:organization_subscription_plan)
+    @organization = create(:organization, subscription_plan_id: @subscription_plan.id)
+
+    expect(@organization.current_subscription.plan).to eq(@subscription_plan)
+  end
+end

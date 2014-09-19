@@ -1,7 +1,11 @@
 @import "imports";
 
-body.user-account.subscriptions.new {
-  text-align: center;
+body.user-account.organizations.new {
+  .page > form:first-child {
+    margin-bottom: 2em;
+    position: relative;
+    top: -1em;
+  }
 
   .subscription-plan {
     font-size: 0.8em;
@@ -24,14 +28,6 @@ body.user-account.subscriptions.new {
 
     &:hover {
       @include transform(scale3d(1.1, 1.1, 1.0));
-    }
-  }
-
-  input[type="submit"]:disabled {
-    opacity: 0.3;
-
-    &:hover {
-      @include transform(none);
     }
   }
 }

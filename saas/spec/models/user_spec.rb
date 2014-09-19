@@ -17,7 +17,7 @@ end
 # Private Methods
 # ---------------------------------------------------------
 
-describe User, "#set_subscription_plan" do
+describe User, "#create_initial_subscription" do
 
   it "should set the subscription plan for the user after create" do
     @subscription_plan = create(:subscription_plan)

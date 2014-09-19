@@ -1,10 +1,10 @@
 <div class="sidebar">
   <ul>
     <li class="title">
-      <%= current_user.display_name %>
+      <%= link_to current_user.display_name, edit_user_account_user_path %>
     </li>
     <li class="account-settings<%= current_page?(edit_user_account_user_path) ? " active" : "" %>">
-    <%= link_to "Account Settings", edit_user_account_user_path %>
+    <%= link_to "Profile", edit_user_account_user_path %>
     </li>
     <li class="billing<%= current_page?(edit_user_account_subscription_path) ? " active" : "" %>">
       <%= link_to "Billing", edit_user_account_subscription_path %>
@@ -15,9 +15,9 @@
     <li class="organizations<%= current_page?(user_account_organization_memberships_path) ? " active" : "" %>">
       <%= link_to "Organizations", user_account_organization_memberships_path %>
     </li>
-    <% current_user.organizations.each do |organization| %>
+    <% current_user.organizations.ordered_by_name.each do |organization| %>
       <li class="organization">
-        <%= link_to organization.name %>
+        <%= link_to organization.name, edit_organization_account_organization_path(organization) %>
       </li>
     <% end %>
   </ul>

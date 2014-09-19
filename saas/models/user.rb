@@ -15,7 +15,10 @@ class User < ActiveRecord::Base
   validates_presence_of :subscription_plan_id, on: :create
 
   # Callbacks
-  after_create :set_subscription_plan
+  after_create :create_initial_subscription
+
+  # Scopes
+  scope :ordered_by_name, -> { order(name: :asc) }
 
   attr_accessor :subscription_plan_id
 
@@ -32,7 +35,7 @@ class User < ActiveRecord::Base
   # returned if it exists and will fall back to the user's email address.
   # @return [String]
   def display_name
-    self.name || self.email
+    self.name.blank? ? self.email : self.name
   end
 
   # Returns a Time-like class with the user's selected time zone.
@@ -45,27 +48,26 @@ class User < ActiveRecord::Base
 private
 
   # Subscribes the user to the selected subscription plan.
-  def set_subscription_plan
+  def create_initial_subscription
     @subscription_plan = SubscriptionPlan.find(self.subscription_plan_id)
     if @subscription_plan.user?
       self.subscribe_to_plan(@subscription_plan)
     else
-      set_organization_subscription_plan
+      create_organization_and_subscription_plan
     end
   end
 
   # Creates an organization when the user chooses an organization plan on sign up.
-  def set_organization_subscription_plan
+  def create_organization_and_subscription_plan
     organization = Organization.create(
-      name:      "My Organization",
-      time_zone: self.time_zone
+      name:                 "My Organization",
+      subscription_plan_id: self.subscription_plan_id,
+      time_zone:            self.time_zone
     )
 
     organization_membership = organization.add_user(self)
     organization_membership.role = :owner
     organization_membership.save
-
-    organization.subscribe_to_plan(@subscription_plan)
   end
 
 end

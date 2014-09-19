@@ -1,0 +1,35 @@
+<% unless @organization.errors.count == 0 %>
+  <div id="error_explanation">
+    <i class="fa fa-times"></i>
+    <h2><%= pluralize(@organization.errors.count, "error") %> prohibited the organization from being created:</h2>
+    <ul>
+      <% @organization.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="title">
+  <h1><%= @organization.name %> / Profile</h1>
+</div>
+
+<div class="outer-container">
+  <%= render partial: "organization_account/sidebar" %>
+
+  <div class="page">
+    <fieldset>
+      <legend>Organization Profile</legend>
+      <%= form_for @organization, url: organization_account_organization_path(@organization) do |f| %>
+        <div>
+          <%= f.label :name %><br>
+          <%= f.text_field :name %>
+        </div>
+
+        <div class="submit">
+          <%= f.submit "Save Profile" %>
+        </div>
+      <% end %>
+    </fieldset>
+  </div>
+</div>

@@ -7,6 +7,15 @@ class Organization < ActiveRecord::Base
 
   # Validations
   validates_presence_of :name
+  validates_presence_of :subscription_plan_id, on: :create
+
+  # Callbacks
+  after_create :create_initial_subscription
+
+  # Scopes
+  scope :ordered_by_name, -> { order(name: :asc) }
+
+  attr_accessor :subscription_plan_id
 
   # Add a user to the organization. Adding new users
   # does not give assign any roles/permissions.
@@ -34,5 +43,19 @@ class Organization < ActiveRecord::Base
   def time
     Time.zone = self.time_zone
     Time.zone
+  end
+
+private
+
+  # Subscribes the organization to the selected subscription plan.
+  def create_initial_subscription
+    return unless self.subscription_plan_id.to_i > 0
+
+    @subscription_plan = SubscriptionPlan.find(self.subscription_plan_id)
+    if @subscription_plan.organization?
+      self.subscribe_to_plan(@subscription_plan)
+    else
+      raise ArgumentError, "The subscription plan with ID `#{subscription_plan_id}` is not for organization accounts"
+    end
   end
 end

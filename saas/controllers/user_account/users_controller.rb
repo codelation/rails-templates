@@ -2,7 +2,7 @@ class UserAccount::UsersController < UserAccount::BaseController
 
   def edit
     @user = current_user
-    @title = "Account Settings"
+    @title = "Profile ~ #{current_user.display_name}"
   end
 
   def show
@@ -11,7 +11,7 @@ class UserAccount::UsersController < UserAccount::BaseController
 
   def update
     @user = current_user
-    @title = "Account Settings"
+    @title = "Profile ~ #{current_user.display_name}"
 
     if user_params.has_key?(:password)
       if @user.update_with_password(user_params)

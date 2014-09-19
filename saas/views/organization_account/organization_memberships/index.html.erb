@@ -1,9 +1,9 @@
 <div class="title">
-  <h1><%= current_user.display_name %> / Organizations</h1>
+  <h1><%= @organization.name %> / Users</h1>
 </div>
 
 <div class="outer-container">
-  <%= render partial: "user_account/sidebar" %>
+  <%= render partial: "organization_account/sidebar" %>
 
   <div class="page">
     <% if @organization_memberships.count > 0 %>
@@ -12,15 +12,13 @@
           <tr>
             <th>Name</th>
             <th>Role</th>
-            <th>Manage</th>
           </tr>
         </thead>
         <tbody>
           <% @organization_memberships.each do |membership| %>
             <tr>
-              <td><%= membership.organization.name %></td>
+              <td><%= membership.user.display_name %></td>
               <td><%= membership.role.titleize %></td>
-              <td>Transfer/Leave</td>
             </tr>
           <% end %>
         </tbody>
@@ -33,7 +31,7 @@
     <% end %>
 
     <p>
-      <%= link_to "New Organization", new_user_account_organization_path, class: "button" %>
+      <%= link_to "New User", "#", class: "button" %>
     </p>
   </div>
 </div>

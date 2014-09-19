@@ -17,12 +17,28 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/title.scss")
     end
 
+    def self.application_organization_account_layout
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/layout.scss")
+    end
+
+    def self.application_organization_account_subscriptions_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/subscriptions/edit.scss")
+    end
+
+    def self.application_organization_account_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/subscriptions/new.scss")
+    end
+
     def self.application_user_account_layout
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/layout.scss")
     end
 
-    def self.application_user_organization_memberships_index
+    def self.application_user_account_organization_memberships_index
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organization_memberships/index.scss")
+    end
+
+    def self.application_user_account_organizations_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organizations/new.scss")
     end
 
     def self.application_user_account_subscriptions_edit

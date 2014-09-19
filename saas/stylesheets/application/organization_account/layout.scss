@@ -1,6 +1,6 @@
 @import "imports";
 
-body.user-account main {
+body.organization-account main {
   .outer-container {
     @include outer-container;
     padding: 0 10px;
@@ -23,13 +23,10 @@ body.user-account main {
   }
 }
 
-body.user-account .sidebar {
+body.organization-account .sidebar {
   @include vertical-navigation;
 
-  li.title a {
-    cursor: default;
-  }
-
+  li.title a,
   li.organization a {
     background-color: rgba(adjust-hue(desaturate($base-accent-color, 70%), 150deg), 0.6);
     border-top: 1px solid rgba(#fff, 0.85);
@@ -44,9 +41,21 @@ body.user-account .sidebar {
       color: #fff;
     }
   }
+
+  li.title a {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+  }
+
+  li.organization.selected a {
+    background-color: $header-background-color;
+    color: $header-link-color;
+    cursor: default;
+    padding: 14px 16px;
+  }
 }
 
-body.user-account .page {
+body.organization-account .page {
   fieldset > div.submit {
     margin-bottom: 0.4em;
   }

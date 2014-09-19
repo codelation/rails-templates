@@ -34,7 +34,7 @@
 }
 
 .flash-notice {
-  background-color: rgba($notice-color, 0.8);
+  background-color: $notice-color;
 }
 
 #error_explanation {

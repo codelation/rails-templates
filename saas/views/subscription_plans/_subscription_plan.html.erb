@@ -16,11 +16,7 @@
 
       <span class="trial">
         <% if subscription_plan.trial_period_days.to_i > 0 && subscription_plan.price > 0 %>
-          <% if current_user %>
-            &nbsp;
-          <% else %>
-            <%= "#{subscription_plan.trial_period_days} Day Free Trial" %>
-          <% end %>
+          <%= "#{subscription_plan.trial_period_days} Day Free Trial" %>
         <% elsif subscription_plan.price == 0 %>
           <%= number_to_currency(subscription_plan.price) %> /
           <%= subscription_plan.interval_count > 1 ? pluralize(subscription_plan.interval_count, subscription_plan.interval) : subscription_plan.interval %>

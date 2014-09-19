@@ -40,7 +40,7 @@ $user-link-color: #fafafa;
 
 // Flash Colors
 $alert-color: $red;
-$notice-color: $base-accent-color;
+$notice-color: rgba($base-accent-color, 0.8);
 
 // Form Colors
 $form-border-color: $base-border-color;

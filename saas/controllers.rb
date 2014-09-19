@@ -13,6 +13,22 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/home_controller.rb")
     end
 
+    def self.organization_account_base_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/organization_account/base_controller.rb")
+    end
+
+    def self.organization_account_organization_memberships_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/organization_account/organization_memberships_controller.rb")
+    end
+
+    def self.organization_account_organizations_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/organization_account/organizations_controller.rb")
+    end
+
+    def self.organization_account_subscriptions_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/organization_account/subscriptions_controller.rb")
+    end
+
     def self.passwords_controller
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/passwords_controller.rb")
     end
@@ -35,6 +51,10 @@ module Saas
 
     def self.user_account_organization_memberships_controller
       File.read("#{File.dirname(__FILE__)}/controllers/user_account/organization_memberships_controller.rb")
+    end
+
+    def self.user_account_organizations_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/user_account/organizations_controller.rb")
     end
 
     def self.user_account_subscriptions_controller

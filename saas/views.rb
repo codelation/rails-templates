@@ -65,12 +65,36 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/home/terms.html.erb")
     end
 
+    def self.organization_account_organization_memberships_index
+      File.read("#{File.dirname(__FILE__)}/views/organization_account/organization_memberships/index.html.erb")
+    end
+
+    def self.organization_account_organizations_edit
+      File.read("#{File.dirname(__FILE__)}/views/organization_account/organizations/edit.html.erb")
+    end
+
+    def self.organization_account_subscriptions_edit
+      File.read("#{File.dirname(__FILE__)}/views/organization_account/subscriptions/edit.html.erb")
+    end
+
+    def self.organization_account_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/views/organization_account/subscriptions/new.html.erb")
+    end
+
+    def self.organization_account_sidebar
+      File.read("#{File.dirname(__FILE__)}/views/organization_account/_sidebar.html.erb")
+    end
+
     def self.subscription_plans_subscription_plan
       File.read("#{File.dirname(__FILE__)}/views/subscription_plans/_subscription_plan.html.erb")
     end
 
     def self.user_account_organization_memberships_index
       File.read("#{File.dirname(__FILE__)}/views/user_account/organization_memberships/index.html.erb")
+    end
+
+    def self.user_account_organizations_new
+      File.read("#{File.dirname(__FILE__)}/views/user_account/organizations/new.html.erb")
     end
 
     def self.user_account_sidebar

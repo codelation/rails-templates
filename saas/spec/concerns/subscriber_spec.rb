@@ -131,16 +131,6 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       expect(@organization.account_balance).to eq(Money.new(-1500, "USD")) # $15.00
     end
 
-    it "should not give the user a trial if the existing subscription isn't in a trial period" do
-      @plan1 = create(:subscription_plan, name: "Plan 1", trial_period_days: 0)
-      @plan2 = create(:subscription_plan, name: "Plan 2", trial_period_days: 30)
-
-      @subscription1 = @organization.subscribe_to_plan(@plan1)
-      @subscription2 = @organization.subscribe_to_plan(@plan2)
-
-      expect(@subscription2.trialing?).to eq(false)
-    end
-
   end
 
   context "subscriber has an existing trial subscription" do
@@ -165,15 +155,6 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       expect(@subscription2.trial_ends_at).to be_within(10).of(@subscription1.trial_ends_at + 15.days)
     end
 
-    it "should not give a trial period if the existing subscription isn't in a trial period" do
-      @plan1 = create(:subscription_plan, name: "Plan 1", trial_period_days: 0)
-      @plan2 = create(:subscription_plan, name: "Plan 2", trial_period_days: 30)
-
-      @subscription1 = @organization.subscribe_to_plan(@plan1)
-      @subscription2 = @organization.subscribe_to_plan(@plan2)
-
-      expect(@subscription2.trialing?).to eq(false)
-    end
   end
 
 end

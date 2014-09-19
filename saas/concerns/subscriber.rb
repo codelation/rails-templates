@@ -32,10 +32,13 @@ module Subscriber
 
     if old_subscription
       return old_subscription if old_subscription.plan == subscription_plan
+      subscription = activate_subscription_plan(old_subscription, subscription_plan)
       end_subscription(old_subscription)
+    else
+      subscription = activate_subscription_plan(nil, subscription_plan)
     end
 
-    activate_subscription_plan(old_subscription, subscription_plan)
+    subscription
   end
 
 private
@@ -43,10 +46,14 @@ private
   def activate_subscription_plan(old_subscription, subscription_plan)
     new_subscription = Subscription.create(plan: subscription_plan)
 
-    if old_subscription && old_subscription.trialing? && subscription_plan.trial_length >= old_subscription.plan.trial_length
+    if old_subscription && subscription_plan.trial_length > 0
       trial_length_diff = subscription_plan.trial_length - old_subscription.plan.trial_length
       new_subscription.trial_ends_at = old_subscription.trial_ends_at + trial_length_diff
-      new_subscription.trialing!
+      if new_subscription.trial_ends_at > Time.now
+        new_subscription.trialing!
+      else
+        new_subscription.active!
+      end
     elsif subscription_plan.trial_length > 0 && old_subscription.nil?
       new_subscription.trialing!
     else
