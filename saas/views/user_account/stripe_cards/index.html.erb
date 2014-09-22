@@ -1,0 +1,102 @@
+<% unless @stripe_card.errors.count == 0 %>
+  <div id="error_explanation">
+    <i class="fa fa-times"></i>
+    <h2><%= pluralize(@stripe_card.errors.count, "error") %> prohibited the from from being submitted:</h2>
+    <ul>
+      <% @stripe_card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="title">
+  <h1><%= current_user.display_name %> / Billing ~ Payment Method</h1>
+</div>
+
+<div class="outer-container">
+  <%= render partial: "user_account/sidebar" %>
+
+  <div class="page">
+    <fieldset>
+      <legend>Payment Methods</legend>
+
+      <table class="default">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Credit Card</th>
+            <th>Expiration</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stripe_cards.each do |stripe_card| %>
+            <tr>
+              <td>
+                <%= link_to user_account_stripe_card_path(stripe_card), confirm: "Use this card for the subscription?" do %>
+                  <i class="fa fa-check"></i>
+                <% end %>
+              </td>
+              <td><%= "#{stripe_card.brand} ****#{stripe_card.last4}" %></td>
+              <td>
+                <%= sprintf("%02d", stripe_card.exp_month) %> /
+                <%= stripe_card.exp_year %>
+              </td>
+              <td>
+                <%= link_to user_account_stripe_card_path(stripe_card), method: :delete, confirm: "Are you sure?" do %>
+                  <i class="fa fa-minus-circle"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= form_for @stripe_card, url: user_account_stripe_cards_path do |f| %>
+        <%= f.hidden_field :stripe_id %>
+        <%= f.hidden_field :stripe_token %>
+        <%= f.hidden_field :brand %>
+        <%= f.hidden_field :last4 %>
+        <%= f.hidden_field :exp_month %>
+        <%= f.hidden_field :exp_year %>
+        <%= f.submit "New Card" %>
+      <% end %>
+    </fieldset>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <script>
+    var stripeHandler = StripeCheckout.configure({
+      key: '<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>',
+      allowRememberMe: false,
+
+      token: function(token) {
+        $('#stripe_card_stripe_id').val(token.card.id);
+        $('#stripe_card_stripe_token').val(token.id);
+        $('#stripe_card_brand').val(token.card.brand);
+        $('#stripe_card_last4').val(token.card.last4);
+        $('#stripe_card_exp_month').val(token.card.exp_month);
+        $('#stripe_card_exp_year').val(token.card.exp_year);
+        $('form').submit();
+      }
+    });
+
+    $('form').submit(function(event) {
+      if ($('#stripe_card_stripe_id').val().length > 0) {
+        return true;
+      }
+
+      stripeHandler.open({
+        name:        '<%= site_title %>',
+        image:       '<%= image_path("logo.png") %>',
+        description: 'New Payment Method',
+        panelLabel:  'Add Card',
+        email:       '<%= current_user.email %>'
+      });
+      return false;
+    });
+  </script>
+<% end %>

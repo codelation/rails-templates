@@ -33,6 +33,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/migrations/create_organizations.rb")
     end
 
+    def self.create_stripe_cards
+      File.read("#{File.dirname(__FILE__)}/migrations/create_stripe_cards.rb")
+    end
+
     def self.create_subscription_plans
       File.read("#{File.dirname(__FILE__)}/migrations/create_subscription_plans.rb")
     end

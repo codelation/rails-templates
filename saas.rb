@@ -66,6 +66,12 @@ run "unzip vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip -d vendo
 run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
 
 # -----------------------------------------
+# Image Files
+# -----------------------------------------
+
+file "app/assets/images/logo.png", Saas::Images.logo
+
+# -----------------------------------------
 # Javascript Files
 # -----------------------------------------
 
@@ -102,6 +108,7 @@ file "app/assets/stylesheets/application/organization_account/layout.scss",     
 
 file "app/assets/stylesheets/application/user_account/organization_memberships/index.scss", Saas::Stylesheets.application_user_account_organization_memberships_index
 file "app/assets/stylesheets/application/user_account/organizations/new.scss",              Saas::Stylesheets.application_user_account_organizations_new
+file "app/assets/stylesheets/application/user_account/stripe_cards/index.scss",             Saas::Stylesheets.application_user_account_stripe_cards_index
 file "app/assets/stylesheets/application/user_account/subscriptions/edit.scss",             Saas::Stylesheets.application_user_account_subscriptions_edit
 file "app/assets/stylesheets/application/user_account/subscriptions/new.scss",              Saas::Stylesheets.application_user_account_subscriptions_new
 file "app/assets/stylesheets/application/user_account/layout.scss",                         Saas::Stylesheets.application_user_account_layout
@@ -130,6 +137,7 @@ file "app/assets/stylesheets/shared/forms.scss",                                
 file "app/assets/stylesheets/shared/headings.scss",                              Saas::Stylesheets.shared_headings
 file "app/assets/stylesheets/shared/lists.scss",                                 Saas::Stylesheets.shared_lists
 file "app/assets/stylesheets/shared/flash_messages.scss",                        Saas::Stylesheets.shared_flash_messages
+file "app/assets/stylesheets/shared/tables.scss",                                Saas::Stylesheets.shared_tables
 file "app/assets/stylesheets/shared/subscription_plans/_subscription_plan.scss", Saas::Stylesheets.shared_subscription_plan
 
 # Sass Mixins
@@ -174,11 +182,13 @@ file "app/controllers/authentication/unlocks_controller.rb",       Saas::Control
 file "app/controllers/organization_account/base_controller.rb",                     Saas::Controllers.organization_account_base_controller
 file "app/controllers/organization_account/organization_memberships_controller.rb", Saas::Controllers.organization_account_organization_memberships_controller
 file "app/controllers/organization_account/organizations_controller.rb",            Saas::Controllers.organization_account_organizations_controller
+file "app/controllers/organization_account/stripe_cards_controller.rb",             Saas::Controllers.organization_account_stripe_cards_controller
 file "app/controllers/organization_account/subscriptions_controller.rb",            Saas::Controllers.organization_account_subscriptions_controller
 
 file "app/controllers/user_account/base_controller.rb",                     Saas::Controllers.user_account_base_controller
 file "app/controllers/user_account/organization_memberships_controller.rb", Saas::Controllers.user_account_organization_memberships_controller
 file "app/controllers/user_account/organizations_controller.rb",            Saas::Controllers.user_account_organizations_controller
+file "app/controllers/user_account/stripe_cards_controller.rb",             Saas::Controllers.user_account_stripe_cards_controller
 file "app/controllers/user_account/subscriptions_controller.rb",            Saas::Controllers.user_account_subscriptions_controller
 file "app/controllers/user_account/users_controller.rb",                    Saas::Controllers.user_account_users_controller
 
@@ -206,6 +216,8 @@ file "app/models/line_item.rb",               Saas::Models.line_item
 file "app/models/organization_membership.rb", Saas::Models.organization_membership
 file "app/models/organization_role.rb",       Saas::Models.organization_role
 file "app/models/organization.rb",            Saas::Models.organization
+file "app/models/payment_method.rb",          Saas::Models.payment_method
+file "app/models/stripe_card.rb",             Saas::Models.stripe_card
 file "app/models/subscription.rb",            Saas::Models.subscription
 file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
 file "app/models/user.rb",                    Saas::Models.user
@@ -214,6 +226,7 @@ file "spec/models/charge_spec.rb",            Saas::Models.charge_spec
 file "spec/models/invoice_spec.rb",           Saas::Models.invoice_spec
 file "spec/models/line_item_spec.rb",         Saas::Models.line_item_spec
 file "spec/models/organization_spec.rb",      Saas::Models.organization_spec
+file "spec/models/stripe_card_spec.rb",       Saas::Models.stripe_card_spec
 file "spec/models/subscription_spec.rb",      Saas::Models.subscription_spec
 file "spec/models/subscription_plan_spec.rb", Saas::Models.subscription_plan_spec
 file "spec/models/user_spec.rb",              Saas::Models.user_spec
@@ -224,6 +237,7 @@ file "spec/factories/line_item_factory.rb",               Saas::Factories.line_i
 file "spec/factories/organization_factory.rb",            Saas::Factories.organization_factory
 file "spec/factories/organization_membership_factory.rb", Saas::Factories.organization_membership_factory
 file "spec/factories/organization_role_factory.rb",       Saas::Factories.organization_role_factory
+file "spec/factories/stripe_card_factory.rb",             Saas::Factories.stripe_card_factory
 file "spec/factories/subscription_factory.rb",            Saas::Factories.subscription_factory
 file "spec/factories/subscription_plan_factory.rb",       Saas::Factories.subscription_plan_factory
 file "spec/factories/user_factory.rb",                    Saas::Factories.user_factory
@@ -277,6 +291,7 @@ file "app/views/layouts/application.html.erb",                   Saas::Views.app
 
 file "app/views/organization_account/organization_memberships/index.html.erb", Saas::Views.organization_account_organization_memberships_index
 file "app/views/organization_account/organizations/edit.html.erb",             Saas::Views.organization_account_organizations_edit
+file "app/views/organization_account/stripe_cards/index.html.erb",             Saas::Views.organization_account_stripe_cards_index
 file "app/views/organization_account/subscriptions/edit.html.erb",             Saas::Views.organization_account_subscriptions_edit
 file "app/views/organization_account/subscriptions/new.html.erb",              Saas::Views.organization_account_subscriptions_new
 file "app/views/organization_account/_sidebar.html.erb",                       Saas::Views.organization_account_sidebar
@@ -285,6 +300,7 @@ file "app/views/subscription_plans/_subscription_plan.html.erb", Saas::Views.sub
 
 file "app/views/user_account/organization_memberships/index.html.erb", Saas::Views.user_account_organization_memberships_index
 file "app/views/user_account/organizations/new.html.erb",              Saas::Views.user_account_organizations_new
+file "app/views/user_account/stripe_cards/index.html.erb",             Saas::Views.user_account_stripe_cards_index
 file "app/views/user_account/subscriptions/edit.html.erb",             Saas::Views.user_account_subscriptions_edit
 file "app/views/user_account/subscriptions/new.html.erb",              Saas::Views.user_account_subscriptions_new
 file "app/views/user_account/users/edit.html.erb",                     Saas::Views.user_account_users_edit
@@ -303,6 +319,7 @@ file "config/environments/development.rb", Saas::Configurations.development(@app
 file "config/environments/production.rb",  Saas::Configurations.production(@app_class)
 file "config/initializers/devise.rb",      Saas::Configurations.devise
 file "config/initializers/smtp.rb",        Saas::Configurations.smtp
+file "config/initializers/stripe.rb",      Saas::Configurations.stripe
 file "config/jshint.json",                 Saas::Configurations.jshint
 file ".env",                               Saas::Configurations.env
 file ".rspec",                             Saas::Configurations.rspec
@@ -324,9 +341,10 @@ file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_line_items.rb
 file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
 file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
 file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
-file "db/migrate/#{(Time.now + 8).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
-file "db/migrate/#{(Time.now + 9).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",            Saas::Migrations.create_subscriptions
-file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_users.rb",                   Saas::Migrations.create_users
+file "db/migrate/#{(Time.now + 8).strftime("%Y%m%d%H%M%S")}_create_stripe_cards.rb",             Saas::Migrations.create_stripe_cards
+file "db/migrate/#{(Time.now + 9).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
+file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",           Saas::Migrations.create_subscriptions
+file "db/migrate/#{(Time.now + 11).strftime("%Y%m%d%H%M%S")}_create_users.rb",                   Saas::Migrations.create_users
 
 # =================================================================
 # DB Seed Files

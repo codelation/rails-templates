@@ -53,6 +53,18 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/spec/models/organization_spec.rb")
     end
 
+    def self.payment_method
+      File.read("#{File.dirname(__FILE__)}/models/payment_method.rb")
+    end
+
+    def self.stripe_card
+      File.read("#{File.dirname(__FILE__)}/models/stripe_card.rb")
+    end
+
+    def self.stripe_card_spec
+      File.read("#{File.dirname(__FILE__)}/spec/models/stripe_card_spec.rb")
+    end
+
     def self.subscription
       File.read("#{File.dirname(__FILE__)}/models/subscription.rb")
     end

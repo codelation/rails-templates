@@ -8,6 +8,7 @@
   <div class="page">
     <fieldset>
       <legend>Subscription Plan</legend>
+
       <div class="current-subscription-plan">
         <% if @subscription %>
           <%= render partial: "subscription_plans/subscription_plan", locals: { subscription_plan: @subscription.plan, url: new_user_account_subscription_path }  %>
@@ -50,21 +51,29 @@
               <td>Expiration:</td>
               <td>10/2017</td>
             </tr>
-            <tr>
-              <td>Next payment:</td>
-              <td>
-                <% if @subscription %>
-                  <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
-                <% else %>
-                  --
-                <% end %>
-              </td>
-            </tr>
+
+            <% if @subscription && @subscription.trialing? %>
+              <tr>
+                <td>Trial Ends:</td>
+                <td><%= local_time(@subscription.trial_ends_at, "%B %e, %Y") %></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td>Next payment:</td>
+                <td>
+                  <% if @subscription %>
+                    <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+                  <% else %>
+                    --
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
           <tfoot>
             <tr>
               <td colspan="2">
-                <%= link_to "Update Payment Method", edit_user_account_subscription_path %>
+                <%= link_to "Update Payment Method", user_account_stripe_cards_path %>
               </td>
             </tr>
           </tfoot>
@@ -75,8 +84,20 @@
     <fieldset class="payment-history">
       <legend>Payment History</legend>
 
-      <table>
+      <table class="default">
         <thead>
+          <tr>
+            <th colspan="4">Current Billing Period</th>
+            <th colspan="2">Account Balance</th>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <%= local_time(@subscription.current_period_start, "%B %e, %Y") %>
+              &#8211;
+              <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+            </td>
+            <td colspan="2"><%= number_to_currency(current_user.account_balance) %></td>
+          </tr>
           <tr>
             <th>Invoice #</th>
             <th>Date</th>

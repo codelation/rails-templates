@@ -2,6 +2,7 @@ module Subscriber
   extend ActiveSupport::Concern
 
   included do
+    has_many :stripe_cards, as: :subscriber
     has_many :subscriptions, as: :subscriber
     monetize :account_balance_cents
   end
@@ -66,12 +67,16 @@ private
   end
 
   def end_subscription(subscription)
-    subscription.ended_at = Time.now
-    subscription.canceled!
-
     if account_credit = subscription.current_period_credit
+      ap "WAAAT"
+      ap account_credit
+      ap subscription.trialing?
+      ap "^TRIAL?"
       self.account_balance -= account_credit
       self.save
     end
+
+    subscription.ended_at = Time.now
+    subscription.canceled!
   end
 end

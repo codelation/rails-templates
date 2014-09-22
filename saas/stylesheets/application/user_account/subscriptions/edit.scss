@@ -41,7 +41,7 @@ body.user-account.subscriptions.edit .current-subscription-plan {
 
 body.user-account.subscriptions.edit .current-subscription {
   color: #555;
-  margin-bottom: 0;
+  margin-bottom: 2em;
   text-align: center;
 
   table {
@@ -77,33 +77,8 @@ body.user-account.subscriptions.edit .current-subscription {
 }
 
 body.user-account.subscriptions.edit .payment-history {
-  table {
-    width: 100%;
-  }
-
-  th,
-  td {
-    background-color: rgba($base-body-color, 0.9);
-    border: 1px solid $base-border-color;
-    padding: 8px;
-    text-align: center;
-  }
-
-  th:first-of-type,
-  td:first-of-type {
-    text-align: left;
-  }
-
-  tr:nth-child(even) td {
-    background-color: rgba($base-body-color, 0.3);
-  }
-
-  tr:hover td {
-    background-color: rgba($base-accent-color, 0.04);
-  }
-
-  th {
-    background-color: $header-background-color;
-    color: $header-link-color;
+  table thead td {
+    background-color: #fff;
+    padding: 2em 1em;
   }
 }

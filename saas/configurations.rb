@@ -1,6 +1,16 @@
 module Saas
   class Configurations < ::Configurations
 
+    def self.env
+      return <<-ENV
+DEVISE_SECRET_TOKEN=#{SecureRandom.hex(64)}
+HOSTNAME=localhost:3000
+
+STRIPE_PUBLISHABLE_KEY=SET_ME
+STRIPE_SECRET_KEY=SET_ME_TOO
+ENV
+    end
+
     def self.gemfile(install_blocky, install_blogelator)
       return <<-GEMFILE
 source "http://rubygems.org"
@@ -25,6 +35,7 @@ gem "puma"
 gem "roadie"
 gem "roadie-rails"
 gem "sass-rails"
+gem "stripe"
 gem "uglifier"
 
 group :development, :test do
@@ -63,6 +74,7 @@ GEMFILE
   namespace :organization_account do
     resources :organizations do
       resources :organization_memberships, path: "memberships"
+      resources :stripe_cards,             path: "payment_methods"
       resource  :subscription,             path: "billing"
     end
   end
@@ -70,6 +82,7 @@ GEMFILE
   namespace :user_account do
     resources :organizations
     resources :organization_memberships, path: "memberships"
+    resources :stripe_cards,             path: "payment_methods"
     resource  :subscription,             path: "billing"
     resource  :user,                     path: "/"
   end
@@ -90,6 +103,10 @@ GEMFILE
   end
 end
 ROUTES
+    end
+
+    def self.stripe
+      File.read("#{File.dirname(__FILE__)}/configurations/stripe.rb")
     end
   end
 end

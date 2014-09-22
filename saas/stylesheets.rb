@@ -41,6 +41,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organizations/new.scss")
     end
 
+    def self.application_user_account_stripe_cards_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/stripe_cards/index.scss")
+    end
+
     def self.application_user_account_subscriptions_edit
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/subscriptions/edit.scss")
     end
@@ -51,10 +55,6 @@ module Saas
 
     def self.contact_messages_main
       File.read("#{File.dirname(__FILE__)}/stylesheets/home/contact_messages/main.scss")
-    end
-
-    def self.flash_messages
-      File.read("#{File.dirname(__FILE__)}/stylesheets/flash_messages.scss")
     end
 
     def self.home(app_name)
@@ -133,6 +133,10 @@ IMPORTS
 
     def self.shared_subscription_plan
       File.read("#{File.dirname(__FILE__)}/stylesheets/shared/subscription_plans/_subscription_plan.scss")
+    end
+
+    def self.shared_tables
+      File.read("#{File.dirname(__FILE__)}/stylesheets/shared/tables.scss")
     end
   end
 end

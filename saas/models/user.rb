@@ -45,6 +45,12 @@ class User < ActiveRecord::Base
     Time.zone
   end
 
+  # The String representation of the user.
+  # @return [String]
+  def to_s
+    "#{self.class} ##{self.id} | #{self.name.blank? ? self.email : "#{self.name} <#{self.email}>"}"
+  end
+
 private
 
   # Subscribes the user to the selected subscription plan.

@@ -1,8 +1,9 @@
 # Ties an organization to a SubscriptionPlan and contains the information about the
 # current billing cycle, trial end time, whether it auto renews, etc.
 class Subscription < ActiveRecord::Base
-  belongs_to :subscriber, polymorphic: true
+  belongs_to :payment_method, polymorphic: true
   belongs_to :plan, class_name: "SubscriptionPlan", foreign_key: "subscription_plan_id"
+  belongs_to :subscriber, polymorphic: true
 
   before_save :build_from_plan
 

@@ -25,6 +25,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/factories/organization_role_factory.rb")
     end
 
+    def self.stripe_card_factory
+      File.read("#{File.dirname(__FILE__)}/factories/stripe_card_factory.rb")
+    end
+
     def self.subscription_factory
       File.read("#{File.dirname(__FILE__)}/factories/subscription_factory.rb")
     end

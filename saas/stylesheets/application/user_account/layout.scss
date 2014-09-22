@@ -33,7 +33,7 @@ body.user-account .sidebar {
   li.organization a {
     background-color: rgba(adjust-hue(desaturate($base-accent-color, 70%), 150deg), 0.6);
     border-top: 1px solid rgba(#fff, 0.85);
-    color: $header-link-color;
+    color: $header-font-color;
     font-family: 'Ovo', serif;
     font-size: 1.3em;
     font-weight: 300;

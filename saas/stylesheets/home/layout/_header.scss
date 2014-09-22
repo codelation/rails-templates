@@ -22,7 +22,7 @@ body.home-layout header {
     text-transform: uppercase;
 
     a {
-      color: $header-link-color;
+      color: $header-font-color;
       display: inline-block;
       padding: 13px 15px 8px 10px;
       text-decoration: none;
@@ -34,7 +34,7 @@ body.home-layout header {
       }
 
       &:hover {
-        color: lighten($header-link-color, 12%);
+        color: lighten($header-font-color, 12%);
 
         i {
           color: lighten($base-accent-color, 12%);
@@ -59,7 +59,7 @@ body.home-layout header {
 
     a {
       border-bottom: 2px solid $header-background-color;
-      color: $header-link-color;
+      color: $header-font-color;
       display: inline-block;
       font-weight: 300;
       letter-spacing: 2px;
@@ -69,8 +69,8 @@ body.home-layout header {
       text-transform: uppercase;
 
       &:hover {
-        border-bottom: 2px solid $header-link-color;
-        color: lighten($header-link-color, 12%);
+        border-bottom: 2px solid $header-font-color;
+        color: lighten($header-font-color, 12%);
       }
     }
 
@@ -98,18 +98,18 @@ body.home-layout header li.divider {
 
 body.home-layout header li.new-session {
   a {
-    color: $user-link-color;
+    color: $header-font-color;
 
     &:hover {
-      color: lighten($user-link-color, 12%);
+      color: lighten($header-font-color, 12%);
     }
   }
 }
 
 body.home-layout header li.new-registration a {
-  border: 1px solid $header-link-color;
+  border: 1px solid $header-font-color;
   border-radius: $base-border-radius;
-  color: $header-link-color;
+  color: $header-font-color;
   margin: 8px 10px 14px;
   padding: 5px 9px;
 
@@ -141,7 +141,7 @@ body.home-layout header li.user {
     }
 
     &:hover {
-      color: lighten($user-link-color, 12%);
+      color: lighten($header-font-color, 12%);
 
       i {
         color: lighten($base-accent-color, 12%);

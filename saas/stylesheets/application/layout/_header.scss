@@ -22,7 +22,7 @@ body.application-layout header {
     text-transform: uppercase;
 
     a {
-      color: $header-link-color;
+      color: $header-font-color;
       display: inline-block;
       padding: 13px 15px 8px 10px;
       text-decoration: none;
@@ -32,7 +32,7 @@ body.application-layout header {
       }
 
       &:hover {
-        color: lighten($header-link-color, 12%);
+        color: lighten($header-font-color, 12%);
 
         i {
           color: lighten($base-accent-color, 12%);
@@ -53,7 +53,7 @@ body.application-layout header {
 
     a {
       border-bottom: 2px solid $header-background-color;
-      color: $header-link-color;
+      color: $header-font-color;
       display: inline-block;
       font-weight: 300;
       letter-spacing: 2px;
@@ -63,8 +63,8 @@ body.application-layout header {
       text-transform: uppercase;
 
       &:hover {
-        border-bottom: 2px solid $header-link-color;
-        color: lighten($header-link-color, 12%);
+        border-bottom: 2px solid $header-font-color;
+        color: lighten($header-font-color, 12%);
       }
     }
 
@@ -97,7 +97,7 @@ body.application-layout header li.user {
     }
 
     &:hover {
-      color: lighten($user-link-color, 12%);
+      color: lighten($header-font-color, 12%);
 
       i {
         color: lighten($base-accent-color, 12%);

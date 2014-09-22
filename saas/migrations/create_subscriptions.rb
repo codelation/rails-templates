@@ -6,6 +6,9 @@ class CreateSubscriptions < ActiveRecord::Migration
       t.integer  :subscriber_id, index: true
       t.string   :subscriber_type
 
+      t.integer  :payment_method_id, index: true
+      t.string   :payment_method_type
+
       t.integer  :status, default: 0
       t.boolean  :cancel_at_period_end, default: true
       t.datetime :current_period_start

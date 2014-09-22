@@ -90,7 +90,7 @@ div.subscription-plan:after {
   border-bottom: 1px solid darken($header-background-color, 10%);
   border-top: 1px solid darken($header-background-color, 10%);
   box-shadow: 0 2px 4px rgba(#000, 0.3);
-  color: $header-link-color;
+  color: $header-font-color;
   content: "Selected";
   display: block;
   font-size: 1.2em;

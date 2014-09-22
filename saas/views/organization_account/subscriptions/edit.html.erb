@@ -64,7 +64,7 @@
           <tfoot>
             <tr>
               <td colspan="2">
-                <%= link_to "Update Payment Method", edit_organization_account_organization_subscription_path(@organization) %>
+                <%= link_to "Update Payment Method", organization_account_organization_stripe_cards_path(@organization) %>
               </td>
             </tr>
           </tfoot>
@@ -75,7 +75,7 @@
     <fieldset class="payment-history">
       <legend>Payment History</legend>
 
-      <table>
+      <table class="default">
         <thead>
           <tr>
             <th>Invoice #</th>

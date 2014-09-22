@@ -73,6 +73,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/organization_account/organizations/edit.html.erb")
     end
 
+    def self.organization_account_stripe_cards_index
+      File.read("#{File.dirname(__FILE__)}/views/organization_account/stripe_cards/index.html.erb")
+    end
+
     def self.organization_account_subscriptions_edit
       File.read("#{File.dirname(__FILE__)}/views/organization_account/subscriptions/edit.html.erb")
     end
@@ -99,6 +103,10 @@ module Saas
 
     def self.user_account_sidebar
       File.read("#{File.dirname(__FILE__)}/views/user_account/_sidebar.html.erb")
+    end
+
+    def self.user_account_stripe_cards_index
+      File.read("#{File.dirname(__FILE__)}/views/user_account/stripe_cards/index.html.erb")
     end
 
     def self.user_account_subscriptions_edit

@@ -45,6 +45,12 @@ class Organization < ActiveRecord::Base
     Time.zone
   end
 
+  # The String representation of the organization.
+  # @return [String]
+  def to_s
+    "#{self.class} ##{self.id} | #{self.name}"
+  end
+
 private
 
   # Subscribes the organization to the selected subscription plan.
