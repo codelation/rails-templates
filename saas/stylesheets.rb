@@ -21,6 +21,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/layout.scss")
     end
 
+    def self.application_organization_account_payment_methods_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/payment_methods/edit.scss")
+    end
+
     def self.application_organization_account_subscriptions_edit
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/subscriptions/edit.scss")
     end
@@ -41,8 +45,8 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organizations/new.scss")
     end
 
-    def self.application_user_account_stripe_cards_index
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/stripe_cards/index.scss")
+    def self.application_user_account_payment_methods_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/payment_methods/edit.scss")
     end
 
     def self.application_user_account_subscriptions_edit

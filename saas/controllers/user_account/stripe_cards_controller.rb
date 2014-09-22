@@ -6,18 +6,16 @@ class UserAccount::StripeCardsController < UserAccount::BaseController
     @stripe_card.subscriber = current_user
 
     if @stripe_card.save
-      redirect_to user_account_stripe_cards_path, notice: "Payment method created successfully"
+      redirect_to edit_user_account_subscription_payment_method_path, notice: "Payment method created successfully"
     else
-      @title = "Billing ~ Payment Method ~ #{current_user.display_name}"
-      render :new
+      redirect_to edit_user_account_subscription_payment_method_path, alert: "There was a problem saving the payment method"
     end
   end
 
-  def index
-    @stripe_card = StripeCard.new
-    @stripe_card.subscriber = current_user
-    @stripe_cards = current_user.stripe_cards
-    @title = "Billing ~ Payment Method ~ #{current_user.display_name}"
+  def destroy
+    @stripe_card = StripeCard.find(params[:id])
+    @stripe_card.destroy
+    redirect_to edit_user_account_subscription_payment_method_path, notice: "Payment method deleted successfully"
   end
 
 private

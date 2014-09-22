@@ -45,11 +45,23 @@
           <tbody>
             <tr>
               <td>Credit Card:</td>
-              <td>Visa ***4212</td>
+              <td>
+                <% if @subscription && @subscription.payment_method %>
+                  <%= @subscription.payment_method.display_name %>
+                <% else %>
+                  <span class="empty">--</span>
+                <% end %>
+              </td>
             </tr>
             <tr>
               <td>Expiration:</td>
-              <td>10/2017</td>
+              <td>
+                <% if @subscription && @subscription.payment_method %>
+                  <%= @subscription.payment_method.expiration_date %>
+                <% else %>
+                  <span class="empty">--</span>
+                <% end %>
+              </td>
             </tr>
 
             <% if @subscription && @subscription.trialing? %>
@@ -64,7 +76,7 @@
                   <% if @subscription %>
                     <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
                   <% else %>
-                    --
+                    <span class="empty">--</span>
                   <% end %>
                 </td>
               </tr>
@@ -73,7 +85,11 @@
           <tfoot>
             <tr>
               <td colspan="2">
-                <%= link_to "Update Payment Method", user_account_stripe_cards_path %>
+                <% if @subscription && @subscription.payment_method %>
+                  <%= link_to "Update Payment Method", edit_user_account_subscription_payment_method_path %>
+                <% elsif @subscription %>
+                  <%= link_to "Add Payment Method", edit_user_account_subscription_payment_method_path %>
+                <% end %>
               </td>
             </tr>
           </tfoot>
@@ -92,9 +108,13 @@
           </tr>
           <tr>
             <td colspan="4">
-              <%= local_time(@subscription.current_period_start, "%B %e, %Y") %>
-              &#8211;
-              <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+              <% if @subscription %>
+                <%= local_time(@subscription.current_period_start, "%B %e, %Y") %>
+                &#8211;
+                <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+              <% else %>
+                Not subscribed to a single user plan
+              <% end %>
             </td>
             <td colspan="2"><%= number_to_currency(current_user.account_balance) %></td>
           </tr>
@@ -108,14 +128,20 @@
           </tr>
         </thead>
         <tbody>
-          <% @invoices.each do |invoice| %>
+          <% if @invoices.count > 0 %>
+            <% @invoices.each do |invoice| %>
+              <tr>
+                <td><%= link_to invoice %></td>
+                <td>2014-09-12</td>
+                <td>Value</td>
+                <td>Visa ***412</td>
+                <td>$9.00</td>
+                <td>Success</td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td><%= link_to invoice %></td>
-              <td>2014-09-12</td>
-              <td>Value</td>
-              <td>Visa ***412</td>
-              <td>$9.00</td>
-              <td>Success</td>
+              <td colspan="6">Your account doesn't have any invoices.</td>
             </tr>
           <% end %>
         </tbody>

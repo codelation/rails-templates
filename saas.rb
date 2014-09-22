@@ -102,13 +102,14 @@ file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets
 file "app/assets/stylesheets/application/.keep",               ""
 file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
 
-file "app/assets/stylesheets/application/organization_account/subscriptions/edit.scss", Saas::Stylesheets.application_organization_account_subscriptions_edit
-file "app/assets/stylesheets/application/organization_account/subscriptions/new.scss",  Saas::Stylesheets.application_organization_account_subscriptions_new
-file "app/assets/stylesheets/application/organization_account/layout.scss",             Saas::Stylesheets.application_organization_account_layout
+file "app/assets/stylesheets/application/organization_account/payment_methods/edit.scss", Saas::Stylesheets.application_organization_account_payment_methods_edit
+file "app/assets/stylesheets/application/organization_account/subscriptions/edit.scss",   Saas::Stylesheets.application_organization_account_subscriptions_edit
+file "app/assets/stylesheets/application/organization_account/subscriptions/new.scss",    Saas::Stylesheets.application_organization_account_subscriptions_new
+file "app/assets/stylesheets/application/organization_account/layout.scss",               Saas::Stylesheets.application_organization_account_layout
 
 file "app/assets/stylesheets/application/user_account/organization_memberships/index.scss", Saas::Stylesheets.application_user_account_organization_memberships_index
 file "app/assets/stylesheets/application/user_account/organizations/new.scss",              Saas::Stylesheets.application_user_account_organizations_new
-file "app/assets/stylesheets/application/user_account/stripe_cards/index.scss",             Saas::Stylesheets.application_user_account_stripe_cards_index
+file "app/assets/stylesheets/application/user_account/payment_methods/edit.scss",           Saas::Stylesheets.application_user_account_payment_methods_edit
 file "app/assets/stylesheets/application/user_account/subscriptions/edit.scss",             Saas::Stylesheets.application_user_account_subscriptions_edit
 file "app/assets/stylesheets/application/user_account/subscriptions/new.scss",              Saas::Stylesheets.application_user_account_subscriptions_new
 file "app/assets/stylesheets/application/user_account/layout.scss",                         Saas::Stylesheets.application_user_account_layout
@@ -182,12 +183,14 @@ file "app/controllers/authentication/unlocks_controller.rb",       Saas::Control
 file "app/controllers/organization_account/base_controller.rb",                     Saas::Controllers.organization_account_base_controller
 file "app/controllers/organization_account/organization_memberships_controller.rb", Saas::Controllers.organization_account_organization_memberships_controller
 file "app/controllers/organization_account/organizations_controller.rb",            Saas::Controllers.organization_account_organizations_controller
+file "app/controllers/organization_account/payment_methods_controller.rb",          Saas::Controllers.organization_account_payment_methods_controller
 file "app/controllers/organization_account/stripe_cards_controller.rb",             Saas::Controllers.organization_account_stripe_cards_controller
 file "app/controllers/organization_account/subscriptions_controller.rb",            Saas::Controllers.organization_account_subscriptions_controller
 
 file "app/controllers/user_account/base_controller.rb",                     Saas::Controllers.user_account_base_controller
 file "app/controllers/user_account/organization_memberships_controller.rb", Saas::Controllers.user_account_organization_memberships_controller
 file "app/controllers/user_account/organizations_controller.rb",            Saas::Controllers.user_account_organizations_controller
+file "app/controllers/user_account/payment_methods_controller.rb",          Saas::Controllers.user_account_payment_methods_controller
 file "app/controllers/user_account/stripe_cards_controller.rb",             Saas::Controllers.user_account_stripe_cards_controller
 file "app/controllers/user_account/subscriptions_controller.rb",            Saas::Controllers.user_account_subscriptions_controller
 file "app/controllers/user_account/users_controller.rb",                    Saas::Controllers.user_account_users_controller
@@ -291,7 +294,7 @@ file "app/views/layouts/application.html.erb",                   Saas::Views.app
 
 file "app/views/organization_account/organization_memberships/index.html.erb", Saas::Views.organization_account_organization_memberships_index
 file "app/views/organization_account/organizations/edit.html.erb",             Saas::Views.organization_account_organizations_edit
-file "app/views/organization_account/stripe_cards/index.html.erb",             Saas::Views.organization_account_stripe_cards_index
+file "app/views/organization_account/payment_methods/edit.html.erb",           Saas::Views.organization_account_payment_methods_edit
 file "app/views/organization_account/subscriptions/edit.html.erb",             Saas::Views.organization_account_subscriptions_edit
 file "app/views/organization_account/subscriptions/new.html.erb",              Saas::Views.organization_account_subscriptions_new
 file "app/views/organization_account/_sidebar.html.erb",                       Saas::Views.organization_account_sidebar
@@ -300,7 +303,7 @@ file "app/views/subscription_plans/_subscription_plan.html.erb", Saas::Views.sub
 
 file "app/views/user_account/organization_memberships/index.html.erb", Saas::Views.user_account_organization_memberships_index
 file "app/views/user_account/organizations/new.html.erb",              Saas::Views.user_account_organizations_new
-file "app/views/user_account/stripe_cards/index.html.erb",             Saas::Views.user_account_stripe_cards_index
+file "app/views/user_account/payment_methods/edit.html.erb",           Saas::Views.user_account_payment_methods_edit
 file "app/views/user_account/subscriptions/edit.html.erb",             Saas::Views.user_account_subscriptions_edit
 file "app/views/user_account/subscriptions/new.html.erb",              Saas::Views.user_account_subscriptions_new
 file "app/views/user_account/users/edit.html.erb",                     Saas::Views.user_account_users_edit

@@ -26,10 +26,24 @@ class UserAccount::SubscriptionsController < UserAccount::BaseController
     @title = "Billing ~ Change Plan ~ #{current_user.display_name}"
   end
 
+  def update
+    @subscription = current_user.current_subscription
+
+    if @subscription.update_attributes(subscription_params)
+      redirect_to edit_user_account_subscription_path, notice: "Payment method updated successfully"
+    else
+      redirect_to edit_user_account_subscription_path, alert: "There was a problem updating the payment method"
+    end
+  end
+
 private
 
   def subscription_params
-    params.require(:subscription).permit(:subscription_plan_id)
+    params.require(:subscription).permit(
+      :subscription_plan_id,
+      :payment_method_id,
+      :payment_method_type
+    )
   end
 
 end

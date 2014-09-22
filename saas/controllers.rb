@@ -25,6 +25,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/organization_account/organizations_controller.rb")
     end
 
+    def self.organization_account_payment_methods_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/organization_account/payment_methods_controller.rb")
+    end
+
     def self.organization_account_stripe_cards_controller
       File.read("#{File.dirname(__FILE__)}/controllers/organization_account/stripe_cards_controller.rb")
     end
@@ -59,6 +63,10 @@ module Saas
 
     def self.user_account_organizations_controller
       File.read("#{File.dirname(__FILE__)}/controllers/user_account/organizations_controller.rb")
+    end
+
+    def self.user_account_payment_methods_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/user_account/payment_methods_controller.rb")
     end
 
     def self.user_account_stripe_cards_controller

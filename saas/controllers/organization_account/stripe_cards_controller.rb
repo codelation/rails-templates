@@ -6,18 +6,16 @@ class OrganizationAccount::StripeCardsController < OrganizationAccount::BaseCont
     @stripe_card.subscriber = @organization
 
     if @stripe_card.save
-      redirect_to organization_account_organization_stripe_cards_path(@organization), notice: "Payment method created successfully"
+      redirect_to edit_organization_account_organization_subscription_payment_method_path(@organization), notice: "Payment method created successfully"
     else
-      @title = "Billing ~ Payment Method ~ #{@organization.name}"
-      render :new
+      redirect_to edit_organization_account_organization_subscription_payment_method_path(@organization), alert: "There was a problem saving the payment method"
     end
   end
 
-  def index
-    @stripe_card = StripeCard.new
-    @stripe_card.subscriber = @organization
-    @stripe_cards = @organization.stripe_cards
-    @title = "Billing ~ Payment Method ~ #{@organization.name}"
+  def destroy
+    @stripe_card = StripeCard.find(params[:id])
+    @stripe_card.destroy
+    redirect_to edit_organization_account_organization_subscription_payment_method_path(@organization), notice: "Payment method deleted successfully"
   end
 
 private

@@ -44,27 +44,51 @@
           <tbody>
             <tr>
               <td>Credit Card:</td>
-              <td>Visa ***4212</td>
-            </tr>
-            <tr>
-              <td>Expiration:</td>
-              <td>10/2017</td>
-            </tr>
-            <tr>
-              <td>Next payment:</td>
               <td>
-                <% if @subscription %>
-                  <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+                <% if @subscription && @subscription.payment_method %>
+                  <%= @subscription.payment_method.display_name %>
                 <% else %>
-                  --
+                  <span class="empty">--</span>
                 <% end %>
               </td>
             </tr>
+            <tr>
+              <td>Expiration:</td>
+              <td>
+                <% if @subscription && @subscription.payment_method %>
+                  <%= @subscription.payment_method.expiration_date %>
+                <% else %>
+                  <span class="empty">--</span>
+                <% end %>
+              </td>
+            </tr>
+
+            <% if @subscription && @subscription.trialing? %>
+              <tr>
+                <td>Trial Ends:</td>
+                <td><%= local_time(@subscription.trial_ends_at, "%B %e, %Y") %></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td>Next payment:</td>
+                <td>
+                  <% if @subscription %>
+                    <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+                  <% else %>
+                    <span class="empty">--</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
           <tfoot>
             <tr>
               <td colspan="2">
-                <%= link_to "Update Payment Method", organization_account_organization_stripe_cards_path(@organization) %>
+                <% if @subscription && @subscription.payment_method %>
+                  <%= link_to "Update Payment Method", edit_organization_account_organization_subscription_payment_method_path(@organization) %>
+                <% elsif @subscription %>
+                  <%= link_to "Add Payment Method", edit_organization_account_organization_subscription_payment_method_path(@organization) %>
+                <% end %>
               </td>
             </tr>
           </tfoot>
@@ -78,6 +102,22 @@
       <table class="default">
         <thead>
           <tr>
+            <th colspan="4">Current Billing Period</th>
+            <th colspan="2">Account Balance</th>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <% if @subscription %>
+                <%= local_time(@subscription.current_period_start, "%B %e, %Y") %>
+                &#8211;
+                <%= local_time(@subscription.current_period_end, "%B %e, %Y") %>
+              <% else %>
+                Not subscribed to an organization plan
+              <% end %>
+            </td>
+            <td colspan="2"><%= number_to_currency(current_user.account_balance) %></td>
+          </tr>
+          <tr>
             <th>Invoice #</th>
             <th>Date</th>
             <th>Plan</th>
@@ -87,14 +127,20 @@
           </tr>
         </thead>
         <tbody>
-          <% @invoices.each do |invoice| %>
+          <% if @invoices.count > 0 %>
+            <% @invoices.each do |invoice| %>
+              <tr>
+                <td><%= link_to invoice %></td>
+                <td>2014-09-12</td>
+                <td>Value</td>
+                <td>Visa ***412</td>
+                <td>$9.00</td>
+                <td>Success</td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr>
-              <td><%= link_to invoice %></td>
-              <td>2014-09-12</td>
-              <td>Value</td>
-              <td>Visa ***412</td>
-              <td>$9.00</td>
-              <td>Success</td>
+              <td colspan="6">Your account doesn't have any invoices.</td>
             </tr>
           <% end %>
         </tbody>

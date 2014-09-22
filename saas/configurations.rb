@@ -75,7 +75,10 @@ GEMFILE
     resources :organizations do
       resources :organization_memberships, path: "memberships"
       resources :stripe_cards,             path: "payment_methods"
-      resource  :subscription,             path: "billing"
+
+      resource :subscription, path: "billing" do
+        resource :payment_method
+      end
     end
   end
 
@@ -83,8 +86,11 @@ GEMFILE
     resources :organizations
     resources :organization_memberships, path: "memberships"
     resources :stripe_cards,             path: "payment_methods"
-    resource  :subscription,             path: "billing"
     resource  :user,                     path: "/"
+
+    resource :subscription, path: "billing" do
+      resource :payment_method
+    end
   end
   resources :contact_messages
 

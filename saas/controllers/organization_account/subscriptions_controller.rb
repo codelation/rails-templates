@@ -27,10 +27,24 @@ class OrganizationAccount::SubscriptionsController < OrganizationAccount::BaseCo
     @title = "Billing ~ Change Plan ~ #{@organization.name}"
   end
 
+  def update
+    @subscription = @organization.current_subscription
+
+    if @subscription.update_attributes(subscription_params)
+      redirect_to edit_organization_account_organization_subscription_path(@organization), notice: "Payment method updated successfully"
+    else
+      redirect_to edit_organization_account_organization_subscription_path(@organization), alert: "There was a problem updating the payment method"
+    end
+  end
+
 private
 
   def subscription_params
-    params.require(:subscription).permit(:subscription_plan_id)
+    params.require(:subscription).permit(
+      :subscription_plan_id,
+      :payment_method_id,
+      :payment_method_type
+    )
   end
 
 end

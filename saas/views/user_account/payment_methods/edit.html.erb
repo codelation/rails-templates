@@ -11,11 +11,11 @@
 <% end %>
 
 <div class="title">
-  <h1><%= @organization.name %> / Billing ~ Payment Method</h1>
+  <h1><%= current_user.display_name %> / Billing ~ Payment Method</h1>
 </div>
 
 <div class="outer-container">
-  <%= render partial: "organization_account/sidebar" %>
+  <%= render partial: "user_account/sidebar" %>
 
   <div class="page">
     <fieldset>
@@ -32,20 +32,27 @@
         </thead>
         <tbody>
           <% @stripe_cards.each do |stripe_card| %>
-            <tr>
+            <tr<%== @subscription.payment_method == stripe_card ? ' class="selected"' : '' %>>
               <td>
-                <%= link_to user_account_stripe_card_path(stripe_card), confirm: "Use this card for the subscription?" do %>
-                  <i class="fa fa-check"></i>
+                <% if @subscription.payment_method == stripe_card %>
+                  <span><i class="fa fa-check"></i></span>
+                <% else %>
+                  <%= link_to user_account_subscription_path(subscription: { payment_method_id: stripe_card.id, payment_method_type: stripe_card.class.to_s }), method: :put, data: { hello: "yo", confirm: "Change the subscription's payment method to use #{stripe_card.display_name}?" } do %>
+                    <i class="fa fa-check"></i>
+                  <% end %>
                 <% end %>
               </td>
-              <td><%= "#{stripe_card.brand} ****#{stripe_card.last4}" %></td>
+              <td><%= stripe_card.display_name %></td>
               <td>
-                <%= sprintf("%02d", stripe_card.exp_month) %> /
-                <%= stripe_card.exp_year %>
+                <%= stripe_card.expiration_date %>
               </td>
               <td>
-                <%= link_to user_account_stripe_card_path(stripe_card), method: :delete, confirm: "Are you sure?" do %>
-                  <i class="fa fa-minus-circle"></i>
+                <% if @subscription.payment_method == stripe_card %>
+                  <span>Active</span>
+                <% else %>
+                  <%= link_to user_account_stripe_card_path(stripe_card), method: :delete, data: { confirm: "Are you sure you want to delete #{stripe_card.display_name}?" } do %>
+                    <i class="fa fa-minus-circle"></i>
+                  <% end %>
                 <% end %>
               </td>
             </tr>
@@ -53,7 +60,7 @@
         </tbody>
       </table>
 
-      <%= form_for @stripe_card, url: organization_account_organization_stripe_cards_path(@organization) do |f| %>
+      <%= form_for @stripe_card, url: user_account_stripe_cards_path do |f| %>
         <%= f.hidden_field :stripe_id %>
         <%= f.hidden_field :stripe_token %>
         <%= f.hidden_field :brand %>

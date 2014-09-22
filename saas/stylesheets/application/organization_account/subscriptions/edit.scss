@@ -62,6 +62,7 @@ body.organization-account.subscriptions.edit .current-subscription {
   td {
     padding: 7px 6px;
     text-align: left;
+    width: 50%;
   }
 
   td:first-of-type {
@@ -72,6 +73,12 @@ body.organization-account.subscriptions.edit .current-subscription {
   tfoot td:first-of-type {
     font-weight: normal;
     padding-top: 1em;
+    text-align: center;
+  }
+
+  .empty {
+    display: inline-block;
+    min-width: 50px;
     text-align: center;
   }
 }
@@ -105,5 +112,12 @@ body.organization-account.subscriptions.edit .payment-history {
   th {
     background-color: $header-background-color;
     color: $header-font-color;
+  }
+}
+
+body.organization-account.subscriptions.edit .payment-history {
+  table thead td {
+    background-color: #fff;
+    padding: 2em 1em;
   }
 }
