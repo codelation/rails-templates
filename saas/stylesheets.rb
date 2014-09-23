@@ -21,16 +21,16 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/layout.scss")
     end
 
-    def self.application_organization_account_payment_methods_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/payment_methods/edit.scss")
+    def self.application_payment_methods_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/payment_methods/edit.scss")
     end
 
-    def self.application_organization_account_subscriptions_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/subscriptions/edit.scss")
+    def self.application_subscriptions_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/subscriptions/edit.scss")
     end
 
-    def self.application_organization_account_subscriptions_new
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/subscriptions/new.scss")
+    def self.application_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/subscriptions/new.scss")
     end
 
     def self.application_user_account_layout
@@ -43,18 +43,6 @@ module Saas
 
     def self.application_user_account_organizations_new
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organizations/new.scss")
-    end
-
-    def self.application_user_account_payment_methods_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/payment_methods/edit.scss")
-    end
-
-    def self.application_user_account_subscriptions_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/subscriptions/edit.scss")
-    end
-
-    def self.application_user_account_subscriptions_new
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/subscriptions/new.scss")
     end
 
     def self.contact_messages_main

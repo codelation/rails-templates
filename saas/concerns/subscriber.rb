@@ -29,54 +29,56 @@ module Subscriber
   # @param subscription_plan [SubscriptionPlan]
   # @return [Subscription]
   def subscribe_to_plan(subscription_plan)
-    old_subscription = self.current_subscription
+    @new_subscription = Subscription.create(plan: subscription_plan)
+    @old_subscription = self.current_subscription
 
-    if old_subscription
-      return old_subscription if old_subscription.plan == subscription_plan
-      subscription = activate_subscription_plan(old_subscription, subscription_plan)
-      end_subscription(old_subscription)
+    if @old_subscription
+      return @old_subscription if @old_subscription.plan == @new_subscription.plan
+      activate_new_subscription
+      end_old_subscription
     else
-      subscription = activate_subscription_plan(nil, subscription_plan)
+      activate_new_subscription
     end
 
-    subscription
+    self.subscriptions << @new_subscription
+
+    @new_subscription
   end
 
 private
 
-  def activate_subscription_plan(old_subscription, subscription_plan)
-    new_subscription = Subscription.create(plan: subscription_plan)
-
-    if old_subscription && subscription_plan.trial_length > 0
-      trial_length_diff = subscription_plan.trial_length - old_subscription.plan.trial_length
-      new_subscription.trial_ends_at = old_subscription.trial_ends_at + trial_length_diff
-      if new_subscription.trial_ends_at > Time.now
-        new_subscription.trialing!
+  def activate_new_subscription
+    if @old_subscription
+      @new_subscription.payment_method = @old_subscription.payment_method
+      if @old_subscription.trialing?
+        trial_length_diff = @new_subscription.plan.trial_length - @old_subscription.plan.trial_length
+        @new_subscription.trial_ends_at = @old_subscription.trial_ends_at + trial_length_diff
       else
-        new_subscription.active!
+        @new_subscription.trial_ends_at = Time.now
       end
-    elsif subscription_plan.trial_length > 0 && old_subscription.nil?
-      new_subscription.trialing!
     else
-      new_subscription.active!
+      @new_subscription.trial_ends_at = Time.now + @new_subscription.plan.trial_length
     end
 
-    self.subscriptions << new_subscription
-
-    new_subscription
+    if @new_subscription.trial_ends_at > Time.now
+      @new_subscription.trialing!
+    else
+      @new_subscription.active!
+    end
   end
 
-  def end_subscription(subscription)
-    if account_credit = subscription.current_period_credit
-      ap "WAAAT"
-      ap account_credit
-      ap subscription.trialing?
-      ap "^TRIAL?"
+  def change_subscription_plans
+    activate_new_subscription
+    end_old_subscription
+  end
+
+  def end_old_subscription
+    if account_credit = @old_subscription.current_period_credit
       self.account_balance -= account_credit
       self.save
     end
 
-    subscription.ended_at = Time.now
-    subscription.canceled!
+    @old_subscription.ended_at = Time.now
+    @old_subscription.canceled!
   end
 end

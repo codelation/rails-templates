@@ -1,6 +1,6 @@
 @import "imports";
 
-body.user-account.payment-methods.edit {
+body.payment-methods.edit {
   th:first-of-type,
   td:first-of-type {
     text-align: center;
@@ -46,5 +46,10 @@ body.user-account.payment-methods.edit {
     background-color: rgba($base-accent-color, 0.06);
     color: darken($base-font-color, 10%);
     font-weight: bold;
+  }
+
+  td[colspan="4"] {
+    color: $base-font-color;
+    padding: 1em;
   }
 }

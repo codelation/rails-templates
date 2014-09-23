@@ -31,37 +31,43 @@
           </tr>
         </thead>
         <tbody>
-          <% @stripe_cards.each do |stripe_card| %>
-            <tr<%== @subscription.payment_method == stripe_card ? ' class="selected"' : '' %>>
-              <td>
-                <% if @subscription.payment_method == stripe_card %>
-                  <span><i class="fa fa-check"></i></span>
-                <% else %>
-                  <%= link_to organization_account_organization_subscription_path(@organization, subscription: { payment_method_id: stripe_card.id, payment_method_type: stripe_card.class.to_s }), method: :put, data: { confirm: "Change the subscription's payment method to use #{stripe_card.display_name}?" } do %>
-                    <i class="fa fa-check"></i>
+          <% if @stripe_cards.count > 0 %>
+            <% @stripe_cards.each do |stripe_card| %>
+              <tr<%== @subscription.payment_method == stripe_card ? ' class="selected"' : '' %>>
+                <td>
+                  <% if @subscription.payment_method == stripe_card %>
+                    <span><i class="fa fa-check"></i></span>
+                  <% else %>
+                    <%= link_to organization_account_organization_subscription_path(@organization, subscription: { payment_method_id: stripe_card.id, payment_method_type: stripe_card.class.to_s }), method: :put, data: { confirm: "Change the subscription's payment method to use #{stripe_card.display_name}?" } do %>
+                      <i class="fa fa-check"></i>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </td>
-              <td><%= stripe_card.display_name %></td>
-              <td>
-                <%= stripe_card.expiration_date %>
-              </td>
-              <td>
-                <% if @subscription.payment_method == stripe_card %>
-                  <span>Active</span>
-                <% else %>
-                  <%= link_to organization_account_organization_stripe_card_path(@organization, stripe_card), method: :delete, data: { confirm: "Are you sure you want to delete #{stripe_card.display_name}?" } do %>
-                    <i class="fa fa-minus-circle"></i>
+                </td>
+                <td><%= stripe_card.display_name %></td>
+                <td>
+                  <%= stripe_card.expiration_date %>
+                </td>
+                <td>
+                  <% if @subscription.payment_method == stripe_card %>
+                    <span>Active</span>
+                  <% else %>
+                    <%= link_to organization_account_organization_stripe_card_path(@organization, stripe_card), method: :delete, data: { confirm: "Are you sure you want to delete #{stripe_card.display_name}?" } do %>
+                      <i class="fa fa-minus-circle"></i>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </td>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="4">Your account doesn&#8217;t have any payment methods.</td>
             </tr>
           <% end %>
         </tbody>
       </table>
 
       <%= form_for @stripe_card, url: organization_account_organization_stripe_cards_path(@organization) do |f| %>
-        <%= f.hidden_field :stripe_id %>
+        <%= f.hidden_field :stripe_card_id %>
         <%= f.hidden_field :stripe_token %>
         <%= f.hidden_field :brand %>
         <%= f.hidden_field :last4 %>
@@ -81,7 +87,7 @@
       allowRememberMe: false,
 
       token: function(token) {
-        $('#stripe_card_stripe_id').val(token.card.id);
+        $('#stripe_card_stripe_card_id').val(token.card.id);
         $('#stripe_card_stripe_token').val(token.id);
         $('#stripe_card_brand').val(token.card.brand);
         $('#stripe_card_last4').val(token.card.last4);
@@ -92,7 +98,7 @@
     });
 
     $('form').submit(function(event) {
-      if ($('#stripe_card_stripe_id').val().length > 0) {
+      if ($('#stripe_card_stripe_card_id').val().length > 0) {
         return true;
       }
 

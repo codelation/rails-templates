@@ -116,6 +116,7 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
     it "should give the subscriber prorated credit on their account from the old subscription" do
       @subscription = @organization.subscribe_to_plan(@plan)
+      @subscription.active!
 
       # Let's make the current period 30 days long and we're right in the middle of it
       @subscription.current_period_start = Time.now - 15.days
@@ -129,6 +130,30 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       # We should get half the money back as an account credit
       @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
       expect(@organization.account_balance).to eq(Money.new(-1500, "USD")) # $15.00
+    end
+
+    it "should not give the subscriber a new trial period if they have an active plan" do
+      @subscription = @organization.subscribe_to_plan(@plan)
+      @subscription.active!
+
+      # We should get half the money back as an account credit
+      @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
+      expect(@new_subscription.active?).to eq(true)
+    end
+
+    it "should transfer the payment method to the new subscription" do
+      stub_request(:post, "https://api.stripe.com/v1/customers").to_return(
+        body: File.read(File.join(Rails.root, "spec/web_mock/stripe_customer.json"))
+      )
+      @stripe_card = create(:stripe_card)
+
+      @subscription = @organization.subscribe_to_plan(@plan)
+      @subscription.payment_method = @stripe_card
+      @subscription.save
+
+      # We should get half the money back as an account credit
+      @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
+      expect(@new_subscription.payment_method).to eq(@stripe_card)
     end
 
   end

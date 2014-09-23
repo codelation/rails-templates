@@ -102,16 +102,14 @@ file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets
 file "app/assets/stylesheets/application/.keep",               ""
 file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
 
-file "app/assets/stylesheets/application/organization_account/payment_methods/edit.scss", Saas::Stylesheets.application_organization_account_payment_methods_edit
-file "app/assets/stylesheets/application/organization_account/subscriptions/edit.scss",   Saas::Stylesheets.application_organization_account_subscriptions_edit
-file "app/assets/stylesheets/application/organization_account/subscriptions/new.scss",    Saas::Stylesheets.application_organization_account_subscriptions_new
-file "app/assets/stylesheets/application/organization_account/layout.scss",               Saas::Stylesheets.application_organization_account_layout
+file "app/assets/stylesheets/application/organization_account/layout.scss", Saas::Stylesheets.application_organization_account_layout
+
+file "app/assets/stylesheets/application/payment_methods/edit.scss", Saas::Stylesheets.application_payment_methods_edit
+file "app/assets/stylesheets/application/subscriptions/edit.scss",   Saas::Stylesheets.application_subscriptions_edit
+file "app/assets/stylesheets/application/subscriptions/new.scss",    Saas::Stylesheets.application_subscriptions_new
 
 file "app/assets/stylesheets/application/user_account/organization_memberships/index.scss", Saas::Stylesheets.application_user_account_organization_memberships_index
 file "app/assets/stylesheets/application/user_account/organizations/new.scss",              Saas::Stylesheets.application_user_account_organizations_new
-file "app/assets/stylesheets/application/user_account/payment_methods/edit.scss",           Saas::Stylesheets.application_user_account_payment_methods_edit
-file "app/assets/stylesheets/application/user_account/subscriptions/edit.scss",             Saas::Stylesheets.application_user_account_subscriptions_edit
-file "app/assets/stylesheets/application/user_account/subscriptions/new.scss",              Saas::Stylesheets.application_user_account_subscriptions_new
 file "app/assets/stylesheets/application/user_account/layout.scss",                         Saas::Stylesheets.application_user_account_layout
 
 # Home Styleshseets
@@ -225,14 +223,24 @@ file "app/models/subscription.rb",            Saas::Models.subscription
 file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
 file "app/models/user.rb",                    Saas::Models.user
 
-file "spec/models/charge_spec.rb",            Saas::Models.charge_spec
-file "spec/models/invoice_spec.rb",           Saas::Models.invoice_spec
-file "spec/models/line_item_spec.rb",         Saas::Models.line_item_spec
-file "spec/models/organization_spec.rb",      Saas::Models.organization_spec
-file "spec/models/stripe_card_spec.rb",       Saas::Models.stripe_card_spec
-file "spec/models/subscription_spec.rb",      Saas::Models.subscription_spec
-file "spec/models/subscription_plan_spec.rb", Saas::Models.subscription_plan_spec
-file "spec/models/user_spec.rb",              Saas::Models.user_spec
+# -----------------------------------------
+# Spec Files
+# -----------------------------------------
+
+file "spec/models/charge.rb",              Saas::Specs.charge
+file "spec/models/invoice.rb",             Saas::Specs.invoice
+file "spec/models/line_item.rb",           Saas::Specs.line_item
+file "spec/models/organization.rb",        Saas::Specs.organization
+file "spec/models/stripe_card.rb",         Saas::Specs.stripe_card
+file "spec/models/subscription.rb",        Saas::Specs.subscription
+file "spec/models/subscription_plan.rb",   Saas::Specs.subscription_plan
+file "spec/models/user.rb",                Saas::Specs.user
+file "spec/web_mock/stripe_card.json",     Saas::Specs.web_mock_stripe_card
+file "spec/web_mock/stripe_customer.json", Saas::Specs.web_mock_stripe_customer
+
+# -----------------------------------------
+# Factory Girl Files
+# -----------------------------------------
 
 file "spec/factories/charge_factory.rb",                  Saas::Factories.charge_factory
 file "spec/factories/invoice_factory.rb",                 Saas::Factories.invoice_factory

@@ -13,10 +13,6 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/charge.rb")
     end
 
-    def self.charge_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/charge_spec.rb")
-    end
-
     def self.contact_message
       File.read("#{File.dirname(__FILE__)}/models/contact_message.rb")
     end
@@ -25,16 +21,8 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/invoice.rb")
     end
 
-    def self.invoice_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/invoice_spec.rb")
-    end
-
     def self.line_item
       File.read("#{File.dirname(__FILE__)}/models/line_item.rb")
-    end
-
-    def self.line_item_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/line_item_spec.rb")
     end
 
     def self.organization_membership
@@ -49,10 +37,6 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/organization.rb")
     end
 
-    def self.organization_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/organization_spec.rb")
-    end
-
     def self.payment_method
       File.read("#{File.dirname(__FILE__)}/models/payment_method.rb")
     end
@@ -61,32 +45,16 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/stripe_card.rb")
     end
 
-    def self.stripe_card_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/stripe_card_spec.rb")
-    end
-
     def self.subscription
       File.read("#{File.dirname(__FILE__)}/models/subscription.rb")
-    end
-
-    def self.subscription_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/subscription_spec.rb")
     end
 
     def self.subscription_plan
       File.read("#{File.dirname(__FILE__)}/models/subscription_plan.rb")
     end
 
-    def self.subscription_plan_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/subscription_plan_spec.rb")
-    end
-
     def self.user
       File.read("#{File.dirname(__FILE__)}/models/user.rb")
-    end
-
-    def self.user_spec
-      File.read("#{File.dirname(__FILE__)}/spec/models/user_spec.rb")
     end
 
   end

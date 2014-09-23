@@ -1,6 +1,6 @@
 @import "imports";
 
-body.organization-account.subscriptions.edit {
+body.subscriptions.edit {
   .current-subscription-plan {
     @include span-columns(5);
   }
@@ -16,7 +16,7 @@ body.organization-account.subscriptions.edit {
   }
 }
 
-body.organization-account.subscriptions.edit .current-subscription-plan {
+body.subscriptions.edit .current-subscription-plan {
   margin-bottom: 0;
   padding-bottom: 0;
   text-align: center;
@@ -39,9 +39,9 @@ body.organization-account.subscriptions.edit .current-subscription-plan {
   }
 }
 
-body.organization-account.subscriptions.edit .current-subscription {
+body.subscriptions.edit .current-subscription {
   color: #555;
-  margin-bottom: 0;
+  margin-bottom: 2em;
   text-align: center;
 
   table {
@@ -83,39 +83,7 @@ body.organization-account.subscriptions.edit .current-subscription {
   }
 }
 
-body.organization-account.subscriptions.edit .payment-history {
-  table {
-    width: 100%;
-  }
-
-  th,
-  td {
-    background-color: rgba($base-body-color, 0.9);
-    border: 1px solid $base-border-color;
-    padding: 8px;
-    text-align: center;
-  }
-
-  th:first-of-type,
-  td:first-of-type {
-    text-align: left;
-  }
-
-  tr:nth-child(even) td {
-    background-color: rgba($base-body-color, 0.3);
-  }
-
-  tr:hover td {
-    background-color: rgba($base-accent-color, 0.04);
-  }
-
-  th {
-    background-color: $header-background-color;
-    color: $header-font-color;
-  }
-}
-
-body.organization-account.subscriptions.edit .payment-history {
+body.subscriptions.edit .payment-history {
   table thead td {
     background-color: #fff;
     padding: 2em 1em;

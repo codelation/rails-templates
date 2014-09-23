@@ -30,7 +30,7 @@ private
       :exp_month,
       :exp_year,
       :last4,
-      :stripe_id,
+      :stripe_card_id,
       :stripe_token,
     )
   end
