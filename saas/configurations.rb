@@ -35,6 +35,7 @@ gem "puma"
 gem "roadie"
 gem "roadie-rails"
 gem "sass-rails"
+gem "sidekiq"
 gem "stripe"
 gem "uglifier"
 
@@ -59,6 +60,14 @@ group :test do
   gem "webmock"
 end
 GEMFILE
+    end
+
+    def self.procfile
+      File.read("#{File.dirname(__FILE__)}/configurations/Procfile")
+    end
+
+    def self.procfile_development
+      File.read("#{File.dirname(__FILE__)}/configurations/Procfile.development")
     end
 
     def self.routes(app_class, install_blocky, install_blogelator)

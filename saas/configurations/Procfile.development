@@ -1,0 +1,3 @@
+redis: redis-server
+web: rails s Puma
+worker: bundle exec sidekiq
