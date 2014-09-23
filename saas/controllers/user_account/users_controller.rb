@@ -2,7 +2,7 @@ class UserAccount::UsersController < UserAccount::BaseController
 
   def edit
     @user = current_user
-    @title = "Profile ~ #{current_user.display_name}"
+    @title = "Account ~ #{current_user.display_name}"
   end
 
   def show
@@ -11,7 +11,7 @@ class UserAccount::UsersController < UserAccount::BaseController
 
   def update
     @user = current_user
-    @title = "Profile ~ #{current_user.display_name}"
+    @title = "Account ~ #{current_user.display_name}"
 
     if user_params.has_key?(:password)
       if @user.update_with_password(user_params)
@@ -22,7 +22,7 @@ class UserAccount::UsersController < UserAccount::BaseController
       end
     else
       if @user.update_without_password(user_params)
-        redirect_to edit_user_account_user_path, notice: "Profile updated successfully"
+        redirect_to edit_user_account_user_path, notice: "Account updated successfully"
       else
         render :edit
       end

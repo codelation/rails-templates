@@ -20,6 +20,9 @@ module GitignoreConfig
 /log/*.log
 /tmp
 /bin/log
+
+# Ignore Redis dump file
+dump.rdb
 GITIGNORE
   end
 end

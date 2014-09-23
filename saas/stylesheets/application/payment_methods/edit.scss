@@ -1,6 +1,18 @@
 @import "imports";
 
 body.payment-methods.edit {
+  .subscription-plan {
+    font-size: 0.8em;
+
+    .price {
+      margin: 1em auto;
+    }
+
+    .trial {
+      display: none;
+    }
+  }
+
   th:first-of-type,
   td:first-of-type {
     text-align: center;

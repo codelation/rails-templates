@@ -11,7 +11,7 @@
 <% end %>
 
 <div class="title">
-  <h1><%= @organization.name %> / Profile</h1>
+  <h1><%= @organization.name %> / Account</h1>
 </div>
 
 <div class="outer-container">
@@ -19,7 +19,7 @@
 
   <div class="page">
     <fieldset>
-      <legend>Organization Profile</legend>
+      <legend>Organization Account</legend>
       <%= form_for @organization, url: organization_account_organization_path(@organization) do |f| %>
         <div>
           <%= f.label :name %><br>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="submit">
-          <%= f.submit "Save Profile" %>
+          <%= f.submit "Save Settings" %>
         </div>
       <% end %>
     </fieldset>

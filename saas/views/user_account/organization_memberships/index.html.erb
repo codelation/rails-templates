@@ -26,14 +26,16 @@
         </tbody>
       </table>
     <% else %>
-      <p>
-        Create an organization so you can include other users under
-        a single account.
-      </p>
+      <fieldset>
+        <legend>Create Your First Organization</legend>
+        <p>
+          Organizations allow you to manage multiple user accounts under one subscription plan.
+        </p>
+        <p>
+          <%= link_to "Get Started", new_user_account_organization_path, class: "button" %>
+        </p>
+      </fieldset>
     <% end %>
 
-    <p>
-      <%= link_to "New Organization", new_user_account_organization_path, class: "button" %>
-    </p>
   </div>
 </div>

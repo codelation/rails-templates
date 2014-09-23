@@ -1,6 +1,6 @@
 class OrganizationAccount::OrganizationsController < OrganizationAccount::BaseController
   def edit
-    @title = "Profile ~ #{@organization.name}"
+    @title = "Account ~ #{@organization.name}"
   end
 
   def show
@@ -9,9 +9,9 @@ class OrganizationAccount::OrganizationsController < OrganizationAccount::BaseCo
 
   def update
     if @organization.update_attributes(organization_params)
-      redirect_to edit_organization_account_organization_path(@organization), notice: "Profile updated successfully"
+      redirect_to edit_organization_account_organization_path(@organization), notice: "Account updated successfully"
     else
-      @title = "Profile ~ #{@organization.name}"
+      @title = "Account ~ #{@organization.name}"
       render :edit
     end
   end

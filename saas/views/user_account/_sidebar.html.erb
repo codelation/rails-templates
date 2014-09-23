@@ -4,7 +4,7 @@
       <%= link_to current_user.display_name, edit_user_account_user_path %>
     </li>
     <li class="account-settings<%= current_page?(edit_user_account_user_path) ? " active" : "" %>">
-    <%= link_to "Profile", edit_user_account_user_path %>
+    <%= link_to "My Account", edit_user_account_user_path %>
     </li>
     <li class="billing<%= current_page?(edit_user_account_subscription_path) ? " active" : "" %>">
       <%= link_to "Billing", edit_user_account_subscription_path %>

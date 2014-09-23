@@ -11,7 +11,7 @@
 <% end %>
 
 <div class="title">
-  <h1><%= current_user.display_name %> / Profile</h1>
+  <h1><%= current_user.display_name %> / My Account</h1>
 </div>
 
 <div class="outer-container">
@@ -19,7 +19,7 @@
 
   <div class="page">
     <fieldset>
-      <legend>Profile</legend>
+      <legend>My Account</legend>
       <%= form_for @user, url: user_account_user_path do |f| %>
         <div>
           <%= f.label :name %><br>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="submit">
-          <%= f.submit "Save Profile" %>
+          <%= f.submit "Save Settings" %>
         </div>
       <% end %>
     </fieldset>

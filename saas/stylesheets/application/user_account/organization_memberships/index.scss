@@ -1,5 +1,11 @@
 @import "imports";
 
 body.user-account.organization-memberships.index {
+  fieldset {
+    text-align: center;
 
+    p {
+      margin-bottom: 2em;
+    }
+  }
 }
