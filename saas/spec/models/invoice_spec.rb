@@ -1,4 +1,3 @@
-
 require "rails_helper"
 
 describe Invoice, "#paid_at" do

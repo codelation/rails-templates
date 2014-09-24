@@ -182,4 +182,20 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
   end
 
+  context "subscriber has an existing free subscription" do
+
+    it "should assign the new subscription's trial end based on date the subscriber was created" do
+      @organization.created_at = Time.now - 10.days
+      @organization.save
+      @free_plan = create(:subscription_plan, price: 0, trial_period_days: 0)
+      @paid_plan = create(:subscription_plan)
+
+      @free_subscription = @organization.subscribe_to_plan(@free_plan)
+      @paid_subscription = @organization.subscribe_to_plan(@paid_plan)
+
+      expect(@paid_subscription.trial_ends_at).to be_within(10).of(@organization.created_at + @paid_plan.trial_length)
+    end
+
+  end
+
 end
