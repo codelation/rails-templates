@@ -24,7 +24,7 @@
 
         <div>
           <%= f.label :name %><br>
-          <%= f.text_field :name %>
+          <%= f.text_field :name, autofocus: true %>
         </div>
       </fieldset>
 
@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<%= content_for :scripts do %>
+<% content_for :scripts do %>
   <script>
     <% organization = params[:organization] || {} %>
     <% subscription_plan_id = organization[:subscription_plan_id] %>

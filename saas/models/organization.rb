@@ -19,7 +19,7 @@ class Organization < ActiveRecord::Base
 
   # Add a user to the organization. Adding new users
   # does not give assign any roles/permissions.
-  # @params [User] user
+  # @param user [User]
   # @return [OrganizationMembership]
   def add_user(user)
     # Check to see if the user has already been added
@@ -35,6 +35,12 @@ class Organization < ActiveRecord::Base
     self.reload # Make sure #users returns all users
 
     membership
+  end
+
+  # Memberships with the owner role, sorted by the user's name.
+  # @return [Array<OrganizationMembership>]
+  def owner_memberships
+    self.memberships.owner.includes(:user).ordered_by_user_name
   end
 
   # Returns a Time-like class with the

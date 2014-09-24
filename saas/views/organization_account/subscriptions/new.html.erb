@@ -26,8 +26,52 @@
   </div>
 </div>
 
-<%= content_for :scripts do %>
+<% content_for :head do %>
+  <% if @current_subscription && !@current_subscription.trialing? && !@current_subscription.plan.free? %>
+    <%# Hide the trial info when the current subscription is active and paid %>
+    <style>
+      .trial {
+        height: 0;
+        margin-bottom: 1.6em;
+        visibility: hidden;
+      }
+    </style>
+  <% elsif @current_subscription && @current_subscription.plan.free? %>
+    <% if @organization.created_at < Time.now - @subscription_plans.order(trial_period_days: :desc).first.trial_length %>
+      <%# Hide the trial info when the user isn't currently paying, but has been a user longer than the trial period %>
+      <style>
+        .trial {
+          height: 0;
+          margin-bottom: 1.6em;
+          visibility: hidden;
+        }
+      </style>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :scripts do %>
   <script>
-    App.subscriptionPlanSelect(<%== @current_subscription.to_json(include: [:plan]) %>, <%== @subscription_plans.to_json %>);
+    App.subscriptionPlanSelect(<%== @current_subscription ? {
+      status:             @current_subscription.status,
+      currentPeriodStart: @current_subscription.current_period_start,
+      currentPeriodEnd:   @current_subscription.current_period_end,
+      plan: {
+        id:               @current_subscription.plan.id,
+        priceCents:       @current_subscription.plan.price_cents,
+        interval:         @current_subscription.plan.interval,
+        intervalCount:    @current_subscription.plan.interval_count,
+        trialPeriodDays:  @current_subscription.plan.trial_period_days
+      }
+    }.to_json : "null" %>, <%== @subscription_plans.map{|subscription_plan|
+      {
+        id:               subscription_plan.id,
+        priceCents:       subscription_plan.price_cents,
+        interval:         subscription_plan.interval,
+        intervalCount:    subscription_plan.interval_count,
+        trialPeriodDays:  subscription_plan.trial_period_days,
+        upgradeMessage:   upgrade_message(@current_subscription, subscription_plan)
+      }
+    }.to_json %>);
   </script>
 <% end %>

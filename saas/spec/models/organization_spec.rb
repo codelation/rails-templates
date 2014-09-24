@@ -42,6 +42,58 @@ describe Organization, "#add_user(user)" do
 
 end
 
+describe Organization, "#owner_memberships" do
+
+  before(:each) do
+    @organization = create(:organization)
+  end
+
+  it "should return memberships to the organization with the owner role" do
+    expect(@organization.owner_memberships).to eq([])
+
+    @bob = create(:user, name: "Bob")
+    membership = @organization.add_user(@bob)
+    membership.role = :owner
+    membership.save
+
+    @april = create(:user, name: "April")
+    membership = @organization.add_user(@april)
+    membership.role = :admin
+    membership.save
+
+    @suzy = create(:user, name: "Suzy")
+    membership = @organization.add_user(@suzy)
+    membership.role = :member
+    membership.save
+
+    expect(@organization.owner_memberships.map(&:user)).to     include(@bob)
+    expect(@organization.owner_memberships.map(&:user)).to_not include(@april)
+    expect(@organization.owner_memberships.map(&:user)).to_not include(@suzy)
+  end
+
+  it "should order the memberships by the user's name" do
+    expect(@organization.owner_memberships).to eq([])
+
+    @bob = create(:user, name: "Bob")
+    membership = @organization.add_user(@bob)
+    membership.role = :owner
+    membership.save
+
+    @april = create(:user, name: "April")
+    membership = @organization.add_user(@april)
+    membership.role = :owner
+    membership.save
+
+    @suzy = create(:user, name: "Suzy")
+    membership = @organization.add_user(@suzy)
+    membership.role = :owner
+    membership.save
+
+    expect(@organization.owner_memberships.map(&:user)).to eq([@april, @bob, @suzy])
+  end
+
+end
+
 describe Organization, "#time" do
 
   it "should return a time object with the correct time zone" do

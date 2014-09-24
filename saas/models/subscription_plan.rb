@@ -19,7 +19,7 @@ class SubscriptionPlan < ActiveRecord::Base
     year:  1
   }
 
-  # Convenience method for determining if the plan is free.
+  # Convenience method for determining if the plan is completely free.
   # @return [Boolean]
   def free?
     self.price == 0 && self.price_per_user == 0 && self.setup_price == 0

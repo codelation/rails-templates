@@ -134,9 +134,9 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
     it "should not give the subscriber a new trial period if they have an active plan" do
       @subscription = @organization.subscribe_to_plan(@plan)
+      @subscription.trial_ends_at = Time.now - 100.days
       @subscription.active!
 
-      # We should get half the money back as an account credit
       @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
       expect(@new_subscription.active?).to eq(true)
     end

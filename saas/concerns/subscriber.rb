@@ -54,12 +54,10 @@ private
       if @old_subscription.plan.free?
         # If the previous subscription was free, base the trial period on the date the subscriber was created
         @new_subscription.trial_ends_at = self.created_at + @new_subscription.plan.trial_length
-      elsif @old_subscription.trialing?
+      else
         # If the previous subscription was in the trial period, continue the trial on the new subscription
         trial_length_diff = @new_subscription.plan.trial_length - @old_subscription.plan.trial_length
         @new_subscription.trial_ends_at = @old_subscription.trial_ends_at + trial_length_diff
-      else
-        @new_subscription.trial_ends_at = Time.now
       end
     else
       @new_subscription.trial_ends_at = Time.now + @new_subscription.plan.trial_length
