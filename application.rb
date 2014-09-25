@@ -83,6 +83,7 @@ run "rm app/assets/javascripts/application.js"
 file "app/assets/javascripts/application/.keep", ""
 
 file "app/assets/javascripts/application.js",           Javascripts.application
+file "app/assets/javascripts/shared/buttons.js",        Javascripts.buttons
 file "app/assets/javascripts/shared/flash_messages.js", Javascripts.flash_messages
 
 # -----------------------------------------

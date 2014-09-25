@@ -81,6 +81,7 @@ file "app/assets/javascripts/application/.keep",                             ""
 file "app/assets/javascripts/home/.keep",                                    ""
 file "app/assets/javascripts/application/subscriptions/new.js",              Saas::Javascripts.application_subscriptions_new
 file "app/assets/javascripts/application/user_account/organizations/new.js", Saas::Javascripts.application_user_account_organizations_new
+file "app/assets/javascripts/shared/buttons.js",                             Saas::Javascripts.buttons
 file "app/assets/javascripts/shared/flash_messages.js",                      Saas::Javascripts.flash_messages
 file "app/assets/javascripts/application.js",                                Saas::Javascripts.application
 file "app/assets/javascripts/home.js",                                       Saas::Javascripts.home
