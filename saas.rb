@@ -163,7 +163,6 @@ run "rm vendor/assets/stylesheets/#{@app_name.underscore}/bourbon.zip"
 run "rm vendor/assets/stylesheets/#{@app_name.underscore}/font-awesome.zip"
 run "rm vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip"
 
-
 # =================================================================
 # App Files
 # =================================================================
@@ -172,11 +171,13 @@ run "rm vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip"
 # Controller Files
 # -----------------------------------------
 
-file "app/controllers/authentication/confirmations_controller.rb", Saas::Controllers.confirmations_controller
-file "app/controllers/authentication/passwords_controller.rb",     Saas::Controllers.passwords_controller
-file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.registrations_controller
-file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.sessions_controller
-file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.unlocks_controller
+file "app/controllers/admin/sessions_controller.rb", Saas::Controllers.admin_sessions_controller
+
+file "app/controllers/authentication/confirmations_controller.rb", Saas::Controllers.authentication_confirmations_controller
+file "app/controllers/authentication/passwords_controller.rb",     Saas::Controllers.authentication_passwords_controller
+file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.authentication_registrations_controller
+file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.authentication_sessions_controller
+file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.authentication_unlocks_controller
 
 file "app/controllers/organization_account/base_controller.rb",                     Saas::Controllers.organization_account_base_controller
 file "app/controllers/organization_account/organization_memberships_controller.rb", Saas::Controllers.organization_account_organization_memberships_controller
@@ -274,7 +275,7 @@ file "app/mailers/contact_message_mailer.rb", Saas::Mailers.contact_message(@app
 
 run "rm app/views/layouts/application.html.erb"
 
-file "app/views/contact_message_mailer/contact_email.html.erb",  Saas::Views.contact_message_mailer_contact_email
+file "app/views/admin/sessions/new.html.erb",                    Saas::Views.admin_sessions_new
 
 file "app/views/authentication/confirmations/new.html.erb",      Saas::Views.devise_confirmations_new
 file "app/views/authentication/passwords/edit.html.erb",         Saas::Views.devise_passwords_edit
@@ -282,6 +283,8 @@ file "app/views/authentication/passwords/new.html.erb",          Saas::Views.dev
 file "app/views/authentication/registrations/new.html.erb",      Saas::Views.devise_registrations_new
 file "app/views/authentication/sessions/new.html.erb",           Saas::Views.devise_sessions_new
 file "app/views/authentication/unlocks/new.html.erb",            Saas::Views.devise_unlocks_new
+
+file "app/views/contact_message_mailer/contact_email.html.erb",  Saas::Views.contact_message_mailer_contact_email
 
 file "app/views/contact_messages/new.html.erb",                  Saas::Views.contact_messages_new
 file "app/views/contact_messages/show.html.erb",                 Saas::Views.contact_messages_show
@@ -293,14 +296,14 @@ file "app/views/home/pricing.html.erb",                          Saas::Views.hom
 file "app/views/home/privacy.html.erb",                          Saas::Views.home_privacy
 file "app/views/home/terms.html.erb",                            Saas::Views.home_terms
 
-file "app/views/layouts/application/_footer.html.erb",           Saas::Views.application_footer
-file "app/views/layouts/application/_header.html.erb",           Saas::Views.application_header
-file "app/views/layouts/home/_footer.html.erb",                  Saas::Views.home_footer
-file "app/views/layouts/home/_header.html.erb",                  Saas::Views.home_header
-file "app/views/layouts/shared/_analytics.html.erb",             Saas::Views.analytics
-file "app/views/layouts/shared/_flash_messages.html.erb",        Saas::Views.flash_messages
-file "app/views/layouts/home.html.erb",                          Saas::Views.home
-file "app/views/layouts/application.html.erb",                   Saas::Views.application
+file "app/views/layouts/application/_footer.html.erb",           Saas::Views.layouts_application_footer
+file "app/views/layouts/application/_header.html.erb",           Saas::Views.layouts_application_header
+file "app/views/layouts/home/_footer.html.erb",                  Saas::Views.layouts_home_footer
+file "app/views/layouts/home/_header.html.erb",                  Saas::Views.layouts_home_header
+file "app/views/layouts/shared/_analytics.html.erb",             Saas::Views.layouts_shared_analytics
+file "app/views/layouts/shared/_flash_messages.html.erb",        Saas::Views.layouts_shared_flash_messages
+file "app/views/layouts/home.html.erb",                          Saas::Views.layouts_home
+file "app/views/layouts/application.html.erb",                   Saas::Views.layouts_application
 
 file "app/views/organization_account/organization_memberships/index.html.erb", Saas::Views.organization_account_organization_memberships_index
 file "app/views/organization_account/organizations/edit.html.erb",             Saas::Views.organization_account_organizations_edit

@@ -153,11 +153,11 @@ file "app/views/devise/passwords/new.html.erb",            Views.devise_password
 file "app/views/devise/registrations/new.html.erb",        Views.devise_registrations_new if install_devise
 file "app/views/devise/sessions/new.html.erb",             Views.devise_sessions_new      if install_devise
 file "app/views/devise/unlocks/new.html.erb",              Views.devise_unlocks_new       if install_devise
-file "app/views/layouts/application/_footer.html.erb",     Views.footer
-file "app/views/layouts/application/_header.html.erb",     Views.header(@app_name)
-file "app/views/layouts/shared/_analytics.html.erb",       Views.analytics
-file "app/views/layouts/shared/_flash_messages.html.erb",  Views.flash_messages
-file "app/views/layouts/application.html.erb",             Views.application
+file "app/views/layouts/application/_footer.html.erb",     Views.layouts_application_footer
+file "app/views/layouts/application/_header.html.erb",     Views.layouts_application_header(@app_name)
+file "app/views/layouts/shared/_analytics.html.erb",       Views.layouts_shared_analytics
+file "app/views/layouts/shared/_flash_messages.html.erb",  Views.layouts_shared_flash_messages
+file "app/views/layouts/application.html.erb",             Views.layouts_application
 
 # =================================================================
 # Configuration Files

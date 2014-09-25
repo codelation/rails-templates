@@ -1,8 +1,28 @@
 module Saas
   class Controllers
 
-    def self.confirmations_controller
+    def self.admin_sessions_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/admin/sessions_controller.rb")
+    end
+
+    def self.authentication_confirmations_controller
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/confirmations_controller.rb")
+    end
+
+    def self.authentication_passwords_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/authentication/passwords_controller.rb")
+    end
+
+    def self.authentication_registrations_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/authentication/registrations_controller.rb")
+    end
+
+    def self.authentication_sessions_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/authentication/sessions_controller.rb")
+    end
+
+    def self.authentication_unlocks_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/authentication/unlocks_controller.rb")
     end
 
     def self.contact_messages_controller
@@ -35,22 +55,6 @@ module Saas
 
     def self.organization_account_subscriptions_controller
       File.read("#{File.dirname(__FILE__)}/controllers/organization_account/subscriptions_controller.rb")
-    end
-
-    def self.passwords_controller
-      File.read("#{File.dirname(__FILE__)}/controllers/authentication/passwords_controller.rb")
-    end
-
-    def self.registrations_controller
-      File.read("#{File.dirname(__FILE__)}/controllers/authentication/registrations_controller.rb")
-    end
-
-    def self.sessions_controller
-      File.read("#{File.dirname(__FILE__)}/controllers/authentication/sessions_controller.rb")
-    end
-
-    def self.unlocks_controller
-      File.read("#{File.dirname(__FILE__)}/controllers/authentication/unlocks_controller.rb")
     end
 
     def self.user_account_base_controller

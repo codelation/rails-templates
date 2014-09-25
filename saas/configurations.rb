@@ -104,7 +104,9 @@ GEMFILE
   resources :contact_messages
 
   # Authentication Routes
-  devise_for :admin_users
+  devise_for :admin_users, controllers: {
+    sessions: "admin/sessions"
+  }
   devise_for :users, controllers: {
     confirmations: "authentication/confirmations",
     passwords:     "authentication/passwords",

@@ -21,6 +21,10 @@ body.subscriptions.new {
     }
   }
 
+  form {
+    clear: both;
+  }
+
   input[type="submit"]:disabled {
     opacity: 0.3;
 

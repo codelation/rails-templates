@@ -1,12 +1,8 @@
 module Saas
   class Views < ::Views
 
-    def self.application_footer
-      File.read("#{File.dirname(__FILE__)}/views/layouts/application/_footer.html.erb")
-    end
-
-    def self.application_header
-      File.read("#{File.dirname(__FILE__)}/views/layouts/application/_header.html.erb")
+    def self.admin_sessions_new
+      File.read("#{File.dirname(__FILE__)}/views/admin/sessions/new.html.erb")
     end
 
     def self.contact_message_mailer_contact_email
@@ -29,24 +25,12 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/devise/registrations/new.html.erb")
     end
 
-    def self.home
-      File.read("#{File.dirname(__FILE__)}/views/layouts/home.html.erb")
-    end
-
     def self.home_about
       File.read("#{File.dirname(__FILE__)}/views/home/about.html.erb")
     end
 
     def self.home_features
       File.read("#{File.dirname(__FILE__)}/views/home/features.html.erb")
-    end
-
-    def self.home_footer
-      File.read("#{File.dirname(__FILE__)}/views/layouts/home/_footer.html.erb")
-    end
-
-    def self.home_header
-      File.read("#{File.dirname(__FILE__)}/views/layouts/home/_header.html.erb")
     end
 
     def self.home_index
@@ -63,6 +47,26 @@ module Saas
 
     def self.home_terms
       File.read("#{File.dirname(__FILE__)}/views/home/terms.html.erb")
+    end
+
+    def self.layouts_application_footer
+      File.read("#{File.dirname(__FILE__)}/views/layouts/application/_footer.html.erb")
+    end
+
+    def self.layouts_application_header
+      File.read("#{File.dirname(__FILE__)}/views/layouts/application/_header.html.erb")
+    end
+
+    def self.layouts_home
+      File.read("#{File.dirname(__FILE__)}/views/layouts/home.html.erb")
+    end
+
+    def self.layouts_home_footer
+      File.read("#{File.dirname(__FILE__)}/views/layouts/home/_footer.html.erb")
+    end
+
+    def self.layouts_home_header
+      File.read("#{File.dirname(__FILE__)}/views/layouts/home/_header.html.erb")
     end
 
     def self.organization_account_organization_memberships_index

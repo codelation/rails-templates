@@ -1,5 +1,5 @@
 module HeaderView
-  def header(app_name)
+  def layouts_application_header(app_name)
     return <<-HEADER
 <header>
   <div class="branding">
