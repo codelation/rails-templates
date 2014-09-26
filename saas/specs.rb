@@ -29,8 +29,8 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/spec/models/subscription_plan_spec.rb")
     end
 
-    def self.subscription_plan_helper
-      File.read("#{File.dirname(__FILE__)}/spec/helpers/subscription_plan_helper_spec.rb")
+    def self.subscription_plans_helper
+      File.read("#{File.dirname(__FILE__)}/spec/helpers/subscription_plans_helper_spec.rb")
     end
 
     def self.user

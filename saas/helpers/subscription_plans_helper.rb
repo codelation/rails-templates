@@ -1,4 +1,4 @@
-module SubscriptionPlanHelper
+module SubscriptionPlansHelper
 
   # Returns account credit and new billing information about upgrading to a new plan.
   # @param current_subscription [Subscription]

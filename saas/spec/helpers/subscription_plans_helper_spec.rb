@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe SubscriptionPlanHelper, "#upgrade_message(current_subscription, new_plan)" do
+describe SubscriptionPlansHelper, "#upgrade_message(current_subscription, new_plan)" do
 
   context "There is no current subscription" do
 

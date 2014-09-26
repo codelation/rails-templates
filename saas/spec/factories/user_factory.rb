@@ -8,9 +8,5 @@ FactoryGirl.define do
     time_zone { Faker::Address.time_zone }
 
     subscription_plan_id { create(:subscription_plan).id }
-
-    trait :with_organization_name do
-      organization_name "Super Awesome Organization Name, LLC."
-    end
   end
 end

@@ -204,8 +204,8 @@ file "app/controllers/home_controller.rb",             Saas::Controllers.home_co
 # -----------------------------------------
 
 run "rm app/helpers/application_helper.rb"
-file "app/helpers/application_helper.rb",       Saas::Helpers.application(@app_name)
-file "app/helpers/subscription_plan_helper.rb", Saas::Helpers.subscription_plan
+file "app/helpers/application_helper.rb",        Saas::Helpers.application(@app_name)
+file "app/helpers/subscription_plans_helper.rb", Saas::Helpers.subscription_plans
 
 # -----------------------------------------
 # Model Files
@@ -230,17 +230,17 @@ file "app/models/user.rb",                    Saas::Models.user
 # Spec Files
 # -----------------------------------------
 
-file "spec/helpers/subscription_plan_helper_spec.rb", Saas::Specs.subscription_plan_helper
-file "spec/models/charge_spec.rb",                    Saas::Specs.charge
-file "spec/models/invoice_spec.rb",                   Saas::Specs.invoice
-file "spec/models/line_item_spec.rb",                 Saas::Specs.line_item
-file "spec/models/organization_spec.rb",              Saas::Specs.organization
-file "spec/models/stripe_card_spec.rb",               Saas::Specs.stripe_card
-file "spec/models/subscription_spec.rb",              Saas::Specs.subscription
-file "spec/models/subscription_plan_spec.rb",         Saas::Specs.subscription_plan
-file "spec/models/user_spec.rb",                      Saas::Specs.user
-file "spec/web_mock/stripe_card.json",                Saas::Specs.web_mock_stripe_card
-file "spec/web_mock/stripe_customer.json",            Saas::Specs.web_mock_stripe_customer
+file "spec/helpers/subscription_plans_helper_spec.rb", Saas::Specs.subscription_plans_helper
+file "spec/models/charge_spec.rb",                     Saas::Specs.charge
+file "spec/models/invoice_spec.rb",                    Saas::Specs.invoice
+file "spec/models/line_item_spec.rb",                  Saas::Specs.line_item
+file "spec/models/organization_spec.rb",               Saas::Specs.organization
+file "spec/models/stripe_card_spec.rb",                Saas::Specs.stripe_card
+file "spec/models/subscription_spec.rb",               Saas::Specs.subscription
+file "spec/models/subscription_plan_spec.rb",          Saas::Specs.subscription_plan
+file "spec/models/user_spec.rb",                       Saas::Specs.user
+file "spec/web_mock/stripe_card.json",                 Saas::Specs.web_mock_stripe_card
+file "spec/web_mock/stripe_customer.json",             Saas::Specs.web_mock_stripe_customer
 
 # -----------------------------------------
 # Factory Girl Files
