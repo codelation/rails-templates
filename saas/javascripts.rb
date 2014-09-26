@@ -1,11 +1,11 @@
 module Saas
   class Javascripts < ::Javascripts
-    def self.application_subscriptions_new
-      File.read("#{File.dirname(__FILE__)}/javascripts/application/subscriptions/new.js")
+    def self.application_organizations_new
+      File.read("#{File.dirname(__FILE__)}/javascripts/application/organizations/new.js")
     end
 
-    def self.application_user_account_organizations_new
-      File.read("#{File.dirname(__FILE__)}/javascripts/application/user_account/organizations/new.js")
+    def self.application_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/javascripts/application/subscriptions/new.js")
     end
 
     def self.flash_messages

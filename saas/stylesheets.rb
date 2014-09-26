@@ -13,12 +13,24 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/fonts.scss")
     end
 
+    def self.application_layout_main
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/main.scss")
+    end
+
     def self.application_layout_title
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/title.scss")
     end
 
-    def self.application_organization_account_layout
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_account/layout.scss")
+    def self.application_organizations_sidebar
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/_sidebar.scss")
+    end
+
+    def self.application_organizations_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/index.scss")
+    end
+
+    def self.application_organizations_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/new.scss")
     end
 
     def self.application_payment_methods_edit
@@ -33,16 +45,8 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/subscriptions/new.scss")
     end
 
-    def self.application_user_account_layout
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/layout.scss")
-    end
-
-    def self.application_user_account_organization_memberships_index
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organization_memberships/index.scss")
-    end
-
-    def self.application_user_account_organizations_new
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/user_account/organizations/new.scss")
+    def self.application_users_sidebar
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/users/_sidebar.scss")
     end
 
     def self.contact_messages_main

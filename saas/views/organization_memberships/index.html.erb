@@ -1,0 +1,37 @@
+<div class="title">
+  <h1>Users</h1>
+</div>
+
+<div class="outer-container">
+  <%= render partial: "#{params[:resource_name]}/sidebar" %>
+
+  <div class="page">
+    <% if @organization_memberships.count > 0 %>
+      <table class="default">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @organization_memberships.each do |membership| %>
+            <tr>
+              <td><%= membership.user.display_name %></td>
+              <td><%= membership.role.titleize %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>
+        Create an organization so you can include other users under
+        a single account.
+      </p>
+    <% end %>
+
+    <p>
+      <%= link_to "New User", "#", class: "button" %>
+    </p>
+  </div>
+</div>

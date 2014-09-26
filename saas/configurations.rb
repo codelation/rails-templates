@@ -73,35 +73,22 @@ GEMFILE
     def self.routes(app_class, install_blocky, install_blogelator)
       return <<-ROUTES
 #{app_class}::Application.routes.draw do
+  # Application Routes
+  # These routes will be nested in both the organization and user
+  # routes, so you'll be able access either type of subscription
+  # with the routes of your application.
+  def application_routes
+
+  end
+
   # Sales Site Routes
   root to: "home#index"
   %w(about contact features pricing privacy terms).each do |page|
-    get page, to: "home#\#{page}", as: page
-  end
-
-  # Resource Routes
-  namespace :organization_account do
-    resources :organizations do
-      resources :organization_memberships, path: "memberships"
-      resources :stripe_cards,             path: "payment_methods"
-
-      resource :subscription, path: "billing" do
-        resource :payment_method
-      end
-    end
-  end
-
-  namespace :user_account do
-    resources :organizations
-    resources :organization_memberships, path: "memberships"
-    resources :stripe_cards,             path: "payment_methods"
-    resource  :user,                     path: "/"
-
-    resource :subscription, path: "billing" do
-      resource :payment_method
-    end
+    get page, to: "home##{page}", as: page
   end
   resources :contact_messages
+
+  # ---------------------------- DANGER ZONE ---------------------------- #
 
   # Authentication Routes
   devise_for :admin_users, controllers: {
@@ -114,6 +101,19 @@ GEMFILE
     sessions:      "authentication/sessions",
     unlocks:       "authentication/unlocks"
   }
+
+  # Subscriber Routes
+  # These routes handle the billing and organization memberships.
+  resources :organizations, :users
+  resource :subscriber, path: ":resource_name/:subscriber_id" do
+    application_routes
+    resources :organization_memberships, path: "memberships"
+    resources :payment_methods
+
+    resource :subscription do
+      resource :payment_method
+    end
+  end
 #{install_blocky ? "\n  mount Blocky::Engine, at: \"/admin/content\"" : ""}#{install_blogelator ? "\n  mount Blogelator::Engine, at: \"/blog\"" : ""}
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/email"

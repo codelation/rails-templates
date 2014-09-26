@@ -13,7 +13,7 @@ class Organization < ActiveRecord::Base
   after_create :create_initial_subscription
 
   # Scopes
-  scope :ordered_by_name, -> { order(name: :asc) }
+  scope :ordered_by_name, -> { order("LOWER(name)") }
 
   attr_accessor :subscription_plan_id
 
@@ -35,6 +35,13 @@ class Organization < ActiveRecord::Base
     self.reload # Make sure #users returns all users
 
     membership
+  end
+
+  # Alias for #name.to_s. Used to simplify displaying
+  # User and Organization names when they share templates.
+  # @return [String]
+  def display_name
+    self.name.to_s
   end
 
   # Memberships with the owner role, sorted by the user's name.

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   after_create :create_initial_subscription
 
   # Scopes
-  scope :ordered_by_name, -> { order(name: :asc) }
+  scope :ordered_by_name, -> { order("LOWER(name)") }
 
   attr_accessor :subscription_plan_id
 
