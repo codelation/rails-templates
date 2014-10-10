@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # devise :omniauthable, omniauth_providers: [
-  #   :digital_ocean,
+  #   :digitalocean,
   #   :github
   # ]
 

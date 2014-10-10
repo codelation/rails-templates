@@ -177,6 +177,7 @@ run "rm app/controllers/application_controller.rb"
 file "app/controllers/admin/sessions_controller.rb", Saas::Controllers.admin_sessions_controller
 
 file "app/controllers/authentication/confirmations_controller.rb", Saas::Controllers.authentication_confirmations_controller
+file "app/controllers/authentication/omniauth_callbacks_controller.rb",     Saas::Controllers.authentication_omniauth_callbacks_controller
 file "app/controllers/authentication/passwords_controller.rb",     Saas::Controllers.authentication_passwords_controller
 file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.authentication_registrations_controller
 file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.authentication_sessions_controller
@@ -302,6 +303,7 @@ file "app/views/layouts/shared/_flash_messages.html.erb", Saas::Views.layouts_sh
 file "app/views/layouts/home.html.erb",                   Saas::Views.layouts_home
 file "app/views/layouts/application.html.erb",            Saas::Views.layouts_application
 
+file "app/views/omni_auth_providers/index.html.erb",      Saas::Views.omni_auth_providers_index
 file "app/views/organization_memberships/index.html.erb", Saas::Views.organization_memberships_index
 
 file "app/views/organizations/_sidebar.html.erb", Saas::Views.organizations_sidebar

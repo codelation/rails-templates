@@ -69,6 +69,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/layouts/home.html.erb")
     end
 
+    def self.omni_auth_providers_index
+      File.read("#{File.dirname(__FILE__)}/views/omni_auth_providers/index.html.erb")
+    end
+
     def self.organization_memberships_index
       File.read("#{File.dirname(__FILE__)}/views/organization_memberships/index.html.erb")
     end

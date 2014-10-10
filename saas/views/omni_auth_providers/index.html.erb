@@ -1,0 +1,18 @@
+<div class="title">
+  <h1>Connected Accounts</h1>
+</div>
+
+<div class="outer-container">
+  <%= render partial: "#{params[:resource_name]}/sidebar" %>
+
+  <div class="page">
+    <div class="provider">
+      <h2>DigitalOcean</h2>
+      <% if provider = @subscriber.omni_auth_providers.where(name: "digitalocean").first %>
+        <%= link_to "Sign Out", user_omniauth_authorize_path(:digitalocean) %>
+      <% else %>
+        <%= link_to "Sign In", user_omniauth_authorize_path(:digitalocean) %>
+      <% end %>
+    </div>
+  </div>
+</div>
