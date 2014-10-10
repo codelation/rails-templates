@@ -2,9 +2,10 @@ module Subscriber
   extend ActiveSupport::Concern
 
   included do
-    has_many :stripe_cards, as: :subscriber
-    has_many :subscriptions, as: :subscriber
     monetize :account_balance_cents
+    has_many :omni_auth_providers, as: :subscriber
+    has_many :stripe_cards,        as: :subscriber
+    has_many :subscriptions,       as: :subscriber
   end
 
   # Returns whether or not the subscriber has an active subscription.

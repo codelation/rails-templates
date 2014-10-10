@@ -3,8 +3,13 @@ class User < ActiveRecord::Base
 
   # Devise Modules
   # - Also available: :confirmable, :lockable, and :timeoutable
-  devise :database_authenticatable, :omniauthable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # devise :omniauthable, omniauth_providers: [
+  #   :digital_ocean,
+  #   :github
+  # ]
 
   # Relationships
   has_many :organization_memberships

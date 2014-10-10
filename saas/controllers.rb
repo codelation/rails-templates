@@ -37,6 +37,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/home_controller.rb")
     end
 
+    def self.omni_auth_providers_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/omni_auth_providers_controller.rb")
+    end
+
     def self.organizations_controller
       File.read("#{File.dirname(__FILE__)}/controllers/organizations_controller.rb")
     end

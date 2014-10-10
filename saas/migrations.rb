@@ -21,6 +21,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/migrations/create_line_items.rb")
     end
 
+    def self.create_omni_auth_providers
+      File.read("#{File.dirname(__FILE__)}/migrations/create_omni_auth_providers.rb")
+    end
+
     def self.create_organization_memberships
       File.read("#{File.dirname(__FILE__)}/migrations/create_organization_memberships.rb")
     end

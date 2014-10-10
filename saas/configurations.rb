@@ -7,7 +7,13 @@ DEVISE_SECRET_TOKEN=#{SecureRandom.hex(64)}
 HOSTNAME=localhost:3000
 
 STRIPE_PUBLISHABLE_KEY=SET_ME
-STRIPE_SECRET_KEY=SET_ME_TOO
+STRIPE_SECRET_KEY=SET_ME
+
+# OmniAuth Providers
+# DIGITAL_OCEAN_CLIENT_ID=SET_ME
+# DIGITAL_OCEAN_CLIENT_SECRET=SET_ME
+# GITHUB_CLIENT_ID=SET_ME
+# GITHUB_CLIENT_SECRET=SET_ME
 ENV
     end
 
@@ -30,6 +36,8 @@ gem "jquery-rails", "~> 4.0.0.beta2"
 gem "local_time"
 gem "money-rails", github: "RubyMoney/money-rails"
 gem "omniauth"
+# gem "omniauth-digitalocean"
+# gem "omniauth-github"
 gem "pg"
 gem "puma"
 gem "roadie"
@@ -90,18 +98,24 @@ GEMFILE
   end
   resources :contact_messages
 
+
+
   # ---------------------------- DANGER ZONE ---------------------------- #
+
+  # These routes handle user authentication and subscriptions.
+  # Only edit these routes if you know what you're doing. Thanks!
 
   # Authentication Routes
   devise_for :admin_users, controllers: {
     sessions: "admin/sessions"
   }
   devise_for :users, controllers: {
-    confirmations: "authentication/confirmations",
-    passwords:     "authentication/passwords",
-    registrations: "authentication/registrations",
-    sessions:      "authentication/sessions",
-    unlocks:       "authentication/unlocks"
+    confirmations:      "authentication/confirmations",
+    omniauth_callbacks: "authentication/omniauth_callbacks",
+    passwords:          "authentication/passwords",
+    registrations:      "authentication/registrations",
+    sessions:           "authentication/sessions",
+    unlocks:            "authentication/unlocks"
   }
 
   # Subscriber Routes
@@ -109,6 +123,7 @@ GEMFILE
   resources :organizations, :users
   resource :subscriber, path: ":resource_name/:subscriber_id" do
     application_routes
+    resources :omni_auth_providers
     resources :organization_memberships, path: "memberships"
     resources :payment_methods
 

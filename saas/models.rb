@@ -25,6 +25,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/models/line_item.rb")
     end
 
+    def self.omni_auth_provider
+      File.read("#{File.dirname(__FILE__)}/models/omni_auth_provider.rb")
+    end
+
     def self.organization_membership
       File.read("#{File.dirname(__FILE__)}/models/organization_membership.rb")
     end

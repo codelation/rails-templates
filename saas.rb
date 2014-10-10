@@ -185,6 +185,7 @@ file "app/controllers/authentication/unlocks_controller.rb",       Saas::Control
 file "app/controllers/application_controller.rb",              Saas::Controllers.application_controller
 file "app/controllers/contact_messages_controller.rb",         Saas::Controllers.contact_messages_controller
 file "app/controllers/home_controller.rb",                     Saas::Controllers.home_controller
+file "app/controllers/omni_auth_providers_controller.rb",      Saas::Controllers.omni_auth_providers_controller
 file "app/controllers/organizations_controller.rb",            Saas::Controllers.organizations_controller
 file "app/controllers/organization_memberships_controller.rb", Saas::Controllers.organization_memberships_controller
 file "app/controllers/payment_methods_controller.rb",          Saas::Controllers.payment_methods_controller
@@ -211,6 +212,7 @@ file "app/models/charge.rb",                  Saas::Models.charge
 file "app/models/contact_message.rb",         Saas::Models.contact_message
 file "app/models/invoice.rb",                 Saas::Models.invoice
 file "app/models/line_item.rb",               Saas::Models.line_item
+file "app/models/omni_auth_provider.rb",      Saas::Models.omni_auth_provider
 file "app/models/organization_membership.rb", Saas::Models.organization_membership
 file "app/models/organization_role.rb",       Saas::Models.organization_role
 file "app/models/organization.rb",            Saas::Models.organization
@@ -349,13 +351,14 @@ file "db/migrate/#{(Time.now + 1).strftime("%Y%m%d%H%M%S")}_create_charges.rb", 
 file "db/migrate/#{(Time.now + 2).strftime("%Y%m%d%H%M%S")}_create_contact_messages.rb",         Saas::Migrations.create_contact_messages
 file "db/migrate/#{(Time.now + 3).strftime("%Y%m%d%H%M%S")}_create_invoices.rb",                 Saas::Migrations.create_invoices
 file "db/migrate/#{(Time.now + 4).strftime("%Y%m%d%H%M%S")}_create_line_items.rb",               Saas::Migrations.create_line_items
-file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
-file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
-file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
-file "db/migrate/#{(Time.now + 8).strftime("%Y%m%d%H%M%S")}_create_stripe_cards.rb",             Saas::Migrations.create_stripe_cards
-file "db/migrate/#{(Time.now + 9).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
-file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",           Saas::Migrations.create_subscriptions
-file "db/migrate/#{(Time.now + 11).strftime("%Y%m%d%H%M%S")}_create_users.rb",                   Saas::Migrations.create_users
+file "db/migrate/#{(Time.now + 5).strftime("%Y%m%d%H%M%S")}_create_omni_auth_providers.rb", Saas::Migrations.create_omni_auth_providers
+file "db/migrate/#{(Time.now + 6).strftime("%Y%m%d%H%M%S")}_create_organization_memberships.rb", Saas::Migrations.create_organization_memberships
+file "db/migrate/#{(Time.now + 7).strftime("%Y%m%d%H%M%S")}_create_organization_roles.rb",       Saas::Migrations.create_organization_roles
+file "db/migrate/#{(Time.now + 8).strftime("%Y%m%d%H%M%S")}_create_organizations.rb",            Saas::Migrations.create_organizations
+file "db/migrate/#{(Time.now + 9).strftime("%Y%m%d%H%M%S")}_create_stripe_cards.rb",             Saas::Migrations.create_stripe_cards
+file "db/migrate/#{(Time.now + 10).strftime("%Y%m%d%H%M%S")}_create_subscription_plans.rb",       Saas::Migrations.create_subscription_plans
+file "db/migrate/#{(Time.now + 11).strftime("%Y%m%d%H%M%S")}_create_subscriptions.rb",           Saas::Migrations.create_subscriptions
+file "db/migrate/#{(Time.now + 12).strftime("%Y%m%d%H%M%S")}_create_users.rb",                   Saas::Migrations.create_users
 
 # =================================================================
 # DB Seed Files
