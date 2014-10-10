@@ -16,7 +16,7 @@ ENV
 source "http://rubygems.org"
 
 ruby "2.1.3"
-gem "rails", "4.1.5"
+gem "rails", "~> 4.2.0.beta2"
 
 gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "cancancan"
@@ -25,21 +25,22 @@ gem "devise"
 gem "ember-rails"
 gem "ember-source"
 gem "highline"
-gem "jbuilder"
-gem "jquery-rails"
+gem "jbuilder", "~> 2.0"
+gem "jquery-rails", "~> 4.0.0.beta2"
 gem "local_time"
-gem "money-rails"
+gem "money-rails", github: "RubyMoney/money-rails"
 gem "omniauth"
 gem "pg"
 gem "puma"
 gem "roadie"
 gem "roadie-rails"
-gem "sass-rails"
+gem "sass-rails", "~> 5.0.0.beta1"
 gem "sidekiq"
 gem "stripe"
-gem "uglifier"
+gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
+  gem "byebug"
   gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "foreman"
@@ -47,6 +48,7 @@ group :development, :test do
   gem "quiet_assets"
   gem "rspec-rails"
   gem "spring"
+  gem "web-console", "~> 2.0.0.beta4"
 end
 
 group :test do
