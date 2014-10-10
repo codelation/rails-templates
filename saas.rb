@@ -172,6 +172,8 @@ run "rm vendor/assets/stylesheets/#{@app_name.underscore}/neat.zip"
 # Controller Files
 # -----------------------------------------
 
+run "rm app/controllers/application_controller.rb"
+
 file "app/controllers/admin/sessions_controller.rb", Saas::Controllers.admin_sessions_controller
 
 file "app/controllers/authentication/confirmations_controller.rb", Saas::Controllers.authentication_confirmations_controller
@@ -195,6 +197,7 @@ file "app/controllers/users_controller.rb",                    Saas::Controllers
 # -----------------------------------------
 
 run "rm app/helpers/application_helper.rb"
+
 file "app/helpers/application_helper.rb",        Saas::Helpers.application(@app_name)
 file "app/helpers/subscription_plans_helper.rb", Saas::Helpers.subscription_plans
 
