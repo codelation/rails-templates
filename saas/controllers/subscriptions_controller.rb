@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription_plan = SubscriptionPlan.find(subscription_params[:subscription_plan_id])
     @subscriber.subscribe_to_plan(@subscription_plan)
-    redirect_to edit_subscriber_subscription_path, notice: "Subscription updated successfully"
+    redirect_to edit_subscriber_subscription_path, notice: "Subscription updated successfully."
   end
 
   def edit
@@ -30,9 +30,9 @@ class SubscriptionsController < ApplicationController
     @subscription = @subscriber.current_subscription
 
     if @subscription.update_attributes(subscription_params)
-      redirect_to edit_subscriber_subscription_path, notice: "Payment method updated successfully"
+      redirect_to edit_subscriber_subscription_path, notice: "Payment method updated successfully."
     else
-      redirect_to edit_subscriber_subscription_path, alert: "There was a problem updating the payment method"
+      redirect_to edit_subscriber_subscription_path, alert: "There was a problem updating the payment method."
     end
   end
 

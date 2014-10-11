@@ -15,13 +15,13 @@ class UsersController < ApplicationController
     if user_params.has_key?(:password)
       if @user.update_with_password(user_params)
         sign_in(@user, bypass: true)
-        redirect_to edit_user_path(@user), notice: "Password updated successfully"
+        redirect_to edit_user_path(@user), notice: "Password updated successfully."
       else
         render :edit
       end
     else
       if @user.update_without_password(user_params)
-        redirect_to edit_user_path(@user), notice: "Account updated successfully"
+        redirect_to edit_user_path(@user), notice: "Account updated successfully."
       else
         render :edit
       end

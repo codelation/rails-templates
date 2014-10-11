@@ -10,10 +10,24 @@ STRIPE_PUBLISHABLE_KEY=SET_ME
 STRIPE_SECRET_KEY=SET_ME
 
 # OmniAuth Providers
-# DIGITAL_OCEAN_CLIENT_ID=SET_ME
-# DIGITAL_OCEAN_CLIENT_SECRET=SET_ME
-# GITHUB_CLIENT_ID=SET_ME
-# GITHUB_CLIENT_SECRET=SET_ME
+DIGITAL_OCEAN_CLIENT_ID=SET_ME
+DIGITAL_OCEAN_CLIENT_SECRET=SET_ME
+
+FACEBOOK_CLIENT_ID=SET_ME
+FACEBOOK_CLIENT_SECRET=SET_ME
+
+GITHUB_CLIENT_ID=SET_ME
+GITHUB_CLIENT_SECRET=SET_ME
+
+GOOGLE_CLIENT_ID=SET_ME
+GOOGLE_CLIENT_SECRET=SET_ME
+
+HEROKU_CLIENT_ID=SET_ME
+HEROKU_CLIENT_SECRET=SET_ME
+
+TWITTER_CLIENT_ID=SET_ME
+TWITTER_CLIENT_SECRET=SET_ME
+
 ENV
     end
 
@@ -36,8 +50,12 @@ gem "jquery-rails", "~> 4.0.0.beta2"
 gem "local_time"
 gem "money-rails", github: "RubyMoney/money-rails"
 gem "omniauth"
-# gem "omniauth-digitalocean"
-# gem "omniauth-github"
+gem "omniauth-digitalocean"
+gem "omniauth-facebook"
+gem "omniauth-github"
+gem "omniauth-google-oauth2"
+gem "omniauth-heroku"
+gem "omniauth-twitter"
 gem "pg"
 gem "puma"
 gem "roadie"

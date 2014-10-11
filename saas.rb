@@ -69,7 +69,13 @@ run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
 # Image Files
 # -----------------------------------------
 
-file "app/assets/images/logo.png", Saas::Images.logo
+file "app/assets/images/logo.png",                              Saas::Images.logo
+file "app/assets/images/omni_auth_providers/digitalocean.png",  Saas::Images.omni_auth_providers_digitalocean
+file "app/assets/images/omni_auth_providers/facebook.png",      Saas::Images.omni_auth_providers_facebook
+file "app/assets/images/omni_auth_providers/github.png",        Saas::Images.omni_auth_providers_github
+file "app/assets/images/omni_auth_providers/google_oauth2.png", Saas::Images.omni_auth_providers_google_oauth2
+file "app/assets/images/omni_auth_providers/heroku.png",        Saas::Images.omni_auth_providers_heroku
+file "app/assets/images/omni_auth_providers/twitter.png",       Saas::Images.omni_auth_providers_twitter
 
 # -----------------------------------------
 # Javascript Files
@@ -103,6 +109,8 @@ file "app/assets/stylesheets/application/layout/main.scss",    Saas::Stylesheets
 file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets.application_layout_title
 file "app/assets/stylesheets/application/.keep",               ""
 file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
+
+file "app/assets/stylesheets/application/omni_auth_providers/index.scss", Saas::Stylesheets.application_omni_auth_providers_index
 
 file "app/assets/stylesheets/application/organizations/_sidebar.scss", Saas::Stylesheets.application_organizations_sidebar
 file "app/assets/stylesheets/application/organizations/index.scss",    Saas::Stylesheets.application_organizations_index

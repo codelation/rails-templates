@@ -21,6 +21,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/title.scss")
     end
 
+    def self.application_omni_auth_providers_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/omni_auth_providers/index.scss")
+    end
+
     def self.application_organizations_sidebar
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/_sidebar.scss")
     end

@@ -8,19 +8,19 @@ class PaymentMethodsController < ApplicationController
     if @stripe_card.save
       @subscription.reload
       if @subscription.payment_method == @stripe_card
-        redirect_to edit_subscriber_subscription_path, notice: "Payment method added successfully"
+        redirect_to edit_subscriber_subscription_path, notice: "Payment method added successfully."
       else
-        redirect_to edit_subscriber_subscription_payment_method_path, notice: "Payment method created successfully"
+        redirect_to edit_subscriber_subscription_payment_method_path, notice: "Payment method created successfully."
       end
     else
-      redirect_to edit_subscriber_subscription_payment_method_path, alert: "There was a problem saving the payment method"
+      redirect_to edit_subscriber_subscription_payment_method_path, alert: "There was a problem saving the payment method."
     end
   end
 
   def destroy
     @stripe_card = StripeCard.find(params[:id])
     @stripe_card.destroy
-    redirect_to edit_subscriber_subscription_payment_method_path, notice: "Payment method deleted successfully"
+    redirect_to edit_subscriber_subscription_payment_method_path, notice: "Payment method deleted successfully."
   end
 
   def edit

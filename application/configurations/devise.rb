@@ -230,10 +230,22 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :digitalocean, ENV["DIGITAL_OCEAN_CLIENT_ID"], ENV["DIGITAL_OCEAN_CLIENT_SECRET"],
-  #                 scope: "read write"
-  # config.omniauth :github, ENV["GITHUB_CLIENT_ID"], ENV["GITHUB_CLIENT_SECRET"],
-  #                 scope: "admin:public_key, admin:repo_hook, gist, repo, user"
+  config.omniauth :digitalocean, ENV["DIGITAL_OCEAN_CLIENT_ID"], ENV["DIGITAL_OCEAN_CLIENT_SECRET"],
+                  scope: "read write"
+
+  config.omniauth :facebook, ENV["FACEBOOK_CLIENT_ID"], ENV["FACEBOOK_CLIENT_SECRET"],
+                  image_size: "large",
+                  scope: "email, public_profile, user_friends"
+
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
+
+  config.omniauth :github, ENV["GITHUB_CLIENT_ID"], ENV["GITHUB_CLIENT_SECRET"],
+                  scope: "admin:public_key, admin:repo_hook, gist, repo, user"
+
+  config.omniauth :heroku, ENV["HEROKU_CLIENT_ID"], ENV["HEROKU_CLIENT_SECRET"]
+
+  config.omniauth :twitter, ENV["TWITTER_CLIENT_ID"], ENV["TWITTER_CLIENT_SECRET"],
+                  image_size: "original"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

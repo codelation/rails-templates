@@ -6,10 +6,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # devise :omniauthable, omniauth_providers: [
-  #   :digitalocean,
-  #   :github
-  # ]
+  devise :omniauthable, omniauth_providers: [
+    :digitalocean,
+    :facebook,
+    :github,
+    :google_oauth2,
+    :heroku,
+    :twitter
+  ]
 
   # Relationships
   has_many :organization_memberships
