@@ -35,7 +35,7 @@ ENV
       return <<-GEMFILE
 source "http://rubygems.org"
 
-ruby "2.1.3"
+ruby "2.2.0"
 gem "rails", "~> 4.2.0.beta2"
 
 gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}
