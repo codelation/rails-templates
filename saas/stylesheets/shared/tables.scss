@@ -30,4 +30,9 @@ table.default {
     color: $header-font-color;
     padding: 0.5em 1em;
   }
+
+  tfoot tr td,
+  tfoot tr td:hover {
+    background-color: #f2f2f2;
+  }
 }

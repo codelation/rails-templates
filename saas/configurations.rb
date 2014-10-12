@@ -38,6 +38,7 @@ APPLICATION
     def self.env
       return <<-ENV
 DEVISE_SECRET_TOKEN=#{SecureRandom.hex(64)}
+ENCRYPTION_TOKEN=#{SecureRandom.hex(64)}
 HOSTNAME=localhost:3000
 
 STRIPE_PUBLISHABLE_KEY=SET_ME
@@ -86,6 +87,7 @@ gem "coffee-rails"
 gem "devise"
 gem "ember-rails"
 gem "ember-source"
+gem "gibberish"
 gem "highline"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails", "~> 4.0.0.beta2"

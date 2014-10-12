@@ -11,11 +11,11 @@
         <li class="account-settings<%= current_page?(edit_organization_path(organization)) ? " active" : "" %>">
           <%= link_to "Organization Account", edit_organization_path(organization) %>
         </li>
-        <li class="billing<%= current_page?(edit_subscriber_subscription_path) ? " active" : "" %>">
-          <%= link_to "Billing", edit_subscriber_subscription_path %>
+        <li class="billing<%= current_page?(edit_subscriber_subscription_path(subscriber_params)) ? " active" : "" %>">
+          <%= link_to "Billing", edit_subscriber_subscription_path(subscriber_params) %>
         </li>
-        <li class="users<%= current_page?(subscriber_organization_memberships_path) ? " active" : "" %>">
-          <%= link_to "Users", subscriber_organization_memberships_path %>
+        <li class="users<%= current_page?(subscriber_organization_memberships_path(subscriber_params)) ? " active" : "" %>">
+          <%= link_to "Users", subscriber_organization_memberships_path(subscriber_params) %>
         </li>
       <% end %>
     <% end %>
