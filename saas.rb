@@ -71,10 +71,12 @@ run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
 
 file "app/assets/images/logo.png",                              Saas::Images.logo
 file "app/assets/images/omni_auth_providers/digitalocean.png",  Saas::Images.omni_auth_providers_digitalocean
+file "app/assets/images/omni_auth_providers/dnsimple.png",      Saas::Images.omni_auth_providers_dnsimple
 file "app/assets/images/omni_auth_providers/facebook.png",      Saas::Images.omni_auth_providers_facebook
 file "app/assets/images/omni_auth_providers/github.png",        Saas::Images.omni_auth_providers_github
 file "app/assets/images/omni_auth_providers/google_oauth2.png", Saas::Images.omni_auth_providers_google_oauth2
 file "app/assets/images/omni_auth_providers/heroku.png",        Saas::Images.omni_auth_providers_heroku
+file "app/assets/images/omni_auth_providers/slack.png",         Saas::Images.omni_auth_providers_slack
 file "app/assets/images/omni_auth_providers/twitter.png",       Saas::Images.omni_auth_providers_twitter
 
 # -----------------------------------------
@@ -212,6 +214,12 @@ file "app/helpers/application_helper.rb",        Saas::Helpers.application(@app_
 file "app/helpers/subscription_plans_helper.rb", Saas::Helpers.subscription_plans
 
 # -----------------------------------------
+# Job Files
+# -----------------------------------------
+
+file "app/jobs/refresh_omni_auth_tokens_job.rb", Saas::Jobs.refresh_omni_auth_tokens
+
+# -----------------------------------------
 # Model Files
 # -----------------------------------------
 
@@ -311,7 +319,10 @@ file "app/views/layouts/shared/_flash_messages.html.erb", Saas::Views.layouts_sh
 file "app/views/layouts/home.html.erb",                   Saas::Views.layouts_home
 file "app/views/layouts/application.html.erb",            Saas::Views.layouts_application
 
-file "app/views/omni_auth_providers/index.html.erb",      Saas::Views.omni_auth_providers_index
+file "app/views/omni_auth_providers/_omni_auth_provider.html.erb", Saas::Views.omni_auth_providers_omni_auth_provider
+file "app/views/omni_auth_providers/dnsimple.html.erb",            Saas::Views.omni_auth_providers_dnsimple
+file "app/views/omni_auth_providers/index.html.erb",               Saas::Views.omni_auth_providers_index
+
 file "app/views/organization_memberships/index.html.erb", Saas::Views.organization_memberships_index
 
 file "app/views/organizations/_sidebar.html.erb", Saas::Views.organizations_sidebar
@@ -335,6 +346,7 @@ file "app/views/users/edit.html.erb",     Saas::Views.users_edit
 
 run "rm config/environments/development.rb"
 run "rm config/environments/production.rb"
+run "rm config/application.rb"
 
 run "rm .gitignore"
 
@@ -343,6 +355,7 @@ file "config/environments/production.rb",  Saas::Configurations.production(@app_
 file "config/initializers/devise.rb",      Saas::Configurations.devise
 file "config/initializers/smtp.rb",        Saas::Configurations.smtp
 file "config/initializers/stripe.rb",      Saas::Configurations.stripe
+file "config/application.rb",              Saas::Configurations.application(@app_class)
 file "config/jshint.json",                 Saas::Configurations.jshint
 file ".env",                               Saas::Configurations.env
 file ".rspec",                             Saas::Configurations.rspec

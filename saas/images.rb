@@ -9,6 +9,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/images/omni_auth_providers/digitalocean.png")
     end
 
+    def self.omni_auth_providers_dnsimple
+      File.read("#{File.dirname(__FILE__)}/images/omni_auth_providers/dnsimple.png")
+    end
+
     def self.omni_auth_providers_facebook
       File.read("#{File.dirname(__FILE__)}/images/omni_auth_providers/facebook.png")
     end
@@ -23,6 +27,10 @@ module Saas
 
     def self.omni_auth_providers_heroku
       File.read("#{File.dirname(__FILE__)}/images/omni_auth_providers/heroku.png")
+    end
+
+    def self.omni_auth_providers_slack
+      File.read("#{File.dirname(__FILE__)}/images/omni_auth_providers/slack.png")
     end
 
     def self.omni_auth_providers_twitter

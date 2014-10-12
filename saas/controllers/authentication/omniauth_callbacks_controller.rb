@@ -29,6 +29,11 @@ module Authentication
       handle_callback
     end
 
+    def slack
+      @provider_name = "Slack"
+      handle_callback
+    end
+
     def twitter
       @provider_name = "Twitter"
       handle_callback

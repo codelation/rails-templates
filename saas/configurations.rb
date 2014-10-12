@@ -1,6 +1,40 @@
 module Saas
   class Configurations < ::Configurations
 
+    def self.application(app_class)
+      return <<-APPLICATION
+require File.expand_path('../boot', __FILE__)
+
+require "rails/all"
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module #{app_class}
+  class Application < Rails::Application
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+
+    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
+    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+    # config.time_zone = 'Central Time (US & Canada)'
+
+    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    # config.i18n.default_locale = :de
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
+
+    # ActiveJob Sidekiq Adapter
+    config.active_job.queue_adapter = :sidekiq
+  end
+end
+APPLICATION
+    end
+
     def self.env
       return <<-ENV
 DEVISE_SECRET_TOKEN=#{SecureRandom.hex(64)}
@@ -10,24 +44,32 @@ STRIPE_PUBLISHABLE_KEY=SET_ME
 STRIPE_SECRET_KEY=SET_ME
 
 # OmniAuth Providers
-DIGITAL_OCEAN_CLIENT_ID=SET_ME
-DIGITAL_OCEAN_CLIENT_SECRET=SET_ME
+# Don't forget to remove any unused scope options
+
+DIGITALOCEAN_CLIENT_ID=SET_ME
+DIGITALOCEAN_CLIENT_SECRET=SET_ME
+DIGITALOCEAN_SCOPE="read write"
 
 FACEBOOK_CLIENT_ID=SET_ME
 FACEBOOK_CLIENT_SECRET=SET_ME
+FACEBOOK_SCOPE="email, public_profile, user_friends"
 
 GITHUB_CLIENT_ID=SET_ME
 GITHUB_CLIENT_SECRET=SET_ME
+GITHUB_SCOPE="admin:public_key, admin:repo_hook, gist, repo, user"
 
-GOOGLE_CLIENT_ID=SET_ME
-GOOGLE_CLIENT_SECRET=SET_ME
+GOOGLE_OAUTH2_CLIENT_ID=SET_ME
+GOOGLE_OAUTH2_CLIENT_SECRET=SET_ME
 
 HEROKU_CLIENT_ID=SET_ME
 HEROKU_CLIENT_SECRET=SET_ME
 
+SLACK_CLIENT_ID=SET_ME
+SLACK_CLIENT_SECRET=SET_ME
+SLACK_SCOPE="identify, post, read"
+
 TWITTER_CLIENT_ID=SET_ME
 TWITTER_CLIENT_SECRET=SET_ME
-
 ENV
     end
 
@@ -36,7 +78,7 @@ ENV
 source "http://rubygems.org"
 
 ruby "2.2.0"
-gem "rails", "~> 4.2.0.beta2"
+gem "rails", github: "rails"
 
 gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "cancancan"
@@ -50,20 +92,34 @@ gem "jquery-rails", "~> 4.0.0.beta2"
 gem "local_time"
 gem "money-rails", github: "RubyMoney/money-rails"
 gem "omniauth"
-gem "omniauth-digitalocean"
-gem "omniauth-facebook"
-gem "omniauth-github"
-gem "omniauth-google-oauth2"
-gem "omniauth-heroku"
-gem "omniauth-twitter"
 gem "pg"
 gem "puma"
+gem "rest-client"
 gem "roadie"
 gem "roadie-rails"
 gem "sass-rails", "~> 5.0.0.beta1"
 gem "sidekiq"
 gem "stripe"
 gem "uglifier", ">= 1.3.0"
+
+# Connected Accounts - OmniAuth Providers
+gem "omniauth-digitalocean"
+gem "omniauth-facebook"
+gem "omniauth-github"
+gem "omniauth-google-oauth2"
+gem "omniauth-heroku"
+gem "omniauth-slack", github: "kmrshntr/omniauth-slack"
+gem "omniauth-twitter"
+
+# Connected Accounts - API Libraries
+gem "droplet_kit"       # DigitalOcean
+gem "dnsimple-ruby"     # DNSimple
+gem "koala"             # Facebook
+gem "octokit"           # GitHub
+gem "google-api-client" # Google
+gem "platform-api"      # Heroku
+gem "slack-api"         # Slack
+gem "twitter"           # Twitter
 
 group :development, :test do
   gem "byebug"
@@ -74,7 +130,7 @@ group :development, :test do
   gem "quiet_assets"
   gem "rspec-rails"
   gem "spring"
-  gem "web-console", "~> 2.0.0.beta4"
+  # gem "web-console", "~> 2.0.0.beta4"
 end
 
 group :test do
@@ -123,10 +179,15 @@ GEMFILE
   # These routes handle user authentication and subscriptions.
   # Only edit these routes if you know what you're doing. Thanks!
 
-  # Authentication Routes
+  # Devise Routes for Admin Users
   devise_for :admin_users, controllers: {
     sessions: "admin/sessions"
   }
+
+  # Pseudo OAuth Providers
+  get "users/auth/:provider", to: "omni_auth_providers#new"
+
+  # Devise Routes for Users
   devise_for :users, controllers: {
     confirmations:      "authentication/confirmations",
     omniauth_callbacks: "authentication/omniauth_callbacks",

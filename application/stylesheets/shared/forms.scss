@@ -12,6 +12,11 @@ fieldset {
   }
 }
 
+fieldset legend + .instructions {
+  color: lighten($base-font-color, 15%);
+  margin: -0.5em 0 1.5em;
+}
+
 input,
 label,
 select {

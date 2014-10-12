@@ -8,10 +8,12 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, omniauth_providers: [
     :digitalocean,
+    :dnsimple,
     :facebook,
     :github,
     :google_oauth2,
     :heroku,
+    :slack,
     :twitter
   ]
 
