@@ -102,6 +102,8 @@ gem "roadie"
 gem "roadie-rails"
 gem "sass-rails", "~> 5.0.0.beta1"
 gem "sidekiq"
+gem "sinatra"
+gem "sshkey"
 gem "stripe"
 gem "uglifier", ">= 1.3.0"
 
@@ -200,6 +202,21 @@ GEMFILE
     unlocks:            "authentication/unlocks"
   }
 
+  #{install_blocky ? "\n  mount Blocky::Engine, at: \"/admin/content\"" : ""}#{install_blogelator ? "\n  mount Blogelator::Engine, at: \"/blog\"" : ""}
+  # LetterOpener for Emails
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/email"
+  end
+
+  # Sidekiq Monitoring
+  require "sidekiq/web"
+  authenticate :admin_user do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+
+  # ------------------------------------------------------------------------- #
+  # Routes should be above this line because of :resource_name/:subscriber_id
+
   # Subscriber Routes
   # These routes handle the billing and organization memberships.
   resources :organizations, :users
@@ -212,10 +229,6 @@ GEMFILE
     resource :subscription do
       resource :payment_method
     end
-  end
-#{install_blocky ? "\n  mount Blocky::Engine, at: \"/admin/content\"" : ""}#{install_blogelator ? "\n  mount Blogelator::Engine, at: \"/blog\"" : ""}
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/email"
   end
 end
 ROUTES
