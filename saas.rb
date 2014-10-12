@@ -70,6 +70,7 @@ run "rm vendor/assets/fonts/#{@app_name.underscore}/font-awesome.zip"
 # -----------------------------------------
 
 file "app/assets/images/logo.png",                              Saas::Images.logo
+file "app/assets/images/omni_auth_providers/codeship.png",      Saas::Images.omni_auth_providers_codeship
 file "app/assets/images/omni_auth_providers/digitalocean.png",  Saas::Images.omni_auth_providers_digitalocean
 file "app/assets/images/omni_auth_providers/dnsimple.png",      Saas::Images.omni_auth_providers_dnsimple
 file "app/assets/images/omni_auth_providers/facebook.png",      Saas::Images.omni_auth_providers_facebook
@@ -320,6 +321,7 @@ file "app/views/layouts/home.html.erb",                   Saas::Views.layouts_ho
 file "app/views/layouts/application.html.erb",            Saas::Views.layouts_application
 
 file "app/views/omni_auth_providers/_omni_auth_provider.html.erb", Saas::Views.omni_auth_providers_omni_auth_provider
+file "app/views/omni_auth_providers/codeship.html.erb",            Saas::Views.omni_auth_providers_codeship
 file "app/views/omni_auth_providers/dnsimple.html.erb",            Saas::Views.omni_auth_providers_dnsimple
 file "app/views/omni_auth_providers/index.html.erb",               Saas::Views.omni_auth_providers_index
 
