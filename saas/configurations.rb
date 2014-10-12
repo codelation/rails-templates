@@ -107,7 +107,7 @@ gem "sshkey"
 gem "stripe"
 gem "uglifier", ">= 1.3.0"
 
-# Connected Accounts - OmniAuth Providers
+# Connected Services - OmniAuth Providers
 gem "omniauth-digitalocean"
 gem "omniauth-facebook"
 gem "omniauth-github"
@@ -116,7 +116,7 @@ gem "omniauth-heroku"
 gem "omniauth-slack", github: "kmrshntr/omniauth-slack"
 gem "omniauth-twitter"
 
-# Connected Accounts - API Libraries
+# Connected Services - API Libraries
 gem "barge"             # DigitalOcean
 gem "dnsimple-ruby"     # DNSimple
 gem "koala"             # Facebook

@@ -24,7 +24,7 @@ class OmniAuthProvidersController < ApplicationController
   end
 
   def index
-    @title = "Connected Accounts ~ #{@subscriber.display_name}"
+    @title = "Connected Services ~ #{@subscriber.display_name}"
   end
 
   def new

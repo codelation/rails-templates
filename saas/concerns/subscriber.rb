@@ -47,7 +47,7 @@ module Subscriber
   end
 
   # ------------------------------------------
-  # Connected Accounts - API Clients
+  # Connected Services - API Clients
   # ------------------------------------------
 
   def digitalocean_client
