@@ -5,10 +5,16 @@ fieldset {
   border: 1px solid $base-border-color;
   margin: 0;
   margin-bottom: $base-line-height;
-  padding: $base-line-height;
+  padding: $base-line-height $base-line-height 0 $base-line-height;
 
   & > div {
     margin-bottom: $base-font-size;
+  }
+
+  .button,
+  button,
+  input[type="submit"] {
+    margin: $base-font-size 0 $base-font-size * 1.5;
   }
 }
 

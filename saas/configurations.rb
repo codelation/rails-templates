@@ -112,7 +112,7 @@ gem "omniauth-slack", github: "kmrshntr/omniauth-slack"
 gem "omniauth-twitter"
 
 # Connected Accounts - API Libraries
-gem "droplet_kit"       # DigitalOcean
+gem "barge"             # DigitalOcean
 gem "dnsimple-ruby"     # DNSimple
 gem "koala"             # Facebook
 gem "octokit"           # GitHub

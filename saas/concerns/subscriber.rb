@@ -46,6 +46,18 @@ module Subscriber
     @new_subscription
   end
 
+  # ------------------------------------------
+  # Connected Accounts - API Clients
+  # ------------------------------------------
+
+  def digitalocean_client
+    @digitalocean_client ||= begin
+      if provider = self.omni_auth_providers.where(name: "digitalocean").first
+        Barge::Client.new(access_token: provider.access_token)
+      end
+    end
+  end
+
 private
 
   def activate_new_subscription
