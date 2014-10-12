@@ -1,7 +1,7 @@
-class RefreshOmniAuthTokensJob < ActiveJob::Base
-  queue_as :default
+class RefreshOmniAuthTokensWorker
+  include Sidekiq::Worker
 
-  def perform(*args)
+  def perform
     OmniAuthProvider.where.not(name: "facebook").find_each do |provider|
       @provider = provider
       refresh_token

@@ -214,12 +214,6 @@ file "app/helpers/application_helper.rb",        Saas::Helpers.application(@app_
 file "app/helpers/subscription_plans_helper.rb", Saas::Helpers.subscription_plans
 
 # -----------------------------------------
-# Job Files
-# -----------------------------------------
-
-file "app/jobs/refresh_omni_auth_tokens_job.rb", Saas::Jobs.refresh_omni_auth_tokens
-
-# -----------------------------------------
 # Model Files
 # -----------------------------------------
 
@@ -238,6 +232,12 @@ file "app/models/stripe_card.rb",             Saas::Models.stripe_card
 file "app/models/subscription.rb",            Saas::Models.subscription
 file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
 file "app/models/user.rb",                    Saas::Models.user
+
+# -----------------------------------------
+# Worker Files
+# -----------------------------------------
+
+file "app/workers/refresh_omni_auth_tokens_worker.rb", Saas::Workers.refresh_omni_auth_tokens
 
 # -----------------------------------------
 # Spec Files

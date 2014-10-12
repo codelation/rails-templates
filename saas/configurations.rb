@@ -28,7 +28,8 @@ module #{app_class}
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # ActiveJob Sidekiq Adapter
+    # Sidekiq Configuration
+    config.eager_load_paths += ["#{config.root}/app/workers"]
     config.active_job.queue_adapter = :sidekiq
   end
 end
