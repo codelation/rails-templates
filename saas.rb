@@ -326,6 +326,7 @@ file "app/views/omni_auth_providers/dnsimple.html.erb",            Saas::Views.o
 file "app/views/omni_auth_providers/index.html.erb",               Saas::Views.omni_auth_providers_index
 
 file "app/views/organization_memberships/index.html.erb", Saas::Views.organization_memberships_index
+file "app/views/organization_memberships/new.html.erb", Saas::Views.organization_memberships_new
 
 file "app/views/organizations/_sidebar.html.erb", Saas::Views.organizations_sidebar
 file "app/views/organizations/edit.html.erb",     Saas::Views.organizations_edit
@@ -352,20 +353,21 @@ run "rm config/application.rb"
 
 run "rm .gitignore"
 
-file "config/environments/development.rb", Saas::Configurations.development(@app_class)
-file "config/environments/production.rb",  Saas::Configurations.production(@app_class)
-file "config/initializers/devise.rb",      Saas::Configurations.devise
-file "config/initializers/smtp.rb",        Saas::Configurations.smtp
-file "config/initializers/stripe.rb",      Saas::Configurations.stripe
-file "config/application.rb",              Saas::Configurations.application(@app_class)
-file "config/jshint.json",                 Saas::Configurations.jshint
-file ".env",                               Saas::Configurations.env
-file ".rspec",                             Saas::Configurations.rspec
-file ".gitignore",                         Saas::Configurations.gitignore
-file ".tm_properties",                     Saas::Configurations.tm_properties
-file "Guardfile",                          Saas::Configurations.guardfile
-file "Procfile",                           Saas::Configurations.procfile
-file "Procfile.development",               Saas::Configurations.procfile_development
+file "config/environments/development.rb",     Saas::Configurations.development(@app_class)
+file "config/environments/production.rb",      Saas::Configurations.production(@app_class)
+file "config/initializers/devise.rb",          Saas::Configurations.devise
+file "config/initializers/smtp.rb",            Saas::Configurations.smtp
+file "config/initializers/stripe.rb",          Saas::Configurations.stripe
+file "config/locales/devise_invitable.en.yml", Saas::Configurations.devise_invitable
+file "config/application.rb",                  Saas::Configurations.application(@app_class)
+file "config/jshint.json",                     Saas::Configurations.jshint
+file ".env",                                   Saas::Configurations.env
+file ".rspec",                                 Saas::Configurations.rspec
+file ".gitignore",                             Saas::Configurations.gitignore
+file ".tm_properties",                         Saas::Configurations.tm_properties
+file "Guardfile",                              Saas::Configurations.guardfile
+file "Procfile",                               Saas::Configurations.procfile
+file "Procfile.development",                   Saas::Configurations.procfile_development
 
 # =================================================================
 # Migration Files

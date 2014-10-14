@@ -1,4 +1,5 @@
 class OrganizationsController < ApplicationController
+  before_action :set_subscriber
 
   def create
     @organization = Organization.new(organization_params)
@@ -7,7 +8,7 @@ class OrganizationsController < ApplicationController
       organization_membership = @organization.add_user(current_user)
       organization_membership.role = :owner
       organization_membership.save
-      redirect_to edit_organization_path(@organization), notice: "Organization created successfully."
+      redirect_to edit_organization_path(@organization), notice: "Organization created successfully"
     else
       @subscription_plans = SubscriptionPlan.organization.active
       @title = "New Organization ~ #{current_user.display_name}"
@@ -30,7 +31,7 @@ class OrganizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:id])
     if @organization.update_attributes(organization_params)
-      redirect_to edit_organization_path(@organization), notice: "Account updated successfully."
+      redirect_to edit_organization_path(@organization), notice: "Account updated successfully"
     else
       @title = "Account ~ #{@organization.name}"
       render :edit
@@ -56,6 +57,10 @@ private
 
   def organization_params
     params.require(:organization).permit(:name, :subscription_plan_id)
+  end
+
+  def set_subscriber
+    @subscriber = current_user
   end
 
 end

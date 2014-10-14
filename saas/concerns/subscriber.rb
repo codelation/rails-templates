@@ -58,6 +58,14 @@ module Subscriber
     end
   end
 
+  def github_client
+    @github_client ||= begin
+      if provider = self.omni_auth_providers.where(name: "github").first
+        Octokit::Client.new(access_token: provider.access_token)
+      end
+    end
+  end
+
 private
 
   def activate_new_subscription

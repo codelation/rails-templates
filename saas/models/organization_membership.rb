@@ -10,4 +10,10 @@ class OrganizationMembership < ActiveRecord::Base
     admin:  1,
     owner:  2
   }
+
+  def self.selectable_roles
+    roles.sort.map{|role|
+      [role[0].titleize, role[0]]
+    }
+  end
 end

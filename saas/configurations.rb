@@ -36,6 +36,10 @@ end
 APPLICATION
     end
 
+    def self.devise_invitable
+      File.read("#{File.dirname(__FILE__)}/configurations/locales/devise_invitable.en.yml")
+    end
+
     def self.env
       return <<-ENV
 DEVISE_SECRET_TOKEN=#{SecureRandom.hex(64)}
@@ -86,6 +90,7 @@ gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelat
 gem "cancancan"
 gem "coffee-rails"
 gem "devise"
+gem "devise_invitable"
 gem "ember-rails"
 gem "ember-source"
 gem "gibberish"

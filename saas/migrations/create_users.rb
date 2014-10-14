@@ -3,8 +3,8 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.integer :account_balance_cents,    default: 0,     null: false
       t.string  :account_balance_currency, default: "USD", null: false
-      t.string  :name
-      t.string  :time_zone
+      t.string :name
+      t.string :time_zone
 
       ## Confirmable
       t.string   :confirmation_token
@@ -13,8 +13,20 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :email, null: false, default: ""
+      t.string :encrypted_password, default: ""
+
+      ## Invitable
+      t.string     :invitation_token
+      t.datetime   :invitation_created_at
+      t.datetime   :invitation_sent_at
+      t.datetime   :invitation_accepted_at
+      t.integer    :invitation_limit
+      t.references :invited_by,        polymorphic: true
+      t.integer    :invitations_count, default: 0
+      t.index      :invitations_count
+      t.index      :invitation_token,  unique: true # for invitable
+      t.index      :invited_by_id
 
       ## Lockable
       t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts

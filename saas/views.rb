@@ -89,6 +89,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/organization_memberships/index.html.erb")
     end
 
+    def self.organization_memberships_new
+      File.read("#{File.dirname(__FILE__)}/views/organization_memberships/new.html.erb")
+    end
+
     def self.organizations_sidebar
       File.read("#{File.dirname(__FILE__)}/views/organizations/_sidebar.html.erb")
     end
