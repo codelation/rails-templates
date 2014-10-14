@@ -29,6 +29,14 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/_sidebar.scss")
     end
 
+    def self.application_organization_memberships_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_memberships/edit.scss")
+    end
+
+    def self.application_organization_memberships_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_memberships/index.scss")
+    end
+
     def self.application_organizations_index
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/index.scss")
     end

@@ -115,6 +115,9 @@ file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets
 
 file "app/assets/stylesheets/application/omni_auth_providers/index.scss", Saas::Stylesheets.application_omni_auth_providers_index
 
+file "app/assets/stylesheets/application/organization_memberships/edit.scss",  Saas::Stylesheets.application_organization_memberships_edit
+file "app/assets/stylesheets/application/organization_memberships/index.scss", Saas::Stylesheets.application_organization_memberships_index
+
 file "app/assets/stylesheets/application/organizations/_sidebar.scss", Saas::Stylesheets.application_organizations_sidebar
 file "app/assets/stylesheets/application/organizations/index.scss",    Saas::Stylesheets.application_organizations_index
 file "app/assets/stylesheets/application/organizations/new.scss",      Saas::Stylesheets.application_organizations_new
@@ -327,8 +330,9 @@ file "app/views/omni_auth_providers/codeship.html.erb",            Saas::Views.o
 file "app/views/omni_auth_providers/dnsimple.html.erb",            Saas::Views.omni_auth_providers_dnsimple
 file "app/views/omni_auth_providers/index.html.erb",               Saas::Views.omni_auth_providers_index
 
+file "app/views/organization_memberships/edit.html.erb",  Saas::Views.organization_memberships_edit
 file "app/views/organization_memberships/index.html.erb", Saas::Views.organization_memberships_index
-file "app/views/organization_memberships/new.html.erb", Saas::Views.organization_memberships_new
+file "app/views/organization_memberships/new.html.erb",   Saas::Views.organization_memberships_new
 
 file "app/views/organizations/_sidebar.html.erb", Saas::Views.organizations_sidebar
 file "app/views/organizations/edit.html.erb",     Saas::Views.organizations_edit

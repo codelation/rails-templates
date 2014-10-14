@@ -1,6 +1,7 @@
 class OrganizationMembershipsController < ApplicationController
   before_action :build_organization_membership, only: [:new]
   before_action :set_organization
+  before_action :set_organization_membership, only: [:destroy, :edit, :update]
 
   def create
     @user = User.where(email: user_params[:email]).first_or_initialize
@@ -14,6 +15,15 @@ class OrganizationMembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @organization_membership.destroy
+    redirect_to subscriber_organization_memberships_path, notice: "Membership removed successfully."
+  end
+
+  def edit
+    @title = "Edit Membership ~ #{@organization.display_name}"
+  end
+
   def index
     @organization_memberships = @organization.memberships.ordered_by_user_name
     @title = "Users ~ #{@organization.display_name}"
@@ -21,6 +31,15 @@ class OrganizationMembershipsController < ApplicationController
 
   def new
     @title = "New User ~ #{@organization.display_name}"
+  end
+
+  def update
+    if @organization_membership.update_attributes(organization_membership_params)
+      redirect_to subscriber_organization_memberships_path, notice: "Membership updated successfully."
+    else
+      @title = "Edit Membership ~ #{@organization.display_name}"
+      render :edit
+    end
   end
 
 private
@@ -65,6 +84,10 @@ private
 
   def set_organization
     @organization = @subscriber
+  end
+
+  def set_organization_membership
+    @organization_membership = OrganizationMembership.find(params[:id])
   end
 
   def user_params

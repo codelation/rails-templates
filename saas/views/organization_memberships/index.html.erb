@@ -11,7 +11,8 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Role</th>
+            <th class="role">Role</th>
+            <th class="actions">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -19,6 +20,18 @@
             <tr>
               <td><%= membership.user.display_name %></td>
               <td><%= membership.role.titleize %></td>
+              <td>
+                <% if membership.user == current_user %>
+                  That&#8217;s you!
+                <% else %>
+                  <%= link_to edit_subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button" do %>
+                    Edit
+                  <% end %>
+                  <%= link_to subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button destroy", method: :delete, data: { confirm: "Are you sure you want to remove #{membership.user.display_name} from #{membership.organization.display_name}?"} do %>
+                    Remove
+                  <% end %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
