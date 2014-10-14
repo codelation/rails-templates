@@ -9,6 +9,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/confirmations_controller.rb")
     end
 
+    def self.authentication_invitations_controller
+      File.read("#{File.dirname(__FILE__)}/controllers/authentication/invitations_controller.rb")
+    end
+
     def self.authentication_omniauth_callbacks_controller
       File.read("#{File.dirname(__FILE__)}/controllers/authentication/omniauth_callbacks_controller.rb")
     end

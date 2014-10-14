@@ -67,6 +67,8 @@ private
 
   # Subscribes the user to the selected subscription plan.
   def create_initial_subscription
+    return unless self.subscription_plan_id.to_i > 0
+
     @subscription_plan = SubscriptionPlan.find(self.subscription_plan_id)
     if @subscription_plan.user?
       self.subscribe_to_plan(@subscription_plan)

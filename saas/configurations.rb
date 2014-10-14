@@ -200,6 +200,7 @@ GEMFILE
   # Devise Routes for Users
   devise_for :users, controllers: {
     confirmations:      "authentication/confirmations",
+    invitations:        "authentication/invitations",
     omniauth_callbacks: "authentication/omniauth_callbacks",
     passwords:          "authentication/passwords",
     registrations:      "authentication/registrations",

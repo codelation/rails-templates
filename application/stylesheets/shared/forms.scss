@@ -5,22 +5,11 @@ fieldset {
   border: 1px solid $base-border-color;
   margin: 0;
   margin-bottom: $base-line-height;
-  padding: $base-line-height $base-line-height 0 $base-line-height;
+  padding: $base-line-height;
 
   & > div {
     margin-bottom: $base-font-size;
   }
-
-  .button,
-  button,
-  input[type="submit"] {
-    margin: $base-font-size 0 $base-font-size * 1.5;
-  }
-}
-
-fieldset legend + .instructions {
-  color: lighten($base-font-color, 15%);
-  margin: -0.5em 0 1.5em;
 }
 
 input,
@@ -69,6 +58,14 @@ textarea,
     border-color: $form-border-color-focus;
     box-shadow: $form-box-shadow-focus;
     outline: none;
+  }
+
+  &[disabled="disabled"] {
+    background-color: darken(white, 0.5%);
+    color: lighten($base-font-color, 20%);
+    &:hover {
+      border-color: $form-border-color;
+    }
   }
 }
 

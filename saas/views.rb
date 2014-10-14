@@ -21,6 +21,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/current_users/edit.html.erb")
     end
 
+    def self.devise_invitations_edit
+      File.read("#{File.dirname(__FILE__)}/views/devise/invitations/edit.html.erb")
+    end
+
     def self.devise_registrations_new
       File.read("#{File.dirname(__FILE__)}/views/devise/registrations/new.html.erb")
     end

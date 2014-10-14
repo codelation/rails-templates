@@ -187,12 +187,13 @@ run "rm app/controllers/application_controller.rb"
 
 file "app/controllers/admin/sessions_controller.rb", Saas::Controllers.admin_sessions_controller
 
-file "app/controllers/authentication/confirmations_controller.rb", Saas::Controllers.authentication_confirmations_controller
-file "app/controllers/authentication/omniauth_callbacks_controller.rb",     Saas::Controllers.authentication_omniauth_callbacks_controller
-file "app/controllers/authentication/passwords_controller.rb",     Saas::Controllers.authentication_passwords_controller
-file "app/controllers/authentication/registrations_controller.rb", Saas::Controllers.authentication_registrations_controller
-file "app/controllers/authentication/sessions_controller.rb",      Saas::Controllers.authentication_sessions_controller
-file "app/controllers/authentication/unlocks_controller.rb",       Saas::Controllers.authentication_unlocks_controller
+file "app/controllers/authentication/confirmations_controller.rb",      Saas::Controllers.authentication_confirmations_controller
+file "app/controllers/authentication/invitations_controller.rb",        Saas::Controllers.authentication_invitations_controller
+file "app/controllers/authentication/omniauth_callbacks_controller.rb", Saas::Controllers.authentication_omniauth_callbacks_controller
+file "app/controllers/authentication/passwords_controller.rb",          Saas::Controllers.authentication_passwords_controller
+file "app/controllers/authentication/registrations_controller.rb",      Saas::Controllers.authentication_registrations_controller
+file "app/controllers/authentication/sessions_controller.rb",           Saas::Controllers.authentication_sessions_controller
+file "app/controllers/authentication/unlocks_controller.rb",            Saas::Controllers.authentication_unlocks_controller
 
 file "app/controllers/application_controller.rb",              Saas::Controllers.application_controller
 file "app/controllers/contact_messages_controller.rb",         Saas::Controllers.contact_messages_controller
@@ -293,6 +294,7 @@ run "rm app/views/layouts/application.html.erb"
 file "app/views/admin/sessions/new.html.erb",                    Saas::Views.admin_sessions_new
 
 file "app/views/authentication/confirmations/new.html.erb",      Saas::Views.devise_confirmations_new
+file "app/views/authentication/invitations/edit.html.erb",       Saas::Views.devise_invitations_edit
 file "app/views/authentication/passwords/edit.html.erb",         Saas::Views.devise_passwords_edit
 file "app/views/authentication/passwords/new.html.erb",          Saas::Views.devise_passwords_new
 file "app/views/authentication/registrations/new.html.erb",      Saas::Views.devise_registrations_new

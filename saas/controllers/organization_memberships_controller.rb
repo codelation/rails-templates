@@ -3,7 +3,7 @@ class OrganizationMembershipsController < ApplicationController
   before_action :set_organization
 
   def create
-    @user = User.where(organization_membership_params[:user]).first_or_initialize
+    @user = User.where(email: user_params[:email]).first_or_initialize
 
     if @user == current_user
       redirect_to subscriber_organization_memberships_path, notice: "You just tried to invite yourself!"
@@ -45,13 +45,19 @@ private
   end
 
   def invite_new_user
-    render json: @user
+    @organization_membership = OrganizationMembership.new(organization_membership_params)
+    @organization_membership.user = User.invite!(user_params, current_user)
+    if @organization_membership.save
+      redirect_to subscriber_organization_memberships_path, notice: "User invited successfully."
+    else
+      @title = "New User ~ #{@organization.display_name}"
+      render :new
+    end
   end
 
   def organization_membership_params
     params.require(:organization_membership).permit(
-      :role,
-      user: [:email]
+      :role
     ).merge(
       organization_id: @organization.id
     )
@@ -59,6 +65,10 @@ private
 
   def set_organization
     @organization = @subscriber
+  end
+
+  def user_params
+    params[:organization_membership].require(:user).permit(:email).merge(subscription_plan_id: -1)
   end
 
 end
