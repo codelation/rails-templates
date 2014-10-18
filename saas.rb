@@ -248,7 +248,15 @@ file "app/workers/refresh_omni_auth_tokens_worker.rb", Saas::Workers.refresh_omn
 # Spec Files
 # -----------------------------------------
 
+run "rm -rf test"
+
+file "spec/controllers/.keep", ""
+file "spec/factories/.keep",   ""
+file "spec/features/.keep",    ""
+file "spec/models/.keep",      ""
+
 file "spec/helpers/subscription_plans_helper_spec.rb", Saas::Specs.subscription_plans_helper
+file "spec/models/ability_spec.rb",                    Saas::Specs.ability
 file "spec/models/charge_spec.rb",                     Saas::Specs.charge
 file "spec/models/invoice_spec.rb",                    Saas::Specs.invoice
 file "spec/models/line_item_spec.rb",                  Saas::Specs.line_item
@@ -259,6 +267,8 @@ file "spec/models/subscription_plan_spec.rb",          Saas::Specs.subscription_
 file "spec/models/user_spec.rb",                       Saas::Specs.user
 file "spec/web_mock/stripe_card.json",                 Saas::Specs.web_mock_stripe_card
 file "spec/web_mock/stripe_customer.json",             Saas::Specs.web_mock_stripe_customer
+file "spec/rails_helper.rb",                           Saas::Specs.rails_helper
+file "spec/spec_helper.rb",                            Saas::Specs.spec_helper
 
 # -----------------------------------------
 # Factory Girl Files
@@ -408,20 +418,6 @@ file "db/seeds.rb",                         Saas::Seeds.seeds
 # =================================================================
 
 file "lib/tasks/development.rake", Tasks.development
-
-# =================================================================
-# Spec Files
-# =================================================================
-
-run "rm -rf test"
-
-file "spec/controllers/.keep", ""
-file "spec/factories/.keep",   ""
-file "spec/features/.keep",    ""
-file "spec/models/.keep",      ""
-
-file "spec/rails_helper.rb", Spec.rails_helper
-file "spec/spec_helper.rb",  Spec.spec_helper
 
 # =================================================================
 # Documentation Files

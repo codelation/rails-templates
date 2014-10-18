@@ -1,4 +1,4 @@
-class Spec
+class Specs
   def self.rails_helper
     File.read("#{File.dirname(__FILE__)}/spec/rails_helper.rb")
   end

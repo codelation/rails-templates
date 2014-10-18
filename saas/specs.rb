@@ -1,5 +1,9 @@
 module Saas
-  class Specs
+  class Specs < ::Specs
+
+    def self.ability
+      File.read("#{File.dirname(__FILE__)}/spec/models/ability_spec.rb")
+    end
 
     def self.charge
       File.read("#{File.dirname(__FILE__)}/spec/models/charge_spec.rb")

@@ -200,8 +200,8 @@ file "spec/factories/.keep",   ""
 file "spec/features/.keep",    ""
 file "spec/models/.keep",      ""
 
-file "spec/rails_helper.rb", Spec.rails_helper
-file "spec/spec_helper.rb",  Spec.spec_helper
+file "spec/rails_helper.rb", Specs.rails_helper
+file "spec/spec_helper.rb",  Specs.spec_helper
 
 # =================================================================
 # Documentation Files
