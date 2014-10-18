@@ -1,7 +1,7 @@
 class OmniAuthProvider < ActiveRecord::Base
   belongs_to :subscriber, polymorphic: true
 
-  validates_presence_of :name, :subscriber_id
+  validates :name, :subscriber, presence: true
 
   def access_token
     @access_token ||= begin

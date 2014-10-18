@@ -6,8 +6,8 @@ class Organization < ActiveRecord::Base
   has_many :memberships, class_name: "OrganizationMembership"
 
   # Validations
-  validates_presence_of :name
-  validates_presence_of :subscription_plan_id, on: :create
+  validates :name,                 presence: true
+  validates :subscription_plan_id, presence: true, on: :create
 
   # Callbacks
   after_create :create_initial_subscription

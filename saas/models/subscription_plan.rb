@@ -5,7 +5,7 @@ class SubscriptionPlan < ActiveRecord::Base
   monetize :price_per_user_cents
   monetize :setup_price_cents
 
-  validates_presence_of :interval, :interval_count
+  validates :interval, :interval_count, presence: true
 
   scope :active, -> { where(active: true) }
 

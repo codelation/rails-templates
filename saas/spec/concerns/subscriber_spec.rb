@@ -26,7 +26,7 @@ describe Subscriber, "#active_subscription?" do
 
   it "should return false after the current subscription ends" do
     @subscription = @organization.subscribe_to_plan(@plan)
-    @subscription.ended_at = Time.now - 1.day
+    @subscription.ended_at = @organization.time.now - 1.day
     @subscription.save
 
     expect(@organization.active_subscription?).to eq(false)
@@ -76,23 +76,23 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
   it "should set the current period start and end on the subscription" do
     @subscription = @organization.subscribe_to_plan(@plan)
 
-    period_start = Time.now
+    period_start = @organization.time.now
     period_end = period_start + @plan.interval_length
 
-    expect(@subscription.current_period_start).to be_within(10).of(period_start)
-    expect(@subscription.current_period_end).to   be_within(10).of(period_end)
+    expect(@subscription.current_period_start).to be_within(100).of(period_start)
+    expect(@subscription.current_period_end).to   be_within(100).of(period_end)
   end
 
   it "should set the trial end of the subscription based on the plan" do
     @subscription = @organization.subscribe_to_plan(@plan)
 
-    trial_end = Time.now + @plan.trial_length
-    expect(@subscription.trial_ends_at).to be_within(10).of(trial_end)
+    trial_end = @organization.time.now + @plan.trial_length
+    expect(@subscription.trial_ends_at).to be_within(100).of(trial_end)
 
     @yearly_plan.trial_period_days = 0
     @subscription = @organization.subscribe_to_plan(@yearly_plan)
 
-    expect(@subscription.trial_ends_at).to be_within(10).of(Time.now)
+    expect(@subscription.trial_ends_at).to be_within(100).of(@organization.time.now)
   end
 
   context "subscriber has an existing subscription" do
@@ -103,7 +103,7 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
       @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
       @subscription.reload
-      expect(@subscription.ended_at).to be_within(10).of(Time.now)
+      expect(@subscription.ended_at).to be_within(100).of(@organization.time.now)
     end
 
     it "should not end or create a new subscription if subscribing to the same plan" do
@@ -119,8 +119,8 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       @subscription.active!
 
       # Let's make the current period 30 days long and we're right in the middle of it
-      @subscription.current_period_start = Time.now - 15.days
-      @subscription.current_period_end = Time.now + 15.days
+      @subscription.current_period_start = @organization.time.now - 15.days
+      @subscription.current_period_end = @organization.time.now + 15.days
       @subscription.save
 
       # And make the plan $30/interval so the price is $1/day
@@ -129,12 +129,13 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
       # We should get half the money back as an account credit
       @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
+
       expect(@organization.account_balance).to eq(Money.new(-1500, "USD")) # $15.00
     end
 
     it "should not give the subscriber a new trial period if they have an active plan" do
       @subscription = @organization.subscribe_to_plan(@plan)
-      @subscription.trial_ends_at = Time.now - 100.days
+      @subscription.trial_ends_at = @organization.time.now - 100.days
       @subscription.active!
 
       @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
@@ -167,7 +168,7 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       @subscription1 = @organization.subscribe_to_plan(@plan1)
       @subscription2 = @organization.subscribe_to_plan(@plan2)
 
-      expect(@subscription2.trial_ends_at).to be_within(10).of(@subscription1.trial_ends_at)
+      expect(@subscription2.trial_ends_at).to be_within(100).of(@subscription1.trial_ends_at)
     end
 
     it "should extend the trial end time of the new subscription to match the new plan's trial period" do
@@ -177,7 +178,7 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       @subscription1 = @organization.subscribe_to_plan(@plan1)
       @subscription2 = @organization.subscribe_to_plan(@plan2)
 
-      expect(@subscription2.trial_ends_at).to be_within(10).of(@subscription1.trial_ends_at + 15.days)
+      expect(@subscription2.trial_ends_at).to be_within(100).of(@subscription1.trial_ends_at + 15.days)
     end
 
   end
@@ -193,7 +194,7 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
       @free_subscription = @organization.subscribe_to_plan(@free_plan)
       @paid_subscription = @organization.subscribe_to_plan(@paid_plan)
 
-      expect(@paid_subscription.trial_ends_at).to be_within(10).of(@organization.created_at + @paid_plan.trial_length)
+      expect(@paid_subscription.trial_ends_at).to be_within(100).of(@organization.created_at + @paid_plan.trial_length)
     end
 
   end

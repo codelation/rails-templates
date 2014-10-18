@@ -30,7 +30,7 @@ module Subscriber
   # @param subscription_plan [SubscriptionPlan]
   # @return [Subscription]
   def subscribe_to_plan(subscription_plan)
-    @new_subscription = Subscription.create(plan: subscription_plan)
+    @new_subscription = Subscription.new(plan: subscription_plan, subscriber: self)
     @old_subscription = self.current_subscription
 
     if @old_subscription
@@ -81,10 +81,10 @@ private
         @new_subscription.trial_ends_at = @old_subscription.trial_ends_at + trial_length_diff
       end
     else
-      @new_subscription.trial_ends_at = Time.now + @new_subscription.plan.trial_length
+      @new_subscription.trial_ends_at = self.time.now + @new_subscription.plan.trial_length
     end
 
-    if @new_subscription.trial_ends_at > Time.now
+    if @new_subscription.trial_ends_at > self.time.now
       @new_subscription.trialing!
     else
       @new_subscription.active!
@@ -102,7 +102,7 @@ private
       self.save
     end
 
-    @old_subscription.ended_at = Time.now
+    @old_subscription.ended_at = self.time.now
     @old_subscription.canceled!
   end
 end

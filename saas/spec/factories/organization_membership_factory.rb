@@ -6,7 +6,7 @@ FactoryGirl.define do
     user
 
     trait :with_admin_role do
-      association :role, factory: :admin_organization_role
+      role :admin
     end
   end
 end

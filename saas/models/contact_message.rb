@@ -1,6 +1,6 @@
 class ContactMessage < ActiveRecord::Base
   # Validations
-  validates_presence_of :email, :name, :message
+  validates :email, :name, :message, presence: true
 
   # Callbacks
   after_create :deliver_email

@@ -7,6 +7,8 @@ class Invoice < ActiveRecord::Base
 
   monetize :total_cents
 
+  validates :subscriber, presence: true
+
   # Returns the date for which the invoice was successfully paid
   # @return [Date] date of first successful charge, nil otherwise
   def paid_at

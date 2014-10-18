@@ -2,8 +2,8 @@ class StripeCard < PaymentMethod
   self.table_name = "stripe_cards"
 
   # Validations
-  validates_presence_of :stripe_token, on: :create
-  validates_presence_of :subscriber
+  validates :stripe_token, presence: true, on: :create
+  validates :subscriber,   presence: true
 
   # Callbacks
   before_create  :update_stripe_customer

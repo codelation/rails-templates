@@ -9,6 +9,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/spec/models/charge_spec.rb")
     end
 
+    def self.factories
+      File.read("#{File.dirname(__FILE__)}/spec/support/factories_spec.rb")
+    end
+
     def self.invoice
       File.read("#{File.dirname(__FILE__)}/spec/models/invoice_spec.rb")
     end
