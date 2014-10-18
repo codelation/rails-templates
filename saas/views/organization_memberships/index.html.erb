@@ -21,12 +21,12 @@
               <td><%= membership.user.display_name %></td>
               <td><%= membership.role.titleize %></td>
               <td>
+                <%= link_to edit_subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button" do %>
+                  Edit
+                <% end %>
                 <% if membership.user == current_user %>
-                  That&#8217;s you!
+                  <span class="button destroy">Remove</span>
                 <% else %>
-                  <%= link_to edit_subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button" do %>
-                    Edit
-                  <% end %>
                   <%= link_to subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button destroy", method: :delete, data: { confirm: "Are you sure you want to remove #{membership.user.display_name} from #{membership.organization.display_name}?"} do %>
                     Remove
                   <% end %>

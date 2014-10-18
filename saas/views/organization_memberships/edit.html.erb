@@ -11,7 +11,7 @@
 <% end %>
 
 <div class="title">
-  <h1><%= @organization.display_name %></h1>
+  <h1><%= @organization.display_name %> ~ <%= @organization_membership.user.display_name %></h1>
 </div>
 
 <div class="outer-container">
@@ -24,7 +24,7 @@
       <%= form_for @organization_membership, url: subscriber_organization_membership_path(subscriber_params.merge(id: @organization_membership.id)) do |f| %>
         <div>
           <%= label_tag :user_name, "Full Name" %><br>
-          <span class="user-name"><%= @organization_membership.user.name %></span>
+          <span class="user-name"><%= @organization_membership.user.name || "--" %></span>
         </div>
 
         <div>

@@ -27,21 +27,28 @@ module Saas
     end
 
     def subscriber_params
-      if params[:resource_name] && params[:subscriber_id]
-        {
-          resource_name: params[:resource_name],
-          subscriber_id: params[:subscriber_id]
-        }
-      elsif @organization
+      if @organization && @organization.persisted?
         {
           resource_name: "organizations",
           subscriber_id: @organization.id
         }
-      elsif current_user
+      elsif current_user && current_user.active_subscription?
         {
           resource_name: "users",
           subscriber_id: current_user.id
         }
+      elsif current_user
+        if organization = current_user.organizations.find{|organization| organization.active_subscription? }
+          {
+            resource_name: "organizations",
+            subscriber_id: organization.id
+          }
+        else
+          {
+            resource_name: "users",
+            subscriber_id: current_user.id
+          }
+        end
       else
         {}
       end

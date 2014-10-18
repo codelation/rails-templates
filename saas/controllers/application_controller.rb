@@ -10,6 +10,7 @@ private
   def set_subscriber
     if subscriber_route?
       @subscriber = params[:resource_name].classify.constantize.find(params[:subscriber_id])
+      @organization = @subscriber if @subscriber.is_a?(Organization)
     else
       @subscriber = current_user
     end

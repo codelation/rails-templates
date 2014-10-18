@@ -5,10 +5,18 @@ fieldset {
   border: 1px solid $base-border-color;
   margin: 0;
   margin-bottom: $base-line-height;
-  padding: $base-line-height;
+  padding: $base-line-height $base-line-height 0 $base-line-height;
 
   & > div {
     margin-bottom: $base-font-size;
+  }
+
+  & > form > div {
+    margin-bottom: $base-font-size;
+  }
+
+  & > *:last-child {
+    margin-bottom: $base-line-height;
   }
 }
 

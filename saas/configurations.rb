@@ -28,6 +28,12 @@ module #{app_class}
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.assets.precompile += %w(
+      #{app_class.underscore}/font-awesome/fontawesome-webfont.eot #{app_class.underscore}/font-awesome/fontawesome-webfont.svg
+      #{app_class.underscore}/font-awesome/fontawesome-webfont.ttf #{app_class.underscore}/font-awesome/fontawesome-webfont.woff
+      home.css home.js
+    )
+
     # Sidekiq Configuration
     config.eager_load_paths += ["\#{config.root}/app/workers"]
     config.active_job.queue_adapter = :sidekiq
