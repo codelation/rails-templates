@@ -29,7 +29,7 @@ module #{app_class}
     config.active_record.raise_in_transactional_callbacks = true
 
     # Sidekiq Configuration
-    config.eager_load_paths += ["#{config.root}/app/workers"]
+    config.eager_load_paths += ["\#{config.root}/app/workers"]
     config.active_job.queue_adapter = :sidekiq
   end
 end
