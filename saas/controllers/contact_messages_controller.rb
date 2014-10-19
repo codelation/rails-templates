@@ -3,6 +3,7 @@ class ContactMessagesController < ApplicationController
 
   def create
     @contact_message = ContactMessage.new(contact_message_params)
+    authorize! :create, @contact_message
 
     if @contact_message.save
       redirect_to @contact_message
@@ -13,12 +14,13 @@ class ContactMessagesController < ApplicationController
 
   def new
     @contact_message = ContactMessage.new
+    authorize! :create, @contact_message
 
     @title = "Contact Us"
   end
 
   def show
-
+    authorize! :create, ContactMessage
   end
 
 private

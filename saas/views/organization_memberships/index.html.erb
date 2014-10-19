@@ -21,15 +21,26 @@
               <td><%= membership.user.display_name %></td>
               <td><%= membership.role.titleize %></td>
               <td>
-                <%= link_to edit_subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button" do %>
-                  Edit
+                <% if can? :update, membership %>
+                  <%= link_to edit_subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button" do %>
+                    <% if membership.user == current_user %>
+                      View
+                    <% else %>
+                      Edit
+                    <% end %>
+                  <% end %>
                 <% end %>
+
                 <% if membership.user == current_user %>
                   <span class="button destroy">Remove</span>
                 <% else %>
-                  <%= link_to subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button destroy", method: :delete, data: { confirm: "Are you sure you want to remove #{membership.user.display_name} from #{membership.organization.display_name}?"} do %>
-                    Remove
+
+                  <% if can? :destroy, membership %>
+                    <%= link_to subscriber_organization_membership_path(subscriber_params.merge(id: membership.id)), class: "button destroy", method: :delete, data: { confirm: "Are you sure you want to remove #{membership.user.display_name} from #{membership.organization.display_name}?"} do %>
+                      Remove
+                    <% end %>
                   <% end %>
+
                 <% end %>
               </td>
             </tr>
@@ -43,8 +54,10 @@
       </p>
     <% end %>
 
-    <p>
-      <%= link_to "New User", new_subscriber_organization_membership_path, class: "button" %>
-    </p>
+    <% if can? :create, OrganizationMembership.new(organization: @organization) %>
+      <p>
+        <%= link_to "New User", new_subscriber_organization_membership_path, class: "button" %>
+      </p>
+    <% end %>
   </div>
 </div>

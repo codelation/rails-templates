@@ -3,7 +3,6 @@ class StripeCard < PaymentMethod
 
   # Validations
   validates :stripe_token, presence: true, on: :create
-  validates :subscriber,   presence: true
 
   # Callbacks
   before_create  :update_stripe_customer

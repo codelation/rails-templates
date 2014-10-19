@@ -25,6 +25,15 @@ class Subscription < ActiveRecord::Base
     canceled: 4
   }
 
+  # Returns whether or not the subscription is still in use.
+  # @return [Boolean]
+  def current?
+    in_use = !self.unpaid?
+    not_ended = self.ended_at.nil? || self.ended_at > Time.now
+
+    in_use && not_ended
+  end
+
   # The amount the subscriber should be credited if
   # they cancel the subscription right now. Nil is
   # returned if there is no credit given.

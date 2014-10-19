@@ -1,5 +1,6 @@
 module Authentication
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    skip_authorization_check
     layout "home"
 
     before_action :set_omni_auth_provider

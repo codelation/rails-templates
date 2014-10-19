@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.new(organization_params)
+    authorize! :create, @organization
 
     if @organization.save
       organization_membership = @organization.add_user(current_user)
@@ -19,17 +20,22 @@ class OrganizationsController < ApplicationController
 
   def edit
     @organization = Organization.find(params[:id])
+    authorize! :update, @organization
+
     @subscriber = @organization
     @title = "Account ~ #{@organization.name}"
   end
 
   def index
+    authorize! :create, Organization
     @organization_memberships = current_user.organization_memberships.ordered_by_organization_name
     @title = "Organizations ~ #{current_user.display_name}"
   end
 
   def update
     @organization = Organization.find(params[:id])
+    authorize! :update, @organization
+
     if @organization.update_attributes(organization_params)
       redirect_to edit_organization_path(@organization), notice: "Account updated successfully"
     else
@@ -40,6 +46,8 @@ class OrganizationsController < ApplicationController
 
   def new
     @organization = Organization.new
+    authorize! :create, @organization
+
     @subscription_plans = SubscriptionPlan.organization.active
     @title = "New Organization ~ #{current_user.display_name}"
   end

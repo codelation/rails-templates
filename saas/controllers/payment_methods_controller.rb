@@ -4,6 +4,7 @@ class PaymentMethodsController < ApplicationController
   def create
     @stripe_card = StripeCard.new(stripe_card_params)
     @stripe_card.subscriber = @subscriber
+    authorize! :create, @stripe_card
 
     if @stripe_card.save
       @subscription.reload
@@ -19,13 +20,20 @@ class PaymentMethodsController < ApplicationController
 
   def destroy
     @stripe_card = StripeCard.find(params[:id])
-    @stripe_card.destroy
-    redirect_to edit_subscriber_subscription_payment_method_path, notice: "Payment method deleted successfully."
+    authorize! :destroy, @stripe_card
+
+    if @stripe_card.destroy
+      redirect_to edit_subscriber_subscription_payment_method_path, notice: "Payment method deleted successfully."
+    else
+      redirect_to edit_subscriber_subscription_payment_method_path, alert: "Payment method cannot be deleted if assigned to a subscription."
+    end
   end
 
   def edit
     @stripe_card = StripeCard.new
     @stripe_card.subscriber = @subscriber
+    authorize! :update, @stripe_card
+
     @stripe_cards = @subscriber.stripe_cards
 
     @title = "Billing ~ Payment Method ~ #{@subscriber.display_name}"

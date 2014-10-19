@@ -50,3 +50,40 @@ describe StripeCard, "#update_current_subscription" do
     expect(@user.current_subscription.payment_method).to eq(@payment_method)
   end
 end
+
+describe StripeCard, "#destroy" do
+  before(:each) do
+    stub_request(:post, "https://api.stripe.com/v1/customers").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_customer.json"))
+    )
+    stub_request(:get, "https://api.stripe.com/v1/customers/cus_4paKHGMWyPEkmv").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_customer.json"))
+    )
+
+    stub_request(:post, "https://api.stripe.com/v1/customers/cus_4paKHGMWyPEkmv/cards").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card.json"))
+    )
+    stub_request(:get, "https://api.stripe.com/v1/customers/cus_4paKHGMWyPEkmv/cards/card123").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card.json"))
+    )
+    stub_request(:delete, "https://api.stripe.com/v1/customers/cus_4paKHGMWyPEkmv/cards/card123").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card_delete.json"))
+    )
+
+    @user = create(:user)
+    @stripe_card = create(:stripe_card, subscriber: @user)
+    @plan = create(:subscription_plan)
+    @subscription = @user.subscribe_to_plan(@plan)
+    @subscription.payment_method = @stripe_card
+    @subscription.save
+  end
+
+  it "should not allow destroy if the card belongs to a current subscription" do
+    expect(@stripe_card.destroy).to eq(false)
+  end
+
+  it "should allow destroy if the card doesn't belong to a current subscription" do
+    @stripe_card.subscriptions.destroy_all
+    expect(@stripe_card.destroy).to eq(@stripe_card)
+  end
+end

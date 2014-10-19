@@ -2,14 +2,18 @@ class UsersController < ApplicationController
   before_action :set_user, :set_subscriber
 
   def edit
+    authorize! :update, @user
     @title = "My Account"
   end
 
   def show
+    authorize! :read, @user
     redirect_to edit_user_path(@user)
   end
 
   def update
+    authorize! :update, @user
+
     @title = "My Account"
 
     if user_params.has_key?(:password)

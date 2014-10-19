@@ -68,14 +68,16 @@
         </tbody>
       </table>
 
-      <%= form_for @stripe_card, url: subscriber_payment_methods_path do |f| %>
-        <%= f.hidden_field :stripe_card_id %>
-        <%= f.hidden_field :stripe_token %>
-        <%= f.hidden_field :brand %>
-        <%= f.hidden_field :last4 %>
-        <%= f.hidden_field :exp_month %>
-        <%= f.hidden_field :exp_year %>
-        <%= f.submit "New Card" %>
+      <% if can? :create, @stripe_card %>
+        <%= form_for @stripe_card, url: subscriber_payment_methods_path do |f| %>
+          <%= f.hidden_field :stripe_card_id %>
+          <%= f.hidden_field :stripe_token %>
+          <%= f.hidden_field :brand %>
+          <%= f.hidden_field :last4 %>
+          <%= f.hidden_field :exp_month %>
+          <%= f.hidden_field :exp_year %>
+          <%= f.submit "New Card" %>
+        <% end %>
       <% end %>
     </fieldset>
   </div>

@@ -19,7 +19,12 @@
 
   <div class="page">
     <fieldset>
-      <legend>Edit Organization Membership</legend>
+      <legend>
+        <% unless @organization_membership.user == current_user %>
+          Edit
+        <% end %>
+        Organization Membership
+      </legend>
 
       <%= form_for @organization_membership, url: subscriber_organization_membership_path(subscriber_params.merge(id: @organization_membership.id)) do |f| %>
         <div>
@@ -34,12 +39,18 @@
 
         <div>
           <%= f.label :role, "User Role" %><br>
-          <%= f.select :role, OrganizationMembership.selectable_roles %>
+          <% if @organization_membership.user == current_user %>
+            <span class="user-role"><%= @organization_membership.role.titleize %></span>
+          <% else %>
+            <%= f.select :role, OrganizationMembership.selectable_roles %>
+          <% end %>
         </div>
 
-        <div>
-          <%= f.submit "Update Membership" %>
-        </div>
+        <% unless @organization_membership.user == current_user %>
+          <div>
+            <%= f.submit "Update Membership" %>
+          </div>
+        <% end %>
       <% end %>
     </fieldset>
   </div>

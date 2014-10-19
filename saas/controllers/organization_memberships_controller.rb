@@ -4,6 +4,7 @@ class OrganizationMembershipsController < ApplicationController
   before_action :set_organization_membership, only: [:destroy, :edit, :update]
 
   def create
+    authorize! :create, OrganizationMembership.new(organization: @organization)
     @user = User.where(email: user_params[:email]).first_or_initialize
 
     if @user == current_user
@@ -17,23 +18,31 @@ class OrganizationMembershipsController < ApplicationController
 
   def destroy
     @organization_membership.destroy
+    authorize! :destroy, @organization_membership
+
     redirect_to subscriber_organization_memberships_path, notice: "Membership removed successfully."
   end
 
   def edit
+    authorize! :update, @organization_membership
     @title = "Edit Membership ~ #{@organization.display_name}"
   end
 
   def index
     @organization_memberships = @organization.memberships.ordered_by_user_name
+    authorize! :update, @organization_memberships.first
+
     @title = "Users ~ #{@organization.display_name}"
   end
 
   def new
+    authorize! :create, OrganizationMembership.new(organization: @organization)
     @title = "New User ~ #{@organization.display_name}"
   end
 
   def update
+    authorize! :update, @organization_membership
+
     if @organization_membership.update_attributes(organization_membership_params)
       redirect_to subscriber_organization_memberships_path, notice: "Membership updated successfully."
     else

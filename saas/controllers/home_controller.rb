@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   layout "home"
+  skip_authorization_check
 
   def about
     @title = "About Us"

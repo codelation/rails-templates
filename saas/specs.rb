@@ -45,6 +45,10 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/spec/models/user_spec.rb")
     end
 
+    def self.web_mock_stripe_card_delete
+      File.read("#{File.dirname(__FILE__)}/spec/web_mock/stripe_card_delete.json")
+    end
+
     def self.web_mock_stripe_card
       File.read("#{File.dirname(__FILE__)}/spec/web_mock/stripe_card.json")
     end

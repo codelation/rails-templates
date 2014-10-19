@@ -265,6 +265,7 @@ file "spec/models/subscription_spec.rb",               Saas::Specs.subscription
 file "spec/models/subscription_plan_spec.rb",          Saas::Specs.subscription_plan
 file "spec/models/user_spec.rb",                       Saas::Specs.user
 file "spec/support/factories_spec.rb",                 Saas::Specs.factories
+file "spec/web_mock/stripe_card_delete.json",          Saas::Specs.web_mock_stripe_card_delete
 file "spec/web_mock/stripe_card.json",                 Saas::Specs.web_mock_stripe_card
 file "spec/web_mock/stripe_customer.json",             Saas::Specs.web_mock_stripe_customer
 file "spec/rails_helper.rb",                           Saas::Specs.rails_helper

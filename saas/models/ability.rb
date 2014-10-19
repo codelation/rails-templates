@@ -6,6 +6,17 @@ class Ability
     @user ||= user
     @user ||= User.new # guest user (not logged in)
 
+    # ------------------------------------------
+    # ContactMessage Permissions
+    # ------------------------------------------
+    can :create, ContactMessage
+
+
+    # ------------------------------------------
+    # OmniAuthProvider Permissions
+    # ------------------------------------------
+    can :manage, OmniAuthProvider, subscriber_id: @user.id, subscriber_type: "User"
+
 
     # ------------------------------------------
     # Organization Permissions
@@ -43,18 +54,13 @@ class Ability
     payment_methods = [StripeCard]
 
     # Single User Account Owner
-    can :create,  payment_methods, subscriber_id: @user.id, subscriber_type: "User"
-    can :destroy, payment_methods, subscriber_id: @user.id, subscriber_type: "User"
+    can :manage, payment_methods, subscriber_id: @user.id, subscriber_type: "User"
 
     # Organization Owner
-    can :create,  payment_methods, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
-    can :update,  payment_methods, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
-    can :destroy, payment_methods, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
+    can :manage,  payment_methods, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
 
     # Organization Admin
-    can :create,  payment_methods, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
-    can :update,  payment_methods, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
-    can :destroy, payment_methods, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
+    can :manage,  payment_methods, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
 
 
     # ------------------------------------------
@@ -78,8 +84,7 @@ class Ability
     # User Permissions
     # ------------------------------------------
 
-    can :update,  User, id: @user.id
-    can :destroy, User, id: @user.id
+    can :manage, User, id: @user.id
   end
 
 private

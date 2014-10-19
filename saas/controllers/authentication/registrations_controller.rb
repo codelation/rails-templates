@@ -1,5 +1,6 @@
 module Authentication
   class RegistrationsController < Devise::RegistrationsController
+    skip_authorization_check
     before_action :configure_permitted_parameters
     layout "home"
 

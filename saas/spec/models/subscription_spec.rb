@@ -4,6 +4,49 @@ require "rails_helper"
 # Instance Methods
 # ---------------------------------------------------------
 
+describe Subscription, "#current?" do
+
+  before(:each) do
+    @subscription = build(:subscription)
+    @subscriber = @subscription.subscriber
+  end
+
+  context "subscription hasn't ended" do
+
+    it "should return true during trial period" do
+      @subscription.status = :trialing
+      expect(@subscription.current?).to eq(true)
+    end
+
+    it "should return true if the subscription is active" do
+      @subscription.status = :active
+      expect(@subscription.current?).to eq(true)
+    end
+
+    it "should return true if the subscription is past due" do
+      @subscription.status = :past_due
+      expect(@subscription.current?).to eq(true)
+    end
+
+    it "should return true if the subscription is canceled" do
+      @subscription.status = :canceled
+      expect(@subscription.current?).to eq(true)
+    end
+
+    it "should return false if the subscription is unpaid" do
+      @subscription.status = :unpaid
+      expect(@subscription.current?).to eq(false)
+    end
+
+  end
+
+  it "should return false if the subscription has ended" do
+    @subscription.ended_at = Time.now - 10.days
+    expect(@subscription.current?).to eq(false)
+  end
+
+end
+
 describe Subscription, "#current_period_credit" do
 
   before(:each) do

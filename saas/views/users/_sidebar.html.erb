@@ -25,9 +25,11 @@
     </li>
 
     <% current_user.organizations.ordered_by_name.each do |organization| %>
-      <li class="organization">
-        <%= link_to organization.name, edit_organization_path(organization) %>
-      </li>
+      <% if can? :update, organization %>
+        <li class="organization">
+          <%= link_to organization.name, edit_organization_path(organization) %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
