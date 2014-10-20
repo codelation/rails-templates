@@ -1,5 +1,5 @@
-class User < ActiveRecord::Base
-  include Subscriber
+class User < Subscriber
+  self.table_name = "users"
 
   # Devise Modules
   # - Also available: :confirmable, :lockable, and :timeoutable
@@ -48,13 +48,6 @@ class User < ActiveRecord::Base
   # @return [String]
   def display_name
     self.name.blank? ? self.email : self.name
-  end
-
-  # Returns a Time-like class with the user's selected time zone.
-  # @return [ActiveSupport::TimeWithZone]
-  def time
-    Time.zone = self.time_zone
-    Time.zone
   end
 
   # The String representation of the user.

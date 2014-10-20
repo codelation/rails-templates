@@ -29,12 +29,16 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/spec/models/stripe_card_spec.rb")
     end
 
-    def self.subscription
-      File.read("#{File.dirname(__FILE__)}/spec/models/subscription_spec.rb")
+    def self.subscriber
+      File.read("#{File.dirname(__FILE__)}/spec/models/subscriber_spec.rb")
     end
 
     def self.subscription_plan
       File.read("#{File.dirname(__FILE__)}/spec/models/subscription_plan_spec.rb")
+    end
+
+    def self.subscription
+      File.read("#{File.dirname(__FILE__)}/spec/models/subscription_spec.rb")
     end
 
     def self.subscription_plans_helper

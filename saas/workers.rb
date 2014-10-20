@@ -1,8 +1,12 @@
 module Saas
   class Workers
 
-    def self.refresh_omni_auth_tokens
-      File.read("#{File.dirname(__FILE__)}/workers/refresh_omni_auth_tokens_worker.rb")
+    def self.omni_auth_token_refresh
+      File.read("#{File.dirname(__FILE__)}/workers/omni_auth_token_refresh_worker.rb")
+    end
+
+    def self.subscription_update
+      File.read("#{File.dirname(__FILE__)}/workers/subscription_update_worker.rb")
     end
 
   end

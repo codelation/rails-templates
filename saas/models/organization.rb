@@ -1,5 +1,5 @@
-class Organization < ActiveRecord::Base
-  include Subscriber
+class Organization < Subscriber
+  self.table_name = "organizations"
 
   # Relationships
   has_many :admin_invitations
@@ -48,14 +48,6 @@ class Organization < ActiveRecord::Base
   # @return [Array<OrganizationMembership>]
   def owner_memberships
     self.memberships.owner.includes(:user).ordered_by_user_name
-  end
-
-  # Returns a Time-like class with the
-  # organization's selected time zone.
-  # @return [ActiveSupport::TimeWithZone]
-  def time
-    Time.zone = self.time_zone
-    Time.zone
   end
 
   # The String representation of the organization.

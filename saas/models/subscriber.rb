@@ -1,12 +1,10 @@
-module Subscriber
-  extend ActiveSupport::Concern
+class Subscriber < ActiveRecord::Base
+  include OmniAuthProviderClients
+  self.abstract_class = true
 
-  included do
-    monetize :account_balance_cents
-    has_many :omni_auth_providers, as: :subscriber
-    has_many :stripe_cards,        as: :subscriber
-    has_many :subscriptions,       as: :subscriber
-  end
+  monetize :account_balance_cents
+  has_many :stripe_cards,  as: :subscriber, dependent: :destroy
+  has_many :subscriptions, as: :subscriber
 
   # Returns whether or not the subscriber has an active subscription.
   # @return [Boolean]
@@ -46,24 +44,11 @@ module Subscriber
     @new_subscription
   end
 
-  # ------------------------------------------
-  # Connected Services - API Clients
-  # ------------------------------------------
-
-  def digitalocean_client
-    @digitalocean_client ||= begin
-      if provider = self.omni_auth_providers.where(name: "digitalocean").first
-        Barge::Client.new(access_token: provider.access_token)
-      end
-    end
-  end
-
-  def github_client
-    @github_client ||= begin
-      if provider = self.omni_auth_providers.where(name: "github").first
-        Octokit::Client.new(access_token: provider.access_token)
-      end
-    end
+  # Returns a Time-like class with the user's selected time zone.
+  # @return [ActiveSupport::TimeWithZone]
+  def time
+    Time.zone = self.time_zone
+    Time.zone
   end
 
 private

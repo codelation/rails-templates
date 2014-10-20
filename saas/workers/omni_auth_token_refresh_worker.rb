@@ -1,11 +1,11 @@
-class RefreshOmniAuthTokensWorker
+class OmniAuthTokenRefreshWorker
   include Sidekiq::Worker
 
-  def perform
-    OmniAuthProvider.where.not(name: "facebook").find_each do |provider|
-      @provider = provider
-      refresh_token
-    end
+  def perform(provider_id)
+    @provider = OmniAuthProvider.find_by_id(provider_id)
+    return unless @provider
+
+    refresh_token
   end
 
 private

@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
   belongs_to :subscriber, polymorphic: true
-  has_many :line_items
-  has_many :charges
+  has_many :line_items, dependent: :destroy
+  has_many :charges,    dependent: :destroy
 
   after_touch :calculate_total
 
@@ -12,9 +12,8 @@ class Invoice < ActiveRecord::Base
   # Returns the date for which the invoice was successfully paid
   # @return [Date] date of first successful charge, nil otherwise
   def paid_at
-    if self.paid?
-      self.charges.where(status: Charge.statuses[:succeeded]).chronological.first.created_at
-    end
+    return unless self.paid?
+    self.charges.where(status: Charge.statuses[:succeeded]).chronological.first.created_at
   end
 
   # Returns if paid or not

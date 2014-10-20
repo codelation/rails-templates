@@ -233,15 +233,17 @@ file "app/models/organization_membership.rb", Saas::Models.organization_membersh
 file "app/models/organization.rb",            Saas::Models.organization
 file "app/models/payment_method.rb",          Saas::Models.payment_method
 file "app/models/stripe_card.rb",             Saas::Models.stripe_card
-file "app/models/subscription.rb",            Saas::Models.subscription
+file "app/models/subscriber.rb",              Saas::Models.subscriber
 file "app/models/subscription_plan.rb",       Saas::Models.subscription_plan
+file "app/models/subscription.rb",            Saas::Models.subscription
 file "app/models/user.rb",                    Saas::Models.user
 
 # -----------------------------------------
 # Worker Files
 # -----------------------------------------
 
-file "app/workers/refresh_omni_auth_tokens_worker.rb", Saas::Workers.refresh_omni_auth_tokens
+file "app/workers/omni_auth_token_refresh_worker.rb", Saas::Workers.omni_auth_token_refresh
+file "app/workers/subscription_update_worker.rb",     Saas::Workers.subscription_update
 
 # -----------------------------------------
 # Spec Files
@@ -261,8 +263,9 @@ file "spec/models/invoice_spec.rb",                    Saas::Specs.invoice
 file "spec/models/line_item_spec.rb",                  Saas::Specs.line_item
 file "spec/models/organization_spec.rb",               Saas::Specs.organization
 file "spec/models/stripe_card_spec.rb",                Saas::Specs.stripe_card
-file "spec/models/subscription_spec.rb",               Saas::Specs.subscription
+file "spec/models/subscriber_spec.rb",                 Saas::Specs.subscriber
 file "spec/models/subscription_plan_spec.rb",          Saas::Specs.subscription_plan
+file "spec/models/subscription_spec.rb",               Saas::Specs.subscription
 file "spec/models/user_spec.rb",                       Saas::Specs.user
 file "spec/support/factories_spec.rb",                 Saas::Specs.factories
 file "spec/web_mock/stripe_card_delete.json",          Saas::Specs.web_mock_stripe_card_delete
@@ -289,8 +292,7 @@ file "spec/factories/user_factory.rb",                    Saas::Factories.user_f
 # Concern Files
 # -----------------------------------------
 
-file "app/models/concerns/subscriber.rb",       Saas::Concerns.subscriber
-file "spec/models/concerns/subscriber_spec.rb", Saas::Concerns.subscriber_spec
+file "app/models/concerns/omni_auth_provider_clients.rb", Saas::Concerns.omni_auth_provider_clients
 
 # -----------------------------------------
 # Mailer Files
@@ -381,6 +383,7 @@ file ".env",                                   Saas::Configurations.env
 file ".rspec",                                 Saas::Configurations.rspec
 file ".gitignore",                             Saas::Configurations.gitignore
 file ".tm_properties",                         Saas::Configurations.tm_properties
+file "clock.rb",                               Saas::Configurations.clock
 file "Guardfile",                              Saas::Configurations.guardfile
 file "Procfile",                               Saas::Configurations.procfile
 file "Procfile.development",                   Saas::Configurations.procfile_development

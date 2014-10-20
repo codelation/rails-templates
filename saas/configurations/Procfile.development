@@ -1,3 +1,4 @@
+clock: bundle exec clockwork clock.rb
 redis: redis-server
-web: rails s Puma
+web: bundle exec rails s Puma
 worker: bundle exec sidekiq

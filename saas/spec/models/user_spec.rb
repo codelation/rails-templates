@@ -4,11 +4,16 @@ require "rails_helper"
 # Instance Methods
 # ---------------------------------------------------------
 
-describe User, "#time" do
+describe User, "#display_name" do
 
-  it "should return a time object with the correct time zone" do
+  it "should return the user's full name" do
     @user = build(:user)
-    expect(@user.time.name).to eq(@user.time_zone)
+    expect(@user.display_name).to eq(@user.name)
+  end
+
+  it "should return the user's email address if full name is blank" do
+    @user = build(:user, name: "")
+    expect(@user.display_name).to eq(@user.email)
   end
 
 end

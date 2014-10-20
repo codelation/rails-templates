@@ -42,6 +42,10 @@ end
 APPLICATION
     end
 
+    def self.clock
+      File.read("#{File.dirname(__FILE__)}/configurations/clock.rb")
+    end
+
     def self.devise_invitable
       File.read("#{File.dirname(__FILE__)}/configurations/locales/devise_invitable.en.yml")
     end
@@ -94,6 +98,7 @@ gem "rails", github: "rails"
 
 gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "cancancan"
+gem "clockwork"
 gem "coffee-rails"
 gem "devise"
 gem "devise_invitable"
@@ -129,7 +134,7 @@ gem "omniauth-twitter"
 
 # Connected Services - API Libraries
 gem "barge"             # DigitalOcean
-gem "dnsimple-ruby"     # DNSimple
+gem "fog"               # DNSimple
 gem "koala"             # Facebook
 gem "octokit"           # GitHub
 gem "google-api-client" # Google

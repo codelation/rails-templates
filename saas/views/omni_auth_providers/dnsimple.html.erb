@@ -28,6 +28,12 @@
 
       <%= form_for @omni_auth_provider, url: subscriber_omni_auth_providers_path(resource_name: "users", subscriber_id: current_user.id) do |f| %>
         <%= f.hidden_field :name %>
+
+        <div>
+          <%= f.label :email, "Email Address" %><br>
+          <%= f.text_field :email %>
+        </div>
+
         <div>
           <%= f.label :access_token, "API Key" %><br>
           <%= f.text_field :access_token %>

@@ -44,6 +44,7 @@ private
   def omni_auth_provider_params
     params.require(:omni_auth_provider).permit(
       :access_token,
+      :email,
       :name
     )
   end
