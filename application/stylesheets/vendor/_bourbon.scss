@@ -4,23 +4,29 @@
 @import "bourbon/settings/asset-pipeline";
 
 // Custom Helpers
+@import "bourbon/helpers/convert-units";
 @import "bourbon/helpers/gradient-positions-parser";
+@import "bourbon/helpers/is-num";
+@import "bourbon/helpers/linear-angle-parser";
+@import "bourbon/helpers/linear-gradient-parser";
 @import "bourbon/helpers/linear-positions-parser";
+@import "bourbon/helpers/linear-side-corner-parser";
 @import "bourbon/helpers/radial-arg-parser";
 @import "bourbon/helpers/radial-positions-parser";
+@import "bourbon/helpers/radial-gradient-parser";
 @import "bourbon/helpers/render-gradients";
 @import "bourbon/helpers/shape-size-stripper";
+@import "bourbon/helpers/str-to-num";
 
 // Custom Functions
+@import "bourbon/functions/assign";
 @import "bourbon/functions/color-lightness";
 @import "bourbon/functions/flex-grid";
 @import "bourbon/functions/golden-ratio";
 @import "bourbon/functions/grid-width";
-@import "bourbon/functions/linear-gradient";
 @import "bourbon/functions/modular-scale";
 @import "bourbon/functions/px-to-em";
 @import "bourbon/functions/px-to-rem";
-@import "bourbon/functions/radial-gradient";
 @import "bourbon/functions/strip-units";
 @import "bourbon/functions/tint-shade";
 @import "bourbon/functions/transition-property-name";
@@ -44,7 +50,6 @@
 @import "bourbon/css3/hyphens";
 @import "bourbon/css3/hidpi-media-query";
 @import "bourbon/css3/image-rendering";
-@import "bourbon/css3/inline-block";
 @import "bourbon/css3/keyframes";
 @import "bourbon/css3/linear-gradient";
 @import "bourbon/css3/perspective";

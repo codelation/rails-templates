@@ -1,4 +1,5 @@
 class PaymentMethodsController < ApplicationController
+  layout "account"
   before_action :set_subscription
 
   def create

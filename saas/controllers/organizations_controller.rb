@@ -1,4 +1,5 @@
 class OrganizationsController < ApplicationController
+  layout "account"
   before_action :set_subscriber
 
   def create

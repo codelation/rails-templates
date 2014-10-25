@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout "account"
   before_action :set_user, :set_subscriber
 
   def edit

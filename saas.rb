@@ -86,15 +86,17 @@ file "app/assets/images/omni_auth_providers/twitter.png",       Saas::Images.omn
 
 run "rm app/assets/javascripts/application.js"
 
-file "app/assets/javascripts/application/.keep",                ""
-file "app/assets/javascripts/home/.keep",                       ""
-file "app/assets/javascripts/application/organizations/new.js", Saas::Javascripts.application_organizations_new
-file "app/assets/javascripts/application/subscriptions/new.js", Saas::Javascripts.application_subscriptions_new
-file "app/assets/javascripts/shared/buttons.js",                Saas::Javascripts.buttons
-file "app/assets/javascripts/shared/flash_messages.js",         Saas::Javascripts.flash_messages
-file "app/assets/javascripts/application.js",                   Saas::Javascripts.application
-file "app/assets/javascripts/home.js",                          Saas::Javascripts.home
-file "vendor/assets/javascripts/moment.js",                     Saas::Javascripts.vendor_moment
+file "app/assets/javascripts/account/.keep",                ""
+file "app/assets/javascripts/application/.keep",            ""
+file "app/assets/javascripts/home/.keep",                   ""
+file "app/assets/javascripts/account/organizations/new.js", Saas::Javascripts.account_organizations_new
+file "app/assets/javascripts/account/subscriptions/new.js", Saas::Javascripts.account_subscriptions_new
+file "app/assets/javascripts/shared/buttons.js",            Saas::Javascripts.buttons
+file "app/assets/javascripts/shared/flash_messages.js",     Saas::Javascripts.flash_messages
+file "app/assets/javascripts/account.js",                   Saas::Javascripts.account
+file "app/assets/javascripts/application.js",               Saas::Javascripts.application
+file "app/assets/javascripts/home.js",                      Saas::Javascripts.home
+file "vendor/assets/javascripts/moment.js",                 Saas::Javascripts.vendor_moment
 
 # -----------------------------------------
 # Stylesheet Files
@@ -102,9 +104,30 @@ file "vendor/assets/javascripts/moment.js",                     Saas::Javascript
 
 run "rm app/assets/stylesheets/application.css"
 
+# Account Stylesheets
+file "app/assets/stylesheets/account/layout/_footer.scss", Saas::Stylesheets.account_layout_footer
+file "app/assets/stylesheets/account/layout/_header.scss", Saas::Stylesheets.account_layout_header
+file "app/assets/stylesheets/account/layout/fonts.scss",   Saas::Stylesheets.account_layout_fonts
+file "app/assets/stylesheets/account/layout/main.scss",    Saas::Stylesheets.account_layout_main
+file "app/assets/stylesheets/account/layout/title.scss",   Saas::Stylesheets.account_layout_title
+file "app/assets/stylesheets/account/.keep",               ""
+file "app/assets/stylesheets/account.css.scss",            Saas::Stylesheets.account(@app_name)
+
+file "app/assets/stylesheets/account/omni_auth_providers/index.scss", Saas::Stylesheets.account_omni_auth_providers_index
+
+file "app/assets/stylesheets/account/organization_memberships/edit.scss",  Saas::Stylesheets.account_organization_memberships_edit
+file "app/assets/stylesheets/account/organization_memberships/index.scss", Saas::Stylesheets.account_organization_memberships_index
+
+file "app/assets/stylesheets/account/organizations/_sidebar.scss", Saas::Stylesheets.account_organizations_sidebar
+file "app/assets/stylesheets/account/organizations/index.scss",    Saas::Stylesheets.account_organizations_index
+file "app/assets/stylesheets/account/organizations/new.scss",      Saas::Stylesheets.account_organizations_new
+
+file "app/assets/stylesheets/account/payment_methods/edit.scss",   Saas::Stylesheets.account_payment_methods_edit
+file "app/assets/stylesheets/account/subscriptions/edit.scss",     Saas::Stylesheets.account_subscriptions_edit
+file "app/assets/stylesheets/account/subscriptions/new.scss",      Saas::Stylesheets.account_subscriptions_new
+file "app/assets/stylesheets/account/users/_sidebar.scss",         Saas::Stylesheets.account_users_sidebar
+
 # Application Stylesheets
-file "app/assets/stylesheets/_imports.scss",                   Saas::Stylesheets.imports(@app_name)
-file "app/assets/stylesheets/_variables.scss",                 Saas::Stylesheets.variables
 file "app/assets/stylesheets/application/layout/_footer.scss", Saas::Stylesheets.application_layout_footer
 file "app/assets/stylesheets/application/layout/_header.scss", Saas::Stylesheets.application_layout_header
 file "app/assets/stylesheets/application/layout/fonts.scss",   Saas::Stylesheets.application_layout_fonts
@@ -112,20 +135,6 @@ file "app/assets/stylesheets/application/layout/main.scss",    Saas::Stylesheets
 file "app/assets/stylesheets/application/layout/title.scss",   Saas::Stylesheets.application_layout_title
 file "app/assets/stylesheets/application/.keep",               ""
 file "app/assets/stylesheets/application.css.scss",            Saas::Stylesheets.application(@app_name)
-
-file "app/assets/stylesheets/application/omni_auth_providers/index.scss", Saas::Stylesheets.application_omni_auth_providers_index
-
-file "app/assets/stylesheets/application/organization_memberships/edit.scss",  Saas::Stylesheets.application_organization_memberships_edit
-file "app/assets/stylesheets/application/organization_memberships/index.scss", Saas::Stylesheets.application_organization_memberships_index
-
-file "app/assets/stylesheets/application/organizations/_sidebar.scss", Saas::Stylesheets.application_organizations_sidebar
-file "app/assets/stylesheets/application/organizations/index.scss",    Saas::Stylesheets.application_organizations_index
-file "app/assets/stylesheets/application/organizations/new.scss",      Saas::Stylesheets.application_organizations_new
-
-file "app/assets/stylesheets/application/payment_methods/edit.scss",   Saas::Stylesheets.application_payment_methods_edit
-file "app/assets/stylesheets/application/subscriptions/edit.scss",     Saas::Stylesheets.application_subscriptions_edit
-file "app/assets/stylesheets/application/subscriptions/new.scss",      Saas::Stylesheets.application_subscriptions_new
-file "app/assets/stylesheets/application/users/_sidebar.scss",         Saas::Stylesheets.application_users_sidebar
 
 # Home Styleshseets
 file "app/assets/stylesheets/home/.keep",                      ""
@@ -144,6 +153,8 @@ file "app/assets/stylesheets/home/home/privacy.scss",          Saas::Stylesheets
 file "app/assets/stylesheets/home/home/terms.scss",            Saas::Stylesheets.home_terms
 
 # Shared Stylesheets
+file "app/assets/stylesheets/_imports.scss",                                     Saas::Stylesheets.imports(@app_name)
+file "app/assets/stylesheets/_variables.scss",                                   Saas::Stylesheets.variables
 file "app/assets/stylesheets/shared/body.scss",                                  Saas::Stylesheets.shared_body
 file "app/assets/stylesheets/shared/buttons.scss",                               Saas::Stylesheets.shared_buttons
 file "app/assets/stylesheets/shared/devise.scss",                                Saas::Stylesheets.shared_devise
@@ -328,14 +339,18 @@ file "app/views/home/pricing.html.erb",                   Saas::Views.home_prici
 file "app/views/home/privacy.html.erb",                   Saas::Views.home_privacy
 file "app/views/home/terms.html.erb",                     Saas::Views.home_terms
 
+file "app/views/layouts/account/_footer.html.erb",        Saas::Views.layouts_account_footer
+file "app/views/layouts/account/_header.html.erb",        Saas::Views.layouts_account_header
 file "app/views/layouts/application/_footer.html.erb",    Saas::Views.layouts_application_footer
 file "app/views/layouts/application/_header.html.erb",    Saas::Views.layouts_application_header
 file "app/views/layouts/home/_footer.html.erb",           Saas::Views.layouts_home_footer
 file "app/views/layouts/home/_header.html.erb",           Saas::Views.layouts_home_header
 file "app/views/layouts/shared/_analytics.html.erb",      Saas::Views.layouts_shared_analytics
 file "app/views/layouts/shared/_flash_messages.html.erb", Saas::Views.layouts_shared_flash_messages
-file "app/views/layouts/home.html.erb",                   Saas::Views.layouts_home
+file "app/views/layouts/account.html.erb",                Saas::Views.layouts_account
 file "app/views/layouts/application.html.erb",            Saas::Views.layouts_application
+file "app/views/layouts/home.html.erb",                   Saas::Views.layouts_home
+
 
 file "app/views/omni_auth_providers/_omni_auth_provider.html.erb", Saas::Views.omni_auth_providers_omni_auth_provider
 file "app/views/omni_auth_providers/codeship.html.erb",            Saas::Views.omni_auth_providers_codeship

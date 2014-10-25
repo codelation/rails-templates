@@ -1,4 +1,5 @@
 class OmniAuthProvidersController < ApplicationController
+  layout "account"
 
   def create
     @omni_auth_provider = OmniAuthProvider.new(omni_auth_provider_params)

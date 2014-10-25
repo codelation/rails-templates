@@ -57,10 +57,10 @@ class Ability
     can :manage, payment_methods, subscriber_id: @user.id, subscriber_type: "User"
 
     # Organization Owner
-    can :manage,  payment_methods, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
+    can :manage, payment_methods, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
 
     # Organization Admin
-    can :manage,  payment_methods, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
+    can :manage, payment_methods, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
 
 
     # ------------------------------------------
@@ -76,8 +76,8 @@ class Ability
     can :create, Subscription, subscriber_id: owner_organizations_ids, subscriber_type: "Organization"
 
     # Organization Admin
-    can :create,  Subscription, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
-    can :update,  Subscription, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
+    can :create, Subscription, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
+    can :update, Subscription, subscriber_id: admin_organizations_ids, subscriber_type: "Organization"
 
 
     # ------------------------------------------

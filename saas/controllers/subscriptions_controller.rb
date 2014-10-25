@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  layout "account"
 
   def create
     @subscription_plan = SubscriptionPlan.find(subscription_params[:subscription_plan_id])

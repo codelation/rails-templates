@@ -53,6 +53,18 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/views/home/terms.html.erb")
     end
 
+    def self.layouts_account
+      File.read("#{File.dirname(__FILE__)}/views/layouts/account.html.erb")
+    end
+
+    def self.layouts_account_footer
+      File.read("#{File.dirname(__FILE__)}/views/layouts/account/_footer.html.erb")
+    end
+
+    def self.layouts_account_header
+      File.read("#{File.dirname(__FILE__)}/views/layouts/account/_header.html.erb")
+    end
+
     def self.layouts_application_footer
       File.read("#{File.dirname(__FILE__)}/views/layouts/application/_footer.html.erb")
     end

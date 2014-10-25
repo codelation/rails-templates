@@ -1,4 +1,5 @@
 class OrganizationMembershipsController < ApplicationController
+  layout "account"
   before_action :build_organization_membership, only: [:new]
   before_action :set_organization
   before_action :set_organization_membership, only: [:destroy, :edit, :update]

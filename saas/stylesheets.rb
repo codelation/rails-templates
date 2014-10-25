@@ -1,6 +1,78 @@
 module Saas
   class Stylesheets < ::Stylesheets
 
+    def self.account(app_name)
+      return <<-ACCOUNT
+/*
+ *= require #{app_name.underscore}/font-awesome
+ *= require #{app_name.underscore}/normalize
+ *= require_tree ./shared
+ *= require_tree ./account
+ *= require_self
+ */
+ACCOUNT
+    end
+
+    def self.account_layout_footer
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/layout/_footer.scss")
+    end
+
+    def self.account_layout_header
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/layout/_header.scss")
+    end
+
+    def self.account_layout_fonts
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/layout/fonts.scss")
+    end
+
+    def self.account_layout_main
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/layout/main.scss")
+    end
+
+    def self.account_layout_title
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/layout/title.scss")
+    end
+
+    def self.account_omni_auth_providers_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/omni_auth_providers/index.scss")
+    end
+
+    def self.account_organizations_sidebar
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/organizations/_sidebar.scss")
+    end
+
+    def self.account_organization_memberships_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/organization_memberships/edit.scss")
+    end
+
+    def self.account_organization_memberships_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/organization_memberships/index.scss")
+    end
+
+    def self.account_organizations_index
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/organizations/index.scss")
+    end
+
+    def self.account_organizations_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/organizations/new.scss")
+    end
+
+    def self.account_payment_methods_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/payment_methods/edit.scss")
+    end
+
+    def self.account_subscriptions_edit
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/subscriptions/edit.scss")
+    end
+
+    def self.account_subscriptions_new
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/subscriptions/new.scss")
+    end
+
+    def self.account_users_sidebar
+      File.read("#{File.dirname(__FILE__)}/stylesheets/account/users/_sidebar.scss")
+    end
+
     def self.application_layout_footer
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/_footer.scss")
     end
@@ -19,46 +91,6 @@ module Saas
 
     def self.application_layout_title
       File.read("#{File.dirname(__FILE__)}/stylesheets/application/layout/title.scss")
-    end
-
-    def self.application_omni_auth_providers_index
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/omni_auth_providers/index.scss")
-    end
-
-    def self.application_organizations_sidebar
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/_sidebar.scss")
-    end
-
-    def self.application_organization_memberships_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_memberships/edit.scss")
-    end
-
-    def self.application_organization_memberships_index
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organization_memberships/index.scss")
-    end
-
-    def self.application_organizations_index
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/index.scss")
-    end
-
-    def self.application_organizations_new
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/organizations/new.scss")
-    end
-
-    def self.application_payment_methods_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/payment_methods/edit.scss")
-    end
-
-    def self.application_subscriptions_edit
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/subscriptions/edit.scss")
-    end
-
-    def self.application_subscriptions_new
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/subscriptions/new.scss")
-    end
-
-    def self.application_users_sidebar
-      File.read("#{File.dirname(__FILE__)}/stylesheets/application/users/_sidebar.scss")
     end
 
     def self.contact_messages_main

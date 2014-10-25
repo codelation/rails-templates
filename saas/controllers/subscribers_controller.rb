@@ -1,4 +1,5 @@
 class SubscribersController < ApplicationController
+  layout "account"
 
   def edit
     @user = current_user
