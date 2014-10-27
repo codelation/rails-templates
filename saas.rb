@@ -267,23 +267,26 @@ file "spec/factories/.keep",   ""
 file "spec/features/.keep",    ""
 file "spec/models/.keep",      ""
 
-file "spec/helpers/subscription_plans_helper_spec.rb", Saas::Specs.subscription_plans_helper
-file "spec/models/ability_spec.rb",                    Saas::Specs.ability
-file "spec/models/charge_spec.rb",                     Saas::Specs.charge
-file "spec/models/invoice_spec.rb",                    Saas::Specs.invoice
-file "spec/models/line_item_spec.rb",                  Saas::Specs.line_item
-file "spec/models/organization_spec.rb",               Saas::Specs.organization
-file "spec/models/stripe_card_spec.rb",                Saas::Specs.stripe_card
-file "spec/models/subscriber_spec.rb",                 Saas::Specs.subscriber
-file "spec/models/subscription_plan_spec.rb",          Saas::Specs.subscription_plan
-file "spec/models/subscription_spec.rb",               Saas::Specs.subscription
-file "spec/models/user_spec.rb",                       Saas::Specs.user
-file "spec/support/factories_spec.rb",                 Saas::Specs.factories
-file "spec/web_mock/stripe_card_delete.json",          Saas::Specs.web_mock_stripe_card_delete
-file "spec/web_mock/stripe_card.json",                 Saas::Specs.web_mock_stripe_card
-file "spec/web_mock/stripe_customer.json",             Saas::Specs.web_mock_stripe_customer
-file "spec/rails_helper.rb",                           Saas::Specs.rails_helper
-file "spec/spec_helper.rb",                            Saas::Specs.spec_helper
+file "spec/helpers/subscription_plans_helper_spec.rb",  Saas::Specs.subscription_plans_helper
+file "spec/models/ability_spec.rb",                     Saas::Specs.ability
+file "spec/models/charge_spec.rb",                      Saas::Specs.charge
+file "spec/models/invoice_spec.rb",                     Saas::Specs.invoice
+file "spec/models/line_item_spec.rb",                   Saas::Specs.line_item
+file "spec/models/organization_spec.rb",                Saas::Specs.organization
+file "spec/models/stripe_card_spec.rb",                 Saas::Specs.stripe_card
+file "spec/models/subscriber_spec.rb",                  Saas::Specs.subscriber
+file "spec/models/subscription_plan_spec.rb",           Saas::Specs.subscription_plan
+file "spec/models/subscription_spec.rb",                Saas::Specs.subscription
+file "spec/models/user_spec.rb",                        Saas::Specs.user
+file "spec/support/factories_spec.rb",                  Saas::Specs.factories
+file "spec/web_mock/stripe_card_charge_fail.json",      Saas::Specs.web_mock_stripe_card_charge_fail
+file "spec/web_mock/stripe_card_charge.json",           Saas::Specs.web_mock_stripe_card_charge
+file "spec/web_mock/stripe_card_delete.json",           Saas::Specs.web_mock_stripe_card_delete
+file "spec/web_mock/stripe_card.json",                  Saas::Specs.web_mock_stripe_card
+file "spec/web_mock/stripe_customer.json",              Saas::Specs.web_mock_stripe_customer
+file "spec/workers/subscription_update_worker_spec.rb", Saas::Specs.workers_subscription_update_worker
+file "spec/rails_helper.rb",                            Saas::Specs.rails_helper
+file "spec/spec_helper.rb",                             Saas::Specs.spec_helper
 
 # -----------------------------------------
 # Factory Girl Files

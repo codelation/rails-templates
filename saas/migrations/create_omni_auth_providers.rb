@@ -1,13 +1,13 @@
 class CreateOmniAuthProviders < ActiveRecord::Migration
   def change
     create_table :omni_auth_providers do |t|
+      t.belongs_to :subscriber, index: true, polymorphic: true
+
       t.jsonb   :auth_data
       t.string  :name
-      t.integer :subscriber_id, index: true
-      t.string  :subscriber_type
       t.string  :uid
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

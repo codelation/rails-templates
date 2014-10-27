@@ -1,5 +1,43 @@
 require "rails_helper"
 
+describe StripeCard, "#charge(amount, description)" do
+  before(:each) do
+    stub_request(:post, "https://api.stripe.com/v1/customers").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_customer.json"))
+    )
+    stub_request(:get, "https://api.stripe.com/v1/customers/cus_4paKHGMWyPEkmv").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_customer.json"))
+    )
+    stub_request(:get, "https://api.stripe.com/v1/customers/cus_4paKHGMWyPEkmv/cards/card123").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card.json"))
+    )
+    @user = create(:user)
+    @stripe_card = create(:stripe_card, subscriber: @user)
+  end
+
+  it "should return a Stripe::Charge object upon a successful charge" do
+    stub_request(:post, "https://api.stripe.com/v1/charges").to_return(
+      body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card_charge.json"))
+    )
+
+    amount = Money.new(1000, "USD") # $10.00
+    @charge = @stripe_card.charge(amount, "Test charge")
+    expect(@charge.amount).to      eq(1000)
+    expect(@charge.currency).to    eq("usd")
+    expect(@charge.description).to eq("Test charge")
+  end
+
+  it "should raise an error on a failed charge" do
+    stub_request(:post, "https://api.stripe.com/v1/charges").to_return(
+      body:   File.read(File.join(Rails.root, "spec/web_mock/stripe_card_charge_fail.json")),
+      status: 402
+    )
+
+    amount = Money.new(1000, "USD") # $10.00
+    expect { @stripe_card.charge(amount, "Test charge") }.to raise_error(Stripe::CardError)
+  end
+end
+
 # ---------------------------------------------------------
 # Private Methods
 # ---------------------------------------------------------

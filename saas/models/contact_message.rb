@@ -8,6 +8,6 @@ class ContactMessage < ActiveRecord::Base
 private
 
   def deliver_email
-    ContactMessageMailer.contact_email(self).deliver
+    ContactMessageMailer.contact_email(self.id).deliver
   end
 end

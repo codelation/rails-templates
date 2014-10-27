@@ -3,7 +3,7 @@ class User < Subscriber
 
   # Devise Modules
   # - Also available: :confirmable, :lockable, and :timeoutable
-  devise :database_authenticatable, :invitable, :registerable,
+  devise :async, :database_authenticatable, :invitable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   devise :omniauthable, omniauth_providers: [

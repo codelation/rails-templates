@@ -33,6 +33,20 @@ describe Subscriber, "#active_subscription?" do
   end
 end
 
+describe Subscriber, "#current_invoice" do
+
+  before(:each) do
+    @organization = create(:organization)
+    @plan = create(:subscription_plan)
+    @subscription = @organization.subscribe_to_plan(@plan)
+  end
+
+  it "should return the current invoice for subscriber's current subscription" do
+    expect(@organization.current_invoice).to eq(@subscription.current_invoice)
+  end
+
+end
+
 describe Subscriber, "#current_subscription" do
 
   before(:each) do
@@ -73,16 +87,6 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
     expect(@subscription.plan).to eq(@plan)
   end
 
-  it "should set the current period start and end on the subscription" do
-    @subscription = @organization.subscribe_to_plan(@plan)
-
-    period_start = @organization.time.now
-    period_end = period_start + @plan.interval_length
-
-    expect(@subscription.current_period_start).to be_within(100).of(period_start)
-    expect(@subscription.current_period_end).to   be_within(100).of(period_end)
-  end
-
   it "should set the trial end of the subscription based on the plan" do
     @subscription = @organization.subscribe_to_plan(@plan)
 
@@ -93,6 +97,28 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
     @subscription = @organization.subscribe_to_plan(@yearly_plan)
 
     expect(@subscription.trial_ends_at).to be_within(100).of(@organization.time.now)
+  end
+
+  it "should set the current period start and end on the subscription" do
+    @plan = create(:subscription_plan, trial_period_days: 0)
+    @subscription = @organization.subscribe_to_plan(@plan)
+
+    period_start = @organization.time.now
+    period_end = period_start + @plan.interval_length
+
+    expect(@subscription.current_period_start).to be_within(100).of(period_start)
+    expect(@subscription.current_period_end).to   be_within(100).of(period_end)
+  end
+
+  it "should set the first period to be the length of the trial period" do
+    @plan = create(:subscription_plan, trial_period_days: 10)
+    @subscription = @organization.subscribe_to_plan(@plan)
+
+    period_start = @organization.time.now
+    period_end = period_start + 10.days
+
+    expect(@subscription.current_period_start).to be_within(100).of(period_start)
+    expect(@subscription.current_period_end).to   be_within(100).of(period_end)
   end
 
   context "subscriber has an existing subscription" do
@@ -140,6 +166,12 @@ describe Subscriber, "#subscribe_to_plan(subscription_plan)" do
 
       @new_subscription = @organization.subscribe_to_plan(@yearly_plan)
       expect(@new_subscription.active?).to eq(true)
+
+      period_start = @organization.time.now
+      period_end = period_start + @yearly_plan.interval_length
+
+      expect(@new_subscription.current_period_start).to be_within(100).of(period_start)
+      expect(@new_subscription.current_period_end).to   be_within(100).of(period_end)
     end
 
     it "should transfer the payment method to the new subscription" do

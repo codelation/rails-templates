@@ -1,11 +1,19 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :successful_charge, class: Charge do
-    status :succeeded
-  end
+  factory :charge do
+    invoice
 
-  factory :unsuccessful_charge, class: Charge do
-    status :failed
+    factory :successful_charge do
+      after(:create) do |charge|
+        charge.succeeded!
+      end
+    end
+
+    factory :unsuccessful_charge do
+      after(:create) do |charge|
+        charge.failed!
+      end
+    end
   end
 end

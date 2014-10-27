@@ -19,7 +19,7 @@ class CreateSubscriptionPlans < ActiveRecord::Migration
       t.integer :setup_price_cents,       default: 0,     null: false
       t.string  :setup_price_currency,    default: "USD", null: false
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

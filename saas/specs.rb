@@ -49,6 +49,14 @@ module Saas
       File.read("#{File.dirname(__FILE__)}/spec/models/user_spec.rb")
     end
 
+    def self.web_mock_stripe_card_charge_fail
+      File.read("#{File.dirname(__FILE__)}/spec/web_mock/stripe_card_charge_fail.json")
+    end
+
+    def self.web_mock_stripe_card_charge
+      File.read("#{File.dirname(__FILE__)}/spec/web_mock/stripe_card_charge.json")
+    end
+
     def self.web_mock_stripe_card_delete
       File.read("#{File.dirname(__FILE__)}/spec/web_mock/stripe_card_delete.json")
     end
@@ -59,6 +67,10 @@ module Saas
 
     def self.web_mock_stripe_customer
       File.read("#{File.dirname(__FILE__)}/spec/web_mock/stripe_customer.json")
+    end
+
+    def self.workers_subscription_update_worker
+      File.read("#{File.dirname(__FILE__)}/spec/workers/subscription_update_worker_spec.rb")
     end
 
   end

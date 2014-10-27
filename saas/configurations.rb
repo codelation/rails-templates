@@ -52,6 +52,8 @@ APPLICATION
 
     def self.env
       return <<-ENV
+CONTACT_EMAIL_ADDRESS=set-contact-email-address-env-variable@codelation.com
+DEVISE_EMAIL_FROM=set-devise-email-from-env-variable@codelation.com
 DEVISE_SECRET_TOKEN=#{SecureRandom.hex(64)}
 ENCRYPTION_TOKEN=#{SecureRandom.hex(64)}
 HOSTNAME=localhost:3000
@@ -101,6 +103,7 @@ gem "cancancan"
 gem "clockwork"
 gem "coffee-rails"
 gem "devise"
+gem "devise-async"
 gem "devise_invitable"
 gem "ember-rails"
 gem "ember-source"
@@ -118,6 +121,7 @@ gem "roadie"
 gem "roadie-rails"
 gem "sass-rails", "~> 5.0.0.beta1"
 gem "sidekiq"
+gem "sidekiq_mailer"
 gem "sinatra"
 gem "sshkey"
 gem "stripe"

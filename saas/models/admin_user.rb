@@ -1,3 +1,3 @@
 class AdminUser < ActiveRecord::Base
-  devise :database_authenticatable, :trackable
+  devise :async, :database_authenticatable, :lockable, :trackable
 end

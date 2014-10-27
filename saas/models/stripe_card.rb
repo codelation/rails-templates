@@ -9,6 +9,22 @@ class StripeCard < PaymentMethod
   after_create   :update_current_subscription
   before_destroy :delete_stripe_card
 
+  # Charges the credit card through Stripe.
+  # @param amount [Money]
+  # @param description [String]
+  # @return [Stripe::Charge]
+  def charge(amount, description = nil)
+    customer = Stripe::Customer.retrieve(self.stripe_customer_id)
+    card = customer.cards.retrieve(self.stripe_card_id)
+
+    Stripe::Charge.create(
+      amount:      amount.fractional,
+      currency:    amount.currency.iso_code,
+      card:        card,
+      description: description
+    )
+  end
+
   # The credit card brand with the last four digits for display purposes.
   # @return [String]
   def display_name

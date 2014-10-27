@@ -5,6 +5,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require "database_cleaner"
 require "factory_girl_rails"
 require "rspec/rails"
+require "sidekiq/testing"
 require "webmock/rspec"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -23,6 +24,10 @@ RSpec.configure do |config|
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+
+  config.before(:each) do
+    Sidekiq::Worker.clear_all
+  end
 
   config.before(:suite) do
     begin

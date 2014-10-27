@@ -22,7 +22,7 @@
       <legend>Organization Account</legend>
       <%= form_for @organization, url: organization_path(@organization) do |f| %>
         <div>
-          <%= f.label :name %><br>
+          <%= f.label :name, "Organization Name" %><br>
           <%= f.text_field :name %>
         </div>
 

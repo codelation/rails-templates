@@ -3,6 +3,8 @@ class Subscriber < ActiveRecord::Base
   self.abstract_class = true
 
   monetize :account_balance_cents
+
+  has_many :invoices,      as: :subscriber
   has_many :stripe_cards,  as: :subscriber, dependent: :destroy
   has_many :subscriptions, as: :subscriber
 
@@ -16,7 +18,15 @@ class Subscriber < ActiveRecord::Base
     end
   end
 
-  # The current subscription for the subscriber.
+  # The invoice for the subscriber's current subscription.
+  # @return [Invoice]
+  def current_invoice
+    if subscription = self.current_subscription
+      subscription.current_invoice
+    end
+  end
+
+  # The subscription for the current period.
   # @return [Subscription]
   def current_subscription
     self.subscriptions.current.first
@@ -70,6 +80,7 @@ private
     end
 
     if @new_subscription.trial_ends_at > self.time.now
+      @new_subscription.current_period_end = @new_subscription.trial_ends_at
       @new_subscription.trialing!
     else
       @new_subscription.active!

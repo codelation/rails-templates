@@ -4,8 +4,6 @@ FactoryGirl.define do
   factory :invoice do
     association :subscriber, factory: :organization
 
-    due_at "2014-09-17 13:10:15"
-    period_start "2014-09-17 13:10:15"
-    period_end "2014-09-17 13:10:15"
+    due_at { Time.now }
   end
 end
