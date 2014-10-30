@@ -1,4 +1,5 @@
 class Organization < Subscriber
+  acts_as_paranoid
   self.table_name = "organizations"
 
   # Relationships

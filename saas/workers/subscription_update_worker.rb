@@ -9,7 +9,7 @@ class SubscriptionUpdateWorker
 
     if @invoice.finalized?
       retry_invoice_charge
-    elsif @subscription.auto_renew && !@subscription.canceled?
+    elsif (@subscription.trialing? || @subscription.auto_renew) && !@subscription.canceled?
       renew_subscription
     else
       end_subscription

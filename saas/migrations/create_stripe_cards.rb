@@ -11,6 +11,7 @@ class CreateStripeCards < ActiveRecord::Migration
       t.integer :exp_month
       t.integer :exp_year
 
+      t.datetime :deleted_at, index: true
       t.timestamps null: false
     end
   end

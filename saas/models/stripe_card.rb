@@ -1,4 +1,5 @@
 class StripeCard < PaymentMethod
+  acts_as_paranoid
   self.table_name = "stripe_cards"
 
   # Validations
@@ -6,8 +7,7 @@ class StripeCard < PaymentMethod
 
   # Callbacks
   before_create  :update_stripe_customer
-  after_create   :update_current_subscription
-  before_destroy :delete_stripe_card
+  before_destroy :delete_stripe_card, :remove_stripe_info
 
   # Charges the credit card through Stripe.
   # @param amount [Money]
@@ -20,6 +20,7 @@ class StripeCard < PaymentMethod
     Stripe::Charge.create(
       amount:      amount.fractional,
       currency:    amount.currency.iso_code,
+      customer:    customer,
       card:        card,
       description: description
     )
@@ -46,6 +47,13 @@ private
     customer.cards.retrieve(self.stripe_card_id).delete
   end
 
+  # Remove Stripe customer and card information from local DB.
+  def remove_stripe_info
+    self.stripe_card_id     = nil
+    self.stripe_customer_id = nil
+    self.stripe_token       = nil
+  end
+
   # Creates a new Stripe customer with the card added. It will be added
   # to the subscriber's existing Stripe customer if it exists.
   def update_stripe_customer
@@ -60,16 +68,5 @@ private
       )
     end
     self.stripe_customer_id = @stripe_customer.id
-  end
-
-  # Adds the card as the payment method on the subscriber's current
-  # subscription if there isn't already a payment method set.
-  def update_current_subscription
-    subscription = self.subscriber.current_subscription
-
-    if subscription && subscription.payment_method.nil?
-      subscription.payment_method = self
-      subscription.save
-    end
   end
 end

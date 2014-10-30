@@ -47,6 +47,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
 
+      t.datetime :deleted_at, index: true
       t.timestamps null: false
     end
 

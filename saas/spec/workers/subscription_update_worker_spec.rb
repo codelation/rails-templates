@@ -59,8 +59,8 @@ describe SubscriptionUpdateWorker, "#perform(subscription_id)" do
       SubscriptionUpdateWorker.perform_async(@subscription.id)
       @subscription.reload
 
-      expect(@subscription.current_period_start).to eq(period_start)
-      expect(@subscription.current_period_end).to   eq(period_end)
+      expect(@subscription.current_period_start).to be_within(100).of(period_start)
+      expect(@subscription.current_period_end).to   be_within(100).of(period_end)
     end
 
     it "should set the subscription status to :past_due if the charge fails" do
@@ -133,8 +133,8 @@ describe SubscriptionUpdateWorker, "#perform(subscription_id)" do
       SubscriptionUpdateWorker.perform_async(@subscription.id)
       @subscription.reload
 
-      expect(@subscription.current_period_start).to eq(period_start)
-      expect(@subscription.current_period_end).to   eq(period_end)
+      expect(@subscription.current_period_start).to be_within(100).of(period_start)
+      expect(@subscription.current_period_end).to   be_within(100).of(period_end)
     end
 
     it "should set the subscription status to :past_due if the charge fails" do

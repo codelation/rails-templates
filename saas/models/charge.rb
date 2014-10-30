@@ -1,6 +1,8 @@
 class Charge < ActiveRecord::Base
-  belongs_to :invoice, touch: true
-  belongs_to :payment_method, polymorphic: true
+  acts_as_paranoid
+
+  belongs_to :invoice,        -> { with_deleted }, touch: true
+  belongs_to :payment_method, -> { with_deleted }, polymorphic: true
 
   scope :chronological, -> { order(created_at: :asc) }
 
@@ -8,7 +10,8 @@ class Charge < ActiveRecord::Base
 
   enum status: {
     failed:     0,
-    succeeded:  1
+    succeeded:  1,
+    errored:    2
   }
 
 private
@@ -18,8 +21,21 @@ private
       begin
         self.payment_method.charge(self.invoice.total)
         self.succeeded!
-      rescue => e
+      rescue Stripe::CardError => e
+        self.error_message = e.json_body[:error][:message]
         self.failed!
+      rescue Stripe::InvalidRequestError => e
+        self.error_message = e.json_body[:error][:message]
+        self.errored!
+      rescue Stripe::AuthenticationError => e
+        self.error_message = e.json_body[:error][:message]
+        self.errored!
+      rescue Stripe::APIConnectionError => e
+        self.error_message = e.json_body[:error][:message]
+        self.errored!
+      rescue Stripe::StripeError => e
+        self.error_message = e.json_body[:error][:message]
+        self.errored!
       end
     else
       self.succeeded!

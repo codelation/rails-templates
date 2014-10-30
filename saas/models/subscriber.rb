@@ -4,9 +4,9 @@ class Subscriber < ActiveRecord::Base
 
   monetize :account_balance_cents
 
-  has_many :invoices,      as: :subscriber
+  has_many :invoices,      as: :subscriber, dependent: :destroy
   has_many :stripe_cards,  as: :subscriber, dependent: :destroy
-  has_many :subscriptions, as: :subscriber
+  has_many :subscriptions, as: :subscriber, dependent: :destroy
 
   # Returns whether or not the subscriber has an active subscription.
   # @return [Boolean]
@@ -16,6 +16,15 @@ class Subscriber < ActiveRecord::Base
     else
       false
     end
+  end
+
+  # This invoice should be used for adding one-off line items to and then
+  # the subscriber will receive the invoice at the end of the next day.
+  # The invoice will be finalized when it is due and the first charge attempt will be made.
+  # @return [Invoice]
+  def ad_hoc_invoice
+    due_at = (self.time.now + 1.day).end_of_day
+    self.subscriber.invoices.where(due_at: due_at, subscription: nil).first_or_create
   end
 
   # The invoice for the subscriber's current subscription.
@@ -29,7 +38,7 @@ class Subscriber < ActiveRecord::Base
   # The subscription for the current period.
   # @return [Subscription]
   def current_subscription
-    self.subscriptions.current.first
+    self.subscriptions.where("ended_at IS NULL OR ended_at > ?", self.time.now).first
   end
 
   # Subscribe the user or organization to a new subscription plan.

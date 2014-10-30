@@ -1,6 +1,8 @@
 # Ties an organization to a SubscriptionPlan and contains the information about the
 # current billing cycle, trial end time, whether it auto renews, etc.
 class Subscription < ActiveRecord::Base
+  acts_as_paranoid
+
   # Relationships
   belongs_to :payment_method, polymorphic: true
   belongs_to :plan, class_name: "SubscriptionPlan", foreign_key: "subscription_plan_id"
@@ -51,7 +53,14 @@ class Subscription < ActiveRecord::Base
   # The invoice for the current period.
   # @return [Invoice]
   def current_invoice
-    self.subscriber.invoices.where(due_at: self.current_period_end).first_or_create
+    invoice = self.subscriber.invoices.where(due_at: self.current_period_end, subscription: self).first_or_create
+
+    if invoice.payment_method != self.payment_method
+      invoice.payment_method = self.payment_method
+      invoice.save
+    end
+
+    invoice
   end
 
   # The amount the subscriber should be credited if
@@ -89,7 +98,7 @@ class Subscription < ActiveRecord::Base
   # Nil is returned for non-renewing and canceled subscriptions
   # @return [DateTime]
   def next_period_end
-    return unless self.auto_renew && !self.canceled?
+    return unless (self.trialing? || self.auto_renew) && !self.canceled?
     self.next_period_start + self.plan.interval_length
   end
 
@@ -97,7 +106,7 @@ class Subscription < ActiveRecord::Base
   # Nil is returned for non-renewing and canceled subscriptions
   # @return [DateTime]
   def next_period_start
-    return unless self.auto_renew && !self.canceled?
+    return unless (self.trialing? || self.auto_renew) && !self.canceled?
     self.subscriber.time.at(self.current_period_end)
   end
 

@@ -3,7 +3,7 @@ class PaymentMethod < ActiveRecord::Base
 
   # Relationships
   belongs_to :subscriber, polymorphic: true
-  has_many   :subscriptions
+  has_many   :subscriptions, -> { with_deleted }
 
   # Validations
   validates :subscriber,   presence: true

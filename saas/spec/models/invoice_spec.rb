@@ -52,7 +52,7 @@ describe Invoice, "#finalize!" do
   context "if the subscriber has enough credit on their account to cover the invoice amount" do
 
     before(:each) do
-      @subscription = create(:subscription)
+      @subscription = create(:subscription, payment_method: create(:stripe_card))
       @subscriber = @subscription.subscriber
       @subscriber.update_attribute(:account_balance_cents, -10000) # $100.00
       @invoice = @subscriber.current_invoice
@@ -78,7 +78,7 @@ describe Invoice, "#finalize!" do
   context "if the subscriber has credit on their account, but not the full total" do
 
     before(:each) do
-      @subscription = create(:subscription)
+      @subscription = create(:subscription, payment_method: create(:stripe_card))
       @subscriber = @subscription.subscriber
       @subscriber.update_attribute(:account_balance_cents, -500) # $5.00
       @invoice = @subscriber.current_invoice
@@ -87,11 +87,19 @@ describe Invoice, "#finalize!" do
     end
 
     it "the invoice total should be the total - the subscriber credit" do
+      stub_request(:post, "https://api.stripe.com/v1/charges").to_return(
+        body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card_charge.json"))
+      )
+
       @invoice.finalize!
       expect(@invoice.total).to eq(Money.new(1500, "USD")) # $15.00
     end
 
     it "should update the subscriber's account balance" do
+      stub_request(:post, "https://api.stripe.com/v1/charges").to_return(
+        body: File.read(File.join(Rails.root, "spec/web_mock/stripe_card_charge.json"))
+      )
+
       expect(@subscriber.account_balance).to eq(Money.new(-500, "USD")) # $100.00
 
       @invoice.finalize!
@@ -117,8 +125,9 @@ describe Invoice, "#paid_at" do
       successful_charge = create(:successful_charge)
       @invoice.charges << successful_charge
       @invoice.charges << create(:successful_charge)
+      @invoice.paid = true
 
-      expect(@invoice.paid_at).to eq(successful_charge.created_at)
+      expect(@invoice.paid_at).to be_within(100).of(successful_charge.created_at)
     end
 
   end
@@ -130,38 +139,6 @@ describe Invoice, "#paid_at" do
       @invoice.charges << create(:unsuccessful_charge)
 
       expect(@invoice.paid_at).to eq(nil)
-    end
-
-  end
-
-end
-
-describe Invoice, "#paid?" do
-
-  before(:each) do
-    @invoice = create(:invoice)
-  end
-
-  context "if there is a successful charge" do
-
-    it "should return true" do
-      @invoice.charges << create(:unsuccessful_charge)
-      @invoice.charges << create(:unsuccessful_charge)
-      @invoice.charges << create(:successful_charge)
-
-      expect(@invoice.paid?).to eq(true)
-    end
-
-  end
-
-  context "if there is not a successful charge" do
-
-    it "should return false" do
-       @invoice.charges << create(:unsuccessful_charge)
-       @invoice.charges << create(:unsuccessful_charge)
-       @invoice.charges << create(:unsuccessful_charge)
-
-       expect(@invoice.paid?).to eq(false)
     end
 
   end

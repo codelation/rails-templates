@@ -6,6 +6,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.string  :name
       t.string  :time_zone
 
+      t.datetime :deleted_at, index: true
       t.timestamps null: false
     end
   end

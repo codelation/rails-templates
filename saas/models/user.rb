@@ -1,4 +1,5 @@
 class User < Subscriber
+  acts_as_paranoid
   self.table_name = "users"
 
   # Devise Modules

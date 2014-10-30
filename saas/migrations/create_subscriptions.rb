@@ -14,6 +14,7 @@ class CreateSubscriptions < ActiveRecord::Migration
       t.integer  :status,               default: 0
       t.datetime :trial_ends_at
 
+      t.datetime :deleted_at, index: true
       t.timestamps null: false
     end
 

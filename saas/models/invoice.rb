@@ -1,25 +1,43 @@
 class Invoice < ActiveRecord::Base
-  belongs_to :subscriber, polymorphic: true
-  has_many :line_items, dependent: :destroy
-  has_many :charges,    dependent: :destroy
+  acts_as_paranoid
 
+  # Relationships
+  belongs_to :payment_method, -> { with_deleted }, polymorphic: true
+  belongs_to :subscriber,     -> { with_deleted }, polymorphic: true
+  belongs_to :subscription,   -> { with_deleted }
+  has_many   :line_items,     -> { with_deleted }, dependent: :destroy
+  has_many   :charges,        -> { with_deleted }, dependent: :destroy
+
+  # Validations
+  validates :subscriber, presence: true
+
+  # Callbacks
   after_touch :calculate_total
 
-  monetize :total_cents
+  # Scopes
+  scope :paid,     -> { joins(:charges).where(charges: { status: Charge.statuses[:succeeded] }) }
+  scope :past_due, -> { joins(:charges).where.not(charges: { status: Charge.statuses[:succeeded] }).where("subscription_id IS NULL AND due_at <= ?", Time.now) }
 
-  validates :subscriber, presence: true
+  monetize :total_cents
 
   # Calculates the final amount and attempts to charge the subscriber.
   # @return [Boolean] whether or not the charge is successful
   def finalize!
+    calculate_total
     adjust_total unless self.finalized?
 
     charge = Charge.create(
       invoice:        self,
-      payment_method: self.subscriber.current_subscription.payment_method
+      payment_method: self.payment_method
     )
 
-    charge.succeeded?
+    if charge.succeeded?
+      self.update_attribute(:paid, true)
+      true
+    else
+      self.update_attribute(:paid, false)
+      false
+    end
   end
 
   # Returns whether or not the invoice has been finalized.
@@ -35,18 +53,11 @@ class Invoice < ActiveRecord::Base
     self.charges.where(status: Charge.statuses[:succeeded]).chronological.first.created_at
   end
 
-  # Returns if paid or not
-  # @return [Boolean] true if there exists a successful charge
-  def paid?
-    self.charges.where(status: Charge.statuses[:succeeded]).count >= 1
-  end
-
 private
 
   # Adds an adjustment line item for adding/subtracting
   # the subscriber's account balance.
   def adjust_total
-    calculate_total
     return if self.subscriber.account_balance == 0 || self.total == 0
 
     if self.subscriber.account_balance > 0
@@ -78,6 +89,7 @@ private
   # Calculates the new total for the invoice
   # @return [Boolean] true if saved
   def calculate_total
+    self.reload
     return unless self.line_items.count > 0
     self.total = self.line_items.map(&:total).reduce(&:+)
     self.save

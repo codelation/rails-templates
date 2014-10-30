@@ -8,6 +8,7 @@ class CreateLineItems < ActiveRecord::Migration
       t.string  :description
       t.integer :quantity,        default: 1
 
+      t.datetime :deleted_at, index: true
       t.timestamps null: false
     end
   end

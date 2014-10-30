@@ -1,5 +1,7 @@
 class LineItem < ActiveRecord::Base
-  belongs_to :invoice, touch: true
+  acts_as_paranoid
+
+  belongs_to :invoice, -> { with_deleted }, touch: true
 
   monetize :amount_cents
 

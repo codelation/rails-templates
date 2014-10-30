@@ -33,6 +33,23 @@ describe Subscriber, "#active_subscription?" do
   end
 end
 
+describe Subscriber, "#ad_hoc_invoice" do
+
+  before(:each) do
+    @organization = create(:organization)
+  end
+
+  it "should return an invoice that is due at the end of the next day" do
+    end_of_next_day = (@organization.time.now + 1.day).end_of_day
+    expect(@organization.ad_hoc_invoice.due_at).to be_within(100).of(end_of_next_day)
+  end
+
+  it "should return the same invoice if called multiple times before the next day" do
+    expect(@organization.ad_hoc_invoice).to eq(@organization.ad_hoc_invoice)
+  end
+
+end
+
 describe Subscriber, "#current_invoice" do
 
   before(:each) do
