@@ -37,6 +37,14 @@ module #{app_class}
     # Sidekiq Configuration
     config.eager_load_paths += ["\#{config.root}/app/workers"]
     config.active_job.queue_adapter = :sidekiq
+
+    # Cross Origin Resource Sharing for Cloudfront
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins "*"
+        resource "/assets/*", headers: :any, methods: [:get, :head, :options]
+      end
+    end
   end
 end
 APPLICATION
