@@ -24,7 +24,7 @@ class Subscriber < ActiveRecord::Base
   # @return [Invoice]
   def ad_hoc_invoice
     due_at = (self.time.now + 1.day).end_of_day
-    self.subscriber.invoices.where(due_at: due_at, subscription: nil).first_or_create
+    self.invoices.where(due_at: due_at, subscription: nil).first_or_create
   end
 
   # The invoice for the subscriber's current subscription.
