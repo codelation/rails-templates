@@ -18,8 +18,8 @@ class OrganizationMembershipsController < ApplicationController
   end
 
   def destroy
-    @organization_membership.destroy
     authorize! :destroy, @organization_membership
+    @organization_membership.destroy
 
     redirect_to subscriber_organization_memberships_path, notice: "Membership removed successfully."
   end
