@@ -103,7 +103,7 @@ ENV
       return <<-GEMFILE
 source "http://rubygems.org"
 
-ruby "2.2.0"
+ruby "2.1.5"
 gem "rails", github: "rails"
 
 gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}
