@@ -104,7 +104,7 @@ ENV
 source "http://rubygems.org"
 
 ruby "2.1.5"
-gem "rails", github: "rails"
+gem "rails", "4.2.0.rc1"
 
 gem "awesome_print"#{install_blocky ? "\ngem \"blocky\"" : ""}#{install_blogelator ? "\ngem \"blogelator\"" : ""}
 gem "cancancan"
