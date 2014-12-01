@@ -31,7 +31,7 @@ module #{app_class}
     config.assets.precompile += %w(
       #{app_class.underscore}/font-awesome/fontawesome-webfont.eot #{app_class.underscore}/font-awesome/fontawesome-webfont.svg
       #{app_class.underscore}/font-awesome/fontawesome-webfont.ttf #{app_class.underscore}/font-awesome/fontawesome-webfont.woff
-      home.css home.js
+      account.css account.js home.css home.js
     )
 
     # Sidekiq Configuration
