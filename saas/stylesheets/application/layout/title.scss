@@ -21,9 +21,9 @@ body.application-layout main > .title {
 
   h1 {
     @include outer-container;
-    font-family: 'Questrial', sans-serif;
+    font-family: $sans-serif;
     font-size: 30px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 7px;
     margin: 0 auto;
     overflow: hidden;
@@ -35,15 +35,16 @@ body.application-layout main > .title {
   }
 }
 
-body.application-layout {
+body.application-layout p.flash-alert + main > .title:after,
+body.application-layout p.flash-notice + main > .title:after {
+  box-shadow: none;
+}
+
+body.application-layout main {
   #error_explanation,
   .flash-alert,
   .flash-notice {
-    & + .title {
-      box-shadow: none;
-    }
-
-    & + main > .title:first-child {
+    & + .title:after {
       box-shadow: none;
     }
   }

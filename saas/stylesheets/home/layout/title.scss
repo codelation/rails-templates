@@ -20,9 +20,9 @@ body.home-layout main > .title {
 
   h1 {
     @include outer-container;
-    font-family: 'Questrial', sans-serif;
+    font-family: $sans-serif;
     font-size: 30px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 7px;
     margin: 0 auto;
     overflow: hidden;
@@ -34,15 +34,16 @@ body.home-layout main > .title {
   }
 }
 
-body.home-layout {
+body.home-layout p.flash-alert + main > .title:after,
+body.home-layout p.flash-notice + main > .title:after {
+  box-shadow: none;
+}
+
+body.home-layout main {
   #error_explanation,
   .flash-alert,
   .flash-notice {
-    & + .title {
-      box-shadow: none;
-    }
-
-    & + main > .title:first-child {
+    & + .title:after {
       box-shadow: none;
     }
   }

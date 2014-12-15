@@ -7,6 +7,8 @@
       height:        0,
       paddingBottom: 0,
       paddingTop:    0
+    }, function() {
+      flashElement.remove();
     });
     return false;
   });
